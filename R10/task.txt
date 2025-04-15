@@ -1,0 +1,6 @@
+67d45c97ef3958f5a03334df
+
+67dce70eab369ba41b234282
+
+Necesito un código en Python que genere un DataFrame de Pandas con datos simulados de 2000 ventas de distintos modelos de Volkswagen (Golf, Passat, Tiguan, Polo, Arteon, T-Roc, Jetta, Touran, Touareg, Atlas) durante el año 2023. Cada venta debe incluir la fecha de la transacción, el modelo del auto vendido y el precio de venta (valor aleatorio entre CLP 10.000.000 y CLP 60.000.000).
+Luego, se debe crear una nueva tabla que muestre para cada mes del año 2023 cuál fue el modelo de auto que generó el mayor monto total de ventas y también monto total de ventas en pesos chilenos (CLP). Por último, se debe imprimir esta tabla para visualizar los resultados.

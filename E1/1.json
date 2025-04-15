@@ -1,0 +1,78 @@
+[
+  {
+    "ProjectID": "PRJ001",
+    "ProjectName": "Rediseño del sitio web",
+    "StartDate": "2024-01-10",
+    "EndDate": "2024-03-15",
+    "Status": "En progreso",
+    "Tasks": [
+      {
+        "TaskID": "T001",
+        "TaskName": "Diseño de maquetas",
+        "AssignedTo": "Alejandro Sánchez",
+        "Deadline": "2024-01-20",
+        "Completed": true
+      },
+      {
+        "TaskID": "T002",
+        "TaskName": "Desarrollar interfaz",
+        "AssignedTo": "Miguel Vergara",
+        "Deadline": "2024-02-10",
+        "Completed": false
+      },
+      {
+        "TaskID": "T003",
+        "TaskName": "Pruebas de usabilidad",
+        "AssignedTo": "Carla Gómez",
+        "Deadline": "2024-03-01",
+        "Completed": false
+      }
+    ]
+  },
+  {
+    "ProjectID": "PRJ002",
+    "ProjectName": "Desarrollo de API",
+    "StartDate": "2024-02-01",
+    "EndDate": "2024-04-30",
+    "Status": "Planificado",
+    "Tasks": [
+      {
+        "TaskID": "T004",
+        "TaskName": "Definición de requisitos",
+        "AssignedTo": "Luis Martínez",
+        "Deadline": "2024-02-15",
+        "Completed": true
+      },
+      {
+        "TaskID": "T005",
+        "TaskName": "Diseño de base de datos",
+        "AssignedTo": "Ana Torres",
+        "Deadline": "2024-03-01",
+        "Completed": false
+      }
+    ]
+  },
+  {
+    "ProjectID": "PRJ003",
+    "ProjectName": "Implementación de CRM",
+    "StartDate": "2024-03-01",
+    "EndDate": "2024-06-30",
+    "Status": "No iniciado",
+    "Tasks": [
+      {
+        "TaskID": "T006",
+        "TaskName": "Selección de software",
+        "AssignedTo": "Pedro Ruiz",
+        "Deadline": "2024-03-15",
+        "Completed": false
+      },
+      {
+        "TaskID": "T007",
+        "TaskName": "Capacitación del equipo",
+        "AssignedTo": "Sofía Fernández",
+        "Deadline": "2024-05-01",
+        "Completed": false
+      }
+    ]
+  }
+]

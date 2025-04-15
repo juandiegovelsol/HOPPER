@@ -1,0 +1,5 @@
+67d46c582425d46105c365d4
+
+67e81725517b27b68fa923d0
+
+Trabajo para un hotel ubicado en Orlando como desarrollador de software. Me pidieron un programa en JavaScript y Node que me permita automatizar el cálculo en USD del tiempo extra que los huéspedes tardan en salir de su habitación y entregarla. Para ello, existe un archivo del día en formato CSV que el programa debe leer, que contiene el id del huésped (cada id debe ser único), el tiempo que tardó en salir de la habitación en formato HH:MM:SS (donde cada dígito debe ser un entero positivo y debe ser una hora válida), y la tasa de penalidad que se le aplica a cada huesped dependiendo de su categoría (debe ser número positivo). Quiero que implementes el código que me permita validar los datos según lo indicado, calcular cúanto debe pagar cada huésped y el calcular el total de penalidades en USD del día. Dame también un ejemplo del archivo CSV para poder probar el código. Quiero el código completo, sin comentarios y sin explicaciones.

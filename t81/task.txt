@@ -1,0 +1,5 @@
+67d466d50d2cc42fa1840496
+
+67e8674af0bcf847fd9b3710
+
+Estoy trabajando para un estudio de desarrollo de video juegos ubicado en Estados Unidos, me pidieron desarrollar un juego de tanques y minas con HTML, CSS y JavaScript en el que un tanque se debe mover por un campo de batalla usando las teclas a, s, d y w. El campo de batalla es una cuadrícula de 20x20 celdas donde el tanque ocupa una celda entera y se puede mover hacia adelante o atrás con las teclas w y s respectivamente y puede girar 90 grados usando las teclas a y d a cada lado. El tanque también puede disparar proyectiles usando la barra espaciadora solo hacia el frente. Deben aparecer minas de forma aleatoria en la cuadrícula que tienen que ser eliminadas al recibir un disparo. Quiero que me des el código completo y sin comentarios, tampoco incluyas explicaciones.

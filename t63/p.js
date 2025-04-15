@@ -1,0 +1,156 @@
+const fs = require("fs");
+
+function verificarReceta(receta) {
+  if (Object.keys(receta.ingredientes).length === 0) {
+    console.warn(
+      `Alerta: La receta con ID "${receta.id}" no contiene ingredientes. Se omitirá.`
+    );
+    return false;
+  }
+  if (!Number.isInteger(receta.id) || receta.id <= 0) {
+    console.warn(
+      `Alerta: El identificador "${receta.id}" no es un entero positivo. Se descartará esta receta.`
+    );
+    return false;
+  }
+  if (!Number.isInteger(receta.total) || receta.total <= 0) {
+    console.warn(
+      `Alerta: El total de la receta con ID "${receta.id}" no es un número positivo. Se ignorará.`
+    );
+    return false;
+  }
+  for (const [ingrediente, cantidad] of Object.entries(receta.ingredientes)) {
+    if (!Number.isInteger(cantidad) || cantidad <= 0) {
+      console.warn(
+        `Alerta: La cantidad del ingrediente "${ingrediente}" en la receta "${receta.id}" no es válida. Se descartará.`
+      );
+      return false;
+    }
+  }
+  return true;
+}
+
+function obtenerIngredientesMenosUsados(recetas, minimo, maximo) {
+  const conteoIngredientes = {};
+  for (const receta of recetas) {
+    if (receta.total > minimo && receta.total <= maximo) {
+      for (const [ingrediente, cantidad] of Object.entries(
+        receta.ingredientes
+      )) {
+        if (!conteoIngredientes[ingrediente]) {
+          conteoIngredientes[ingrediente] = 0;
+        }
+        conteoIngredientes[ingrediente] += cantidad;
+      }
+    }
+  }
+  let ingredienteMenor = null;
+  let cantidadMinima = Infinity;
+  for (const [ingrediente, cantidad] of Object.entries(conteoIngredientes)) {
+    if (cantidad < cantidadMinima) {
+      ingredienteMenor = ingrediente;
+      cantidadMinima = cantidad;
+    }
+  }
+  return cantidadMinima === Infinity
+    ? null
+    : { ingrediente: ingredienteMenor, cantidad: cantidadMinima };
+}
+
+function procesarRecetas(recetas) {
+  const recetasValidas = [];
+  for (const receta of recetas) {
+    if (verificarReceta(receta)) {
+      recetasValidas.push(receta);
+    }
+  }
+
+  const resultado = [];
+
+  const ingredienteMenor0a10 = obtenerIngredientesMenosUsados(
+    recetasValidas,
+    0,
+    10
+  );
+  const ingredienteMenor10a20 = obtenerIngredientesMenosUsados(
+    recetasValidas,
+    10,
+    20
+  );
+  const ingredienteMenor20oMas = obtenerIngredientesMenosUsados(
+    recetasValidas,
+    20,
+    Infinity
+  );
+
+  console.log(
+    ingredienteMenor0a10
+      ? `Ingrediente menos usado en recetas de $0-$10: ${ingredienteMenor0a10.ingrediente} (Cantidad: ${ingredienteMenor0a10.cantidad})`
+      : "No hay recetas en el rango de precios $0-$10."
+  );
+  console.log(
+    ingredienteMenor10a20
+      ? `Ingrediente menos usado en recetas de $10-$20: ${ingredienteMenor10a20.ingrediente} (Cantidad: ${ingredienteMenor10a20.cantidad})`
+      : "No hay recetas en el rango de precios $10-$20."
+  );
+  console.log(
+    ingredienteMenor20oMas
+      ? `Ingrediente menos usado en recetas de $20 o más: ${ingredienteMenor20oMas.ingrediente} (Cantidad: ${ingredienteMenor20oMas.cantidad})`
+      : "No hay recetas en el rango de precios $20 o más."
+  );
+
+  if (ingredienteMenor0a10) {
+    resultado.push({
+      rango: "0-10",
+      ingrediente: ingredienteMenor0a10.ingrediente,
+      cantidad: ingredienteMenor0a10.cantidad,
+    });
+  }
+  if (ingredienteMenor10a20) {
+    resultado.push({
+      rango: "10-20",
+      ingrediente: ingredienteMenor10a20.ingrediente,
+      cantidad: ingredienteMenor10a20.cantidad,
+    });
+  }
+  if (ingredienteMenor20oMas) {
+    resultado.push({
+      rango: "20+",
+      ingrediente: ingredienteMenor20oMas.ingrediente,
+      cantidad: ingredienteMenor20oMas.cantidad,
+    });
+  }
+
+  if (resultado.length > 0) {
+    const cabecera = "Rango,Ingrediente,Cantidad\n";
+    const filas = resultado
+      .map((item) => `${item.rango},${item.ingrediente},${item.cantidad}`)
+      .join("\n");
+    const contenidoCSV = cabecera + filas;
+
+    fs.writeFile("ingredientes_menos_usados.csv", contenidoCSV, (err) => {
+      if (err) {
+        console.error("Error al escribir el archivo CSV:", err);
+      } else {
+        console.log(
+          "Archivo CSV generado con éxito: ingredientes_menos_usados.csv"
+        );
+      }
+    });
+  } else {
+    console.log("No hay datos para generar el archivo CSV.");
+  }
+}
+
+fs.readFile("recetas.json", "utf8", (err, data) => {
+  if (err) {
+    console.error("Error al leer el archivo JSON de recetas:", err);
+    return;
+  }
+  try {
+    const recetas = JSON.parse(data);
+    procesarRecetas(recetas);
+  } catch (error) {
+    console.error("Error al interpretar el archivo JSON de recetas:", error);
+  }
+});

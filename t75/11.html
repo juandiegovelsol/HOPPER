@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minijuego de Naves Espaciales</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      canvas {
+        background: black;
+        display: block;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="gameCanvas"></canvas>
+    <script>
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      let ship = {
+        x: canvas.width / 2,
+        y: canvas.height / 2,
+        angle: -Math.PI / 2,
+        speed: 0,
+        alive: true,
+      };
+      let bullets = [];
+      let enemies = [];
+      let enemyBullets = [];
+      let keys = {};
+
+      function update() {
+        if (!ship.alive) return;
+
+        if (keys["w"] || keys["ArrowUp"]) {
+          ship.x += Math.cos(ship.angle) * 4;
+          ship.y += Math.sin(ship.angle) * 4;
+        }
+        if (keys["s"] || keys["ArrowDown"]) {
+          ship.x -= Math.cos(ship.angle) * 2;
+          ship.y -= Math.sin(ship.angle) * 2;
+        }
+        if (keys["a"] || keys["ArrowLeft"]) {
+          ship.angle -= 0.05;
+        }
+        if (keys["d"] || keys["ArrowRight"]) {
+          ship.angle += 0.05;
+        }
+
+        if (ship.x < 0) ship.x = canvas.width;
+        if (ship.x > canvas.width) ship.x = 0;
+        if (ship.y < 0) ship.y = canvas.height;
+        if (ship.y > canvas.height) ship.y = 0;
+
+        bullets.forEach((bullet) => {
+          bullet.x += Math.cos(bullet.angle) * 7;
+          bullet.y += Math.sin(bullet.angle) * 7;
+        });
+        bullets = bullets.filter(
+          (bullet) =>
+            bullet.x > 0 &&
+            bullet.x < canvas.width &&
+            bullet.y > 0 &&
+            bullet.y < canvas.height &&
+            bullet.alive
+        );
+
+        enemyBullets.forEach((bullet) => {
+          bullet.x += Math.cos(bullet.angle) * 5;
+          bullet.y += Math.sin(bullet.angle) * 5;
+        });
+        enemyBullets = enemyBullets.filter(
+          (bullet) =>
+            bullet.x > 0 &&
+            bullet.x < canvas.width &&
+            bullet.y > 0 &&
+            bullet.y < canvas.height &&
+            bullet.alive
+        );
+
+        enemies.forEach((enemy) => {
+          enemy.update();
+          if (Math.random() < 0.005 && enemy.alive) {
+            enemy.shoot();
+          }
+        });
+        enemies = enemies.filter((enemy) => enemy.alive);
+        checkCollisions();
+      }
+
+      function checkCollisions() {
+        bullets.forEach((bullet) => {
+          if (!bullet.alive) return;
+          enemies.forEach((enemy) => {
+            if (!enemy.alive) return;
+            if (Math.hypot(bullet.x - enemy.x, bullet.y - enemy.y) < 15 + 5) {
+              enemy.alive = false;
+              bullet.alive = false;
+            }
+          });
+        });
+
+        enemyBullets.forEach((bullet) => {
+          if (!bullet.alive || !ship.alive) return;
+          if (Math.hypot(ship.x - bullet.x, ship.y - bullet.y) < 10 + 3) {
+            bullet.alive = false;
+            ship.alive = false;
+            setTimeout(() => {
+              alert("Fin del Juego");
+              document.location.reload();
+            }, 100);
+          }
+        });
+
+        enemies.forEach((enemy) => {
+          if (!enemy.alive || !ship.alive) return;
+          if (Math.hypot(ship.x - enemy.x, ship.y - enemy.y) < 10 + 15) {
+            enemy.alive = false;
+            ship.alive = false;
+            setTimeout(() => {
+              alert("Fin del Juego");
+              document.location.reload();
+            }, 100);
+          }
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        if (ship.alive) {
+          ctx.save();
+          ctx.translate(ship.x, ship.y);
+          ctx.rotate(ship.angle);
+          ctx.fillStyle = "white";
+          ctx.beginPath();
+          ctx.moveTo(10, 0);
+          ctx.lineTo(-7, -7);
+          ctx.lineTo(-7, 7);
+          ctx.closePath();
+          ctx.fill();
+          ctx.restore();
+        }
+
+        bullets.forEach((bullet) => {
+          if (!bullet.alive) return;
+          ctx.fillStyle = "yellow";
+          ctx.beginPath();
+          ctx.arc(bullet.x, bullet.y, 3, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        enemyBullets.forEach((bullet) => {
+          if (!bullet.alive) return;
+          ctx.fillStyle = "lime";
+          ctx.beginPath();
+          ctx.arc(bullet.x, bullet.y, 3, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        enemies.forEach((enemy) => {
+          if (!enemy.alive) return;
+          ctx.fillStyle = "red";
+          ctx.beginPath();
+          ctx.arc(enemy.x, enemy.y, 15, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      }
+
+      document.addEventListener("keydown", (e) => {
+        keys[e.key.toLowerCase()] = true;
+        if (e.code === "Space") {
+          shoot();
+        }
+      });
+      document.addEventListener("keyup", (e) => {
+        keys[e.key.toLowerCase()] = false;
+      });
+
+      function shoot() {
+        if (!ship.alive) return;
+        bullets.push({
+          x: ship.x + Math.cos(ship.angle) * 10,
+          y: ship.y + Math.sin(ship.angle) * 10,
+          angle: ship.angle,
+          alive: true,
+        });
+      }
+
+      class Enemy {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.alive = true;
+          this.speed = 1 + Math.random() * 1;
+        }
+        shoot() {
+          if (!this.alive || !ship.alive) return;
+          const angleToPlayer = Math.atan2(ship.y - this.y, ship.x - this.x);
+          enemyBullets.push({
+            x: this.x,
+            y: this.y,
+            angle: angleToPlayer,
+            alive: true,
+          });
+        }
+        update() {
+          if (!this.alive) return;
+          if (ship.alive) {
+            const angleToPlayer = Math.atan2(ship.y - this.y, ship.x - this.x);
+            this.x += Math.cos(angleToPlayer) * this.speed;
+            this.y += Math.sin(angleToPlayer) * this.speed;
+          }
+          if (this.x < 0) this.x = canvas.width;
+          if (this.x > canvas.width) this.x = 0;
+          if (this.y < 0) this.y = canvas.height;
+          if (this.y > canvas.height) this.y = 0;
+        }
+      }
+
+      setInterval(() => {
+        if (enemies.length < 10 && Math.random() < 0.5) {
+          let edge = Math.floor(Math.random() * 4);
+          let spawnX, spawnY;
+          switch (edge) {
+            case 0:
+              spawnX = Math.random() * canvas.width;
+              spawnY = -20;
+              break;
+            case 1:
+              spawnX = Math.random() * canvas.width;
+              spawnY = canvas.height + 20;
+              break;
+            case 2:
+              spawnX = -20;
+              spawnY = Math.random() * canvas.height;
+              break;
+            case 3:
+              spawnX = canvas.width + 20;
+              spawnY = Math.random() * canvas.height;
+              break;
+          }
+          enemies.push(new Enemy(spawnX, spawnY));
+        }
+      }, 500);
+
+      function gameLoop() {
+        update();
+        draw();
+        requestAnimationFrame(gameLoop);
+      }
+
+      gameLoop();
+    </script>
+  </body>
+</html>

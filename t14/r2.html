@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rompecabezas</title>
+    <style>
+      #puzzleContainer {
+        width: 500px;
+        height: 500px;
+        position: relative;
+        border: 1px solid #000;
+      }
+      .puzzlePiece {
+        position: absolute;
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+      input {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="file" id="imageLoader" accept="image/png, image/jpeg" />
+    <div id="puzzleContainer"></div>
+    <script>
+      const container = document.getElementById("puzzleContainer");
+      const input = document.getElementById("imageLoader");
+      let originalPositions = [];
+
+      input.addEventListener("change", function (e) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const img = new Image();
+          img.onload = function () {
+            setupPuzzle(img);
+          };
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+
+      function setupPuzzle(img) {
+        container.innerHTML = "";
+        originalPositions = [];
+        const size = 100,
+          n = 5;
+        let positions = [];
+
+        for (let y = 0; y < n; y++) {
+          for (let x = 0; x < n; x++) {
+            const piece = document.createElement("div");
+            piece.className = "puzzlePiece";
+            piece.style.width = size + "px";
+            piece.style.height = size + "px";
+            piece.style.backgroundImage = `url(${img.src})`;
+            piece.style.backgroundPosition = `-${x * size}px -${y * size}px`;
+            piece.style.left = x * size + "px";
+            piece.style.top = y * size + "px";
+            originalPositions.push({ x: x * size, y: y * size });
+            positions.push({ x: x * size, y: y * size });
+            makeDraggable(piece);
+            container.appendChild(piece);
+          }
+        }
+
+        shuffle(positions);
+        const pieces = container.querySelectorAll(".puzzlePiece");
+        pieces.forEach((piece, index) => {
+          piece.style.left = positions[index].x + "px";
+          piece.style.top = positions[index].y + "px";
+        });
+      }
+
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+
+      function makeDraggable(piece) {
+        let offsetX, offsetY;
+
+        piece.addEventListener("mousedown", function (e) {
+          offsetX = e.clientX - piece.offsetLeft;
+          offsetY = e.clientY - piece.offsetTop;
+          document.addEventListener("mousemove", mouseMove);
+          document.addEventListener("mouseup", mouseUp);
+        });
+
+        function mouseMove(e) {
+          piece.style.left = e.clientX - offsetX + "px";
+          piece.style.top = e.clientY - offsetY + "px";
+        }
+
+        function mouseUp() {
+          const closest = findClosest(piece);
+          piece.style.left = closest.x + "px";
+          piece.style.top = closest.y + "px";
+          document.removeEventListener("mousemove", mouseMove);
+          document.removeEventListener("mouseup", mouseUp);
+          checkCompletion();
+        }
+      }
+
+      function findClosest(piece) {
+        let closest = originalPositions[0];
+        let closestDistance = distance(
+          piece.offsetLeft,
+          piece.offsetTop,
+          closest.x,
+          closest.y
+        );
+        originalPositions.forEach((pos) => {
+          const d = distance(piece.offsetLeft, piece.offsetTop, pos.x, pos.y);
+          if (d < closestDistance) {
+            closest = pos;
+            closestDistance = d;
+          }
+        });
+        return closest;
+      }
+
+      function distance(x1, y1, x2, y2) {
+        return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+      }
+
+      function checkCompletion() {
+        const pieces = container.querySelectorAll(".puzzlePiece");
+        for (let i = 0; i < pieces.length; i++) {
+          if (
+            pieces[i].offsetLeft !== originalPositions[i].x ||
+            pieces[i].offsetTop !== originalPositions[i].y
+          ) {
+            return;
+          }
+        }
+        alert("¡Puzzle completo!");
+      }
+    </script>
+  </body>
+</html>

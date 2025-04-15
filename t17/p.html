@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Juego de Honda</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      #gameContainer {
+        position: relative;
+        width: 800px;
+        height: 600px;
+        background-color: #f0e68c;
+        overflow: hidden;
+      }
+      #slingshot {
+        position: absolute;
+        left: 50px;
+        bottom: 50px;
+        width: 60px;
+        height: 100px;
+        background-color: brown;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+      }
+      #rock {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        width: 20px;
+        height: 20px;
+        background-color: gray;
+        border-radius: 50%;
+        cursor: grab;
+      }
+      #target {
+        position: absolute;
+        right: 100px;
+        top: 200px;
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gameContainer">
+      <div id="slingshot">
+        <div id="rock"></div>
+      </div>
+      <div id="target"></div>
+    </div>
+
+    <script>
+      const gameContainer = document.getElementById("gameContainer");
+      const slingshot = document.getElementById("slingshot");
+      const rock = document.getElementById("rock");
+      const target = document.getElementById("target");
+      let isDragging = false;
+      let initialMouseX, initialMouseY;
+      let rockInitialOffsetX, rockInitialOffsetY;
+      const gravity = 0.01;
+      let velocityX = 0;
+      let velocityY = 0;
+      let isFlying = false;
+
+      rock.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        initialMouseX = e.clientX;
+        initialMouseY = e.clientY;
+        rockInitialOffsetX = rock.offsetLeft;
+        rockInitialOffsetY = rock.offsetTop;
+        rock.style.cursor = "grabbing";
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        const dx = e.clientX - initialMouseX;
+        const dy = e.clientY - initialMouseY;
+        const dragRadius = 40;
+        const centerX =
+          rockInitialOffsetX + slingshot.offsetLeft + rock.offsetWidth / 2;
+        const centerY =
+          rockInitialOffsetY + slingshot.offsetTop + rock.offsetHeight / 2;
+
+        const currentMouseX = e.clientX;
+        const currentMouseY = e.clientY;
+
+        const angle = Math.atan2(
+          currentMouseY - centerY,
+          currentMouseX - centerX
+        );
+        const distance = Math.min(
+          dragRadius,
+          Math.sqrt(
+            Math.pow(currentMouseX - centerX, 2) +
+              Math.pow(currentMouseY - centerY, 2)
+          )
+        );
+
+        const newRockLeft =
+          centerX +
+          distance * Math.cos(angle) -
+          rock.offsetWidth / 2 -
+          slingshot.offsetLeft;
+        const newRockTop =
+          centerY +
+          distance * Math.sin(angle) -
+          rock.offsetHeight / 2 -
+          slingshot.offsetTop;
+
+        rock.style.left = `${newRockLeft}px`;
+        rock.style.top = `${newRockTop}px`;
+      });
+
+      document.addEventListener("mouseup", (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        rock.style.cursor = "grab";
+        const releaseMouseX = event.clientX;
+        const releaseMouseY = event.clientY;
+        const pullBackX = initialMouseX - releaseMouseX;
+        const pullBackY = initialMouseY - releaseMouseY;
+        velocityX = pullBackX * 0.1;
+        velocityY = pullBackY * 0.1;
+
+        isFlying = true;
+        animateRock();
+      });
+
+      function animateRock() {
+        if (!isFlying) return;
+        velocityY += gravity;
+        const currentRockX = rock.offsetLeft + slingshot.offsetLeft;
+        const currentRockY = rock.offsetTop + slingshot.offsetTop;
+
+        const newRockX = currentRockX + velocityX;
+        const newRockY = currentRockY + velocityY;
+
+        rock.style.left = `${newRockX - slingshot.offsetLeft}px`;
+        rock.style.top = `${newRockY - slingshot.offsetTop}px`;
+
+        const rockRect = rock.getBoundingClientRect();
+        const targetRect = target.getBoundingClientRect();
+
+        if (
+          rockRect.right > targetRect.left &&
+          rockRect.left < targetRect.right &&
+          rockRect.bottom > targetRect.top &&
+          rockRect.top < targetRect.bottom
+        ) {
+          isFlying = false;
+          console.log("Tiro al blanco!");
+        }
+
+        if (
+          newRockY > gameContainer.offsetHeight ||
+          newRockX < 0 ||
+          newRockX > gameContainer.offsetWidth
+        ) {
+          isFlying = false;
+        }
+
+        if (isFlying) {
+          requestAnimationFrame(animateRock);
+        } else {
+          resetRockPosition();
+        }
+      }
+
+      function resetRockPosition() {
+        rock.style.left = "20px";
+        rock.style.top = "20px";
+        velocityX = 0;
+        velocityY = 0;
+      }
+    </script>
+  </body>
+</html>

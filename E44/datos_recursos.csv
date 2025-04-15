@@ -1,0 +1,5 @@
+region,proyecto,problema_severidad,necesidad_recursos
+RegionA,Proyecto1,Alta,50000
+RegionB,Proyecto2,Medio,30000
+RegionA,Proyecto3,Bajo,20000
+RegionC,Proyecto4,Alto,70000

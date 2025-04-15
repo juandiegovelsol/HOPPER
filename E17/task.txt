@@ -1,0 +1,76 @@
+67ee1360a525b1799fd2df86
+
+
+Soy un desarrollador de software que administra mis fragmentos de código y notas para varios lenguajes de programación. Quiero crear una forma estructurada de almacenar y recuperar estos fragmentos. Escriba un programa JavaScript que administre mis fragmentos mediante un objeto. El programa debe cumplir con los siguientes requisitos:
+
+Permitirme ingresar fragmentos de código, incluidos "id", "idioma", "descripción" y "código".
+Almacenar estos datos en un objeto llamado codeSnippets, donde la clave es el ID del fragmento y el valor es un objeto que contiene los detalles del fragmento.
+Proporcionar una función para recuperar un fragmento por su ID y devolverlo en un formato JSON bien estructurado.
+Asegurarse de que el programa maneja los casos en los que el ID especificado no existe devolviendo un mensaje que indica que no se encontró el fragmento.
+Permitirme enumerar todos los fragmentos en un lenguaje de programación específico.
+No incluir ningún ario ni explicación en el código.
+Contexto:
+
+Como desarrollador de software, necesito llevar un registro de varios fragmentos de código para poder consultarlos y reutilizarlos rápidamente. Un enfoque estructurado me ayudará a organizar mi trabajo y mejorar mi productividad.
+
+Resultado deseado:
+
+El objetivo es tener un programa de JavaScript que registre de manera eficiente mis fragmentos de código y me permita recuperarlos y filtrarlos en función de los lenguajes de programación.
+
+Ejemplo de entrada:
+
+El objeto codeSnippets podría comenzar de la siguiente manera:
+
+JavaScript
+
+
+
+
+12345
+let codeSnippets = {
+"1": { language: "JavaScript", description: "Función para sumar dos números", code: "function add(a, b) { return a + b; }" },
+"2": { language: "Python", description: "Función para sumar dos números", code: "def add(a, b): return a + b" },
+"3": { language: "Java", 
+Ejemplo de salida:
+
+Para una solicitud para recuperar el fragmento con ID "2", el JSON de salida podría verse así:
+
+JSON (Raw)
+
+
+
+
+123456
+{
+  "id": "2",
+  "language": "Python",
+  "description": "Función para sumar dos números",
+  "code": "def add(a, b): return a + b"
+}
+Si el ID no existe, la salida podría ser:
+
+PLAINTEXT
+
+
+
+123
+{
+"message": "Fragmento no encontrado".
+}
+Para una solicitud que desea enumerar todos los fragmentos de código en "JavaScript", el resultado podría verse así:
+
+JSON (Raw)
+
+
+
+
+12345678
+[
+  {
+    "id": "1",
+    "language": "JavaScript",
+    "description": "Función para sumar dos números",
+    "code": "function add(a, b) { return a + b; }"
+  }
+]
+Este mensaje describe claramente la tarea, proporciona contexto y especifica el resultado deseado, lo que lo convierte en una solicitud sólida para generar datos estructurados.

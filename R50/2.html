@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editor de Texto Simple</title>
+    <link rel="stylesheet" href="styles2.css" />
+  </head>
+  <body>
+    <div class="editor-container">
+      <textarea id="textArea" placeholder="Escribe aquí..."></textarea>
+      <div class="toolbar">
+        <button onclick="applyBold()">Negrita</button>
+        <button onclick="applyItalic()">Cursiva</button>
+        <button onclick="applyUnderline()">Subrayado</button>
+        <button onclick="saveText()">Guardar</button>
+        <button onclick="loadText()">Cargar</button>
+      </div>
+    </div>
+    <script src="script2.js"></script>
+  </body>
+</html>

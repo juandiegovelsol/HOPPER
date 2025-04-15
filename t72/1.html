@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Bloques</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      #game-container {
+        position: relative;
+        width: 80vw;
+        height: 60vh;
+        border: 2px solid #000;
+        background-color: #fff;
+        overflow: hidden;
+      }
+      #paddle {
+        position: absolute;
+        bottom: 0;
+        width: 100px;
+        height: 10px;
+        background-color: #333;
+        border-radius: 5px;
+      }
+      #ball {
+        position: absolute;
+        bottom: calc(50% - 5px);
+        left: calc(50% - 5px);
+        width: 10px;
+        height: 10px;
+        background-color: #f00;
+        border-radius: 50%;
+      }
+      .brick {
+        position: absolute;
+        width: 40px;
+        height: 20px;
+        background-color: #33b5e5;
+        border: 1px solid #000;
+      }
+      .brick-row {
+        display: flex;
+        justify-content: space-around;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game-container">
+      <div id="paddle"></div>
+      <div id="ball"></div>
+      <div id="bricks" class="brick-row"></div>
+    </div>
+
+    <script>
+      const paddle = document.getElementById("paddle");
+      const ball = document.getElementById("ball");
+      const bricksContainer = document.getElementById("bricks");
+      let bricks = [];
+
+      const paddleWidth = paddle.offsetWidth;
+      const paddleHeight = paddle.offsetHeight;
+      const ballSize = ball.offsetWidth;
+
+      let gameStarted = false;
+      let gameOver = false;
+      let won = false;
+
+      const keys = {
+        37: false, // left
+        39: false, // right
+      };
+
+      window.addEventListener("keydown", (e) => {
+        if (e.keyCode === 37 || e.keyCode === 39) {
+          e.preventDefault();
+          keys[e.keyCode] = true;
+          gameStarted = true;
+        }
+      });
+
+      window.addEventListener("keyup", (e) => {
+        keys[e.keyCode] = false;
+      });
+
+      function createBricks() {
+        for (let i = 0; i < 30; i++) {
+          const brick = document.createElement("div");
+          brick.classList.add("brick");
+          bricksContainer.appendChild(brick);
+          bricks.push(brick);
+        }
+      }
+
+      function resetGame() {
+        gameOver = false;
+        won = false;
+        gameStarted = false;
+        ball.style.bottom = `calc(50% - 5px)`;
+        ball.style.left = `calc(50% - 5px)`;
+        ball.style.transform = "scale(1)";
+        paddle.style.left = "0";
+        bricksContainer.innerHTML = "";
+        createBricks();
+      }
+
+      resetGame();
+
+      function update() {
+        if (gameOver || won) return;
+
+        let paddleLeft = parseFloat(paddle.style.left);
+        let ballBottom = parseFloat(ball.style.bottom);
+        let ballLeft = parseFloat(ball.style.left);
+
+        if (keys[37] && paddleLeft > 0) {
+          paddle.style.left = `${paddleLeft - 5}px`;
+        }
+        if (keys[39] && paddleLeft < 70) {
+          paddle.style.left = `${paddleLeft + 5}px`;
+        }
+
+        if (!gameStarted) return;
+
+        ballBottom += 5;
+        ballLeft += gameStarted ? (Math.random() < 0.5 ? 3 : -3) : 0;
+        ball.style.bottom = `${ballBottom}px`;
+        ball.style.left = `${ballLeft}px`;
+
+        if (ballLeft <= 0 || ballLeft + ballSize >= 800) {
+          gameStarted = false;
+        }
+
+        if (ballBottom + ballSize >= 600) {
+          gameOver = true;
+        }
+
+        if (bricks.length === 0) {
+          won = true;
+        }
+
+        bricks.forEach((brick, index) => {
+          if (
+            brick &&
+            ballBottom + ballSize >= brick.offsetTop &&
+            ballBottom <= brick.offsetTop + brick.offsetHeight &&
+            ballLeft + ballSize >= brick.offsetLeft &&
+            ballLeft <= brick.offsetLeft + brick.offsetWidth
+          ) {
+            bricks.splice(index, 1);
+            brick.remove();
+            gameStarted = false;
+            ballBottom = 400;
+            setTimeout(() => {
+              gameStarted = true;
+            }, 500);
+          }
+        });
+
+        requestAnimationFrame(update);
+      }
+
+      update();
+    </script>
+  </body>
+</html>

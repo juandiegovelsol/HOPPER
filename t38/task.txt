@@ -1,0 +1,259 @@
+67d45c96f5664e6a0bff3c5d
+
+67dce75bbe407f0cdffdbaa3
+
+Trabajo en una universidad en Santiago de Chile y me pidieron desarrollar un script de JavaScript para leer y procesar datos desde un archivo JSON con información de los estudiantes. Los datos contienen un nombre, un id, un semestre y un arreglo de notas de los cursos tomados durante el semestre. El programa debe calcular y devolver el promedio de notas de cada estudiante durante el semestre, después de validar que los datos tengan el formato correcto.
+
+```javascript
+function procesarDatosEstudiantes(jsonData) {
+  const estudiantes = JSON.parse(jsonData);
+  const resultados = [];
+
+  for (const estudiante of estudiantes) {
+    const validacion = validarEstudiante(estudiante);
+    if (!validacion.esValido) {
+      console.error(
+        `Error en estudiante ${estudiante.nombre || "sin nombre"}: ${
+          validacion.mensaje
+        }`
+      );
+      continue;
+    }
+
+    const promedio = calcularPromedio(estudiante.cursos);
+    resultados.push({
+      id: estudiante.id,
+      nombre: estudiante.nombre,
+      semestre: estudiante.semestre,
+      promedio: promedio,
+    });
+  }
+
+  return resultados;
+}
+
+function validarEstudiante(estudiante) {
+  if (!estudiante.nombre || estudiante.nombre.trim() === "") {
+    return { esValido: false, mensaje: "El nombre no puede estar vacío" };
+  }
+
+  if (!Number.isInteger(estudiante.id) || estudiante.id <= 0) {
+    return { esValido: false, mensaje: "El ID debe ser un entero positivo" };
+  }
+
+  if (
+    !estudiante.cursos ||
+    !Array.isArray(estudiante.cursos) ||
+    estudiante.cursos.length === 0
+  ) {
+    return {
+      esValido: false,
+      mensaje: "El estudiante debe tener al menos un curso",
+    };
+  }
+
+  for (let i = 0; i < estudiante.cursos.length; i++) {
+    const curso = estudiante.cursos[i];
+    if (!Number.isInteger(curso.id) || curso.id <= 0) {
+      return {
+        esValido: false,
+        mensaje: `El ID del curso ${i + 1} debe ser un entero positivo`,
+      };
+    }
+
+    if (!curso.nombre || curso.nombre.trim() === "") {
+      return {
+        esValido: false,
+        mensaje: `El nombre del curso ${i + 1} no puede estar vacío`,
+      };
+    }
+
+    if (typeof curso.nota !== "number" || curso.nota < 0 || curso.nota > 10) {
+      return {
+        esValido: false,
+        mensaje: `La nota del curso ${i + 1} debe ser un valor entre 0 y 10`,
+      };
+    }
+  }
+
+  return { esValido: true };
+}
+
+function calcularPromedio(cursos) {
+  const totalNotas = cursos.reduce((sum, curso) => sum + curso.nota, 0);
+  return totalNotas / cursos.length;
+}
+
+function leerYProcesarArchivo(rutaArchivo) {
+  const fs = require("fs");
+  try {
+    const datos = fs.readFileSync(rutaArchivo, "utf8");
+    return procesarDatosEstudiantes(datos);
+  } catch (error) {
+    console.error("Error al leer el archivo:", error);
+    return [];
+  }
+}
+
+const resultados = leerYProcesarArchivo("estudiantes.json");
+console.log(JSON.stringify(resultados, null, 2));
+
+module.exports = {
+  procesarDatosEstudiantes,
+  leerYProcesarArchivo,
+};
+```
+
+Necesito que me des la salida completa de consola para cada una de las siguientes entradas (archivos JSON), junto con una explicación cortita de cada salida. 
+
+Entrada 1
+
+`estudiantes.json` 
+```json
+[
+  {
+    "id": 1001,
+    "nombre": "Ana García",
+    "semestre": 3,
+    "cursos": [
+      {
+        "id": 101,
+        "nombre": "Programación",
+        "nota": 8.5
+      },
+      {
+        "id": 102,
+        "nombre": "Matemáticas",
+        "nota": 9.5
+      },
+      {
+        "id": 103,
+        "nombre": "Bases de Datos",
+        "nota": 9.0
+      }
+    ]
+  },
+  {
+    "id": 1002,
+    "nombre": "Carlos Rodríguez",
+    "semestre": 2,
+    "cursos": [
+      {
+        "id": 101,
+        "nombre": "Programación",
+        "nota": 6.8
+      },
+      {
+        "id": 104,
+        "nombre": "Algoritmos",
+        "nota": 8.7
+      }
+    ]
+  },
+  {
+    "id": 1003,
+    "nombre": "María López",
+    "semestre": 4,
+    "cursos": [
+      {
+        "id": 105,
+        "nombre": "Desarrollo Web",
+        "nota": 9.5
+      },
+      {
+        "id": 106,
+        "nombre": "Inteligencia Artificial",
+        "nota": 7.8
+      },
+      {
+        "id": 107,
+        "nombre": "Redes",
+        "nota": 8.2
+      },
+      {
+        "id": 108,
+        "nombre": "Sistemas Operativos",
+        "nota": 6.9
+      }
+    ]
+  }
+]
+```
+
+Entrada 2 
+
+`estudiantes.json` 
+```json
+[
+  {
+    "id": 1001,
+    "nombre": "Ana García",
+    "semestre": 1,
+    "cursos": [
+      {
+        "id": 101,
+        "nombre": "Programación",
+        "nota": 8.5
+      },
+      {
+        "id": 102,
+        "nombre": "Matemáticas",
+        "nota": 9.5
+      },
+      {
+        "id": 103,
+        "nombre": "Bases de Datos",
+        "nota": 9.0
+      }
+    ]
+  },
+  {
+    "id": 1001,
+    "nombre": "Ana García",
+    "semestre": 2,
+    "cursos": [
+      {
+        "id": 101,
+        "nombre": "Programación 2",
+        "nota": 6.8
+      },
+      {
+        "id": 104,
+        "nombre": "Algoritmos",
+        "nota": 8.7
+      }
+    ]
+  }
+]
+```
+
+
+Entrada 3
+
+`estudiantes.json` 
+```json
+[
+  {
+    "id": "1001",
+    "nombre": "",
+    "semestre": 1,
+    "cursos": [
+      {
+        "id": 101,
+        "nombre": "Programación",
+        "nota": 10.1
+      },
+      {
+        "id": 102,
+        "nombre": "Matemáticas",
+        "nota": 9.5
+      },
+      {
+        "id": 103,
+        "nombre": "Bases de Datos",
+        "nota": 9.0
+      }
+    ]
+  }
+]
+```

@@ -1,0 +1,27 @@
+{
+    "2023": {
+        "promedio_ventas_por_vendedor": {
+            "Juan Pérez": 26000.0
+        },
+        "calificaciones_vendedores": {
+            "Juan Pérez": 8
+        },
+        "ventas_por_modelo": {
+            "Toyota Corolla": 2
+        }
+    },
+    "2024": {
+        "promedio_ventas_por_vendedor": {
+            "María Gómez": 30000.0,
+            "Carlos Díaz": 26000.0
+        },
+        "calificaciones_vendedores": {
+            "María Gómez": 7,
+            "Carlos Díaz": 7
+        },
+        "ventas_por_modelo": {
+            "Honda Civic": 2,
+            "Ford Focus": 2
+        }
+    }
+}

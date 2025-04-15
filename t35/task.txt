@@ -1,0 +1,8 @@
+67d45c972665e84b5915f43a
+
+67dce80439c2bf0940925635
+
+Soy un desarrollador de videojuegos de una empresa ubicada en Santiago de Chile y me pidieron desarrollar un juego con HTML, CSS y JavaScript para su página web. El juego consiste en un personaje estático ubicado en la parte baja central de la pantalla que tiene una resortera con munición infinita que puede ser disparada presionando la tecla espacio. De la parte de arriba de la pantalla caen suministros enemigos y la función del jugador es disparar hacia los suministros para no dejar que caigan al suelo. La dirección de disparo se debe controlar con las teclas de izquierda y derecha.
+
+Dame el código completo sin comentarios y con una explicación corta de un párrafo.
+

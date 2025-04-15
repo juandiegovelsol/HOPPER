@@ -1,0 +1,22 @@
+{
+    "resumen_mensual": {
+        "12345": {
+            "uso_total_datos_mb": 7100.0,
+            "promedio_diario_mb": 3550.0,
+            "dias_uso_anomalo": 1,
+            "porcentaje_dias_anomalo": 50.0
+        },
+        "12346": {
+            "uso_total_datos_mb": 1500.0,
+            "promedio_diario_mb": 750.0,
+            "dias_uso_anomalo": 0,
+            "porcentaje_dias_anomalo": 0.0
+        },
+        "12347": {
+            "uso_total_datos_mb": 450.0,
+            "promedio_diario_mb": 225.0,
+            "dias_uso_anomalo": 0,
+            "porcentaje_dias_anomalo": 0.0
+        }
+    }
+}

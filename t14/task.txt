@@ -1,0 +1,6 @@
+67d46b6b0d2cc42fa1841c54
+
+67d70c8f9a37997ff59c3282
+
+
+Soy un desarrollador principiante de videojuegos y me han pedido crear un minijuego con HTML, CSS y JavaScript. Lo que se necesita es que el usuario debe poder cargar una imagen sólo en formato png o jpg y el juego debe generar un rompecabezas de 5x5 cuadros a partir de la imagen subida, adaptando la imagen a un espacio de 500x500 pixeles y generando piezas iguales. El juego debe desordenar las piezas e implementar una función de arrastrar y soltar para que el jugador pueda resolver el puzle. Se debe detectar cuando todas las piezas están en la posición original para determinar que el juego terminó. Dame el código completo, sin comentarios y con una expliación de un párrafo.

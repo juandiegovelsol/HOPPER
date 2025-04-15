@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego Espacial</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #000;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="gameCanvas"></canvas>
+    <script>
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      let player = {
+        x: canvas.width / 2,
+        y: canvas.height / 2,
+        width: 40,
+        height: 40,
+        angle: 0,
+        speed: 2,
+        rotationSpeed: 0.1,
+      };
+
+      let keys = {};
+      let enemies = [];
+      let playerBullets = [];
+      let enemyBullets = [];
+      let enemySpawnInterval;
+      let gameOver = false;
+
+      window.addEventListener("keydown", (e) => {
+        keys[e.key] = true;
+      });
+
+      window.addEventListener("keyup", (e) => {
+        keys[e.key] = false;
+      });
+
+      function spawnEnemy() {
+        let enemy = {
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          width: 30,
+          height: 30,
+          speed: Math.random() * 1 + 1,
+        };
+        enemies.push(enemy);
+      }
+
+      function update() {
+        if (gameOver) return;
+
+        if (keys["a"]) player.angle -= player.rotationSpeed;
+        if (keys["d"]) player.angle += player.rotationSpeed;
+        if (keys["w"]) {
+          player.x += Math.cos(player.angle) * player.speed;
+          player.y += Math.sin(player.angle) * player.speed;
+        }
+        if (keys["s"]) {
+          player.x -= Math.cos(player.angle) * player.speed;
+          player.y -= Math.sin(player.angle) * player.speed;
+        }
+
+        player.x = Math.clamp(player.x, 0, canvas.width);
+        player.y = Math.clamp(player.y, 0, canvas.height);
+
+        for (let bullet of playerBullets) {
+          bullet.x += Math.cos(bullet.angle) * 5;
+          bullet.y += Math.sin(bullet.angle) * 5;
+
+          bullet.x = Math.clamp(bullet.x, 0, canvas.width);
+          bullet.y = Math.clamp(bullet.y, 0, canvas.height);
+        }
+
+        for (let bullet of enemyBullets) {
+          bullet.x += Math.cos(bullet.angle) * 3;
+          bullet.y += Math.sin(bullet.angle) * 3;
+
+          bullet.x = Math.clamp(bullet.x, 0, canvas.width);
+          bullet.y = Math.clamp(bullet.y, 0, canvas.height);
+
+          if (detectCollision(player, bullet)) {
+            gameOver = true;
+          }
+        }
+
+        for (let enemy of enemies) {
+          enemy.x += ((player.x - enemy.x) * enemy.speed) / 100;
+          enemy.y += ((player.y - enemy.y) * enemy.speed) / 100;
+
+          if (Math.random() < 0.01) {
+            let angle = Math.atan2(enemy.y - player.y, enemy.x - player.x);
+            enemyBullets.push({
+              x: enemy.x,
+              y: enemy.y,
+              width: 5,
+              height: 5,
+              angle: angle,
+            });
+          }
+
+          if (detectCollision(enemy, player)) {
+            gameOver = true;
+          }
+        }
+
+        if (Math.random() < 0.02) spawnEnemy();
+
+        for (let i = playerBullets.length - 1; i >= 0; i--) {
+          let bullet = playerBullets[i];
+          for (let j = enemies.length - 1; j >= 0; j--) {
+            let enemy = enemies[j];
+            if (detectCollision(bullet, enemy)) {
+              playerBullets.splice(i, 1);
+              enemies.splice(j, 1);
+              break;
+            }
+          }
+        }
+      }
+
+      function detectCollision(a, b) {
+        return (
+          a.x < b.x + b.width &&
+          a.x + a.width > b.x &&
+          a.y < b.y + b.height &&
+          a.height + a.y > b.y
+        );
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.save();
+        ctx.translate(player.x, player.y);
+        ctx.rotate(player.angle);
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(
+          -player.width / 2,
+          -player.height / 2,
+          player.width,
+          player.height
+        );
+        ctx.restore();
+
+        for (let bullet of playerBullets) {
+          ctx.save();
+          ctx.translate(bullet.x, bullet.y);
+          ctx.rotate(bullet.angle);
+          ctx.fillStyle = "#fff";
+          ctx.fillRect(-2, -2, 4, 4);
+          ctx.restore();
+        }
+
+        for (let enemy of enemies) {
+          ctx.fillStyle = "#f00";
+          ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+        }
+
+        for (let bullet of enemyBullets) {
+          ctx.save();
+          ctx.translate(bullet.x, bullet.y);
+          ctx.rotate(bullet.angle);
+          ctx.fillStyle = "#f00";
+          ctx.fillRect(-2, -2, 4, 4);
+          ctx.restore();
+        }
+      }
+
+      function gameLoop() {
+        update();
+        draw();
+        if (!gameOver) requestAnimationFrame(gameLoop);
+      }
+
+      enemySpawnInterval = setInterval(spawnEnemy, 1000);
+      gameLoop();
+    </script>
+  </body>
+</html>

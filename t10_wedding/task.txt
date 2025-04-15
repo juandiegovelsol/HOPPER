@@ -1,0 +1,109 @@
+67d46185dd1cc234447d4168
+
+67d6eec2216849ef69be5a9f
+
+
+Me encuentro planeando mi matrimonio y para ello he construido una interfaz de usuario que gestiona las invitaciones que deseamos hacer. Cada invitación tiene los campos del ejemplo y se almacenan en un arreglo de objetos:
+
+```javascript
+{
+        id: 1,
+        name: "Juan Perez",
+        guests: 2,
+        table: "1A",
+        status: "confirmado",
+        invitationSent: false,
+        phone: "555-1234",
+}
+```
+
+Ahora quiero crear un servidor con Node, Express y JavaScript que me permita manejar los mismos datos para poder integrar la interfaz a un sistema de almacenamiento de los datos. Por ahora, los datos se deben almacenar en una variable interna del código, no es necesario usar una base de datos. Quiero generar un endpoint para crear una nueva invitación (id se asigna automáticamente, invitationSent es false por defecto, status es pendiente por defecto, los campos name, table, y phone no pueden estar vacíos y guests tiene que ser un entero positivo), otro para retornar todas las invitaciones, y otro para modificar una invitación con id específico (se deben hacer las mismas validaciones que en el endpoint para crear invitaciones, adicionalmente validar que status contiene solo "confirmado", "pendiente" o "rechazado" y que invitationSent es un booleano). Quiero el código completo sin comentarios y con una explicación de un párrafo.
+
+
+casos de prueba:
+
+curl -X POST \
+  http://localhost:3000/invitaciones \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Ana García",
+    "guests": 3,
+    "table": "2B",
+    "phone": "555-5678"
+  }'
+
+curl -X POST \
+  http://localhost:3000/invitaciones \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Carlos López",
+    "guests": 2,
+    "table": "3C"
+  }'
+
+curl http://localhost:3000/invitaciones
+
+curl -X PUT \
+  http://localhost:3000/invitaciones/1 \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "status": "confirmado",
+    "invitationSent": true
+  }'
+
+
+curl -X PUT \
+  http://localhost:3000/invitaciones/2 \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "status": "invalidStatus"
+  }'
+
+
+
+
+
+
+
+
+
+curl -X POST \
+  http://localhost:3000/invitations \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Ana Garcia",
+    "guests": 3,
+    "table": "2B",
+    "phone": "555-5678"
+  }'
+
+curl -X POST \
+  http://localhost:3000/invitations \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Carlos Lopez",
+    "guests": 2,
+    "table": "3C"
+  }'
+
+curl http://localhost:3000/invitations
+
+curl -X PUT \
+  http://localhost:3000/invitations/1 \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Ana Garcia",
+    "guests": 3,
+    "table": "2B",
+    "phone": "555-5678",
+    "status": "confirmado",
+    "invitationSent": true
+  }'
+
+
+curl -X PUT \
+  http://localhost:3000/invitations/2 \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "status": "invalidStatus"
+  }'

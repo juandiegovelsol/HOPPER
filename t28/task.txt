@@ -1,0 +1,114 @@
+67d45c97ef3958f5a03334f6
+
+67dce6fe44fb1449741a9458
+
+
+
+Estoy programando un script en JavaScript para poder calcular un el total de mi pago mensual en pesos chilenos. El programa recibe un archivo CSV que contiene registros de tiempos en formato HH MM SS (horas, minutos y segundos) y el respectivo pago por hora de cada registro. Después se calcula el tiempo y el pago para cada tasa junto con el tiempo y el pago total de todos los registros. El programa también hace validación de entrada para garantizar que todos los registros tienen el formato correcto.
+
+```javascript
+const fs = require("fs");
+const csvFile = process.argv[2] || "data.csv";
+fs.readFile(csvFile, "utf8", (err, data) => {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
+  let lines = data.trim().split("\n");
+  if (lines.length === 0) {
+    console.error("No hay registros en el archivo CSV");
+    process.exit(1);
+  }
+  if (lines[0].toLowerCase().includes("tiempo")) {
+    lines.shift();
+  }
+  if (lines.length === 0) {
+    console.error("No hay registros en el archivo CSV");
+    process.exit(1);
+  }
+  let rateTotals = {};
+  let totalPaid = 0;
+  let totalTime = 0;
+  const timeRegex = /^\d{2} \d{2} \d{2}$/;
+  lines.forEach((line, index) => {
+    let parts = line.split(",");
+    console.log(parts.length);
+    if (parts.length !== 2) {
+      console.error(`Error en la línea ${index + 1}: formato incorrecto`);
+      process.exit(1);
+    }
+    let timeStr = parts[0].trim();
+    let rateStr = parts[1].trim();
+    if (!timeRegex.test(timeStr)) {
+      console.error(
+        `Error en la línea ${
+          index + 1
+        }: el tiempo debe tener el formato numérico HH MM SS`
+      );
+      process.exit(1);
+    }
+    let [hh, mm, ss] = timeStr.split(" ").map(Number);
+    if (isNaN(hh) || isNaN(mm) || isNaN(ss)) {
+      console.error(
+        `Error en la línea ${
+          index + 1
+        }: el tiempo contiene valores no numéricos`
+      );
+      process.exit(1);
+    }
+    let seconds = hh * 3600 + mm * 60 + ss;
+    let hoursWorked = seconds / 3600;
+    let rate = parseFloat(rateStr);
+    if (isNaN(rate) || rate <= 0) {
+      console.error(
+        `Error en la línea ${index + 1}: la tasa debe ser un número positivo`
+      );
+      process.exit(1);
+    }
+    if (!rateTotals[rate]) {
+      rateTotals[rate] = { paid: 0, time: 0 };
+    }
+    let subtotal = rate * hoursWorked;
+    rateTotals[rate].paid += subtotal;
+    rateTotals[rate].time += hoursWorked;
+    totalPaid += subtotal;
+    totalTime += hoursWorked;
+  });
+  for (let rate in rateTotals) {
+    console.log(
+      `Tasa: ${rate} CLP, Tiempo trabajado: ${rateTotals[rate].time.toFixed(
+        2
+      )} horas, Subtotal pagado: ${rateTotals[rate].paid.toFixed(2)} CLP`
+    );
+  }
+  console.log(`Total pagado: ${totalPaid.toFixed(2)} CLP`);
+  console.log(`Total de tiempo trabajado: ${totalTime.toFixed(2)} horas`);
+});
+```
+
+Necesito que me des la salida para cada una de las siguientes entradas (archivos CSV), junto con una explicación cortita de cada salida.
+
+Entrada 1
+```csv
+Tiempo,Tasa
+01 30 00,15000 
+04 15 30,15000
+07 00 00,18000
+02 45 15,15000
+05 30 00,18000
+```
+
+Entrada 2
+```csv
+Tiempo,Tasa
+AA 30 00 as,-15000,1 
+00 27 50,13000 
+01 20 00,19000 
+05 15 10,5000  
+```
+
+Entrada 3
+```csv
+Tiempo,Tasa
+8:30:00,15000
+```

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Caída</title>
+    <style>
+      body {
+        overflow: hidden;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f0f0;
+      }
+      #game-area {
+        position: relative;
+        width: 400px;
+        height: 600px;
+        background-color: #c0c0c0;
+        border: 2px solid #000;
+      }
+      .player {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-color: #00f;
+        top: 0;
+        left: 185px;
+      }
+      .platform {
+        position: absolute;
+        width: 200px;
+        height: 20px;
+        background-color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game-area">
+      <div class="player"></div>
+      <div class="platform" style="bottom: 10px; left: 100px"></div>
+      <div class="platform" style="bottom: 50px; left: 200px"></div>
+    </div>
+    <script>
+      const player = document.querySelector(".player");
+      const platforms = document.querySelectorAll(".platform");
+      let falling = false;
+      let score = 0;
+
+      function movePlatforms() {
+        platforms.forEach((platform) => {
+          const rect = platform.getBoundingClientRect();
+          if (rect.top > window.innerHeight) {
+            platform.style.bottom = `${window.innerHeight - 10}px`;
+            platform.style.left =
+              Math.random() * (window.innerWidth - 200) + "px";
+          }
+        });
+      }
+
+      function checkCollision() {
+        const playerRect = player.getBoundingClientRect();
+        platforms.forEach((platform) => {
+          const platformRect = platform.getBoundingClientRect();
+          if (
+            playerRect.bottom >= platformRect.top &&
+            playerRect.top <= platformRect.bottom
+          ) {
+            if (
+              playerRect.left >= platformRect.left &&
+              playerRect.right <= platformRect.right
+            ) {
+              falling = false;
+            }
+          }
+        });
+      }
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") {
+          player.style.left =
+            Math.max(0, parseInt(player.style.left) - 10) + "px";
+        } else if (e.key === "ArrowRight") {
+          player.style.left =
+            Math.min(
+              window.innerWidth - player.offsetWidth,
+              parseInt(player.style.left) + 10
+            ) + "px";
+        }
+        if (!falling) {
+          falling = true;
+        }
+      });
+
+      function gameLoop() {
+        if (falling) {
+          player.style.top = parseInt(player.style.top) + 5 + "px";
+          checkCollision();
+          if (parseInt(player.style.top) > window.innerHeight) {
+            alert("Game Over! Tu puntaje es: " + score);
+            window.cancelAnimationFrame(animationFrameId);
+          }
+        }
+        movePlatforms();
+        animationFrameId = requestAnimationFrame(gameLoop);
+      }
+
+      let animationFrameId = requestAnimationFrame(gameLoop);
+    </script>
+  </body>
+</html>

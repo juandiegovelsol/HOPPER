@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego</title>
+    <style>
+      body {
+        overflow: hidden;
+        margin: 0;
+      }
+      #game {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        background: lightblue;
+      }
+      #character {
+        position: absolute;
+        bottom: 20px;
+        width: 50px;
+        height: 50px;
+        background: red;
+      }
+      .enemy {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game">
+      <div id="character"></div>
+    </div>
+    <script>
+      const game = document.getElementById("game");
+      const character = document.getElementById("character");
+      let characterY = 20,
+        isJumping = false,
+        enemies = [],
+        gameInterval,
+        enemyInterval;
+
+      const groundLevel = 20;
+      const topLevel = 120;
+
+      function jump() {
+        if (isJumping) return;
+        isJumping = true;
+        let jumpCount = 0;
+        const jumpInterval = setInterval(() => {
+          if (jumpCount < 15) {
+            characterY += 5;
+            jumpCount++;
+          } else if (jumpCount < 30) {
+            characterY -= 5;
+            jumpCount++;
+          } else {
+            clearInterval(jumpInterval);
+            isJumping = false;
+          }
+          character.style.bottom = characterY + "px";
+        }, 20);
+      }
+
+      function createEnemy() {
+        const enemy = document.createElement("div");
+        enemy.classList.add("enemy");
+        const enemyLevel = Math.random() > 0.5 ? groundLevel : topLevel;
+        enemy.style.bottom = enemyLevel + "px";
+        enemy.style.right = "0";
+        game.appendChild(enemy);
+        enemies.push(enemy);
+      }
+
+      function gameLoop() {
+        enemies.forEach((enemy, index) => {
+          let enemyRight = parseFloat(enemy.style.right || 0);
+          if (enemyRight > game.clientWidth) {
+            enemy.remove();
+            enemies.splice(index, 1);
+          } else {
+            enemy.style.right = enemyRight + 10 + "px";
+          }
+
+          if (
+            character.getBoundingClientRect().right >
+              enemy.getBoundingClientRect().left &&
+            character.getBoundingClientRect().left <
+              enemy.getBoundingClientRect().right &&
+            character.getBoundingClientRect().bottom >
+              enemy.getBoundingClientRect().top &&
+            character.getBoundingClientRect().top <
+              enemy.getBoundingClientRect().bottom
+          ) {
+            clearInterval(gameInterval);
+            clearInterval(enemyInterval);
+            alert("Fin del juego!");
+          }
+        });
+      }
+
+      window.addEventListener("keydown", (e) => {
+        if (e.code === "Space") jump();
+      });
+      gameInterval = setInterval(gameLoop, 20);
+      enemyInterval = setInterval(createEnemy, 2000);
+    </script>
+  </body>
+</html>

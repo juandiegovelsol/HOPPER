@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Radar Chart</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      canvas {
+        display: block;
+        margin: 20px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="radarChart" width="600" height="600"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const ctx = document.getElementById("radarChart").getContext("2d");
+      const data = {
+        labels: [
+          "Salarios",
+          "Vacaciones",
+          "Calidad Humana",
+          "Acompañamiento psicológico",
+          "Beneficios económicos",
+          "Calidad en las instalaciones",
+        ],
+        datasets: [
+          {
+            label: "Promedio de Calificaciones",
+            data: [7.5, 6.8, 8.2, 7.1, 6.5, 7.8],
+            backgroundColor: "rgba(54, 162, 235, 0.2)",
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 2,
+            pointBackgroundColor: "rgba(54, 162, 235, 1)",
+            pointRadius: 5,
+          },
+        ],
+      };
+
+      const config = {
+        type: "radar",
+        data: data,
+        options: {
+          responsive: true,
+          plugins: {
+            radar: {
+              scale: {
+                reverse: false,
+                ticks: {
+                  beginAtZero: true,
+                  max: 10,
+                  stepSize: 1,
+                },
+              },
+            },
+          },
+        },
+      };
+
+      new Chart(ctx, config);
+    </script>
+  </body>
+</html>

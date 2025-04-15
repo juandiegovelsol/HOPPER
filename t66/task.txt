@@ -1,0 +1,5 @@
+67d3d12fe5af4bf00cdbc348
+
+67e793c21224eeb500c186f1
+
+Estoy trabajando para una empresa en Estados Unidos que me pidió desarrollar una página web con HTML, CSS y JavaScript para poder visualizar los datos de interacción de las personas con el perfil de diferentes redes sociales. Quiero generar un gráfico que me muestre el porcentaje de las personas que interactúan con nuestro perfil a través de 3 redes sociales distintas (A, B y C) en el día actual, y otro para poder visualizar el cambio de interacciones en las 3 redes sociales dentro de los últimos 7 dias. El primer gráfico puede ser de tipo circular y el segundo puede ser un gráfico de barras, donde las barras para las 3 redes sociales en un mismo día se encuentren juntas pero con diferente color. Quiero que simules todos los datos necesarios para poder visualizar los gráficos como necesito. Dame el código completo, sin comentarios y con una explicación breve de un párrafo.

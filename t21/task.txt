@@ -1,0 +1,6 @@
+67d4616e080b335e34145e60
+
+67dce8c9fbf2e309bd303ac9
+
+Trabajo para una compañía de desarrollo de videojuegos web localizada en Chile y me pidieron implementar un juego para construcción de una torre. El juego debe consistir en bloques que aparecen y caen desde la parte superior de la pantalla, con las teclas de dirección el jugador los puede mover hacia la izquierda o derecha mientras caen, y deben quedar estáticos una vez alcancen la parte inferior de la pantalla (sólo para el primer bloque) o la superficie del bloque inmediatamente anterior. El juego se termina cuando el jugador no logra ubicar un bloque sobre el bloque inmediatamente anterior. Dame el código completo de HTML, CSS, y JavaScript, sin comentarios y con una explicación de un párrafo.
+

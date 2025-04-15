@@ -1,0 +1,41 @@
+{
+  "1": {
+    "total": 100.1,
+    "dishes": [
+      { "name": "Pizza", "quantity": 50 },
+      { "name": "Soda", "quantity": 5 }
+    ]
+  },
+  "2": {
+    "total": 75.2,
+    "dishes": [
+      { "name": "Pizza", "quantity": 1 },
+      { "name": "Pasta", "quantity": 2 }
+    ]
+  },
+  "3": {
+    "total": 120.0,
+    "dishes": [
+      { "name": "Steak", "quantity": 2 },
+      { "name": "Wine", "quantity": 1 }
+    ]
+  },
+  "4": {
+    "total": 0,
+    "dishes": [{ "name": "Invalid", "quantity": 1 }]
+  },
+  "5": {
+    "total": 55.75,
+    "dishes": [
+      { "name": "Pizza", "quantity": 2 },
+      { "name": "Fries", "quantity": 1 }
+    ]
+  },
+  "-6": {
+    "total": 45.5,
+    "dishes": [
+      { "name": "Pizza", "quantity": 2 },
+      { "name": "Soda", "quantity": 2 }
+    ]
+  }
+}

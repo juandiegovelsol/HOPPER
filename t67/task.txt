@@ -1,0 +1,5 @@
+67d3d1305d3860772ad48952
+
+67e245f7aedf7bda8a70035a
+
+Trabajo para una empresa de ventas en grandes superficies en la ciudad de Nueva York. Me pidieron desarrollar una nueva funcionalidad para su página web construida con HTML, CSS y JavaScript para poder visualizar los datos de ventas en USD de 3 sectores diferentes (Comida, Aseo y Tecnología), me pidieron que haya un diagrama de anillos con tres segmentos donde cada uno represente el porcentaje de ventas calculado a partir del total de ventas en el día. La aplicación almacena los datos de los últimos 7 días y cada día tiene un botón que, al ser presionado, actualiza el gráfico con los datos correspondientes al día presionado. Quiero que generes datos simulados de las ventas diarias en USD para cada sector durante los 7 días necesarios, a partir de los cuales se calcularán los porcentajes. Dame solo el código completo, sin comentarios.

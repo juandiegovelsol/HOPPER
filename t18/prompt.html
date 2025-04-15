@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de tareas</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .checklist-container {
+        width: 300px;
+      }
+
+      .progress-container {
+        position: relative;
+        width: 150px;
+        height: 150px;
+      }
+
+      .progress-circle {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: #f0f0f0;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .progress-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+
+      .checklist-item {
+        margin-bottom: 8px;
+      }
+
+      .circle-bg {
+        fill: none;
+        stroke: #ddd;
+        stroke-width: 3.8;
+      }
+      .circle {
+        fill: none;
+        stroke: steelblue;
+        stroke-width: 3.8;
+        stroke-dasharray: 100, 100;
+        stroke-dashoffset: 100;
+        transition: stroke-dashoffset 0.5s ease-out;
+      }
+
+      .percentage {
+        fill: #333;
+        font-size: 0.5em;
+        text-anchor: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress-container">
+      <div class="progress-circle">
+        <svg viewBox="0 0 36 36" class="circular-chart">
+          <path
+            class="circle-bg"
+            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+          ></path>
+          <path
+            class="circle"
+            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+          ></path>
+        </svg>
+        <text x="18" y="20.35" class="progress-text">0%</text>
+      </div>
+    </div>
+
+    <div class="checklist-container">
+      <h2>Tareas</h2>
+      <div class="checklist-item">
+        <input type="checkbox" id="task1" />
+        <label for="task1">Tarea 1</label>
+      </div>
+      <div class="checklist-item">
+        <input type="checkbox" id="task2" />
+        <label for="task2">Tarea 2</label>
+      </div>
+      <div class="checklist-item">
+        <input type="checkbox" id="task3" />
+        <label for="task3">Tarea 3</label>
+      </div>
+      <div class="checklist-item">
+        <input type="checkbox" id="task4" />
+        <label for="task4">Tarea 4</label>
+      </div>
+    </div>
+
+    <script>
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      const progressText = document.querySelector(".progress-text");
+      const circle = document.querySelector(".circle");
+
+      function updateProgressBar() {
+        const totalTasks = checkboxes.length;
+        const completedTasks = document.querySelectorAll(
+          'input[type="checkbox"]:checked'
+        ).length;
+        const percentage = (completedTasks / totalTasks) * 100;
+        const dashOffset = 100 - percentage;
+
+        circle.style.strokeDashoffset = dashOffset;
+        progressText.textContent = `${Math.round(percentage)}%`;
+      }
+
+      checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener("change", updateProgressBar);
+      });
+
+      updateProgressBar();
+    </script>
+  </body>
+</html>

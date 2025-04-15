@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1001,
+    "nombre": "Ana García",
+    "semestre": 1,
+    "cursos": [
+      {
+        "id": 101,
+        "nombre": "Programación",
+        "nota": 8.5
+      },
+      {
+        "id": 102,
+        "nombre": "Matemáticas",
+        "nota": 9.5
+      },
+      {
+        "id": 103,
+        "nombre": "Bases de Datos",
+        "nota": 9.0
+      }
+    ]
+  },
+  {
+    "id": 1001,
+    "nombre": "Ana García",
+    "semestre": 2,
+    "cursos": [
+      {
+        "id": 101,
+        "nombre": "Programación 2",
+        "nota": 6.8
+      },
+      {
+        "id": 104,
+        "nombre": "Algoritmos",
+        "nota": 8.7
+      }
+    ]
+  }
+]

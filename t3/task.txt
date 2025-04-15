@@ -1,0 +1,105 @@
+67d7222f7c41dd88eb8d11a4
+
+Soy un aficionado de la programación y quiero generar un juego en Swift pero solamente a través de la terminal. La terminal debe mostrar 10 líneas y cada línea debe tener 10 caracteres separados por un espacio, es decir que la terminal debe representar una cuadrícula de 10x10 casillas. Los elementos vacíos se deben representar con el caracter "_". En la primer línea se debe mostrar un objetivo "X" que se mueve en una sequencia predefinida (incluida en el código y que se repite indefinidamente) y en la última línea se debe mostrar una nave "Y" que se controla con las letras "a" y "d" y que dispara con un caracter vacío " ". Los disparos deben avanzar hacia el objetivo, ganando el juego cuando un disparo alcanza el objetivo, y se representan en la cuadrícula con "*". Proporciona el código sin comentarios y con una explicación en un párrafo.
+
+
+/Respuesta final
+
+
+El siguiente código implementa un juego en la terminal donde una nave controlada por el usuario debe disparar para alcanzar un objetivo que se mueve en una secuencia predefinida.
+
+import Foundation
+
+struct Position {
+    var x: Int
+    var y: Int
+}
+
+class Game {
+    let width = 10
+    let height = 10
+    var grid: [[Character]]
+    var targetPosition: Position
+    var shipPosition: Position
+    var bullets: [Position] = []
+    let targetSequence: [Int] = Array(0..<10) + Array((0..<9).reversed())
+    var targetStep = 0
+    
+    init() {
+        grid = Array(repeating: Array(repeating: "_", count: width), count: height)
+        targetPosition = Position(x: 0, y: 0)
+        shipPosition = Position(x: 4, y: 9)
+    }
+    
+    func displayGrid() {
+        updateGrid()
+        for row in grid {
+            print(row.map { String($0) }.joined(separator: " "))
+        }
+    }
+    
+    func updateGrid() {
+        grid = Array(repeating: Array(repeating: "_", count: width), count: height)
+        targetPosition.x = targetSequence[targetStep % targetSequence.count]
+        grid[targetPosition.y][targetPosition.x] = "X"
+        grid[shipPosition.y][shipPosition.x] = "Y"
+        for bullet in bullets {
+            if bullet.y >= 0 {
+                grid[bullet.y][bullet.x] = "*"
+            }
+        }
+    }
+    
+    func moveBullets() {
+        bullets = bullets.map { Position(x: $0.x, y: $0.y - 1) }.filter { $0.y >= 0 }
+    }
+    
+    func checkHit() -> Bool {
+        for bullet in bullets {
+            if bullet.x == targetPosition.x && bullet.y == targetPosition.y {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func moveShip(direction: Character) {
+        if direction == "a", shipPosition.x > 0 {
+            shipPosition.x -= 1
+        } else if direction == "d", shipPosition.x < width - 1 {
+            shipPosition.x += 1
+        }
+    }
+    
+    func fireBullet() {
+        bullets.append(Position(x: shipPosition.x, y: shipPosition.y - 1))
+    }
+    
+    func start() {
+        while true {
+            displayGrid()
+            if checkHit() {
+                print("¡Has ganado!")
+                break
+            }
+            if let input = readLine(strippingNewline: true) {
+                switch input {
+                case "a", "d":
+                    moveShip(direction: Character(input))
+                case " ":
+                    fireBullet()
+                default:
+                    break
+                }
+            }
+            moveBullets()
+            targetStep += 1
+            usleep(200000)
+        }
+    }
+}
+
+let game = Game()
+game.start()
+
+Este código establece un juego en un entorno de la terminal de una cuadrícula de 10x10 usando Swift. La cuadrícula se representa con caracteres de subrayado ("_") para las posiciones vacías, un "X" para un objetivo móvil en la primera fila que sigue una secuencia predefinida de movimientos (movimiento de ida y vuelta entre los índices 0 y 9), y una "Y" que representa la nave controlada por el usuario en la última fila. El usuario puede mover la nave a la izquierda o derecha usando los caracteres "a" y "d" respectivamente, y puede disparar balas con el caracter espacio (" "). Las balas avanzan hacia arriba en la cuadrícula y el juego termina con un mensaje de victoria cuando una bala alcanza la "X". El juego ejecuta un bucle que actualiza la terminal y permite interacciones en tiempo real.

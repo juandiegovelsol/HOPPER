@@ -1,0 +1,151 @@
+67d46b6a235517d4f0e6d564
+
+67e876223aa71659ab309447
+
+
+Trabajo para una empresa de desarrollo de software con sede en Santiago de Chile y me pidieron desarrollar un sistema para procesar datos de compra de activos de un cliente durante todo su historial. El programa obtiene los datos de un JSON que contiene un arreglo de objetos, cada objeto tiene una fecha y un arreglo de compras, donde cada compra tiene un id y un precio en pesos chilenos. El código valida que la fecha esté en el formato DD/MM/YYYY, que sea una fecha válida, que compras sea un arreglo, que cada id tenga 4 caracteres alfanuméricos y que el precio sea un número positivo. Después, el código calcula el promedio de compra de cada activo durante cada dia y el promedio de compra de cada activo durante todos los días.
+
+```javascript
+const fs = require("fs");
+
+function isValidDate(dateString) {
+  const regex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+  if (!regex.test(dateString)) return false;
+  const [day, month, year] = dateString.split("/").map(Number);
+  const date = new Date(year, month - 1, day);
+  return (
+    date.getDate() === day &&
+    date.getMonth() === month - 1 &&
+    date.getFullYear() === year
+  );
+}
+
+function isValidCompras(compras) {
+  return Array.isArray(compras);
+}
+
+function isValidActivoId(id) {
+  return /^[A-Za-z0-9]{4}$/.test(id);
+}
+
+function isValidPrecio(precio) {
+  return typeof precio === "number" && precio > 0;
+}
+
+function calculateAverages(data) {
+  const dailyAverages = {};
+  const overallData = {};
+
+  data.forEach((entry) => {
+    if (!isValidDate(entry.fecha) || !isValidCompras(entry.compras)) return;
+
+    const day = entry.fecha;
+    dailyAverages[day] = dailyAverages[day] || {};
+
+    entry.compras.forEach((compra) => {
+      if (!isValidActivoId(compra.id) || !isValidPrecio(compra.precio)) return;
+
+      dailyAverages[day][compra.id] = dailyAverages[day][compra.id] || {
+        total: 0,
+        count: 0,
+      };
+      dailyAverages[day][compra.id].total += compra.precio;
+      dailyAverages[day][compra.id].count++;
+
+      overallData[compra.id] = overallData[compra.id] || { total: 0, count: 0 };
+      overallData[compra.id].total += compra.precio;
+      overallData[compra.id].count++;
+    });
+  });
+
+  console.log("Promedio Diario:");
+  for (const day in dailyAverages) {
+    console.log(`Fecha: ${day}`);
+    for (const id in dailyAverages[day]) {
+      const average =
+        dailyAverages[day][id].total / dailyAverages[day][id].count;
+      console.log(`Activo ID: ${id}, Promedio: ${average.toFixed(2)}`);
+    }
+  }
+
+  console.log("\nPromedio Total:");
+  for (const id in overallData) {
+    const average = overallData[id].total / overallData[id].count;
+    console.log(`Activo ID: ${id}, Promedio: ${average.toFixed(2)}`);
+  }
+}
+
+fs.readFile("compras.json", "utf8", (err, data) => {
+  if (err) throw err;
+  const jsonData = JSON.parse(data);
+  calculateAverages(jsonData);
+});
+```
+
+Necesito que me des la salida completa de consola para cada una de las siguientes entradas (archivos JSON), junto con una explicación cortita de cada salida. 
+
+Entrada 1
+
+`compras.json`  
+```json
+[
+  {
+    "fecha": "10/10/2023",
+    "compras": [
+      { "id": "A123", "precio": 1000 },
+      { "id": "B456", "precio": 2000 },
+      { "id": "A123", "precio": 1500 }
+    ]
+  },
+  {
+    "fecha": "11/10/2023",
+    "compras": [
+      { "id": "A123", "precio": 2000 },
+      { "id": "B456", "precio": 2500 }
+    ]
+  }
+]
+```
+
+Entrada 2 
+
+`compras.json`  
+```json
+[
+  {
+    "fecha": "10/10/2023",
+    "compras": [
+      { "id": "CLP2", "precio": 1000 },
+      { "id": "CLP@", "precio": 2000 },
+      { "id": "AXS11", "precio": 1500 }
+    ]
+  },
+  {
+    "fecha": "11/10/2023",
+    "compras": []
+  }
+]
+```
+
+Entrada 3 
+
+`compras.json`  
+```json
+[
+  {
+    "fecha": "10/10/2023",
+    "compras": [
+      { "id": "CLP2", "precio": 1000 },
+      { "id": "CLP@", "precio": 2000 },
+      { "id": "AXS11", "precio": 1500 }
+    ]
+  },
+  {
+    "fecha": "29/02/2023",
+    "compras": [
+      { "id": "A123", "precio": 2000 },
+      { "id": "B456", "precio": 2500 }
+    ]
+  }
+]
+```

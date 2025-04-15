@@ -1,0 +1,34 @@
+[
+  {
+    "nombre": "Juan Pérez",
+    "email": "juan.perez@example.com",
+    "pais": "España",
+    "pago": "pendiente",
+    "comida": "vegetariano",
+    "sesiones": ["IA", "Blockchain"]
+  },
+  {
+    "nombre": "Maria Lopez",
+    "email": "maria.lopez@example.com",
+    "pais": "México",
+    "pago": "completado",
+    "comida": "vegano",
+    "sesiones": ["Marketing", "Ciberseguridad"]
+  },
+  {
+    "nombre": "John Doe",
+    "email": "john.doe@example.com",
+    "pais": "Estados Unidos",
+    "pago": "completado",
+    "comida": "normal",
+    "sesiones": ["IA", "Marketing"]
+  },
+  {
+    "nombre": "John Doe2",
+    "email": "john.doe2@example.com",
+    "pais": "Estados Unidos",
+    "pago": "Completado",
+    "comida": "Vegano",
+    "sesiones": ["IA", "Marketing"]
+  }
+]

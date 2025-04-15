@@ -1,0 +1,32 @@
+{
+  "compra1": {
+    "id": 1,
+    "total": 50,
+    "productos": {
+      "manzana": 3,
+      "pan": 2
+    }
+  },
+  "compra2": {
+    "id": "dos",
+    "total": 150,
+    "productos": {
+      "jugo": 5
+    }
+  },
+  "compra3": {
+    "id": 3,
+    "total": 250,
+    "productos": {
+      "carne": 1,
+      "pescado": 2
+    }
+  },
+  "compra4": {
+    "id": 4,
+    "total": 300,
+    "productos": {
+      "manzana": 10
+    }
+  }
+}

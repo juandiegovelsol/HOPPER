@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Área de Firma</title>
+    <style>
+      #signature-pad {
+        border: 2px dashed #000;
+        margin: 20px;
+        padding: 10px;
+        width: 300px;
+        height: 150px;
+        position: relative;
+      }
+      #signature {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #f0f0f0;
+      }
+      #signature-controls {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="signature-pad">
+      <canvas id="signature"></canvas>
+    </div>
+
+    <div id="signature-controls">
+      <button id="clear-btn">Borrar</button>
+      <button id="save-btn">Guardar</button>
+    </div>
+
+    <script>
+      const signatureCanvas = document.getElementById("signature");
+      const context = signatureCanvas.getContext("2d");
+
+      // Establecer el tamaño del lienzo a la misma dimensión que su contenedor
+      signatureCanvas.width = signatureCanvas.clientWidth;
+      signatureCanvas.height = signatureCanvas.clientHeight;
+
+      let drawing = false; // Estado para detectar si el usuario está dibujando
+      let lastX, lastY; // Coordenadas para trazar la línea
+
+      // Inicio del dibujo
+      signatureCanvas.addEventListener("mousedown", (event) => {
+        drawing = true;
+        [lastX, lastY] = [event.offsetX, event.offsetY];
+      });
+
+      // Dibujar mientras el usuario se mueva con el mouse presionado
+      signatureCanvas.addEventListener("mousemove", draw);
+
+      function draw(event) {
+        if (!drawing) return; // Salir si no se está dibujando
+
+        context.lineWidth = 2;
+        context.lineCap = "round";
+        context.strokeStyle = "black";
+
+        context.beginPath();
+        context.moveTo(lastX, lastY);
+        [lastX, lastY] = [event.offsetX, event.offsetY];
+        context.lineTo(lastX, lastY);
+        context.stroke();
+      }
+
+      // Terminar el dibujo
+      signatureCanvas.addEventListener("mouseup", () => {
+        drawing = false;
+      });
+
+      // Borrar la firma
+      document.getElementById("clear-btn").addEventListener("click", () => {
+        context.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+      });
+
+      // Guardar la firma en formato PNG
+      document.getElementById("save-btn").addEventListener("click", () => {
+        const link = document.createElement("a");
+        link.download = "firma.png";
+        link.href = signatureCanvas.toDataURL();
+        link.click();
+      });
+    </script>
+  </body>
+</html>

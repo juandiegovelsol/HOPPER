@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rentabilidad de Criptomonedas</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <canvas id="myChart" width="400" height="200"></canvas>
+    <script>
+      const data = [
+        {
+          Nombre: "Bitcoin",
+          PrecioActual: 40000000,
+          VariacionAnual: -5000000,
+          Proyeccion: 45000000,
+        },
+        {
+          Nombre: "Ethereum",
+          PrecioActual: 2500000,
+          VariacionAnual: 300000,
+          Proyeccion: 3200000,
+        },
+        {
+          Nombre: "Cardano",
+          PrecioActual: 1200,
+          VariacionAnual: -200,
+          Proyeccion: 1500,
+        },
+        {
+          Nombre: "Solana",
+          PrecioActual: 130000,
+          VariacionAnual: 20000,
+          Proyeccion: 160000,
+        },
+        {
+          Nombre: "XRP",
+          PrecioActual: 700,
+          VariacionAnual: -100,
+          Proyeccion: 850,
+        },
+        {
+          Nombre: "Polkadot",
+          PrecioActual: 18000,
+          VariacionAnual: -3000,
+          Proyeccion: 22000,
+        },
+        {
+          Nombre: "Dogecoin",
+          PrecioActual: 60,
+          VariacionAnual: 10,
+          Proyeccion: 75,
+        },
+        {
+          Nombre: "Shiba Inu",
+          PrecioActual: 0.03,
+          VariacionAnual: 0.002,
+          Proyeccion: 0.04,
+        },
+      ];
+
+      // Calcular la rentabilidad
+      const resultados = data.map((item) => ({
+        Nombre: item.Nombre,
+        Rentabilidad:
+          ((item.Proyeccion - item.PrecioActual) / item.PrecioActual) * 100,
+      }));
+
+      // Ordenar los resultados por rentabilidad de menor a mayor
+      resultados.sort((a, b) => a.Rentabilidad - b.Rentabilidad);
+
+      // Extraer los nombres y rentabilidades para el gráfico
+      const nombres = resultados.map((item) => item.Nombre);
+      const rentabilidades = resultados.map((item) => item.Rentabilidad);
+
+      // Configurar el gráfico
+      const ctx = document.getElementById("myChart").getContext("2d");
+      const myChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: nombres,
+          datasets: [
+            {
+              label: "Rentabilidad (%)",
+              data: rentabilidades,
+              backgroundColor: "rgba(75, 192, 192, 0.2)",
+              borderColor: "rgba(75, 192, 192, 1)",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            x: {
+              ticks: {
+                maxRotation: 30,
+                minRotation: 30,
+              },
+            },
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tanques y Minas</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+      }
+
+      #campoDeBatalla {
+        display: grid;
+        grid-template-columns: repeat(20, 40px);
+        grid-template-rows: repeat(20, 40px);
+        gap: 2px;
+        background-color: #ddd;
+      }
+
+      .celda {
+        width: 40px;
+        height: 40px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #tanque {
+        transform: rotate(90deg);
+      }
+
+      #proyectil {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 10px;
+        background-color: #000;
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="campoDeBatalla"></div>
+    <div id="tanque"></div>
+    <div id="proyectil"></div>
+
+    <script>
+      const campo = document.getElementById("campoDeBatalla");
+      const tanque = document.getElementById("tanque");
+      const proyectil = document.getElementById("proyectil");
+      let direccion = { x: 0, y: -1 };
+      let posicionTanque = { x: 0, y: 0 };
+      const tamanoCuadricula = 40;
+      const minas = [];
+
+      function generarMinas(cantidad) {
+        for (let i = 0; i < cantidad; i++) {
+          const x = Math.floor(Math.random() * 20);
+          const y = Math.floor(Math.random() * 20);
+          if (x !== posicionTanque.x || y !== posicionTanque.y) {
+            minas.push({ x, y });
+          }
+        }
+      }
+
+      generarMinas(5);
+
+      function dibujarCampo() {
+        campo.innerHTML = "";
+        for (let x = 0; x < 20; x++) {
+          for (let y = 0; y < 20; y++) {
+            const celda = document.createElement("div");
+            celda.className = "celda";
+            celda.style.backgroundColor = minas.some(
+              (mina) => mina.x === x && mina.y === y
+            )
+              ? "#f00"
+              : "#fff";
+            campo.appendChild(celda);
+          }
+        }
+      }
+
+      function actualizarPosicionTanque() {
+        tanque.style.transform = `translate(${
+          posicionTanque.x * tamanoCuadricula
+        }px, ${posicionTanque.y * tamanoCuadricula}px) rotate(${
+          direccion.x === 0 && direccion.y === -1
+            ? 90
+            : direccion.x === 0 && direccion.y === 1
+            ? 270
+            : direccion.x === 1 && direccion.y === 0
+            ? 0
+            : 180
+        }deg)`;
+      }
+
+      function moverTanque(e) {
+        switch (e.key) {
+          case "w":
+            direccion = { x: 0, y: -1 };
+            break;
+          case "s":
+            direccion = { x: 0, y: 1 };
+            break;
+          case "a":
+            direccion = { x: -1, y: 0 };
+            break;
+          case "d":
+            direccion = { x: 1, y: 0 };
+            break;
+        }
+        const nuevaPosicion = {
+          x: posicionTanque.x + direccion.x,
+          y: posicionTanque.y + direccion.y,
+        };
+        if (
+          nuevaPosicion.x >= 0 &&
+          nuevaPosicion.x < 20 &&
+          nuevaPosicion.y >= 0 &&
+          nuevaPosicion.y < 20
+        ) {
+          posicionTanque.x = nuevaPosicion.x;
+          posicionTanque.y = nuevaPosicion.y;
+        }
+        actualizarPosicionTanque();
+      }
+
+      function disparar(e) {
+        proyectil.style.left = `${posicionTanque.x * tamanoCuadricula + 10}px`;
+        proyectil.style.top = `${posicionTanque.y * tamanoCuadricula + 10}px`;
+        proyectil.style.transform = `translateY(-50%) rotate(${
+          direccion.x === 0 && direccion.y === -1
+            ? 90
+            : direccion.x === 0 && direccion.y === 1
+            ? 270
+            : direccion.x === 1 && direccion.y === 0
+            ? 0
+            : 180
+        }deg)`;
+      }
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === " ") {
+          disparar();
+        } else if (["w", "a", "s", "d"].includes(e.key)) {
+          moverTanque(e);
+        }
+        dibujarCampo();
+      });
+
+      dibujarCampo();
+      actualizarPosicionTanque();
+    </script>
+  </body>
+</html>

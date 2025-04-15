@@ -1,0 +1,264 @@
+67d466d5080b335e34147b77
+
+67e81746aaf9da66897db16e
+
+
+Trabajo para un restaurante en Nueva York y he desarrollado un programa que me permite leer, validar y procesar los datos de mi restaurante para conocer los platos mas vendidos en 3 rangos de precios. El programa valida los datos e ignora las órdenes que no cumplen con alguno de los requisitos, alertando al usuario que esa orden no ha sido procesada.
+
+```javascript
+const fs = require("fs");
+
+function cargarOrdenes(archivo) {
+  const datos = fs.readFileSync(archivo);
+  return JSON.parse(datos);
+}
+
+function validarOrden(orden) {
+  return (
+    orden &&
+    typeof orden.total === "number" &&
+    orden.total > 0 &&
+    Array.isArray(orden.platos) &&
+    orden.platos.every(
+      (plato) =>
+        typeof plato.nombre === "string" &&
+        plato.nombre.trim() !== "" &&
+        typeof plato.cantidad === "number" &&
+        plato.cantidad > 0
+    )
+  );
+}
+
+function analizarVentas(ordenes) {
+  const categoriasVentas = {
+    baja: {},
+    media: {},
+    alta: {},
+  };
+
+  for (const clave in ordenes) {
+    const orden = ordenes[clave];
+    if (validarOrden(orden)) {
+      const { total, platos } = orden;
+      let categoria = "";
+      if (total <= 50) categoria = "baja";
+      else if (total <= 100) categoria = "media";
+      else categoria = "alta";
+      for (const plato of platos) {
+        categoriasVentas[categoria][plato.nombre] =
+          (categoriasVentas[categoria][plato.nombre] || 0) + plato.cantidad;
+      }
+    } else {
+      console.log(
+        `Alerta: La orden con clave ${clave} no cumple con los requisitos de validación y no será procesada.`
+      );
+    }
+  }
+
+  for (const categoria in categoriasVentas) {
+    const platoMasPedido = Object.entries(categoriasVentas[categoria]).reduce(
+      (a, b) => (b[1] > a[1] ? b : a),
+      ["", 0]
+    );
+    console.log(
+      `Plato más pedido en ${categoria}: ${platoMasPedido[0]} (Cantidad: ${platoMasPedido[1]})`
+    );
+  }
+}
+
+const ordenes = cargarOrdenes("ordenes.json");
+analizarVentas(ordenes);
+
+```
+
+Necesito que me des la salida completa de consola para cada una de las siguientes entradas (archivos JSON), junto con una explicación corta de cada salida.  
+
+Entrada 1
+
+```json
+{
+  "1": {
+    "total": 30.1,
+    "platos": [
+      { "nombre": "Pizza", "cantidad": 1 },
+      { "nombre": "Soda", "cantidad": 2 }
+    ]
+  },
+  "2": {
+    "total": 73.8,
+    "platos": [
+      { "nombre": "Pizza", "cantidad": 1 },
+      { "nombre": "Pasta", "cantidad": 2 }
+    ]
+  },
+  "3": {
+    "total": 150.0,
+    "platos": [
+      { "nombre": "Filete", "cantidad": 2 },
+      { "nombre": "Vino", "cantidad": 1 }
+    ]
+  },
+  "4": {
+    "total": 65.7,
+    "platos": [
+      { "nombre": "Pizza", "cantidad": 2 },
+      { "nombre": "Papas fritas", "cantidad": 1 }
+    ]
+  }
+}
+```
+
+Entrada 2
+
+```json
+{
+  "1": {
+    "total": 10.0,
+    "platos": [{ "nombre": "Soda", "cantidad": 2 }]
+  },
+  "2": {
+    "total": 150,
+    "platos": [
+      { "nombre": "Filete", "cantidad": 4 },
+      { "nombre": "Pasta", "cantidad": 1 }
+    ]
+  }
+}
+```
+
+
+Entrada 3
+
+```json
+{
+  "-11": {
+    "total": "30.1",
+    "platos": [{ "nombre": "", "cantidad": 1 }]
+  },
+  "2": {
+    "total": "73.8",
+    "platos": []
+  },
+  "3": {
+    "total": "-150.0",
+    "platos": [
+      { "nombre": "Filete", "cantidad": 2 },
+      { "nombre": "Vino", "cantidad": 1 }
+    ]
+  }
+}
+```
+
+
+
+
+////////////////////////
+
+
+### Entrada 1
+
+```json
+{
+  "1": {
+    "total": 30.1,
+    "platos": [
+      { "nombre": "Pizza", "cantidad": 1 },
+      { "nombre": "Soda", "cantidad": 2 }
+    ]
+  },
+  "2": {
+    "total": 73.8,
+    "platos": [
+      { "nombre": "Pizza", "cantidad": 1 },
+      { "nombre": "Pasta", "cantidad": 2 }
+    ]
+  },
+  "3": {
+    "total": 150.0,
+    "platos": [
+      { "nombre": "Filete", "cantidad": 2 },
+      { "nombre": "Vino", "cantidad": 1 }
+    ]
+  },
+  "4": {
+    "total": 65.7,
+    "platos": [
+      { "nombre": "Pizza", "cantidad": 2 },
+      { "nombre": "Papas fritas", "cantidad": 1 }
+    ]
+  }
+}
+```
+
+**Salida:**
+
+```bash
+Plato más pedido en baja: Soda (Cantidad: 2)
+Plato más pedido en media: Pizza (Cantidad: 3)
+Plato más pedido en alta: Filete (Cantidad: 2)
+```
+
+**Explicación:** Todas las órdenes tienen un formato válido por lo que se procesan adecuadamente. Sólo la orden "1" entra en la categoría baja por lo que el plato mas vendido es "Soda", las órdenes "2" y "4" entran en la categoría "media" y se suman cantidades por lo que el plato más pedido es "Pizza" con 3 unidades, y sólo la orden "3" entra en la categría "alta" por lo que el plato más vendido es "Filete".
+
+### Entrada 2
+
+```json
+{
+  "1": {
+    "total": 10.0,
+    "platos": [{ "nombre": "Soda", "cantidad": 2 }]
+  },
+  "2": {
+    "total": 150,
+    "platos": [
+      { "nombre": "Filete", "cantidad": 4 },
+      { "nombre": "Pasta", "cantidad": 1 }
+    ]
+  }
+}
+```
+
+**Salida:**
+
+```bash
+Plato más pedido en baja: Soda (Cantidad: 2)
+Plato más pedido en media:  (Cantidad: 0)
+Plato más pedido en alta: Filete (Cantidad: 4)
+```
+
+**Explicación:** Las órdenes son validadas correctamente y clasificadas al igual que en el caso anterior. La diferencia es que no existe una orden en el rango "media", por lo que esta categoría queda vacía y no se imprime ningún plato.
+
+### Entrada 3
+
+```json
+{
+  "-11": {
+    "total": "30.1",
+    "platos": [{ "nombre": "", "cantidad": 1 }]
+  },
+  "2": {
+    "total": "73.8",
+    "platos": []
+  },
+  "3": {
+    "total": "-150.0",
+    "platos": [
+      { "nombre": "Filete", "cantidad": 2 },
+      { "nombre": "Vino", "cantidad": 1 }
+    ]
+  }
+}
+```
+
+**Salida:**
+
+```bash
+Alerta: La orden con clave 2 no cumple con los requisitos de validación y no será procesada.
+Alerta: La orden con clave 3 no cumple con los requisitos de validación y no será procesada.
+Alerta: La orden con clave -11 no cumple con los requisitos de validación y no será procesada.
+Plato más pedido en baja:  (Cantidad: 0)
+Plato más pedido en media:  (Cantidad: 0)
+Plato más pedido en alta:  (Cantidad: 0)
+```
+
+**Explicación:** Todas las órdenes tienen un formato de total inválido (por ejemplo, `"30.1"` en lugar de `30.1`), por lo que este error hace que todas las órdenes sean rechazadas y se impriman los mensajes de alerta. Las categorías quedan vacías, al igual que en la categoría "media" del caso anterior.

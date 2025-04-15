@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pelota en Canvas</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+        display: block;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <script>
+      // Obtener el contexto del canvas
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      // Definir las propiedades de la pelota
+      const ball = {
+        radius: 15,
+        x: canvas.width / 2,
+        y: canvas.height / 2,
+        dx: 0,
+        dy: 0,
+        color: "green",
+      };
+
+      // Definir el radio de repulsión (área donde el ratón repelerá la pelota)
+      const repelRadius = 50;
+
+      // Función para dibujar la pelota en el canvas
+      function drawBall() {
+        // Iniciar el dibujo
+        ctx.beginPath();
+        // Dibujar un círculo
+        ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2, false);
+        // Establecer el color de la pelota
+        ctx.fillStyle = ball.color;
+        // Rellenar el círculo
+        ctx.fill();
+        // Cerrar el camino de dibujo
+        ctx.closePath();
+      }
+
+      // Función para actualizar la posición de la pelota
+      function updateBallPosition() {
+        // Actualizar la posición en X
+        ball.x += ball.dx;
+        // Actualizar la posición en Y
+        ball.y += ball.dy;
+
+        // Comprobación de rebote en los bordes del canvas (lado izquierdo, derecho, superior e inferior)
+        if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
+          // Revertir la dirección en X
+          ball.dx = -ball.dx;
+          // Evitar que la pelota salga del canvas
+          ball.x =
+            ball.x + ball.radius > canvas.width
+              ? canvas.width - ball.radius
+              : ball.radius;
+        }
+
+        if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
+          // Revertir la dirección en Y
+          ball.dy = -ball.dy;
+          // Evitar que la pelota salga del canvas
+          ball.y =
+            ball.y + ball.radius > canvas.height
+              ? canvas.height - ball.radius
+              : ball.radius;
+        }
+      }
+
+      // Función que maneja la repulsión de la pelota cuando el ratón se acerca
+      function repelMouse(event) {
+        // Obtener la posición del ratón relativa al canvas
+        const mousePos = {
+          x: event.clientX - canvas.getBoundingClientRect().left,
+          y: event.clientY - canvas.getBoundingClientRect().top,
+        };
+
+        // Calcular la distancia entre la pelota y el puntero del ratón
+        const distX = ball.x - mousePos.x;
+        const distY = ball.y - mousePos.y;
+        const distance = Math.sqrt(distX * distX + distY * distY);
+
+        // Si el ratón está dentro del radio de repulsión, mover la pelota
+        if (distance < repelRadius) {
+          // Calcular el ángulo de repulsión
+          const angle = Math.atan2(distY, distX);
+          // Cambiar la velocidad en X
+          ball.dx = Math.cos(angle) * 2;
+          // Cambiar la velocidad en Y
+          ball.dy = Math.sin(angle) * 2;
+        }
+      }
+
+      // Función de animación que actualiza el canvas en cada fotograma
+      function animate() {
+        // Limpiar el canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Dibujar la pelota
+        drawBall();
+        // Actualizar la posición de la pelota
+        updateBallPosition();
+        // Solicitar el siguiente fotograma de animación
+        requestAnimationFrame(animate);
+      }
+
+      // Agregar el evento de movimiento del ratón al canvas para repeler la pelota
+      canvas.addEventListener("mousemove", repelMouse);
+
+      // Iniciar la animación
+      animate();
+    </script>
+  </body>
+</html>

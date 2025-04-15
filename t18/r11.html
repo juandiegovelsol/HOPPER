@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de tareas</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+      }
+      .checklist-container {
+        width: 300px;
+      }
+      .progress-container {
+        position: relative;
+        width: 150px;
+        height: 150px;
+      }
+      .progress-circle {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: #f0f0f0;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .progress-ring {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .progress-ring-background {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 10px solid #ddd;
+        box-sizing: border-box;
+      }
+      .progress-ring-fill {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        clip: rect(0, 75px, 150px, 0px);
+      }
+      .progress-ring-fill-inner {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 10px solid steelblue;
+        box-sizing: border-box;
+        transform: rotate(0deg);
+        transform-origin: center center;
+        transition: transform 0.3s ease-in-out;
+      }
+      .progress-ring-mask {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        clip: rect(0, 150px, 150px, 75px);
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      .progress-ring-mask-inner {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 10px solid steelblue;
+        box-sizing: border-box;
+        transform: rotate(0deg);
+        transform-origin: center center;
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      }
+      .progress-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+      .checklist-item {
+        margin-bottom: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress-container">
+      <div class="progress-circle">
+        <div class="progress-ring">
+          <div class="progress-ring-background"></div>
+          <div class="progress-ring-fill">
+            <div class="progress-ring-fill-inner"></div>
+          </div>
+          <div class="progress-ring-mask">
+            <div class="progress-ring-mask-inner"></div>
+          </div>
+        </div>
+        <div class="progress-text">0%</div>
+      </div>
+    </div>
+    <div class="checklist-container">
+      <h2>Tareas</h2>
+      <div class="checklist-item">
+        <input type="checkbox" id="task1" />
+        <label for="task1">Tarea 1</label>
+      </div>
+      <div class="checklist-item">
+        <input type="checkbox" id="task2" />
+        <label for="task2">Tarea 2</label>
+      </div>
+      <div class="checklist-item">
+        <input type="checkbox" id="task3" />
+        <label for="task3">Tarea 3</label>
+      </div>
+      <div class="checklist-item">
+        <input type="checkbox" id="task4" />
+        <label for="task4">Tarea 4</label>
+      </div>
+    </div>
+    <script>
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      const progressText = document.querySelector(".progress-text");
+      const progressFillInner = document.querySelector(
+        ".progress-ring-fill-inner"
+      );
+      const progressMask = document.querySelector(".progress-ring-mask");
+      const progressMaskInner = document.querySelector(
+        ".progress-ring-mask-inner"
+      );
+      function updateProgressBar() {
+        const totalTasks = checkboxes.length;
+        const completedTasks = document.querySelectorAll(
+          'input[type="checkbox"]:checked'
+        ).length;
+        const percentage = (completedTasks / totalTasks) * 100;
+        progressText.textContent = `${Math.round(percentage)}%`;
+        if (percentage <= 50) {
+          const rotation = (percentage / 50) * 180;
+          progressFillInner.style.transform = `rotate(${rotation}deg)`;
+          progressMask.style.opacity = 0;
+          progressMaskInner.style.transform = `rotate(0deg)`;
+        } else {
+          progressFillInner.style.transform = `rotate(180deg)`;
+          progressMask.style.opacity = 1;
+          const maskRotation = ((percentage - 50) / 50) * 180;
+          progressMaskInner.style.transform = `rotate(${maskRotation}deg)`;
+        }
+      }
+      checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener("change", updateProgressBar);
+      });
+      updateProgressBar();
+    </script>
+  </body>
+</html>

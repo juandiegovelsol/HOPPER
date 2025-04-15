@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Esquivar Barreras</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #f0f0f0;
+      }
+      #arena {
+        position: relative;
+        background-color: #ffffff;
+        width: 100vw;
+        height: 100vh;
+      }
+      #player {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: blue;
+        left: 50px;
+      }
+      .barrier {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="arena">
+      <div id="player"></div>
+    </div>
+    <script>
+      const player = document.getElementById("player");
+      const arena = document.getElementById("arena");
+      let isGameRunning = false;
+      let barriers = [];
+
+      function positionPlayer() {
+        const arenaHeight = arena.clientHeight;
+        player.style.top = arenaHeight / 2 - 25 + "px";
+      }
+
+      positionPlayer();
+
+      function startGame() {
+        isGameRunning = true;
+        setInterval(spawnBarrier, 2000);
+      }
+
+      document.addEventListener("keydown", function (e) {
+        if (e.code === "Space") {
+          if (!isGameRunning) {
+            startGame();
+          } else {
+            jump();
+          }
+        }
+      });
+
+      function jump() {
+        const startingTop = parseInt(player.style.top) || 0;
+        const targetTop = Math.max(0, startingTop - 150);
+
+        const jumpTimer = setInterval(function () {
+          if (!isGameRunning) {
+            clearInterval(jumpTimer);
+            return;
+          }
+
+          const newTop = startingTop - 10;
+
+          if (newTop <= targetTop) {
+            clearInterval(jumpTimer);
+            player.style.top = targetTop + "px";
+          } else {
+            player.style.top = newTop + "px";
+          }
+        }, 20);
+      }
+
+      function spawnBarrier() {
+        if (!isGameRunning) return;
+
+        const barrier = document.createElement("div");
+        barrier.className = "barrier";
+        const arenaHeight = arena.clientHeight;
+        const randomY = Math.floor(Math.random() * (arenaHeight - 50));
+        barrier.style.top = randomY + "px";
+        barrier.style.right = "0px";
+
+        arena.appendChild(barrier);
+        barriers.push(barrier);
+        animateBarrier(barrier);
+      }
+
+      function animateBarrier(barrier) {
+        const arenaWidth = arena.clientWidth;
+        let displacement = 0;
+
+        const barrierTimer = setInterval(function () {
+          if (!isGameRunning) {
+            clearInterval(barrierTimer);
+            return;
+          }
+
+          displacement += 5;
+          barrier.style.right = displacement + "px";
+
+          if (displacement > arenaWidth) {
+            clearInterval(barrierTimer);
+            arena.removeChild(barrier);
+            barriers = barriers.filter((b) => b !== barrier);
+          } else {
+            detectCollision(barrier);
+          }
+        }, 20);
+      }
+
+      function detectCollision(barrier) {
+        const playerRect = player.getBoundingClientRect();
+        const barrierRect = barrier.getBoundingClientRect();
+
+        if (
+          playerRect.left < barrierRect.right &&
+          playerRect.right > barrierRect.left &&
+          playerRect.top < barrierRect.bottom &&
+          playerRect.bottom > barrierRect.top
+        ) {
+          endGame();
+        }
+      }
+
+      function endGame() {
+        isGameRunning = false;
+        alert("Fin del juego");
+
+        barriers.forEach((barrier) => {
+          if (arena.contains(barrier)) {
+            arena.removeChild(barrier);
+          }
+        });
+        barriers = [];
+        positionPlayer();
+      }
+
+      window.addEventListener("resize", positionPlayer);
+    </script>
+  </body>
+</html>

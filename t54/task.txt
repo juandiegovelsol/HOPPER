@@ -1,0 +1,5 @@
+67d45be0fa39521959702780
+
+67e822aeb18d69dfcdd9e17b
+
+Estoy trabajando para una empresa de desarrollo de software en Santiago de Chile, me pedieron desarrollar un videojuego en el que haya un jugador que cae desde la parte superior de la pantalla, a una velocidad constante y hay plataformas que no le permiten seguir cayendo. El jugador debe permanecer quieto con relación a la vertical de la pantalla cuando está en caida y son las plataformas las que deben subir a velocidad constante, dando la ilusión de que el jugador cae. Cuando el jugador toca una plataforma, esta no lo deja seguir cayendo hasta que se mueva hacia un lado para retomar su caida, el jugador pierde cuando una plataforma lo hace tocar la parte superior de la pantalla. El jugador debe poder moverse usando las flechas del teclado. Dame el código completo de HTML, CSS y JavaScript, sin comentarios y con una explicación cortita de un párrafo.

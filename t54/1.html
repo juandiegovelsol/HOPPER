@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de plataformas</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      #gameArea {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        background: #87ceeb;
+      }
+      .player {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: #ff4500;
+      }
+      .platform {
+        position: absolute;
+        width: 100px;
+        height: 20px;
+        background: #8b4513;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gameArea">
+      <div id="player" class="player"></div>
+    </div>
+    <script>
+      const gameArea = document.getElementById("gameArea");
+      const player = document.getElementById("player");
+      let playerX = 50;
+      let playerY = 50;
+      let platforms = [];
+      const platformSpeed = 2;
+
+      function createPlatform(y) {
+        const platform = document.createElement("div");
+        platform.classList.add("platform");
+        platform.style.top = y + "px";
+        platform.style.left = Math.random() * (window.innerWidth - 100) + "px";
+        gameArea.appendChild(platform);
+        platforms.push(platform);
+      }
+
+      function movePlatforms() {
+        platforms = platforms.filter((platform) => {
+          const newY = platform.offsetTop - platformSpeed;
+          if (newY + platform.offsetHeight < 0) {
+            gameArea.removeChild(platform);
+            return false;
+          }
+          platform.style.top = newY + "px";
+          if (
+            playerY + player.offsetHeight >= newY &&
+            playerY <= newY + platform.offsetHeight &&
+            playerX + player.offsetWidth >= platform.offsetLeft &&
+            playerX <= platform.offsetLeft + platform.offsetWidth
+          ) {
+            playerY = newY - player.offsetHeight;
+          }
+          return true;
+        });
+      }
+
+      function updatePlayer() {
+        player.style.left = playerX + "px";
+        player.style.top = playerY + "px";
+      }
+
+      function gameLoop() {
+        if (Math.random() < 0.02) createPlatform(window.innerHeight);
+        movePlatforms();
+        updatePlayer();
+        requestAnimationFrame(gameLoop);
+      }
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") {
+          playerX = Math.max(0, playerX - 20);
+        } else if (e.key === "ArrowRight") {
+          playerX = Math.min(
+            window.innerWidth - player.offsetWidth,
+            playerX + 20
+          );
+        }
+        if (
+          platforms.some(
+            (platform) =>
+              playerY + player.offsetHeight >= platform.offsetTop &&
+              playerY <= platform.offsetTop + platform.offsetHeight &&
+              playerX + player.offsetWidth >= platform.offsetLeft &&
+              playerX <= platform.offsetLeft + platform.offsetWidth
+          )
+        ) {
+          playerY += 70;
+        } else {
+          playerY -= platformSpeed;
+        }
+      });
+
+      createPlatform(300);
+      createPlatform(600);
+      gameLoop();
+    </script>
+  </body>
+</html>

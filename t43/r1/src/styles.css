@@ -1,0 +1,31 @@
+.container {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.artista,
+.resultado div {
+  margin-bottom: 15px;
+}
+
+.artista input {
+  margin-right: 10px;
+}
+
+h1,
+h2 {
+  color: #333;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}

@@ -1,0 +1,37 @@
+{
+  "1": {
+    "precioTotal": 30.5,
+    "platos": [
+      { "nombre": "Tacos", "cantidad": 3 },
+      { "nombre": "Burritos", "cantidad": 2 }
+    ]
+  },
+  "2": {
+    "precioTotal": 60.0,
+    "platos": [
+      { "nombre": "Ensalada", "cantidad": 1 },
+      { "nombre": "Sopa", "cantidad": 2 }
+    ]
+  },
+  "3": {
+    "precioTotal": 120.0,
+    "platos": [
+      { "nombre": "Pollo Asado", "cantidad": 2 },
+      { "nombre": "Costillas", "cantidad": 1 }
+    ]
+  },
+  "4": {
+    "precioTotal": 45.0,
+    "platos": [
+      { "nombre": "Pizza", "cantidad": 1 },
+      { "nombre": "Helado", "cantidad": 2 }
+    ]
+  },
+  "5": {
+    "precioTotal": 150.0,
+    "platos": [
+      { "nombre": "Filete", "cantidad": 1 },
+      { "nombre": "Postre", "cantidad": 3 }
+    ]
+  }
+}

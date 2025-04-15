@@ -1,0 +1,23 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.editor-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.toolbar {
+  margin-bottom: 10px;
+}
+
+button {
+  margin-right: 5px;
+}
+
+.editor {
+  min-height: 200px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}

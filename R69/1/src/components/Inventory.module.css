@@ -1,0 +1,38 @@
+.inventoryContainer {
+  width: 80%;
+  margin: 20px auto;
+  background-color: #2c2c2c;
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.inventoryTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.inventoryTable th,
+.inventoryTable td {
+  padding: 10px;
+  border-bottom: 1px solid #fff;
+  text-align: left;
+}
+
+.inventoryTable th {
+  background-color: #fff;
+  color: #2c2c2c;
+}
+
+.inventoryTable td {
+  background-color: #444;
+}
+
+.icon {
+  max-width: 50px;
+  max-height: 50px;
+  object-fit: contain;
+}

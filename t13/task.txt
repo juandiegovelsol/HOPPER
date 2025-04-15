@@ -1,0 +1,146 @@
+67d46188ec15987954922450
+
+67d72cc0ecce5c063ab047ec
+
+Soy un especialista en trading y estoy desarrollando una página web interactiva con HTML, CSS y JavaScript para poder ver el precio de un activo durante el día en intervalos de 60 minutos. La interfaz muestra las velas japonesas correspondientes al tiempo del intervalo y modifica su color dependiendo de si el precio sube o baja durante el intervalo. Como mi especialidad no es la programación, quiero generar comentarios solamente encima de cada una de las funciones creadas y llamadas en el programa, explicando en una sola línea qué hace cada función. Los comentarios deben ir en la definición o el uso de cada función creada en el programa. Genera solamente el código con los comentarios.
+
+```html
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visualización del Precio de Acción</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      #chart {
+        position: relative;
+        width: 1000px;
+        height: 500px;
+        margin: 20px auto;
+        border: 1px solid #ccc;
+      }
+      .candle {
+        position: absolute;
+        width: 20px;
+      }
+      #tooltip {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 5px;
+        border-radius: 3px;
+        font-size: 12px;
+        pointer-events: none;
+        white-space: nowrap;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Visualización del Precio de Acción</h1>
+    <div id="chart"></div>
+    <div id="tooltip"></div>
+
+    <script>
+      function fetchStockData() {
+        return [
+          { time: "00:00", price: 100 },
+          { time: "01:00", price: 102 },
+          { time: "02:00", price: 101 },
+          { time: "03:00", price: 103 },
+          { time: "04:00", price: 105 },
+          { time: "05:00", price: 104 },
+          { time: "06:00", price: 106 },
+          { time: "07:00", price: 107 },
+          { time: "08:00", price: 108 },
+          { time: "09:00", price: 106 },
+          { time: "10:00", price: 104 },
+          { time: "11:00", price: 110 },
+          { time: "12:00", price: 111 },
+          { time: "13:00", price: 112 },
+          { time: "14:00", price: 113 },
+          { time: "15:00", price: 115 },
+          { time: "16:00", price: 114 },
+          { time: "17:00", price: 116 },
+          { time: "18:00", price: 114 },
+          { time: "19:00", price: 111 },
+          { time: "20:00", price: 110 },
+          { time: "21:00", price: 115 },
+          { time: "22:00", price: 120 },
+          { time: "23:00", price: 120 },
+          { time: "00:00", price: 123 },
+        ];
+      }
+
+      function drawChart(data) {
+        const chart = document.getElementById("chart");
+        const tooltip = document.getElementById("tooltip");
+        const chartHeight = chart.clientHeight;
+        const candleWidth = 20;
+        const gap = 5;
+
+        const prices = data.map((item) => item.price);
+        const minPrice = Math.min(...prices);
+        const maxPrice = Math.max(...prices);
+        const priceRange = maxPrice - minPrice;
+
+        function priceToY(price) {
+          return ((maxPrice - price) / priceRange) * chartHeight;
+        }
+
+        chart.innerHTML = "";
+
+        for (let i = 0; i < data.length - 1; i++) {
+          const open = data[i].price;
+          const close = data[i + 1].price;
+          const yOpen = priceToY(open);
+          const yClose = priceToY(close);
+          const top = Math.min(yOpen, yClose);
+          const height = Math.abs(yClose - yOpen) || 2;
+          const color = close > open ? "green" : "red";
+
+          const candle = document.createElement("div");
+          candle.classList.add("candle");
+          candle.style.left = i * (candleWidth + gap) + "px";
+          candle.style.top = top + "px";
+          candle.style.height = height + "px";
+          candle.style.backgroundColor = color;
+
+          const tooltipData = {
+            time: data[i].time,
+            price: close,
+          };
+
+          candle.addEventListener("mouseenter", function () {
+            tooltip.innerHTML = `<strong>Hora:</strong> ${tooltipData.time}<br><strong>Precio:</strong> ${tooltipData.price}`;
+            tooltip.style.display = "block";
+            const candleRect = candle.getBoundingClientRect();
+            tooltip.style.left = "0px";
+            tooltip.style.top = "0px";
+            const tooltipWidth = tooltip.offsetWidth;
+            const tooltipHeight = tooltip.offsetHeight;
+            let tooltipX = candleRect.left + candleWidth / 2 - tooltipWidth / 2;
+            let tooltipY = candleRect.top - tooltipHeight - 5;
+            tooltip.style.left = tooltipX + "px";
+            tooltip.style.top = tooltipY + "px";
+          });
+
+          candle.addEventListener("mouseleave", function () {
+            tooltip.style.display = "none";
+          });
+
+          chart.appendChild(candle);
+        }
+      }
+
+      const stockData = fetchStockData();
+      drawChart(stockData);
+    </script>
+  </body>
+</html>
+```

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Tanques</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      canvas {
+        display: block;
+        margin: 0 auto;
+        background: #eee;
+      }
+      #gameOver {
+        display: none;
+        font-size: 2em;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="battlefield" width="400" height="400"></canvas>
+    <div id="gameOver">Juego Terminado</div>
+    <script>
+      const canvas = document.getElementById("battlefield");
+      const ctx = canvas.getContext("2d");
+      const gameOverElem = document.getElementById("gameOver");
+      const rows = 5;
+      const cols = 5;
+      const cellSize = 80;
+      const tank = { x: 0, y: 0 };
+      const obstacles = [
+        { x: 1, y: 1 },
+        { x: 1, y: 3 },
+        { x: 3, y: 1 },
+        { x: 3, y: 3 },
+      ];
+      const enemies = [];
+      let gameInterval;
+      let gameOver = false;
+
+      const drawTank = () => {
+        ctx.fillStyle = "#00f";
+        ctx.fillRect(tank.x * cellSize, tank.y * cellSize, cellSize, cellSize);
+      };
+
+      const drawObstacles = () => {
+        ctx.fillStyle = "#000";
+        obstacles.forEach((obstacle) => {
+          ctx.fillRect(
+            obstacle.x * cellSize,
+            obstacle.y * cellSize,
+            cellSize,
+            cellSize
+          );
+        });
+      };
+
+      const drawEnemies = () => {
+        ctx.fillStyle = "#f00";
+        enemies.forEach((enemy) => {
+          ctx.fillRect(
+            enemy.x * cellSize,
+            enemy.y * cellSize,
+            cellSize,
+            cellSize
+          );
+        });
+      };
+
+      const drawGrid = () => {
+        ctx.fillStyle = "#000";
+        for (let i = 0; i < rows; i++) {
+          ctx.fillRect(0, i * cellSize, canvas.width, 1);
+          ctx.fillRect(i * cellSize, 0, 1, canvas.height);
+        }
+      };
+
+      const updateEnemies = () => {
+        if (enemies.length < 5 && Math.random() < 0.2) {
+          const emptySpaces = [];
+          for (let x = 0; x < cols; x++) {
+            for (let y = 0; y < rows; y++) {
+              if (
+                !obstacles.some((o) => o.x === x && o.y === y) &&
+                !enemies.some((e) => e.x === x && e.y === y) &&
+                !(x === tank.x && y === tank.y)
+              ) {
+                emptySpaces.push({ x, y });
+              }
+            }
+          }
+          if (emptySpaces.length > 0) {
+            const newEnemy =
+              emptySpaces[Math.floor(Math.random() * emptySpaces.length)];
+            enemies.push(newEnemy);
+          }
+        }
+        for (let i = 0; i < enemies.length; i++) {
+          const enemy = enemies[i];
+          if (enemy.x === tank.x && enemy.y === tank.y) {
+            enemies.splice(i, 1);
+          } else if (enemy.x !== tank.x || enemy.y !== tank.y) {
+            gameOver = true;
+            clearInterval(gameInterval);
+            gameOverElem.style.display = "block";
+          }
+        }
+      };
+
+      const moveTank = (dir) => {
+        const newX = tank.x;
+        const newY = tank.y;
+        switch (dir) {
+          case "w":
+            tank.y = newY - 1;
+            break;
+          case "s":
+            tank.y = newY + 1;
+            break;
+          case "a":
+            tank.x = newX - 1;
+            break;
+          case "d":
+            tank.x = newX + 1;
+            break;
+        }
+
+        if (tank.x < 0) tank.x = 0;
+        if (tank.x >= cols) tank.x = cols - 1;
+        if (tank.y < 0) tank.y = 0;
+        if (tank.y >= rows) tank.y = rows - 1;
+
+        if (obstacles.some((o) => o.x === tank.x && o.y === tank.y)) {
+          tank.x = newX;
+          tank.y = newY;
+        }
+      };
+
+      const keyPressHandler = (e) => {
+        if (gameOver) return;
+        switch (e.key) {
+          case "w":
+          case "a":
+          case "s":
+          case "d":
+            moveTank(e.key);
+            break;
+        }
+      };
+
+      const startGame = () => {
+        gameInterval = setInterval(() => {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          drawGrid();
+          drawObstacles();
+          drawEnemies();
+          drawTank();
+          updateEnemies();
+        }, 5000);
+      };
+
+      document.addEventListener("keydown", keyPressHandler);
+      startGame();
+    </script>
+  </body>
+</html>

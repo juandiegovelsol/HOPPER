@@ -1,0 +1,5 @@
+67d460fa7ecd5eefa4e8403c
+
+67e21c9d582c28b6c3f193f2
+
+Me dedico al desarrollo web y un cliente me pidió un área de firma donde los empleados puedan firmar con el ratón para integrarla en su sistema. Debe incluir dos botones, uno para guardar la firma y otro para borrarla. La firma debe guardarse en formato PNG. Necesito que crees esto en un solo bloque de código utilizando HTML, CSS y JavaScript.

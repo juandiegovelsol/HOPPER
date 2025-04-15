@@ -1,0 +1,144 @@
+{
+  "bandas": [
+    {
+      "id": 1,
+      "nombre": "Rockers Unidos",
+      "genero_musical": "Rock",
+      "numero_miembros": 4,
+      "contacto_principal": {
+        "nombre": "Ana López",
+        "telefono": "+56912345678",
+        "email": "ana.lopez@rockersunidos.cl"
+      }
+    },
+    {
+      "id": 2,
+      "nombre": "Jazz Melodías",
+      "genero_musical": "Jazz",
+      "numero_miembros": 3,
+      "contacto_principal": {
+        "nombre": "Carlos Martínez",
+        "telefono": "+56987654321",
+        "email": "carlos.martinez@jazzmelodias.cl"
+      }
+    },
+    {
+      "id": 3,
+      "nombre": "Cumbia Ritmos",
+      "genero_musical": "Cumbia",
+      "numero_miembros": 5,
+      "contacto_principal": {
+        "nombre": "Luis Pérez",
+        "telefono": "+56945678901",
+        "email": "luis.perez@cumbiaritmos.cl"
+      }
+    },
+    {
+      "id": 4,
+      "nombre": "Pop Estrella",
+      "genero_musical": "Pop",
+      "numero_miembros": 6,
+      "contacto_principal": {
+        "nombre": "María Fernández",
+        "telefono": "+56932109876",
+        "email": "maria.fernandez@popestrella.cl"
+      }
+    },
+    {
+      "id": 5,
+      "nombre": "Fusión Latinoamericana",
+      "genero_musical": "Fusión",
+      "numero_miembros": 7,
+      "contacto_principal": {
+        "nombre": "Javier Gómez",
+        "telefono": "+56965432109",
+        "email": "javier.gomez@fusionlatinoamericana.cl"
+      }
+    }
+  ],
+  "horarios_actuacion": [
+    {
+      "id": 1,
+      "id_banda": 1,
+      "escenario": "Escenario Principal",
+      "fecha": "2024-09-15",
+      "hora_inicio": "18:00",
+      "duracion": 45
+    },
+    {
+      "id": 2,
+      "id_banda": 2,
+      "escenario": "Escenario Secundario",
+      "fecha": "2024-09-15",
+      "hora_inicio": "19:00",
+      "duracion": 45
+    },
+    {
+      "id": 3,
+      "id_banda": 3,
+      "escenario": "Escenario Principal",
+      "fecha": "2024-09-16",
+      "hora_inicio": "18:00",
+      "duracion": 45
+    },
+    {
+      "id": 4,
+      "id_banda": 4,
+      "escenario": "Escenario Secundario",
+      "fecha": "2024-09-16",
+      "hora_inicio": "19:00",
+      "duracion": 45
+    }
+  ],
+  "preferencias_público": [
+    {
+      "id": 1,
+      "id_asistente": 101,
+      "nombre_asistente": "Ana García",
+      "bandas_favoritas": [1, 3],
+      "generos_favoritos": ["Rock", "Cumbia"]
+    },
+    {
+      "id": 2,
+      "id_asistente": 102,
+      "nombre_asistente": "Carlos Ruiz",
+      "bandas_favoritas": [2, 5],
+      "generos_favoritos": ["Jazz", "Fusión Latinoamericana"]
+    },
+    {
+      "id": 3,
+      "id_asistente": 103,
+      "nombre_asistente": "María López",
+      "bandas_favoritas": [4],
+      "generos_favoritos": ["Pop"]
+    },
+    {
+      "id": 4,
+      "id_asistente": 104,
+      "nombre_asistente": "Javier Martínez",
+      "bandas_favoritas": [1],
+      "generos_favoritos": ["Rock"]
+    },
+    {
+      "id": 5,
+      "id_asistente": 105,
+      "nombre_asistente": "Patricia Sánchez",
+      "bandas_favoritas": [2, 3],
+      "generos_favoritos": ["Jazz", "Cumbia"]
+    },
+    {
+      "id": 6,
+      "id_asistente": 106,
+      "nombre_asistente": "Luis Torres",
+      "bandas_favoritas": [5],
+      "generos_favoritos": ["Fusión Latinoamericana"]
+    },
+    {
+      "id": 7,
+      "id_asistente": 107,
+      "nombre_asistente": "Elena Castro",
+      "bandas_favoritas": [1, 4],
+      "generos_favoritos": ["Rock", "Pop"]
+    }
+  ]
+}

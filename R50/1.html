@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editor de Texto</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="editor-container">
+      <div class="toolbar">
+        <button onclick="formatText('bold')">Negrita</button>
+        <button onclick="formatText('italic')">Cursiva</button>
+        <button onclick="formatText('underline')">Subrayado</button>
+        <button onclick="undo()">Deshacer</button>
+        <button onclick="redo()">Rehacer</button>
+        <button onclick="saveText()">Guardar</button>
+      </div>
+      <div id="editor" contenteditable="true" class="editor"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

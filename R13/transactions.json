@@ -1,0 +1,1 @@
+{"_default": {"1": {"transaction_id": "9572e5cb-aa75-47f9-b37e-4cd2448a4103", "sender_id": "cliente1", "receiver_id": "cliente2", "amount": 10000}, "2": {"transaction_id": "b2eaac8a-75d2-4f8b-ae31-1391cfee9061", "sender_id": "cliente2", "receiver_id": "cliente3", "amount": 5000}}}

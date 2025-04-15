@@ -1,0 +1,38 @@
+document.addEventListener("DOMContentLoaded", () => {
+  loadText();
+
+  // Añade listeners para deshacer y rehacer
+  document.querySelector("#textArea").addEventListener("input", () => {
+    if (document.queryCommandEnabled("undo")) {
+      document.execCommand("enableUndo", false, null);
+      document.execCommand("enableUndo", true, "undo");
+    }
+    if (document.queryCommandEnabled("redo")) {
+      document.execCommand("enableRedo", false, null);
+      document.execCommand("enableRedo", true, "redo");
+    }
+  });
+});
+
+function applyBold() {
+  document.execCommand("bold", false, null);
+}
+
+function applyItalic() {
+  document.execCommand("italic", false, null);
+}
+
+function applyUnderline() {
+  document.execCommand("underline", false, null);
+}
+
+function saveText() {
+  localStorage.setItem("savedText", document.getElementById("textArea").value);
+}
+
+function loadText() {
+  const savedText = localStorage.getItem("savedText");
+  if (savedText) {
+    document.getElementById("textArea").value = savedText;
+  }
+}

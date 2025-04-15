@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Tanques</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+        margin: 0;
+      }
+      canvas {
+        background-color: #ffffff;
+        border: 2px solid #000000;
+        display: block;
+        margin-bottom: 20px;
+      }
+      #gameOver {
+        display: none;
+        font-size: 24px;
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <div id="gameOver">Juego Terminado</div>
+
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      const gameOverElem = document.getElementById("gameOver");
+      const rows = 5;
+      const cols = 5;
+      const cellSize = 80;
+      const tank = { x: 0, y: 0 };
+      const enemies = [];
+      let enemySpawnInterval;
+      let gameLoopInterval;
+      let gameOver = false;
+      const enemyLifetime = 5000;
+      const enemySpawnRate = 5000;
+
+      const board = [
+        [0, 0, 0, 0, 0],
+        [0, 1, 0, 1, 0],
+        [0, 0, 0, 0, 0],
+        [0, 1, 0, 1, 0],
+        [0, 0, 0, 0, 0],
+      ];
+
+      function drawGrid() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let y = 0; y < rows; y++) {
+          for (let x = 0; x < cols; x++) {
+            if (board[y][x] === 1) {
+              ctx.fillStyle = "#808080";
+            } else {
+              ctx.fillStyle = "#ffffff";
+            }
+            ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+
+            if (x === tank.x && y === tank.y) {
+              ctx.fillStyle = "#00ff00";
+              ctx.fillRect(
+                x * cellSize + 5,
+                y * cellSize + 5,
+                cellSize - 10,
+                cellSize - 10
+              );
+            }
+
+            const enemy = enemies.find((e) => e.x === x && e.y === y);
+            if (enemy) {
+              ctx.fillStyle = "#0000ff";
+              ctx.beginPath();
+              ctx.arc(
+                x * cellSize + cellSize / 2,
+                y * cellSize + cellSize / 2,
+                cellSize / 3,
+                0,
+                Math.PI * 2
+              );
+              ctx.fill();
+            }
+
+            ctx.strokeStyle = "#cccccc";
+            ctx.strokeRect(x * cellSize, y * cellSize, cellSize, cellSize);
+          }
+        }
+      }
+
+      function moveTank(dx, dy) {
+        if (gameOver) return;
+        const newX = tank.x + dx;
+        const newY = tank.y + dy;
+
+        if (
+          newX >= 0 &&
+          newX < cols &&
+          newY >= 0 &&
+          newY < rows &&
+          board[newY][newX] === 0
+        ) {
+          tank.x = newX;
+          tank.y = newY;
+          checkEnemyCollision();
+          drawGrid();
+        }
+      }
+
+      function checkEnemyCollision() {
+        const enemyIndex = enemies.findIndex(
+          (e) => e.x === tank.x && e.y === tank.y
+        );
+        if (enemyIndex !== -1) {
+          enemies.splice(enemyIndex, 1);
+        }
+      }
+
+      function spawnEnemy() {
+        if (gameOver) return;
+        const availablePositions = [];
+        for (let y = 0; y < rows; y++) {
+          for (let x = 0; x < cols; x++) {
+            if (
+              board[y][x] === 0 &&
+              !(x === tank.x && y === tank.y) &&
+              !enemies.some((e) => e.x === x && e.y === y)
+            ) {
+              availablePositions.push({ x, y });
+            }
+          }
+        }
+
+        if (availablePositions.length > 0) {
+          const randomPosition =
+            availablePositions[
+              Math.floor(Math.random() * availablePositions.length)
+            ];
+          enemies.push({ ...randomPosition, spawnTime: Date.now() });
+          drawGrid();
+        }
+      }
+
+      function checkEnemyTimers() {
+        const now = Date.now();
+        for (const enemy of enemies) {
+          if (now - enemy.spawnTime > enemyLifetime) {
+            gameOver = true;
+            break;
+          }
+        }
+      }
+
+      function gameLoop() {
+        if (gameOver) {
+          gameOverElem.style.display = "block";
+          clearInterval(enemySpawnInterval);
+          clearInterval(gameLoopInterval);
+          document.removeEventListener("keydown", keyPress);
+          return;
+        }
+        checkEnemyTimers();
+        if (!gameOver) {
+          drawGrid();
+        }
+      }
+
+      function keyPress(e) {
+        if (gameOver) return;
+        switch (e.key) {
+          case "a":
+          case "ArrowLeft":
+            moveTank(-1, 0);
+            break;
+          case "d":
+          case "ArrowRight":
+            moveTank(1, 0);
+            break;
+          case "w":
+          case "ArrowUp":
+            moveTank(0, -1);
+            break;
+          case "s":
+          case "ArrowDown":
+            moveTank(0, 1);
+            break;
+        }
+      }
+
+      function startGame() {
+        gameOver = false;
+        gameOverElem.style.display = "none";
+        tank.x = 0;
+        tank.y = 0;
+        enemies.length = 0;
+        clearInterval(enemySpawnInterval);
+        clearInterval(gameLoopInterval);
+
+        drawGrid();
+        enemySpawnInterval = setInterval(spawnEnemy, enemySpawnRate);
+        gameLoopInterval = setInterval(gameLoop, 100);
+        document.addEventListener("keydown", keyPress);
+      }
+
+      startGame();
+    </script>
+  </body>
+</html>

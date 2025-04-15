@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gráfico de Precios</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f5;
+        margin: 0;
+      }
+
+      canvas {
+        border: 1px solid #ccc;
+        background-color: #fff;
+        display: block;
+      }
+
+      button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="priceChart" width="800" height="400"></canvas>
+    <button onclick="toggleMovingAverage()">Mostrar/Ocultar Media Móvil</button>
+
+    <script>
+      const prices = [
+        34500, 34800, 34900, 35000, 35200, 35100, 35300, 35500, 35700, 35800,
+        36000, 36200, 36400, 36600, 36800, 37000, 37200, 37400, 37500, 37600,
+        37800, 38000, 38200, 38400, 38500, 38600, 38800, 39000, 39200, 39400,
+        39600, 39800, 40000, 40200, 40400, 40600, 40800, 41000, 41200, 41400,
+        41500, 41700, 41900, 42100, 42300, 42500, 42700, 42900, 43100, 43300,
+        43500, 43700, 43900, 44100, 44300, 44500, 44700, 44900, 45100, 45300,
+        45500, 45700, 45900, 46100, 46300, 46500, 46700, 46900, 47100, 47300,
+        47500, 47700, 47900, 48100, 48300, 48500, 48700, 48900, 49100, 49300,
+        49500, 49700,
+      ];
+      const ctx = document.getElementById("priceChart").getContext("2d");
+      let movingAverage = [];
+      let showMovingAverage = false;
+
+      function drawChart() {
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        const labels = Array.from({ length: prices.length }, (_, i) => i + 1);
+        const data = {
+          labels: labels,
+          datasets: [
+            {
+              label: "Precios",
+              data: prices,
+              borderColor: "rgb(75, 192, 192)",
+              borderWidth: 2,
+              fill: false,
+              pointRadius: 5,
+            },
+          ],
+        };
+        const config = {
+          type: "line",
+          data: data,
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                display: false,
+              },
+            },
+            tooltips: {
+              mode: "index",
+              intersect: false,
+            },
+            scales: {
+              y: {
+                beginAtZero: false,
+                title: {
+                  display: true,
+                  text: "Precio USD",
+                },
+              },
+              x: {
+                title: {
+                  display: true,
+                  text: "Período",
+                },
+              },
+            },
+          },
+        };
+        if (showMovingAverage) {
+          data.datasets.push({
+            label: "Media Móvil",
+            data: movingAverage,
+            borderColor: "rgb(255, 99, 132)",
+            borderWidth: 2,
+            fill: false,
+            pointRadius: 5,
+          });
+        }
+        new Chart(ctx, config);
+      }
+
+      function calculateMovingAverage() {
+        const windowSize = 10;
+        const ma = [];
+        for (let i = windowSize; i < prices.length; i++) {
+          const window = prices.slice(i - windowSize, i);
+          const average =
+            window.reduce((sum, price) => sum + price, 0) / windowSize;
+          ma.push(average);
+        }
+        return ma;
+      }
+
+      function toggleMovingAverage() {
+        showMovingAverage = !showMovingAverage;
+        movingAverage = calculateMovingAverage();
+        drawChart();
+      }
+
+      drawChart();
+    </script>
+  </body>
+</html>

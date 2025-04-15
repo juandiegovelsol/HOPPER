@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gráficos de Ventas</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 50px;
+      }
+      #grafico {
+        width: 50vw;
+        height: 50vh;
+      }
+      .boton {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="grafico"></canvas>
+    <button class="boton" onclick="actualizarGrafico(0)">Lunes</button>
+    <button class="boton" onclick="actualizarGrafico(1)">Martes</button>
+    <button class="boton" onclick="actualizarGrafico(2)">Miércoles</button>
+    <button class="boton" onclick="actualizarGrafico(3)">Jueves</button>
+    <button class="boton" onclick="actualizarGrafico(4)">Viernes</button>
+    <button class="boton" onclick="actualizarGrafico(5)">Sábado</button>
+    <button class="boton" onclick="actualizarGrafico(6)">Domingo</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const ventasSemanales = [
+        { comida: 600, aseo: 250, tecnologia: 300 },
+        { comida: 400, aseo: 300, tecnologia: 400 },
+        { comida: 550, aseo: 150, tecnologia: 350 },
+        { comida: 700, aseo: 200, tecnologia: 280 },
+        { comida: 800, aseo: 180, tecnologia: 320 },
+        { comida: 900, aseo: 160, tecnologia: 290 },
+        { comida: 650, aseo: 220, tecnologia: 310 },
+      ];
+
+      let grafico;
+
+      function actualizarGrafico(indiceDia) {
+        const ventaDia = ventasSemanales[indiceDia];
+        const totalVentas =
+          ventaDia.comida + ventaDia.aseo + ventaDia.tecnologia;
+
+        const ctx = document.getElementById("grafico").getContext("2d");
+
+        if (grafico) {
+          grafico.destroy();
+        }
+
+        grafico = new Chart(ctx, {
+          type: "doughnut",
+          data: {
+            labels: ["Comida", "Aseo", "Tecnología"],
+            datasets: [
+              {
+                data: [ventaDia.comida, ventaDia.aseo, ventaDia.tecnologia],
+                backgroundColor: ["#FF6347", "#36A2EB", "#FFCE56"],
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              title: {
+                display: true,
+                text:
+                  "Porcentaje de Ventas por Sector (" +
+                  indiceDiaADia(indiceDia) +
+                  ")",
+              },
+            },
+          },
+        });
+      }
+
+      function indiceDiaADia(indice) {
+        const dias = [
+          "Lunes",
+          "Martes",
+          "Miércoles",
+          "Jueves",
+          "Viernes",
+          "Sábado",
+          "Domingo",
+        ];
+        return dias[indice];
+      }
+
+      actualizarGrafico(0);
+    </script>
+  </body>
+</html>

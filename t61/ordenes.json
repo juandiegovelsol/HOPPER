@@ -1,0 +1,33 @@
+[
+  {
+    "id": 1,
+    "importe": 200,
+    "articulos": {
+      "gorro": 2,
+      "camisa": 4
+    }
+  },
+  {
+    "id": 2,
+    "importe": 199,
+    "articulos": {
+      "pantalón": 4,
+      "gorro": 5
+    }
+  },
+  {
+    "id": 3,
+    "importe": 250,
+    "articulos": {
+      "camisa": 10
+    }
+  },
+  {
+    "id": 4,
+    "importe": 200,
+    "articulos": {
+      "gorro": 1,
+      "camisa": 2
+    }
+  }
+]

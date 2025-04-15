@@ -1,0 +1,50 @@
+.App {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.stat {
+  padding: 20px;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+}
+
+.confirmed {
+  background-color: green;
+}
+
+.pending {
+  background-color: yellow;
+  color: black;
+}
+
+.total {
+  background-color: blue;
+}
+
+.rejected {
+  background-color: red;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
+}

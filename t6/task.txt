@@ -1,0 +1,129 @@
+67d45c975cc5085a6531af0d
+
+67d6ecfaf96818abd2151711
+
+Estoy programando una página web con funcionalidad para creación de usuarios y he construido un servidor con Node y Express que me permite gestionar una variable interna que almacena los usuarios a través de peticiones HTTP. Este servidor tiene endpoints para crear un nuevo usuario, obtener el usuario por Id y obtener todos los usuarios solamente si la petición se hace con los permisos necesarios.
+
+`server.js`
+```javascript
+const express = require("express");
+const bodyParser = require("body-parser");
+const userRoutes = require("./users");
+
+const app = express();
+const port = 3000;
+
+app.use(bodyParser.json());
+
+app.use("/users", userRoutes);
+
+app.listen(port, () => {
+  console.log(`Servidor escuchando en http://localhost:${port}`);
+});
+```
+
+`users.js`
+```javascript
+const express = require("express");
+const userController = require("./userController");
+
+const router = express.Router();
+
+router.post("/", userController.createUser);
+router.get("/:id", userController.getUserById);
+router.get("/", userController.getAllUsers);
+
+module.exports = router;
+```
+
+`user`
+```javascript
+let users = [];
+let nextId = 1;
+
+const createUser = (req, res) => {
+  const { username, password, email, name, permission } = req.body;
+  if (
+    !username ||
+    !password ||
+    !email ||
+    !name ||
+    typeof permission !== "boolean"
+  ) {
+    return res.status(400).send({
+      error: "Todos los campos son requeridos y deben tener valores válidos.",
+    });
+  }
+  const newUser = { id: nextId++, username, password, email, name, permission };
+  users.push(newUser);
+  res.status(201).send(newUser);
+};
+
+const getUserById = (req, res) => {
+  const userId = parseInt(req.params.id);
+  const user = users.find((u) => u.id === userId);
+  if (!user) {
+    return res.status(404).send({ error: "Usuario no encontrado" });
+  }
+  res.status(200).send(user);
+};
+
+const getAllUsers = (req, res) => {
+  const requesterId = parseInt(req.headers["requester-id"]);
+  if (isNaN(requesterId)) {
+    return res
+      .status(400)
+      .send({ error: "El ID del solicitante es requerido en el encabezado." });
+  }
+  const requester = users.find((u) => u.id === requesterId);
+  if (!requester) {
+    return res.status(404).send({ error: "Solicitante no encontrado." });
+  }
+  if (!requester.permission) {
+    return res
+      .status(403)
+      .send({ error: "No permitido. Permisos insuficientes." });
+  }
+  res.status(200).send(users);
+};
+
+module.exports = {
+  createUser,
+  getUserById,
+  getAllUsers,
+};
+```
+
+Quiero que me ayudes a evaluar las siguientes pruebas, me des la salida de cada una, y una explicación breve de por qué se produce cada salida.
+ 
+Entrada 1.
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{
+    "username": "testuser",
+    "password": "password123",
+    "email": "test@example.com",
+    "name": "Usuario de prueba",
+    "permission": true
+}' http://localhost:3000/users
+```
+ 
+Entrada 2.
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{
+    "username": "testuser",
+    "password": "password123",
+    "email": "test@example.com"
+}' http://localhost:3000/users
+```
+ 
+Entrada 3.
+```bash
+curl -H "requester-id: 2" http://localhost:3000/users
+```
+ 
+Entrada 4.
+```bash
+curl -H "requester-id: 1" http://localhost:3000/users
+```
+
+

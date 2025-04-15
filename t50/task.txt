@@ -1,0 +1,6 @@
+67d4779069616996ba25c586
+
+67e21c3af788f3a0fa52c071
+
+Soy un programador de videojuegos y trabajo para una compañía española. Me han pedido desarrollar una versión del juego Pong en HTML, CSS y JavaScript para dos jugadores de forma simulatánea en el mismo ordenador. El juego debe consistir en una versión en línea del juego ping-pong, donde cada jugador tiene una barra ubicada en su respectivo lado que puede mover hacia arriba o hacia abajo. El jugador de la izquierda puede mover su barra usando la tecla "w" para arriba y "s" para abajo, y el jugador de la derecha puede usar las teclas de dirección arriba y abajo.
+Una bola debe aparecer en el centro de la pantalla, moviendose en una dirección aleatoria, que rebota en la parte superior e inferior de la pantalla y en cada una de las barras de los jugadores. Cada jugador suma un punto cuando el rival no logra hacer rebotar la bola en su barra y esta alcanza el borde de la pantalla en su respectivo lado. Cuenta y muestra en pantalla los puntos de cada jugador, el juego nunca termina. Dame el código completo, sin comentarios y con una explicación breve del código.

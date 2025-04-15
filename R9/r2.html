@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas Pelota</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      const ball = {
+        x: canvas.width / 2,
+        y: canvas.height / 2,
+        radius: 20,
+        dx: 2, // Dirección en eje X
+        dy: 2, // Dirección en eje Y
+        color: "green",
+      };
+
+      function drawBall() {
+        ctx.beginPath();
+        ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+        ctx.fillStyle = ball.color;
+        ctx.fill();
+        ctx.closePath();
+      }
+
+      function update() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Movimiento de la pelota
+        ball.x += ball.dx;
+        ball.y += ball.dy;
+
+        // Rebote en los bordes
+        if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
+          ball.dx *= -1;
+        }
+        if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
+          ball.dy *= -1;
+        }
+
+        drawBall();
+
+        // Repeler con el puntero del mouse
+        if (mouseNearBall()) {
+          ball.dx *= -1;
+          ball.dy *= -1;
+        }
+
+        requestAnimationFrame(update);
+      }
+
+      function mouseNearBall() {
+        const mouse = { x: event.clientX, y: event.clientY };
+        const distX = mouse.x - ball.x;
+        const distY = mouse.y - ball.y;
+        const distance = Math.sqrt(distX * distX + distY * distY);
+        return distance < ball.radius + 10; // Umbral de repulsión
+      }
+
+      // Inicializar
+      update();
+
+      // Capturar movimiento del mouse
+      canvas.addEventListener("mousemove", mouseNearBall);
+    </script>
+  </body>
+</html>

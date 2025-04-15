@@ -1,0 +1,5 @@
+67d3d12e36d99bf7cd1157b4
+
+67e793d00026f6e3763b5c8e
+
+Me contrataron para desarrollar un video juego con HTML, CSS y JavaScript. El juego consiste en una barra ubicada al inferior de la pantalla que se puede mover sólo hacia los lados con las teclas de dirección. También se ubican una serie de 10x3 bloques en la parte superior de la pantalla separados como si fuese una parrilla. Al presionar por primera vez alguna de las teclas de dirección, debe salir una bola desde la barra en diagonal, que puede rebotar en los bordes laterales del contenedor del juego y en alguno de los bloques. Cuando la bola rebota en un bloque se devuelve y lo elimina, y así el jugador puede mover la barra para intentar hacer rebotar de nuevo la bola. Cuando todos los bloques son eliminados el jugador gana, cuando la bola no es atrapada por el jugador y cae al borde inferior del contenedor, el jugador pierde. Se debe poder reiniciar el juego una vez se haya perdido o ganado. Dame el código completo, sin comentarios y sin explicaciones.

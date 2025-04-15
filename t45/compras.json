@@ -1,0 +1,17 @@
+[
+  {
+    "fecha": "10/10/2023",
+    "compras": [
+      { "id": "CLP2", "precio": 1000 },
+      { "id": "CLP@", "precio": 2000 },
+      { "id": "AXS11", "precio": 1500 }
+    ]
+  },
+  {
+    "fecha": "29/02/2023",
+    "compras": [
+      { "id": "A123", "precio": 2000 },
+      { "id": "B456", "precio": 2500 }
+    ]
+  }
+]

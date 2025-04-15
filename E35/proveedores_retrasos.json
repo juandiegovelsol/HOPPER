@@ -1,0 +1,27 @@
+[
+    {
+        "proveedor": "proveedor_3",
+        "promedio_retraso [d\u00edas]": 11.5,
+        "cantidad_de_retrasos": 2
+    },
+    {
+        "proveedor": "proveedor_1",
+        "promedio_retraso [d\u00edas]": 10.0,
+        "cantidad_de_retrasos": 1
+    },
+    {
+        "proveedor": "proveedor_2",
+        "promedio_retraso [d\u00edas]": 5.0,
+        "cantidad_de_retrasos": 1
+    },
+    {
+        "proveedor": "proveedor_4",
+        "promedio_retraso [d\u00edas]": 20.0,
+        "cantidad_de_retrasos": 1
+    },
+    {
+        "proveedor": "proveedor_5",
+        "promedio_retraso [d\u00edas]": 12.0,
+        "cantidad_de_retrasos": 1
+    }
+]

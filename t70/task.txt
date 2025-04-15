@@ -1,0 +1,156 @@
+67d3d159fbc714b18e991bd3
+
+67e81805db1ac16870c98f4d
+
+
+Estoy desarrollando un programa con JavaScript y node para calcular el total de tiempo que he trabajado y me han pagado para una empresa en Estados Unidos. Este programa despliega un menú en consola que permite elegir entre calcular el tiempo trabajado para el día mas reciente registrado, para los últimos 7 días o para todos los archivos guardados con el formato establecido. La información se encuentra almacenada en archivos CSV que tienen el formato "dataMM-DD-YYYY" y permite escoger la opción a calcular a través de la consola.
+
+```javascript
+const fs = require("fs");
+
+function listCsvFiles() {
+  return fs
+    .readdirSync(".")
+    .filter((file) => /^data\d{2}-\d{2}-\d{4}\.csv$/.test(file))
+    .sort((a, b) => {
+      const dateA = new Date(a.slice(4, 14).replace(/-/g, "/"));
+      const dateB = new Date(b.slice(4, 14).replace(/-/g, "/"));
+      return dateB - dateA;
+    });
+}
+
+function calculateFromFiles(files) {
+  let rateTotals = {};
+  let totalPaid = 0;
+  let totalTime = 0;
+
+  files.forEach((csvFile) => {
+    const data = fs.readFileSync(csvFile, "utf8");
+    let lines = data.trim().split("\n");
+    if (lines[0].toLowerCase().includes("tiempo")) lines.shift();
+    const timeRegex = /^\d{2} \d{2} \d{2}$/;
+    lines.forEach((line, index) => {
+      let parts = line.split(",");
+      let timeStr = parts[0].trim();
+      let rateStr = parts[1].trim();
+      if (!timeRegex.test(timeStr)) process.exit(1);
+      let [hh, mm, ss] = timeStr.split(" ").map(Number);
+      let seconds = hh * 3600 + mm * 60 + ss;
+      let hoursWorked = seconds / 3600;
+      let rate = parseFloat(rateStr);
+      if (isNaN(rate) || rate <= 0) process.exit(1);
+      if (!rateTotals[rate]) {
+        rateTotals[rate] = { paid: 0, time: 0 };
+      }
+      let subtotal = rate * hoursWorked;
+      rateTotals[rate].paid += subtotal;
+      rateTotals[rate].time += hoursWorked;
+      totalPaid += subtotal;
+      totalTime += hoursWorked;
+    });
+  });
+
+  for (let rate in rateTotals) {
+    console.log(
+      `Tasa: ${rate} USD, Tiempo trabajado: ${rateTotals[rate].time.toFixed(
+        2
+      )} horas, Subtotal pagado: $${rateTotals[rate].paid.toFixed(2)} USD`
+    );
+  }
+  console.log(`Total pagado: $${totalPaid.toFixed(2)} USD`);
+  console.log(`Total de tiempo trabajado: ${totalTime.toFixed(2)} horas`);
+}
+
+function main() {
+  const files = listCsvFiles();
+  console.log("Seleccione una opción:");
+  console.log("1. Calcular el total del último día registrado");
+  console.log("2. Calcular el total de los últimos 7 días");
+  console.log("3. Calcular el total de todos los registros");
+  const stdin = process.stdin;
+  stdin.setEncoding("utf-8");
+  stdin.on("data", (input) => {
+    input = input.trim();
+    if (input === "1") {
+      calculateFromFiles(files.slice(0, 1));
+    } else if (input === "2") {
+      calculateFromFiles(files.slice(0, 7));
+    } else if (input === "3") {
+      calculateFromFiles(files);
+    } else {
+      console.log("Opción no válida.");
+    }
+    stdin.pause();
+  });
+}
+
+main();
+```
+
+Necesito que me des el resultado de consola para cada una de las siguientes entradas (archivos CSV) al presionar la opción 2 del menú, y me des una explicación de cada salida.
+
+Entrada 1
+
+`data04-07-2025.csv`
+```csv
+Tiempo,Tasa
+00 02 08,32.5
+01 00 00,32.5
+00 58 59,32.5
+00 03 07,32.5
+01 00 00,32.5
+00 02 01,32.5
+01 00 00,32.5
+00 11 18,32.5
+01 00 00,32.5
+```
+
+`data04-04-2025.csv`
+```csv
+Tiempo,Tasa
+01 00 00,20.8
+00 41 20,32.5
+00 01 33,9.75
+00 45 00,32.5
+00 44 51,32.5
+00 03 43,9.75
+00 45 00,32.5
+00 05 53,9.75
+00 45 00,32.5
+00 00 12,9.75
+00 45 00,32.5
+00 02 04,9.75
+00 45 00,32.5
+00 05 31,9.75
+00 45 00,32.5
+00 44 50,32.5
+00 08 43,9.75
+00 45 00,32.5
+00 58 02,32.5
+```
+
+Entrada 2
+
+`data04-07-2025.csv`
+```csv
+Tiempo,Tasa
+00 02 01,32.5
+01 00 00,32.5
+00 58 59,32.5
+00 03 07,32.5
+01 00 00,32.5
+00 02 01,32.5
+01 00 00,32.5
+00 11 18,32.5
+01 00 00,32.5
+```
+
+Entrada 3
+
+`data04-07-2025.csv`
+```csv
+Tiempo,Tasa
+00 02 01,32.5
+01 00 00,32.5
+00 58 59,32.5
+```

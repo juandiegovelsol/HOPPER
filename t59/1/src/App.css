@@ -1,0 +1,63 @@
+.aplicacion {
+  font-family: "Arial", sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.formulario {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.contenedorColumnas {
+  display: flex;
+  justify-content: space-between;
+}
+
+.columna {
+  flex: 1;
+  min-width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #f9f9f9;
+}
+
+.columna h2 {
+  margin-top: 0;
+}
+
+.proyecto {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: move;
+}
+
+.proyecto:hover {
+  border-color: #aaaaaa;
+}

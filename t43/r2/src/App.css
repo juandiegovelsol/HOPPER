@@ -1,0 +1,18 @@
+.App {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.artist-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.artist-row input {
+  margin-right: 5px;
+}
+
+.artist-row button {
+  margin-left: 5px;
+}

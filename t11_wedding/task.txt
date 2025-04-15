@@ -1,0 +1,44 @@
+67d46b6a235517d4f0e6d55e
+
+67d6fc392304bebccddce35b
+
+curl -X POST \
+  http://localhost:3000/invitations \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Ana Garcia",
+    "guests": 3,
+    "table": "2B",
+    "phone": "555-5678"
+  }'
+
+curl -X POST \
+  http://localhost:3000/invitations \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Carlos Lopez",
+    "guests": 2,
+    "table": "3C"
+  }'
+
+curl http://localhost:3000/invitations
+
+curl -X PUT \
+  http://localhost:3000/invitations/1 \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Ana Garcia",
+    "guests": 3,
+    "table": "2B",
+    "phone": "555-5678",
+    "status": "confirmado",
+    "invitationSent": true
+  }'
+
+
+curl -X PUT \
+  http://localhost:3000/invitations/2 \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "status": "invalidStatus"
+  }'

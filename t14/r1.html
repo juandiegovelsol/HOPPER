@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rompecabezas</title>
+    <style>
+      #puzzle {
+        width: 500px;
+        height: 500px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+      }
+      .piece {
+        width: 100px;
+        height: 100px;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="file" id="upload" accept=".png, .jpg, .jpeg" />
+    <div id="puzzle"></div>
+    <script>
+      let pieces = [];
+      document
+        .getElementById("upload")
+        .addEventListener("change", function (e) {
+          const file = e.target.files[0];
+          if (file) {
+            const img = new Image();
+            img.src = URL.createObjectURL(file);
+            img.onload = function () {
+              pieces = [];
+              document.getElementById("puzzle").innerHTML = "";
+              const canvas = document.createElement("canvas");
+              const context = canvas.getContext("2d");
+              canvas.width = 500;
+              canvas.height = 500;
+              context.drawImage(img, 0, 0, 500, 500);
+              createPuzzle(context);
+              shufflePieces();
+            };
+          }
+        });
+
+      function createPuzzle(context) {
+        for (let y = 0; y < 5; y++) {
+          for (let x = 0; x < 5; x++) {
+            const pieceCanvas = document.createElement("canvas");
+            pieceCanvas.className = "piece";
+            const pieceContext = pieceCanvas.getContext("2d");
+            pieceCanvas.width = 100;
+            pieceCanvas.height = 100;
+            pieceContext.putImageData(
+              context.getImageData(x * 100, y * 100, 100, 100),
+              0,
+              0
+            );
+            pieces.push({ canvas: pieceCanvas, x, y });
+          }
+        }
+      }
+
+      function shufflePieces() {
+        const shuffledPieces = pieces.slice();
+        shuffledPieces.sort(() => Math.random() - 0.5);
+        shuffledPieces.forEach((piece, index) => {
+          const cell = document.createElement("div");
+          cell.style.order = index;
+          cell.draggable = true;
+          cell.appendChild(piece.canvas);
+          cell.ondragstart = (e) => e.dataTransfer.setData("text/plain", index);
+          cell.ondragover = (e) => e.preventDefault();
+          cell.ondrop = (e) => swapPieces(e, index);
+          document.getElementById("puzzle").appendChild(cell);
+        });
+      }
+
+      function swapPieces(e, dropIndex) {
+        const dragIndex = e.dataTransfer.getData("text");
+        const puzzle = document.getElementById("puzzle");
+        puzzle.insertBefore(
+          puzzle.children[dragIndex],
+          puzzle.children[dropIndex]
+        );
+        puzzle.insertBefore(
+          puzzle.children[dropIndex + 1],
+          puzzle.children[dragIndex + 1]
+        );
+        if (isSolved()) alert("¡Felicidades, has completado el rompecabezas!");
+      }
+
+      function isSolved() {
+        return [...document.getElementById("puzzle").children].every(
+          (cell, i) => i === +cell.style.order
+        );
+      }
+    </script>
+  </body>
+</html>

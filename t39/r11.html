@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Juego Espacial</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #000;
+      }
+      #gameCanvas {
+        position: relative;
+        width: 600px;
+        height: 800px;
+        margin: 20px auto;
+        background-color: #111;
+        overflow: hidden;
+      }
+      #turret {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.1s;
+      }
+      .turret-body {
+        width: 100%;
+        height: 40px;
+        background-color: #bbb;
+        border-radius: 5px 5px 0 0;
+      }
+      .turret-cannon {
+        width: 6px;
+        height: 20px;
+        background-color: #ddd;
+        margin-top: 5px;
+        position: relative;
+      }
+      .ship {
+        position: absolute;
+        top: 0;
+        width: 30px;
+        height: 30px;
+      }
+      .friendly {
+        background-color: lightgreen;
+      }
+      .enemy {
+        background-color: lightcoral;
+      }
+      .ship-body {
+        width: 100%;
+        height: 100%;
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      }
+      .shot {
+        position: absolute;
+        width: 4px;
+        height: 10px;
+        background-color: yellow;
+      }
+      #score {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: white;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gameCanvas">
+      <div id="turret">
+        <div class="turret-cannon"></div>
+        <div class="turret-body"></div>
+      </div>
+      <div id="score">Puntaje: 0</div>
+    </div>
+
+    <script>
+      const gameCanvas = document.getElementById("gameCanvas");
+      const turret = document.getElementById("turret");
+      const scoreDisplay = document.getElementById("score");
+      let score = 0;
+      let turretRotation = 0;
+      const shipWidth = 30;
+      const shipHeight = 30;
+      const shotSpeed = 5;
+      const shipSpeed = 1;
+      let ships = [];
+      let shots = [];
+      let gameRunning = true;
+
+      function updateScore(points) {
+        score += points;
+        scoreDisplay.textContent = `Puntaje: ${score}`;
+      }
+
+      function createShip(type) {
+        const ship = document.createElement("div");
+        ship.classList.add("ship");
+        ship.classList.add(type);
+        ship.innerHTML = '<div class="ship-body"></div>';
+        const startX = Math.random() * (gameCanvas.offsetWidth - shipWidth);
+        ship.style.left = `${startX}px`;
+        ship.style.top = `${-shipHeight}px`;
+        ship.dataset.type = type;
+        gameCanvas.appendChild(ship);
+        ships.push(ship);
+        moveShip(ship);
+      }
+
+      function moveShip(ship) {
+        let currentTop = -shipHeight;
+        const canvasBottom = gameCanvas.offsetHeight;
+
+        const intervalId = setInterval(() => {
+          if (!gameRunning) {
+            clearInterval(intervalId);
+            return;
+          }
+
+          currentTop += shipSpeed;
+          ship.style.top = `${currentTop}px`;
+
+          if (currentTop > canvasBottom) {
+            clearInterval(intervalId);
+            handleShipBottom(ship);
+            ship.remove();
+            ships = ships.filter((s) => s !== ship);
+          }
+        }, 20);
+      }
+
+      function handleShipBottom(ship) {
+        if (ship.dataset.type === "friendly") {
+          updateScore(1);
+        } else {
+          updateScore(-1);
+        }
+      }
+
+      function createShot() {
+        const shot = document.createElement("div");
+        shot.classList.add("shot");
+
+        const turretRect = turret.getBoundingClientRect();
+        const gameRect = gameCanvas.getBoundingClientRect();
+
+        const startX =
+          turretRect.left + turretRect.width / 2 - 2 - gameRect.left;
+        const startY = turretRect.top - gameRect.top;
+
+        shot.style.left = `${startX}px`;
+        shot.style.top = `${startY}px`;
+
+        const angleRad = (turretRotation * Math.PI) / 180;
+        shot.dataset.angle = angleRad;
+
+        gameCanvas.appendChild(shot);
+        shots.push(shot);
+        moveShot(shot);
+      }
+
+      function moveShot(shot) {
+        if (!gameRunning) return;
+
+        let currentX = parseFloat(shot.style.left);
+        let currentY = parseFloat(shot.style.top);
+        const angle = parseFloat(shot.dataset.angle);
+
+        currentX += shotSpeed * Math.sin(angle);
+        currentY -= shotSpeed * Math.cos(angle);
+
+        shot.style.left = `${currentX}px`;
+        shot.style.top = `${currentY}px`;
+
+        if (currentY < 0 || currentX < 0 || currentX > gameCanvas.offsetWidth) {
+          shot.remove();
+          shots = shots.filter((s) => s !== shot);
+          return;
+        }
+
+        if (checkCollision(shot)) {
+          return;
+        }
+
+        requestAnimationFrame(() => moveShot(shot));
+      }
+
+      function checkCollision(shot) {
+        const shotRect = shot.getBoundingClientRect();
+        const gameRect = gameCanvas.getBoundingClientRect();
+
+        for (let i = 0; i < ships.length; i++) {
+          const ship = ships[i];
+          const shipRect = ship.getBoundingClientRect();
+
+          if (
+            shotRect.left < shipRect.right &&
+            shotRect.right > shipRect.left &&
+            shotRect.top < shipRect.bottom &&
+            shotRect.bottom > shipRect.top
+          ) {
+            handleShotHit(ship);
+            shot.remove();
+            shots = shots.filter((s) => s !== shot);
+            ship.remove();
+            ships = ships.filter((s) => s !== ship);
+            return true;
+          }
+        }
+
+        return false;
+      }
+
+      function handleShotHit(ship) {
+        if (ship.dataset.type === "enemy") {
+          updateScore(1);
+        } else {
+          updateScore(-1);
+        }
+      }
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+          turretRotation -= 10;
+        } else if (event.key === "ArrowRight") {
+          turretRotation += 10;
+        } else if (event.key === " ") {
+          if (turretRotation < 90 && turretRotation > -90) {
+            createShot();
+          }
+        }
+
+        turretRotation = Math.max(-90, Math.min(90, turretRotation));
+        turret.style.transform = `translateX(-50%) rotate(${turretRotation}deg)`;
+      });
+
+      function gameLoop() {
+        if (!gameRunning) return;
+
+        if (Math.random() < 0.01) {
+          const shipType = Math.random() < 0.5 ? "friendly" : "enemy";
+          createShip(shipType);
+        }
+
+        requestAnimationFrame(gameLoop);
+      }
+
+      gameLoop();
+    </script>
+  </body>
+</html>

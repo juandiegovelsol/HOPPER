@@ -1,0 +1,85 @@
+[
+  {
+    "ProjectID": "PRJ001",
+    "ProjectName": "Rediseño del sitio web",
+    "StartDate": "2024-01-10",
+    "EndDate": "2024-03-15",
+    "Status": "En progreso",
+    "Tasks": [
+      {
+        "TaskID": "T001",
+        "TaskName": "Diseño de maquetas",
+        "AssignedTo": "Alejandro Sánchez",
+        "Deadline": "2024-01-20",
+        "Completed": true
+      },
+      {
+        "TaskID": "T002",
+        "TaskName": "Desarrollar interfaz",
+        "AssignedTo": "Miguel Vergara",
+        "Deadline": "2024-02-10",
+        "Completed": false
+      },
+      {
+        "TaskID": "T003",
+        "TaskName": "Pruebas de usabilidad",
+        "AssignedTo": "Lucía Pérez",
+        "Deadline": "2024-03-01",
+        "Completed": false
+      }
+    ]
+  },
+  {
+    "ProjectID": "PRJ002",
+    "ProjectName": "Desarrollo de aplicación móvil",
+    "StartDate": "2024-02-01",
+    "EndDate": "2024-06-30",
+    "Status": "Planificado",
+    "Tasks": [
+      {
+        "TaskID": "T004",
+        "TaskName": "Análisis de requisitos",
+        "AssignedTo": "Carlos Ruiz",
+        "Deadline": "2024-02-15",
+        "Completed": true
+      },
+      {
+        "TaskID": "T005",
+        "TaskName": "Diseño de la base de datos",
+        "AssignedTo": "Ana Torres",
+        "Deadline": "2024-03-01",
+        "Completed": false
+      }
+    ]
+  },
+  {
+    "ProjectID": "PRJ003",
+    "ProjectName": "Implementación de CRM",
+    "StartDate": "2024-01-20",
+    "EndDate": "2024-04-20",
+    "Status": "En progreso",
+    "Tasks": [
+      {
+        "TaskID": "T006",
+        "TaskName": "Configuración inicial",
+        "AssignedTo": "Pedro Gómez",
+        "Deadline": "2024-02-05",
+        "Completed": true
+      },
+      {
+        "TaskID": "T007",
+        "TaskName": "Integración con sistemas existentes",
+        "AssignedTo": "Sofía Martínez",
+        "Deadline": "2024-03-20",
+        "Completed": false
+      },
+      {
+        "TaskID": "T008",
+        "TaskName": "Capacitación del equipo",
+        "AssignedTo": "Javier Fernández",
+        "Deadline": "2024-04-10",
+        "Completed": false
+      }
+    ]
+  }
+]

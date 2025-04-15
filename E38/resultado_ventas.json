@@ -1,0 +1,17 @@
+{
+    "ventas_2023": {
+        "2023": {
+            "promedio_ventas_por_vendedor": {},
+            "calificaciones_vendedores": {},
+            "ventas_por_modelo": {},
+            "ranking_vendedores": []
+        },
+        "2024": {
+            "promedio_ventas_por_vendedor": {},
+            "calificaciones_vendedores": {},
+            "ventas_por_modelo": {},
+            "ranking_vendedores": []
+        }
+    },
+    "ventas_2024": {}
+}

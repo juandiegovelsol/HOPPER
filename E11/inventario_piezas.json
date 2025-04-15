@@ -1,0 +1,18 @@
+{
+    "motor V8": {
+        "ID": "p23",
+        "DESCRIPCION": "motor 8 cilindros 3.0L",
+        "CANTIDAD": "20",
+        "PROVEEDOR": "motors company",
+        "FECHA INGRESO": "24/02/2024",
+        "NUMERO LOTE": "l123"
+    },
+    "motor V6": {
+        "ID": "p24",
+        "DESCRIPCION": "motor 6 cilindros 2.5L",
+        "CANTIDAD": "10",
+        "PROVEEDOR": "motors company 2",
+        "FECHA INGRESO": "25/02/2024",
+        "NUMERO LOTE": "l556"
+    }
+}

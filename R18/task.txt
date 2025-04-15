@@ -1,0 +1,38 @@
+67d45cd40e1345806be4a675
+
+67e2aa6eb83942c6db530bbf
+
+Refactoriza el siguiente código en Python que implementa una sencilla gestión de ventas en una tienda de electrónica. El código actual funciona, pero sufre de varios problemas de legibilidad y mantenimiento: mezcla la lógica de entrada/salida con la lógica de cálculo, usa variables globales y no cuenta con una buena documentación. El objetivo es mantener la misma funcionalidad principal (calcular el total de ventas y mostrar un resumen), mejorar la estructura separando responsabilidades, e incluir comentarios y docstrings en cada función.
+
+```python
+ventas_globales = []
+
+def agregar_venta(producto, cantidad, precio_unitario):
+
+    total = cantidad * precio_unitario
+    ventas_globales.append({
+        "producto": producto,
+        "cantidad": cantidad,
+        "precio_unitario": precio_unitario,
+        "total": total
+    })
+
+def mostrar_resumen_ventas():
+
+    print("Resumen de Ventas:")
+    total_general = 0
+    for venta in ventas_globales:
+        print(f"Producto: {venta['producto']} | "
+              f"Cantidad: {venta['cantidad']} | "
+              f"Precio Unitario: {venta['precio_unitario']} CLP | "
+              f"Total: {venta['total']} CLP")
+        total_general += venta['total']
+    print(f"Total General de Ventas: {total_general} CLP")
+
+# Ejemplo de uso
+agregar_venta("Teclado", 2, 12500)
+agregar_venta("Mouse", 3, 4500)
+agregar_venta("Monitor", 1, 99990)
+
+mostrar_resumen_ventas()
+```

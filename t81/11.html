@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Tanques</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #282c34;
+      }
+      .grid {
+        width: 500px;
+        height: 500px;
+        display: grid;
+        grid-template-columns: repeat(20, 1fr);
+        grid-template-rows: repeat(20, 1fr);
+      }
+      .cell {
+        width: 25px;
+        height: 25px;
+        box-sizing: border-box;
+        border: 1px solid #555;
+        position: relative;
+      }
+      .tank {
+        background-color: green;
+        position: relative;
+      }
+      .tank::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: darkgreen;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .tank-up::after {
+        transform: translate(-50%, -100%);
+      }
+      .tank-right::after {
+        transform: translate(0%, -50%);
+      }
+      .tank-down::after {
+        transform: translate(-50%, 0%);
+      }
+      .tank-left::after {
+        transform: translate(-100%, -50%);
+      }
+      .mine {
+        background-color: red;
+      }
+      .projectile {
+        background-color: yellow;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid" id="grid"></div>
+    <script>
+      const gridElement = document.getElementById("grid");
+      const gridSize = 20;
+      let tankPosition = { x: 10, y: 10 };
+      let direction = "up";
+      let mines = [];
+      let projectiles = [];
+
+      function createGrid() {
+        for (let i = 0; i < gridSize * gridSize; i++) {
+          const cell = document.createElement("div");
+          cell.classList.add("cell");
+          gridElement.appendChild(cell);
+        }
+        spawnMines();
+        render();
+      }
+
+      function render() {
+        document
+          .querySelectorAll(".cell")
+          .forEach((cell) => (cell.className = "cell"));
+
+        const tankCell = getCell(tankPosition.x, tankPosition.y);
+        tankCell.classList.add("tank");
+        tankCell.classList.add(`tank-${direction}`);
+
+        mines.forEach((mine) => getCell(mine.x, mine.y).classList.add("mine"));
+
+        projectiles.forEach((projectile) => {
+          if (projectile.active) {
+            getCell(projectile.x, projectile.y).classList.add("projectile");
+          }
+        });
+      }
+
+      function getCell(x, y) {
+        return gridElement.children[y * gridSize + x];
+      }
+
+      function moveTank(moveDir) {
+        let newX = tankPosition.x;
+        let newY = tankPosition.y;
+
+        if (moveDir === "forward") {
+          if (direction === "up" && tankPosition.y > 0) newY--;
+          if (direction === "down" && tankPosition.y < gridSize - 1) newY++;
+          if (direction === "left" && tankPosition.x > 0) newX--;
+          if (direction === "right" && tankPosition.x < gridSize - 1) newX++;
+        } else if (moveDir === "backward") {
+          if (direction === "up" && tankPosition.y < gridSize - 1) newY++;
+          if (direction === "down" && tankPosition.y > 0) newY--;
+          if (direction === "left" && tankPosition.x < gridSize - 1) newX++;
+          if (direction === "right" && tankPosition.x > 0) newX--;
+        }
+
+        tankPosition.x = newX;
+        tankPosition.y = newY;
+        render();
+      }
+
+      function rotateTank(dir) {
+        const directions = ["up", "right", "down", "left"];
+        let currentIndex = directions.indexOf(direction);
+        if (dir === "right") direction = directions[(currentIndex + 1) % 4];
+        if (dir === "left") direction = directions[(currentIndex + 3) % 4];
+        render();
+      }
+
+      function fireProjectile() {
+        const projectile = {
+          x: tankPosition.x,
+          y: tankPosition.y,
+          direction: direction,
+          active: true,
+        };
+        projectiles.push(projectile);
+
+        const interval = setInterval(() => {
+          if (!projectile.active) {
+            clearInterval(interval);
+            return;
+          }
+
+          moveProjectile(projectile);
+
+          if (checkCollision(projectile)) {
+            projectile.active = false;
+            mines = mines.filter(
+              (mine) => !(mine.x === projectile.x && mine.y === projectile.y)
+            );
+            render();
+            clearInterval(interval);
+          } else if (
+            projectile.x < 0 ||
+            projectile.x >= gridSize ||
+            projectile.y < 0 ||
+            projectile.y >= gridSize
+          ) {
+            projectile.active = false;
+            clearInterval(interval);
+          } else {
+            render();
+          }
+        }, 100);
+      }
+
+      function moveProjectile(projectile) {
+        if (projectile.direction === "up") projectile.y--;
+        if (projectile.direction === "down") projectile.y++;
+        if (projectile.direction === "left") projectile.x--;
+        if (projectile.direction === "right") projectile.x++;
+      }
+
+      function checkCollision(pos) {
+        return mines.some((mine) => mine.x === pos.x && mine.y === pos.y);
+      }
+
+      function spawnMines() {
+        while (mines.length < 10) {
+          const minePosition = {
+            x: Math.floor(Math.random() * gridSize),
+            y: Math.floor(Math.random() * gridSize),
+          };
+          if (
+            minePosition.x !== tankPosition.x ||
+            minePosition.y !== tankPosition.y
+          ) {
+            mines.push(minePosition);
+          }
+        }
+      }
+
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "w") moveTank("forward");
+        if (event.key === "s") moveTank("backward");
+        if (event.key === "a") rotateTank("left");
+        if (event.key === "d") rotateTank("right");
+        if (event.key === " ") fireProjectile();
+      });
+
+      createGrid();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mostrar y Procesar Datos desde JSON</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      #output {
+        margin-top: 20px;
+        background-color: #f0f0f0;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Datos del Archivo JSON</h1>
+    <div id="output">Cargando datos...</div>
+    <script>
+      let datosJSON = null;
+      async function cargarDatos() {
+        const response = await fetch("data.json");
+        if (!response.ok) {
+          throw new Error("Error al cargar el archivo JSON");
+        }
+        datosJSON = await response.json();
+      }
+      function procesarDatos() {
+        const output = document.getElementById("output");
+        const productos = datosJSON.productos;
+        const mensaje = datosJSON.mensaje;
+        let html = `<h2>${mensaje}</h2><ul>`;
+        productos.forEach((producto) => {
+          html += `<li>ID: ${producto.id}, Nombre: ${producto.nombre}, Precio: ${producto.precio}</li>`;
+        });
+        html += "</ul>";
+        output.innerHTML = html;
+      }
+      async function init() {
+        try {
+          await cargarDatos();
+          procesarDatos();
+        } catch (error) {
+          document.getElementById("output").textContent = error;
+        }
+      }
+      init();
+    </script>
+  </body>
+</html>

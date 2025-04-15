@@ -1,0 +1,19 @@
+origen,tipo_lavado,precio_250g,precio_500g,precio_1000g,precio_250g_promedio,precio_500g_promedio,precio_1000g_promedio
+Colombia,Lavado,1.25,2.5,50.0,,,
+Etiopía,Natural,18.0,33.0,138.0,,,
+Brasil,Honey,,26.4,,,,
+Costa Rica,Natural,1.55,34.1,62.0,,,
+Kenia,Lavado,17.1,31.0,130.4,,,
+Perú,Lavado,1.4500000000000002,2.9000000000000004,58.0,,,
+Honduras,Natural,17.7,2.95,59.0,,,
+México,Honey,15.3,27.0,115.2,,,
+Nicaragua,Lavado,1.35,2.7,54.0,,,
+Brasil,Honey,,26.4,,,52.8,
+Colombia,Lavado,1.25,2.5,50.0,5.0,5.0,50.0
+Costa Rica,Natural,1.55,34.1,62.0,6.2,68.2,62.0
+Etiopía,Natural,18.0,33.0,138.0,72.0,66.0,138.0
+Honduras,Natural,17.7,2.95,59.0,70.8,5.9,59.0
+Kenia,Lavado,17.1,31.0,130.4,68.4,62.0,130.4
+México,Honey,15.3,27.0,115.2,61.2,54.0,115.2
+Nicaragua,Lavado,1.35,2.7,54.0,5.4,5.4,54.0
+Perú,Lavado,1.4500000000000002,2.9000000000000004,58.0,5.800000000000001,5.800000000000001,58.0

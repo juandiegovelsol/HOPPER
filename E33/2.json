@@ -1,0 +1,92 @@
+[
+  {
+    "ProjectID": "PRJ001",
+    "ProjectName": "Rediseño del sitio web",
+    "StartDate": "2024-01-10",
+    "EndDate": "2024-03-15",
+    "Status": "En camino",
+    "Tasks": [
+      {
+        "TaskID": "T001",
+        "TaskName": "Diseño de maquetas",
+        "AssignedTo": "Alejandro Sánchez",
+        "Deadline": "2024-01-20",
+        "Completed": true
+      },
+      {
+        "TaskID": "T002",
+        "TaskName": "Desarrollar interfaz",
+        "AssignedTo": "Miguel Vergara",
+        "Deadline": "2024-02-10",
+        "Completed": false
+      },
+      {
+        "TaskID": "T003",
+        "TaskName": "Integrar sistemas",
+        "AssignedTo": "María López",
+        "Deadline": "2024-02-28",
+        "Completed": false
+      }
+    ]
+  },
+  {
+    "ProjectID": "PRJ002",
+    "ProjectName": "Desarrollo de aplicación móvil",
+    "StartDate": "2024-02-01",
+    "EndDate": "2024-05-30",
+    "Status": "En progreso",
+    "Tasks": [
+      {
+        "TaskID": "T004",
+        "TaskName": "Diseño de UI/UX",
+        "AssignedTo": "Ana García",
+        "Deadline": "2024-02-15",
+        "Completed": true
+      },
+      {
+        "TaskID": "T005",
+        "TaskName": "Desarrollo backend",
+        "AssignedTo": "Luis Martínez",
+        "Deadline": "2024-03-15",
+        "Completed": false
+      },
+      {
+        "TaskID": "T006",
+        "TaskName": "Integración de API",
+        "AssignedTo": "Carlos Ruiz",
+        "Deadline": "2024-04-15",
+        "Completed": false
+      }
+    ]
+  },
+  {
+    "ProjectID": "PRJ003",
+    "ProjectName": "Sistema de gestión de inventario",
+    "StartDate": "2024-03-01",
+    "EndDate": "2024-06-30",
+    "Status": "Planificado",
+    "Tasks": [
+      {
+        "TaskID": "T007",
+        "TaskName": "Análisis de requisitos",
+        "AssignedTo": "Sofía Fernández",
+        "Deadline": "2024-03-15",
+        "Completed": true
+      },
+      {
+        "TaskID": "T008",
+        "TaskName": "Diseño de arquitectura",
+        "AssignedTo": "José Ramírez",
+        "Deadline": "2024-04-01",
+        "Completed": false
+      },
+      {
+        "TaskID": "T009",
+        "TaskName": "Desarrollo del sistema",
+        "AssignedTo": "Laura Torres",
+        "Deadline": "2024-05-30",
+        "Completed": false
+      }
+    ]
+  }
+]

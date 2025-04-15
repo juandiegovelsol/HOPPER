@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.contenedor {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  overflow: hidden;
+  background-color: #222;
+}
+
+.personaje {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: #00ff00;
+  border-radius: 50%;
+  top: 285px;
+  left: 285px;
+  border: 2px solid #00cc00;
+}
+
+.enemigo {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: #ff0000;
+  border-radius: 50%;
+  border: 2px solid #cc0000;
+}
+
+.bala {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: #ffff00;
+  border-radius: 50%;
+  border: 1px solid #ccaa00;
+}
+
+.perdiste {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 28px;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  border: 2px solid #fff;
+}

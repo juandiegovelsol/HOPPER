@@ -1,0 +1,113 @@
+[
+  {
+    "IDProyecto": "PRJ001",
+    "ProjectName": "Rediseño del sitio web",
+    "FechaInicio": "2024-01-10",
+    "FechaFin": "2024-03-15",
+    "Estado": "En camino",
+    "Tareas": [
+      {
+        "IDdeTarea": "T001",
+        "TaskName": "Diseño de maquetas",
+        "AsignadoA": "Alejandro Sánchez",
+        "FechaLimite": "2024-01-20",
+        "Completado": true
+      },
+      {
+        "IDdeTarea": "T002",
+        "TaskName": "Desarrollar interfaz",
+        "AsignadoA": "Miguel Vergara",
+        "FechaLimite": "2024-02-10",
+        "Completado": false
+      },
+      {
+        "IDdeTarea": "T003",
+        "TaskName": "Implementar funciones",
+        "AsignadoA": "María López",
+        "FechaLimite": "2024-02-25",
+        "Completado": false
+      },
+      {
+        "IDdeTarea": "T004",
+        "TaskName": "Pruebas de usuario",
+        "AsignadoA": "Carlos Ruiz",
+        "FechaLimite": "2024-03-05",
+        "Completado": false
+      }
+    ]
+  },
+  {
+    "IDProyecto": "PRJ002",
+    "ProjectName": "Desarrollo de la aplicación móvil",
+    "FechaInicio": "2023-11-01",
+    "FechaFin": "2024-01-31",
+    "Estado": "En progreso",
+    "Tareas": [
+      {
+        "IDdeTarea": "T005",
+        "TaskName": "Diseño de UI",
+        "AsignadoA": "Laura Martínez",
+        "FechaLimite": "2023-11-15",
+        "Completado": true
+      },
+      {
+        "IDdeTarea": "T006",
+        "TaskName": "Desarrollo de backend",
+        "AsignadoA": "Pedro García",
+        "FechaLimite": "2023-12-15",
+        "Completado": true
+      },
+      {
+        "IDdeTarea": "T007",
+        "TaskName": "Integración de API",
+        "AsignadoA": "Sofía Torres",
+        "FechaLimite": "2023-12-30",
+        "Completado": false
+      },
+      {
+        "IDdeTarea": "T008",
+        "TaskName": "Pruebas de integración",
+        "AsignadoA": "Rafael Díaz",
+        "FechaLimite": "2024-01-15",
+        "Completado": false
+      }
+    ]
+  },
+  {
+    "IDProyecto": "PRJ003",
+    "ProjectName": "Implementación de CRM",
+    "FechaInicio": "2023-12-01",
+    "FechaFin": "2024-02-28",
+    "Estado": "En desarrollo",
+    "Tareas": [
+      {
+        "IDdeTarea": "T009",
+        "TaskName": "Diseño de usuario",
+        "AsignadoA": "Ana Gómez",
+        "FechaLimite": "2023-12-10",
+        "Completado": true
+      },
+      {
+        "IDdeTarea": "T010",
+        "TaskName": "Desarrollo del sistema de gestión",
+        "AsignadoA": "Luis Fernández",
+        "FechaLimite": "2024-01-20",
+        "Completado": false
+      },
+      {
+        "IDdeTarea": "T011",
+        "TaskName": "Integración con otras aplicaciones",
+        "AsignadoA": "Elena Pérez",
+        "FechaLimite": "2024-01-25",
+        "Completado": false
+      },
+      {
+        "IDdeTarea": "T012",
+        "TaskName": "Pruebas internas",
+        "AsignadoA": "Javier Moreno",
+        "FechaLimite": "2024-02-15",
+        "Completado": false
+      }
+    ]
+  }
+]

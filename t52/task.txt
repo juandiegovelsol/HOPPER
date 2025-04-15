@@ -1,0 +1,5 @@
+67d3d110539e3979988abec7
+
+67e86ecee853477cff0cf38c
+
+Trabajo para un centro de control de distribución de energía en España, donde monitorizamos constantemente los datos de potencia entregada a la red eléctrica para detección de corte en el suministro. Los datos los recibimos en formato JSON donde cada clave del objeto se define por la fecha y hora en el formato DD/MM/YYYY/HH/MM/SS, cada valor contiene otro objeto con una clave de identificación única de cada sensor de potencia y la medición correspondiente en KWh. Quiero implementar un sistema de detección de cortes eléctricos que lea el archivo JSON y procese los datos para identificar cuando una medición es inferior al 50% de la medición anterior para el mismo sensor, identificando un corte del suministro. Quiero generar una alerta en consola cuando esto pase para poder identificar el sensor y la fecha/hora en que se produjo el corte de energía. Dame el código completo en JavaScript sin comentarios y un archivo JSON de ejemplo para probarlo. Quiero una explicación en un sólo párrafo.

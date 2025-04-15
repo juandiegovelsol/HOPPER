@@ -1,0 +1,5 @@
+67d3d146e97a6007dd95fe13
+
+67e245f4812939187dc0045e
+
+Trabajo para el área de desarrollo de una empresa muy grande ubicada en Estados Unidos. El área de recursos humanos ha hecho un estudio para encontrar la percepción de los trabajadores frente a la compañía en 6 áreas distintas: Salarios, Vacaciones, Calidad Humana, Acompañamiento psicológico, Beneficios económicos, Calidad en las instalaciones. Para publicar el estudio en la página de la compañía, debo desarrollar código en HTML, CSS y JavaScript que me permita simular las calificaciones de 100 empleados en cada área (calificaciones de 0 a 10) y mostrar el promedio de cada área en un gráfico polar con el promedio como coordenada R y ángulos espaciados para cada categoría. Los puntos entre los resultados de las categorías se deben unir para generar una especia de malla. Dame el código completo, sin comentarios ni explicaciones.

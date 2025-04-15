@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de memoria</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+
+      .game-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .card {
+        width: 80px;
+        height: 80px;
+        border: 1px solid #ccc;
+        background-color: #424242;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2em;
+        cursor: pointer;
+        user-select: none;
+        margin: 5px;
+      }
+
+      .shape {
+        width: 40px;
+        height: 40px;
+      }
+
+      .circle {
+        border-radius: 50%;
+      }
+
+      .square {
+      }
+
+      .triangle {
+        width: 0;
+        height: 0;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-bottom: 40px solid black;
+      }
+
+      #message {
+        font-size: 1.2em;
+        margin-top: 20px;
+      }
+
+      .hidden {
+        display: none;
+        background-color: #ccc;
+      }
+
+      .clickable {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game-container">
+      <h1>Juego de memoria</h1>
+      <div class="card-container" id="memoryCards"></div>
+      <div class="card-container hidden" id="selectionCards"></div>
+      <p id="message"></p>
+    </div>
+
+    <script>
+      const memoryCardsContainer = document.getElementById("memoryCards");
+      const selectionCardsContainer = document.getElementById("selectionCards");
+      const messageElement = document.getElementById("message");
+      const shapes = ["circle", "square", "triangle"];
+      let memorySequence = [];
+      let playerSequence = [];
+      let gameStarted = false;
+
+      function createShapeElement(shape) {
+        const shapeDiv = document.createElement("div");
+        shapeDiv.classList.add("shape", shape);
+        return shapeDiv;
+      }
+
+      function startGame() {
+        memorySequence = [];
+        memoryCardsContainer.innerHTML = "";
+        selectionCardsContainer.innerHTML = "";
+        generateMemorySequence();
+        displayMemorySequence();
+      }
+
+      function generateMemorySequence() {
+        for (let i = 0; i < 3; i++) {
+          const randomIndex = Math.floor(Math.random() * shapes.length);
+          memorySequence.push(shapes[randomIndex]);
+        }
+      }
+
+      function displayMemorySequence() {
+        memoryCardsContainer.classList.remove("hidden");
+        memoryCardsContainer.innerHTML = "";
+        let index = 0;
+        const displayInterval = setInterval(() => {
+          if (index < memorySequence.length) {
+            const card = document.createElement("div");
+            card.classList.add("card");
+            card.appendChild(createShapeElement(memorySequence[index]));
+            memoryCardsContainer.appendChild(card);
+            setTimeout(() => {
+              card.classList.add("hidden");
+            }, 1000);
+            index++;
+          } else {
+            clearInterval(displayInterval);
+            setTimeout(displaySelectionOptions, 2000);
+          }
+        }, 1000);
+      }
+
+      function displaySelectionOptions() {
+        selectionCardsContainer.classList.remove("hidden");
+        shapes.forEach((shape) => {
+          const card = document.createElement("div");
+          card.classList.add("card", "clickable");
+          card.appendChild(createShapeElement(shape));
+          card.addEventListener("click", handleShapeSelection);
+          selectionCardsContainer.appendChild(card);
+        });
+        playerSequence = [];
+        messageElement.textContent = "Elige las formas en el orden correcto.";
+        gameStarted = true;
+      }
+
+      function handleShapeSelection(event) {
+        if (!gameStarted) return;
+        const selectedShape = event.currentTarget.firstChild.classList[1];
+        playerSequence.push(selectedShape);
+
+        if (playerSequence.length === memorySequence.length) {
+          checkResult();
+        }
+      }
+
+      function checkResult() {
+        const isCorrect =
+          memorySequence.length === playerSequence.length &&
+          memorySequence.every(
+            (shape, index) => shape === playerSequence[index]
+          );
+        memoryCardsContainer.innerHTML = "";
+        selectionCardsContainer.innerHTML = "";
+        messageElement.textContent = isCorrect
+          ? "Correcto, ¡Ganaste!"
+          : "Incorrecto, Intenta de nuevo.";
+        setTimeout(() => {
+          memoryCardsContainer.classList.add("hidden");
+          selectionCardsContainer.classList.add("hidden");
+          startGame();
+        }, 2000);
+      }
+
+      startGame();
+    </script>
+  </body>
+</html>

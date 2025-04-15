@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Tanques</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      canvas {
+        display: block;
+        margin: 0 auto;
+        background: #eee;
+      }
+      #gameOver {
+        display: none;
+        font-size: 2em;
+        color: red;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="battlefield" width="400" height="400"></canvas>
+    <div id="gameOver">Juego Terminado</div>
+    <script>
+      const canvas = document.getElementById("battlefield");
+      const ctx = canvas.getContext("2d");
+      const gameOverElem = document.getElementById("gameOver");
+      const rows = 5;
+      const cols = 5;
+      const cellSize = canvas.width / cols;
+      const tank = { x: 0, y: 0 };
+      const obstacles = [
+        { x: 1, y: 1 },
+        { x: 1, y: 3 },
+        { x: 3, y: 1 },
+        { x: 3, y: 3 },
+      ];
+      const enemies = [];
+      let gameLoopId;
+      let enemySpawnIntervalId;
+      let gameOver = false;
+
+      const drawTank = () => {
+        ctx.fillStyle = "#00f";
+        ctx.fillRect(tank.x * cellSize, tank.y * cellSize, cellSize, cellSize);
+      };
+
+      const drawObstacles = () => {
+        ctx.fillStyle = "#000";
+        obstacles.forEach((obstacle) => {
+          ctx.fillRect(
+            obstacle.x * cellSize,
+            obstacle.y * cellSize,
+            cellSize,
+            cellSize
+          );
+        });
+      };
+
+      const drawEnemies = () => {
+        ctx.fillStyle = "#f00";
+        enemies.forEach((enemy) => {
+          ctx.fillRect(
+            enemy.x * cellSize,
+            enemy.y * cellSize,
+            cellSize,
+            cellSize
+          );
+        });
+      };
+
+      const drawGrid = () => {
+        ctx.strokeStyle = "#ccc";
+        ctx.lineWidth = 1;
+        for (let i = 1; i < rows; i++) {
+          ctx.beginPath();
+          ctx.moveTo(0, i * cellSize);
+          ctx.lineTo(canvas.width, i * cellSize);
+          ctx.stroke();
+        }
+        for (let i = 1; i < cols; i++) {
+          ctx.beginPath();
+          ctx.moveTo(i * cellSize, 0);
+          ctx.lineTo(i * cellSize, canvas.height);
+          ctx.stroke();
+        }
+      };
+
+      const spawnEnemy = () => {
+        if (gameOver) return;
+        const emptySpaces = [];
+        for (let x = 0; x < cols; x++) {
+          for (let y = 0; y < rows; y++) {
+            const isObstacle = obstacles.some((o) => o.x === x && o.y === y);
+            const isEnemy = enemies.some((e) => e.x === x && e.y === y);
+            const isTank = tank.x === x && tank.y === y;
+            if (!isObstacle && !isEnemy && !isTank) {
+              emptySpaces.push({ x, y });
+            }
+          }
+        }
+
+        if (emptySpaces.length > 0) {
+          const newEnemyPos =
+            emptySpaces[Math.floor(Math.random() * emptySpaces.length)];
+          enemies.push({ ...newEnemyPos, spawnTime: Date.now() });
+        }
+      };
+
+      const updateGame = () => {
+        const now = Date.now();
+        const enemiesToRemove = [];
+
+        for (let i = enemies.length - 1; i >= 0; i--) {
+          const enemy = enemies[i];
+          if (enemy.x === tank.x && enemy.y === tank.y) {
+            enemies.splice(i, 1);
+          }
+        }
+
+        for (let i = enemies.length - 1; i >= 0; i--) {
+          const enemy = enemies[i];
+          const ageInSeconds = (now - enemy.spawnTime) / 1000;
+
+          if (ageInSeconds > 5) {
+            endGame();
+            return;
+          }
+        }
+      };
+
+      const moveTank = (dir) => {
+        if (gameOver) return;
+        let potentialX = tank.x;
+        let potentialY = tank.y;
+
+        switch (dir) {
+          case "w":
+            potentialY--;
+            break;
+          case "s":
+            potentialY++;
+            break;
+          case "a":
+            potentialX--;
+            break;
+          case "d":
+            potentialX++;
+            break;
+        }
+
+        if (
+          potentialX < 0 ||
+          potentialX >= cols ||
+          potentialY < 0 ||
+          potentialY >= rows
+        ) {
+          return;
+        }
+
+        const collision = obstacles.some(
+          (o) => o.x === potentialX && o.y === potentialY
+        );
+        if (collision) {
+          return;
+        }
+        tank.x = potentialX;
+        tank.y = potentialY;
+
+        for (let i = enemies.length - 1; i >= 0; i--) {
+          if (enemies[i].x === tank.x && enemies[i].y === tank.y) {
+            enemies.splice(i, 1);
+          }
+        }
+      };
+
+      const keyPressHandler = (e) => {
+        if (gameOver) return;
+        switch (e.key.toLowerCase()) {
+          case "w":
+          case "a":
+          case "s":
+          case "d":
+            moveTank(e.key.toLowerCase());
+            break;
+        }
+      };
+
+      const drawGame = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawGrid();
+        drawObstacles();
+        drawEnemies();
+        drawTank();
+      };
+
+      const gameLoop = () => {
+        if (gameOver) return;
+
+        updateGame();
+        drawGame();
+
+        gameLoopId = requestAnimationFrame(gameLoop);
+      };
+
+      const endGame = () => {
+        gameOver = true;
+        cancelAnimationFrame(gameLoopId);
+        clearInterval(enemySpawnIntervalId);
+        gameOverElem.style.display = "block";
+      };
+
+      const startGame = () => {
+        gameOver = false;
+        gameOverElem.style.display = "none";
+        enemies.length = 0;
+        tank.x = 0;
+        tank.y = 0;
+
+        enemySpawnIntervalId = setInterval(spawnEnemy, 5000);
+        gameLoopId = requestAnimationFrame(gameLoop);
+      };
+
+      document.addEventListener("keydown", keyPressHandler);
+      startGame();
+    </script>
+  </body>
+</html>

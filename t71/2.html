@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gráfico de Percepción de Empleados</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      canvas {
+        display: block;
+        margin: 0 auto;
+      }
+      .legend {
+        text-align: center;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="radarChart" width="600" height="600"></canvas>
+    <div class="legend">
+      <p>Promedios por área:</p>
+      <p>Salarios: {{salarios}}</p>
+      <p>Vacaciones: {{vacaciones}}</p>
+      <p>Calidad Humana: {{calidadHumana}}</p>
+      <p>Acompañamiento Psicológico: {{acompaniamientoPsicologico}}</p>
+      <p>Beneficios Económicos: {{beneficiosEconomicos}}</p>
+      <p>Calidad en las Instalaciones: {{calidadInstalaciones}}</p>
+    </div>
+    <script>
+      function generarDatosAleatorios() {
+        const areas = [
+          "Salarios",
+          "Vacaciones",
+          "Calidad Humana",
+          "Acompañamiento Psicológico",
+          "Beneficios Económicos",
+          "Calidad en las Instalaciones",
+        ];
+        const datos = Array.from({ length: 100 }, () =>
+          Math.floor(Math.random() * 11)
+        );
+        const promedios =
+          datos.reduce((sum, val) => sum + val, 0) / datos.length;
+        return { datos, promedios, areas };
+      }
+
+      function dibujarGraficoRadar(ctx, datos, promedios, areas) {
+        const numAreas = areas.length;
+        const angulo = (2 * Math.PI) / numAreas;
+        const valorMaximo = 10;
+
+        ctx.clearRect(0, 0, 600, 600);
+
+        // Dibujar etiquetas de áreas
+        for (let i = 0; i < numAreas; i++) {
+          const theta = angulo * i;
+          const x = 300 + 250 * Math.cos(theta);
+          const y = 300 + 250 * Math.sin(theta);
+          ctx.fillText(areas[i], x - 20, y - 10);
+        }
+
+        // Dibujar malla
+        ctx.beginPath();
+        for (let i = 0; i < numAreas; i++) {
+          const theta = angulo * i;
+          const r = 250;
+          const x = 300 + r * Math.cos(theta);
+          const y = 300 + r * Math.sin(theta);
+          ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.strokeStyle = "#999";
+        ctx.stroke();
+
+        // Dibujar puntos de datos
+        ctx.beginPath();
+        for (let i = 0; i < numAreas; i++) {
+          const theta = angulo * i;
+          const r = 250 * (datos[i] / valorMaximo);
+          const x = 300 + r * Math.cos(theta);
+          const y = 300 + r * Math.sin(theta);
+          if (i === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+        ctx.closePath();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "#4CAF50";
+        ctx.stroke();
+
+        // Dibujar promedio
+        ctx.beginPath();
+        const rPromedio = 250 * (promedios / valorMaximo);
+        const xPromedio = 300 + rPromedio * Math.cos(0);
+        const yPromedio = 300 + rPromedio * Math.sin(0);
+        ctx.arc(300, 300, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = "#4CAF50";
+        ctx.fill();
+      }
+
+      const canvas = document.getElementById("radarChart");
+      const ctx = canvas.getContext("2d");
+      const { datos, promedios, areas } = generarDatosAleatorios();
+      dibujarGraficoRadar(ctx, datos, promedios, areas);
+    </script>
+  </body>
+</html>

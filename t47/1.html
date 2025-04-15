@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Saltar y Esquivar</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #f0f0f0;
+      }
+      #gameCanvas {
+        position: relative;
+        background-color: #ffffff;
+        width: 100vw;
+        height: 100vh;
+      }
+      #character {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: blue;
+        bottom: 0;
+        left: 50px;
+      }
+      .obstacle {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        right: 0;
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gameCanvas">
+      <div id="character"></div>
+    </div>
+    <script>
+      let character = document.getElementById("character");
+      let gameCanvas = document.getElementById("gameCanvas");
+      let isJumping = false;
+      let gravity = 1;
+      let jumpHeight = 150;
+      let gameActive = false;
+      let obstacles = [];
+
+      document.addEventListener("keydown", function (event) {
+        if (event.code === "Space") {
+          if (!gameActive) {
+            startGame();
+          } else if (!isJumping) {
+            jump();
+          }
+        }
+      });
+
+      function startGame() {
+        gameActive = true;
+        setInterval(createObstacle, 2000);
+      }
+
+      function createObstacle() {
+        let obstacle = document.createElement("div");
+        obstacle.className = "obstacle";
+        obstacle.style.bottom = "0px";
+        obstacle.style.right = "0px";
+        gameCanvas.appendChild(obstacle);
+        obstacles.push(obstacle);
+        moveObstacle(obstacle);
+      }
+
+      function moveObstacle(obstacle) {
+        let obstacleInterval = setInterval(function () {
+          let obstaclePosition = parseInt(obstacle.style.right);
+          if (obstaclePosition > 150) {
+            obstacle.style.right = obstaclePosition + 5 + "px";
+          } else {
+            clearInterval(obstacleInterval);
+            gameCanvas.removeChild(obstacle);
+            obstacles.splice(obstacles.indexOf(obstacle), 1);
+          }
+          checkCollision(obstacle);
+        }, 20);
+      }
+
+      function jump() {
+        isJumping = true;
+        let jumpUp = setInterval(function () {
+          let characterBottom = parseInt(character.style.bottom);
+          if (characterBottom < jumpHeight) {
+            character.style.bottom = characterBottom + 5 + "px";
+          } else {
+            clearInterval(jumpUp);
+            fall();
+          }
+        }, 20);
+      }
+
+      function fall() {
+        let fallDown = setInterval(function () {
+          let characterBottom = parseInt(character.style.bottom);
+          if (characterBottom > 0) {
+            character.style.bottom = characterBottom - 5 + "px";
+          } else {
+            clearInterval(fallDown);
+            isJumping = false;
+          }
+        }, 20);
+      }
+
+      function checkCollision(obstacle) {
+        let characterRect = character.getBoundingClientRect();
+        let obstacleRect = obstacle.getBoundingClientRect();
+        if (
+          characterRect.left < obstacleRect.right &&
+          characterRect.right > obstacleRect.left &&
+          characterRect.top < obstacleRect.bottom &&
+          characterRect.bottom > obstacleRect.top
+        ) {
+          alert("Game Over");
+          gameActive = false;
+          obstacles.forEach((ob) => gameCanvas.removeChild(ob));
+          obstacles = [];
+        }
+      }
+    </script>
+  </body>
+</html>

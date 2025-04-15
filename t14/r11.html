@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rompecabezas</title>
+    <style>
+      #puzzleContainer {
+        width: 500px;
+        height: 500px;
+        position: relative;
+      }
+      .puzzlePiece {
+        position: absolute;
+        box-sizing: border-box;
+        cursor: pointer;
+        background-size: 500px 500px;
+      }
+      input {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="file" id="imageLoader" accept="image/png, image/jpeg" />
+    <div id="puzzleContainer"></div>
+    <script>
+      const container = document.getElementById("puzzleContainer");
+      const input = document.getElementById("imageLoader");
+      let originalPositions = [];
+      let pieces = [];
+      let currentPositions = [];
+
+      input.addEventListener("change", function (e) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const img = new Image();
+          img.onload = function () {
+            setupPuzzle(img);
+          };
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+
+      function setupPuzzle(img) {
+        container.innerHTML = "";
+        originalPositions = [];
+        currentPositions = [];
+        pieces = [];
+        const size = 100,
+          n = 5;
+        let positions = [];
+
+        for (let y = 0; y < n; y++) {
+          for (let x = 0; x < n; x++) {
+            const piece = document.createElement("div");
+            piece.className = "puzzlePiece";
+            piece.style.width = size + "px";
+            piece.style.height = size + "px";
+            piece.style.backgroundImage = `url(${img.src})`;
+            piece.style.backgroundPosition = `-${x * size}px -${y * size}px`;
+            piece.style.left = x * size + "px";
+            piece.style.top = y * size + "px";
+            piece.dataset.originalX = x * size;
+            piece.dataset.originalY = y * size;
+            piece.dataset.index = y * n + x;
+            originalPositions.push({ x: x * size, y: y * size });
+            positions.push({ x: x * size, y: y * size });
+            makeDraggable(piece);
+            container.appendChild(piece);
+            pieces.push(piece);
+          }
+        }
+
+        shuffle(positions);
+        pieces.forEach((piece, index) => {
+          piece.style.left = positions[index].x + "px";
+          piece.style.top = positions[index].y + "px";
+          currentPositions.push({
+            x: positions[index].x,
+            y: positions[index].y,
+            piece: piece,
+          });
+        });
+      }
+
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+
+      function makeDraggable(piece) {
+        let offsetX, offsetY;
+        let initialLeft, initialTop;
+
+        piece.addEventListener("mousedown", function (e) {
+          e.preventDefault();
+          piece.style.zIndex = 10;
+          offsetX = e.clientX - piece.offsetLeft;
+          offsetY = e.clientY - piece.offsetTop;
+          initialLeft = piece.offsetLeft;
+          initialTop = piece.offsetTop;
+          document.addEventListener("mousemove", mouseMove);
+          document.addEventListener("mouseup", mouseUp);
+        });
+
+        function mouseMove(e) {
+          piece.style.left = e.clientX - offsetX + "px";
+          piece.style.top = e.clientY - offsetY + "px";
+        }
+
+        function mouseUp() {
+          const closest = findClosestPosition(piece);
+          const otherPiece = findPieceAtPosition(closest.x, closest.y);
+
+          if (otherPiece && otherPiece !== piece) {
+            otherPiece.style.left = initialLeft + "px";
+            otherPiece.style.top = initialTop + "px";
+            updatePiecePosition(otherPiece, initialLeft, initialTop);
+          }
+
+          piece.style.left = closest.x + "px";
+          piece.style.top = closest.y + "px";
+          piece.style.zIndex = 1;
+
+          updatePiecePosition(piece, closest.x, closest.y);
+
+          document.removeEventListener("mousemove", mouseMove);
+          document.removeEventListener("mouseup", mouseUp);
+          checkCompletion();
+        }
+      }
+
+      function updatePiecePosition(piece, x, y) {
+        const posIndex = currentPositions.findIndex(
+          (pos) =>
+            pos.piece === piece ||
+            (pos.piece && pos.piece.dataset.index === piece.dataset.index)
+        );
+
+        if (posIndex !== -1) {
+          currentPositions[posIndex] = { x, y, piece };
+        }
+      }
+
+      function findPieceAtPosition(x, y) {
+        const position = currentPositions.find(
+          (pos) => Math.abs(pos.x - x) < 10 && Math.abs(pos.y - y) < 10
+        );
+
+        return position ? position.piece : null;
+      }
+
+      function findClosestPosition(piece) {
+        let closest = originalPositions[0];
+        let closestDistance = distance(
+          piece.offsetLeft,
+          piece.offsetTop,
+          closest.x,
+          closest.y
+        );
+
+        originalPositions.forEach((pos) => {
+          const d = distance(piece.offsetLeft, piece.offsetTop, pos.x, pos.y);
+          if (d < closestDistance) {
+            closest = pos;
+            closestDistance = d;
+          }
+        });
+
+        return closest;
+      }
+
+      function distance(x1, y1, x2, y2) {
+        return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+      }
+
+      function checkCompletion() {
+        let completed = true;
+
+        pieces.forEach((piece) => {
+          const originalX = parseInt(piece.dataset.originalX);
+          const originalY = parseInt(piece.dataset.originalY);
+
+          if (piece.offsetLeft !== originalX || piece.offsetTop !== originalY) {
+            completed = false;
+          }
+        });
+
+        if (completed) {
+          setTimeout(() => {
+            alert("¡Puzzle completo!");
+          }, 100);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+67d458f3792709921874b9f3
+
+67e21c656c64eba142edb368
+
+Mi equipo y yo estamos trabajando en una aplicación web construida usando JavaScript, que entre sus funcionalidades tiene que poder crear reportes dinámicos. Para hacerlo, tengo una idea de una clase clave que nos facilitaría mucho el trabajo, pero necesito que tu la construyas, esto es lo que necesito:
+
+* La clase se llamara "DynamicObject".
+* En su constructor debe recibir un objeto inicial con propiedades definidas.
+* Debe implementar un método llamado "addMethod", que reciba dos parámetros: el nombre de la función en string, y un callback que será ejecutado usando el nombre recibido, este callback debe ejecutarse en el contexto del objeto y tiene que poder acceder a sus propiedades.
+* Debe implementar un método llamado "removeMethod" que reciba como parámetro el nombre de un método, y que elimine de la instancia actual el método que se haya agregado con ese nombre usando "addMethod".
+* Por ultimo, deberá implementar otro método llamado "callMethod" que permita ejecutar los métodos agregados con addMethod, este método recibirá como parámetros el nombre del método que se quiere llamar y los parámetros que el método llamado necesite.

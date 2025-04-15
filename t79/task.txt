@@ -1,0 +1,5 @@
+67d466d60d2cc42fa18404b1
+
+67e79541804106e1b8bbc05b
+
+Trabajo para un estudio de desarrollo de video juegos en Seattle, Estados Unidos, y me pidieron desarrollar un juego de tanques y enemigos con HTML, CSS y JavaScript. El juego consiste en una matriz de 5x5, donde la primera, tercera y quinta columna están completamente libres y la segunda y cuarta columna contienen obstáculos que impiden el paso del tanque sólo en la segunda y cuarta fila de cada una de esas columas. El tanque se debe poder mover por el tablero con las teclas a, s, d y w. Cada 5 segundos debe aparecer un enemigo en una casilla aleatoria (solo en espacios libres) y la misión del tanque es pasar por encima de los enemigos para hacerlos desaparecer. Si pasan 5 segundos después de que un enemigo aparezca y aún no ha sido eliminado, el juego termina. Dame el código completo del juego sin comentarios ni explicaciones.

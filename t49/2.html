@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador de imágenes</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      #image-uploads {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+      }
+
+      .custom-file-upload-label {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        background-color: #f0f0f0;
+        border-radius: 4px;
+        margin-right: 10px;
+      }
+      .custom-file-upload-label:hover {
+        background-color: #e0e0e0;
+      }
+
+      .file-input-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      #collage-container {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 10px;
+        width: 450px;
+        height: 300px;
+        border: 1px solid #ccc;
+        overflow: hidden;
+      }
+
+      .image-container {
+        position: absolute;
+        overflow: hidden;
+        cursor: move;
+        user-select: none;
+      }
+
+      .image-container img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+      }
+
+      #download-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Generador de imágenes</h1>
+    <div class="file-input-container">
+      <input type="file" id="image-uploads" accept="image/*" multiple />
+      <label for="image-uploads" class="custom-file-upload-label">
+        Seleccionar archivos
+      </label>
+      <span id="file-chosen-text">Ningún archivo seleccionado</span>
+    </div>
+
+    <div id="collage-container"></div>
+
+    <button id="download-btn">Descargar</button>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+      const imageUploads = document.getElementById("image-uploads"); // Elemento input para la carga de imágenes
+      const collageContainer = document.getElementById("collage-container"); // Contenedor del collage de imágenes
+      const downloadBtn = document.getElementById("download-btn"); // Botón para descargar el collage
+      const fileChosenText = document.getElementById("file-chosen-text"); // Texto que muestra cuántos archivos se han seleccionado
+      let selectedImage = null; // Imagen actualmente seleccionada para mover
+      let offsetX = 0; // Desplazamiento en X para el movimiento de la imagen
+      let offsetY = 0; // Desplazamiento en Y para el movimiento de la imagen
+
+      imageUploads.addEventListener("change", function (event) {
+        const files = event.target.files; // Archivos seleccionados por el usuario
+        collageContainer.innerHTML = "";
+        if (files.length > 0) {
+          fileChosenText.textContent = `${files.length} archivo(s) seleccionado(s)`;
+        } else {
+          fileChosenText.textContent = "Ningún archivo seleccionado";
+        }
+        const imageSize = 100; // Tamaño de cada imagen en el collage
+        const containerWidth = collageContainer.offsetWidth; // Ancho del contenedor del collage
+        const containerHeight = collageContainer.offsetHeight; // Alto del contenedor del collage
+        const imagesPerRow = Math.floor(containerWidth / imageSize); // Número de imágenes por fila en el collage
+
+        Array.from(files).forEach(function (file, i) {
+          const reader = new FileReader(); // Lector de archivos para convertirlos en datos URL
+          reader.onload = function (e) {
+            const imageContainer = document.createElement("div"); // Contenedor de cada imagen
+            imageContainer.classList.add("image-container");
+            const row = Math.floor(i / imagesPerRow); // Fila en la que se posicionará la imagen
+            const col = i % imagesPerRow; // Columna en la que se posicionará la imagen
+            let initialLeft = col * imageSize; // Posición inicial desde la izquierda
+            let initialTop = row * imageSize; // Posición inicial desde arriba
+            initialLeft = Math.min(initialLeft, containerWidth - imageSize);
+            initialTop = Math.min(initialTop, containerHeight - imageSize);
+            imageContainer.style.top = `${initialTop}px`;
+            imageContainer.style.left = `${initialLeft}px`;
+            imageContainer.style.width = `${imageSize}px`;
+            imageContainer.style.height = `${imageSize}px`;
+            const img = document.createElement("img"); // Elemento de imagen que se insertará en el contenedor
+            img.src = e.target.result;
+            img.alt = `Imagen ${i + 1}`;
+
+            imageContainer.appendChild(img);
+            collageContainer.appendChild(imageContainer);
+
+            imageContainer.addEventListener("mousedown", startDragging);
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+
+      function startDragging(event) {
+        if (event.button !== 0) return;
+        selectedImage = event.currentTarget;
+        const rect = selectedImage.getBoundingClientRect(); // Dimensiones del contenedor de la imagen seleccionada
+        offsetX = event.clientX - rect.left;
+        offsetY = event.clientY - rect.top;
+        selectedImage.style.zIndex = 10;
+        document.addEventListener("mousemove", drag);
+        document.addEventListener("mouseup", stopDragging);
+        event.preventDefault();
+      }
+
+      function drag(event) {
+        if (selectedImage) {
+          const containerRect = collageContainer.getBoundingClientRect(); // Dimensiones del contenedor del collage
+          const mouseX = event.clientX - containerRect.left;
+          const mouseY = event.clientY - containerRect.top;
+          let newLeft = mouseX - offsetX; // Nueva posición X para la imagen seleccionada
+          let newTop = mouseY - offsetY; // Nueva posición Y para la imagen seleccionada
+          newLeft = Math.max(
+            0,
+            Math.min(newLeft, containerRect.width - selectedImage.offsetWidth)
+          );
+          newTop = Math.max(
+            0,
+            Math.min(newTop, containerRect.height - selectedImage.offsetHeight)
+          );
+
+          selectedImage.style.left = `${newLeft}px`;
+          selectedImage.style.top = `${newTop}px`;
+        }
+      }
+
+      function stopDragging() {
+        if (selectedImage) {
+          selectedImage.style.zIndex = "";
+        }
+        selectedImage = null;
+        document.removeEventListener("mousemove", drag);
+        document.removeEventListener("mouseup", stopDragging);
+      }
+
+      downloadBtn.addEventListener("click", function () {
+        const imagesInCollage =
+          collageContainer.querySelectorAll(".image-container"); // Todas las imágenes dentro del collage
+        imagesInCollage.forEach((imgC) => (imgC.style.border = "none"));
+
+        html2canvas(collageContainer, {
+          allowTaint: true,
+          useCORS: true,
+          backgroundColor:
+            window.getComputedStyle(collageContainer).backgroundColor,
+          scale: 2,
+        }).then(function (canvas) {
+          const link = document.createElement("a"); // Elemento de enlace para descargar la imagen
+          link.download = "mi-imagen.png";
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+        });
+      });
+    </script>
+  </body>
+</html>

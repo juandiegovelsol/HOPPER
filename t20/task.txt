@@ -1,0 +1,127 @@
+67d45bda2345f429ac79fe6f
+
+67d715d3c229bd3a25e3b18c
+
+
+Estoy armando una página web para entrenamiento de pilotos de fórmula 1 en la que se mide el tiempo de reacción cada vez. Una vez se aprieta el círculo se incia un conteo regresivo con un tiempo aleatorio y después se llena el círculo en color rojo. Cuando esto último sucede, se empieza a contar el tiempo hasta que el piloto presiona de nuevo el ratón. Después se guardan y ordenan los 10 mejores tiempos logrados. Quiero sólo generar comentarios al código solamente encima de la definición o el uso de las funciones personalizadas dentro del código.
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Entrenamiento de fórmula 1</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      .program-container {
+        text-align: center;
+      }
+      #instructions {
+        margin-bottom: 20px;
+      }
+      #circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 2px solid #333;
+        cursor: pointer;
+        background-color: transparent;
+        margin: 20px auto;
+      }
+      #results {
+        margin-top: 30px;
+        text-align: center;
+      }
+      #results h2 {
+        margin-bottom: 10px;
+      }
+      #ranking {
+        list-style: none;
+        padding: 0;
+      }
+      #ranking li {
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="program-container">
+      <p id="instructions">
+        Bienvenido, aprieta el círculo cuando estés listo. Aprieta nuevamente
+        cuando se vuelva rojo!
+      </p>
+      <div id="circle"></div>
+      <div id="results">
+        <h2>Clasificación de tiempos</h2>
+        <ul id="ranking"></ul>
+      </div>
+    </div>
+    <script>
+      const instructions = document.getElementById("instructions");
+      const circle = document.getElementById("circle");
+      const ranking = document.getElementById("ranking");
+      let startTime = null,
+        times = [],
+        active = false;
+      const getDelay = () => Math.random() * 9000 + 1000;
+      const format = (ms) => {
+        const sec = Math.floor(ms / 1000),
+          msec = ms % 1000;
+        return `${String(sec).padStart(2, "0")}:${String(msec).padStart(
+          3,
+          "0"
+        )}`;
+      };
+      const updateRanking = () => {
+        const top10 = times
+          .slice()
+          .sort((a, b) => a - b)
+          .slice(0, 10);
+        ranking.innerHTML = "";
+        top10.forEach((t) => {
+          const li = document.createElement("li");
+          li.textContent = format(t);
+          ranking.appendChild(li);
+        });
+      };
+      const startSession = () => {
+        active = true;
+        circle.style.backgroundColor = "transparent";
+        instructions.textContent = "Prepárate...";
+        setTimeout(() => {
+          if (active) {
+            circle.style.backgroundColor = "red";
+            startTime = Date.now();
+            instructions.textContent = "Ahora!";
+          }
+        }, getDelay());
+      };
+      circle.addEventListener("click", () => {
+        if (!active) {
+          startSession();
+        } else if (startTime) {
+          const reaction = Date.now() - startTime;
+          times.push(reaction);
+          updateRanking();
+          active = false;
+          instructions.textContent = `Tu tiempo fue: ${format(
+            reaction
+          )}. Aprieta el círculo para intentarlo de nuevo.`;
+          circle.style.backgroundColor = "transparent";
+          startTime = null;
+        }
+      });
+    </script>
+  </body>
+</html>
+
+```

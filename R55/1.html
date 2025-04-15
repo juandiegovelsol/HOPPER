@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba de Naipes</title>
+    <style>
+      #espacioDibujo,
+      #espacioResultado {
+        width: 200px;
+        margin: 10px;
+      }
+
+      .carta {
+        display: flex;
+        align-items: center;
+        border: 1px solid #000;
+        padding: 5px;
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Juego de Naipes</h1>
+    <input type="number" id="cantidad" min="3" max="10" />
+    <button id="dibujar">Dibujar</button>
+    <button id="ordenar">Ordenar</button>
+    <div id="espacioDibujo"></div>
+    <div id="espacioResultado"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Función para generar una carta
+        function generarCarta() {
+          var numero = Math.floor(Math.random() * 13) + 1;
+          var pinta =
+            Math.random() < 0.25
+              ? "corazones"
+              : Math.random() < 0.5
+              ? "diamantes"
+              : Math.random() < 0.75
+              ? "espadas"
+              : "tréboles";
+          return { numero: numero, pinta: pinta };
+        }
+
+        // Función para generar naipes según la cantidad
+        function dibujarNaipes(cantidad) {
+          var naipes = [];
+          for (var i = 0; i < cantidad; i++) {
+            naipes.push(generarCarta());
+          }
+          return naipes;
+        }
+
+        // Función para bubble sort basado en el número de la carta
+        function bubbleSortNaipes(naipes) {
+          var n = naipes.length;
+          for (var i = 0; i < n - 1; i++) {
+            for (var j = 0; j < n - i - 1; j++) {
+              if (naipes[j].numero > naipes[j + 1].numero) {
+                var temp = naipes[j];
+                naipes[j] = naipes[j + 1];
+                naipes[j + 1] = temp;
+              }
+            }
+          }
+          return naipes;
+        }
+
+        // Evento para dibujar naipes al hacer clic en el botón "dibujar"
+        $("#dibujar").click(function () {
+          var cantidad = parseInt($("#cantidad").val());
+          if (isNaN(cantidad) || cantidad < 3 || cantidad > 10) {
+            alert("Por favor, introduce un número entre 3 y 10.");
+            return;
+          }
+
+          var naipes = dibujarNaipes(cantidad);
+          $("#espacioDibujo").empty(); // Limpiar el div antes de dibujar
+
+          $.each(naipes, function (index, carta) {
+            var cartaHtml =
+              '<div class="carta">' +
+              "<span>" +
+              carta.numero +
+              "</span>" +
+              "<span>" +
+              carta.pinta +
+              "</span>" +
+              "</div>";
+            $("#espacioDibujo").append(cartaHtml);
+          });
+        });
+
+        // Evento para ordenar naipes al hacer clic en el botón "ordenar"
+        $("#ordenar").click(function () {
+          var naipes = [];
+          var cartas = $("#espacioDibujo .carta");
+
+          $.each(cartas, function (index, cartaDiv) {
+            var numero = parseInt($(cartaDiv).find("span:first").text());
+            naipes.push({ numero: numero });
+          });
+
+          var naipesOrdenados = bubbleSortNaipes(naipes);
+          $("#espacioResultado").empty(); // Limpiar el div antes de mostrar resultados
+
+          $.each(naipesOrdenados, function (index, carta) {
+            var cartaHtml =
+              '<div class="carta">' +
+              "<span>" +
+              carta.numero +
+              "</span>" +
+              "</div>";
+            $("#espacioResultado").append(cartaHtml);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

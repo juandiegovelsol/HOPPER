@@ -1,0 +1,38 @@
+{
+  "proyectos": [
+    {
+      "nombre_proyecto": "Desarrollo de App Móvil",
+      "tareas": [
+        {
+          "nombre_tarea": "Diseño de Interfaz",
+          "responsable": "Laura García",
+          "fecha_entrega": "2024-09-01",
+          "estado": "en progreso"
+        },
+        {
+          "nombre_tarea": "Integración de API",
+          "responsable": "Carlos Pérez",
+          "fecha_entrega": "2024-09-10",
+          "estado": "pendiente"
+        }
+      ]
+    },
+    {
+      "nombre_proyecto": "Actualización del Sitio Web",
+      "tareas": [
+        {
+          "nombre_tarea": "Optimización de SEO",
+          "responsable": "Ana López",
+          "fecha_entrega": "2024-08-25",
+          "estado": "completado"
+        },
+        {
+          "nombre_tarea": "Revisión de Contenidos",
+          "responsable": "Miguel Santos",
+          "fecha_entrega": "2024-09-05",
+          "estado": "en progreso"
+        }
+      ]
+    }
+  ]
+}

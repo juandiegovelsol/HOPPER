@@ -1,0 +1,8 @@
+67d45d05fa39521959704c98
+
+67d6ee413c8235aab4a31854
+
+Estoy planeando mi boda y quiero desarrollar una página web con React, JavaScript y CSS. Por el momento quiero desarrollar un tablero de control para lograr visualizar las invitaciones que tengo disponibles. En la parte superior de la página se deben mostrar horizontalmente 4 recuadros: Invitados confirmados en verde, invitados pendientes en amarillo, total de invitados en azul (excluyendo los rechazados), e invitados rechazados en rojo. Cada recuadro debe clasificar la cantidad de invitados y mostrarlos en su interior. En la parte inferior se debe mostrar una tabla con todas las invitaciones que tiene las siguientes columnas: Nombre, Invitados, Mesa, Estado, Operaciones, Invitación enviada y numero de teléfono. El estado puede ser confirmado, pendiente o rechazado; las operaciones disponibles son botones para enviar invitación a numero de teléfono, editar invitación y borrar invitación; la columna de invitación enviada debe decir "Si" si ya se presionó la operación de compartirla.
+
+Crea la aplicación en React, JavaScript y CSS, quiero que no incluyas ningún comentario y generes datos para invitaciones desde un estado de React. La operación de enviar invitación debe solo imprimir un mensaje, la edición debe permitir cambiar todos los datos, la eliminación debe borrar la invitación.
+

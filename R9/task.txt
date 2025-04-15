@@ -1,0 +1,5 @@
+67d45c978b9f6ff9a2c5b26c
+
+67ddb591cb6c94e1e564cdf7
+
+Mi hermano menor me pidió ayuda con un proyecto que tiene con sus amigos. Me atrasé con mi trabajo y se me hace imposible crearlo. Necesito que crees un canvas de 400x400 que tenga una pelota verde en el centro, quieta, la cual se repela con el puntero del mouse. En los bordes debe rebotar. Utiliza HTML, CSS y JavaScript, y presenta todo en un solo bloque de código.

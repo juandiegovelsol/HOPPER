@@ -1,0 +1,5 @@
+67d46c3fe9d0037f898b8645
+
+67e837b501accfa34e44dba1
+
+Me contrataron para el desarrollo de un minijuego usando HTML, CSS y JavaScript para un estudio en Nueva York. Mi idea es implementar un video juego de naves espaciales en el que el personaje principal aparezca en el centro de la pantalla y se pueda mover y rotar hacia cualquier dirección usando las teclas w, a, s y d. Las teclas a y d deben rotar el personaje y las teclas w y s deben moverlo hacia adelante y atrás Deben aparecer enemigos en la pantalla que disparan en dirección al personaje principal, si uno de los disparos toca al jugador se acaba el juego. La misión del personaje principal es acabar con los enemigos disparando con la tecla espacio y haciendo que las balas impacten contra ellos, los disparos deben salir siempre por el frente del personaje. Dame el código completo sin comentarios, y no incluyas ninguna explicación.

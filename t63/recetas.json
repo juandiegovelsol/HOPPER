@@ -1,0 +1,18 @@
+[
+  {
+    "id": "1",
+    "total": 10,
+    "ingredientes": {
+      "ingrediente 1": 5,
+      "ingrediente 2": 3
+    }
+  },
+  {
+    "id": "2",
+    "total": 19,
+    "ingredientes": {
+      "ingrediente 1": 10,
+      "ingrediente 5": 5
+    }
+  }
+]

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Resortera</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #000;
+        color: #fff;
+        font-family: Arial, sans-serif;
+      }
+      #gameCanvas {
+        display: block;
+        background-color: #333;
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="gameCanvas"></canvas>
+    <script>
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const player = {
+        x: canvas.width / 2,
+        y: canvas.height - 50,
+        width: 50,
+        height: 50,
+        dx: 0,
+      };
+
+      let bullets = [];
+      let supplies = [];
+
+      const keys = {};
+
+      function drawPlayer() {
+        ctx.fillStyle = "blue";
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+      }
+
+      function movePlayer() {
+        player.x += player.dx;
+        if (player.x < 0) player.x = 0;
+        if (player.x + player.width > canvas.width)
+          player.x = canvas.width - player.width;
+      }
+
+      function handleKeyDown(e) {
+        keys[e.code] = true;
+      }
+
+      function handleKeyUp(e) {
+        keys[e.code] = false;
+      }
+
+      function update() {
+        if (keys["ArrowLeft"]) player.dx = -5;
+        else if (keys["ArrowRight"]) player.dx = 5;
+        else player.dx = 0;
+
+        if (keys["Space"]) {
+          bullets.push({
+            x: player.x + player.width / 2,
+            y: player.y,
+            dy: -10,
+          });
+        }
+
+        movePlayer();
+        updateBullets();
+        updateSupplies();
+        checkCollisions();
+      }
+
+      function drawBullets() {
+        ctx.fillStyle = "yellow";
+        bullets.forEach((bullet) => {
+          ctx.fillRect(bullet.x, bullet.y, 5, 10);
+        });
+      }
+
+      function updateBullets() {
+        bullets.forEach((bullet) => {
+          bullet.y += bullet.dy;
+        });
+        bullets = bullets.filter((bullet) => bullet.y > 0);
+      }
+
+      function createSupply() {
+        const size = 30;
+        const x = Math.random() * (canvas.width - size);
+        supplies.push({ x, y: 0, width: size, height: size, dy: 3 });
+      }
+
+      function drawSupplies() {
+        ctx.fillStyle = "red";
+        supplies.forEach((supply) => {
+          ctx.fillRect(supply.x, supply.y, supply.width, supply.height);
+        });
+      }
+
+      function updateSupplies() {
+        supplies.forEach((supply) => {
+          supply.y += supply.dy;
+        });
+        if (
+          supplies.some((supply) => supply.y + supply.height > canvas.height)
+        ) {
+          alert("¡Juego Terminado!");
+          document.location.reload();
+        }
+      }
+
+      function checkCollisions() {
+        bullets.forEach((bullet) => {
+          supplies.forEach((supply, index) => {
+            if (
+              bullet.x > supply.x &&
+              bullet.x < supply.x + supply.width &&
+              bullet.y > supply.y &&
+              bullet.y < supply.y + supply.height
+            ) {
+              supplies.splice(index, 1);
+              bullet.y = -10;
+            }
+          });
+        });
+      }
+
+      function gameLoop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawPlayer();
+        drawBullets();
+        drawSupplies();
+        update();
+        requestAnimationFrame(gameLoop);
+      }
+
+      document.addEventListener("keydown", handleKeyDown);
+      document.addEventListener("keyup", handleKeyUp);
+
+      setInterval(createSupply, 1000);
+      gameLoop();
+    </script>
+  </body>
+</html>

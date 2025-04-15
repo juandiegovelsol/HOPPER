@@ -1,0 +1,42 @@
+.game {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  border: 1px solid black;
+  overflow: hidden;
+}
+
+.character {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: blue;
+  border-radius: 50%;
+  top: 285px;
+  left: 285px;
+}
+
+.enemy {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.bullet {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: yellow;
+  border-radius: 50%;
+}
+
+.game-over {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 24px;
+}

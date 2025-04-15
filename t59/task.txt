@@ -1,0 +1,224 @@
+Estoy trabajando para un estudio de programación en Orlando y mi colega estaba desarrollando una aplicación web en React y JavaScript para gestionar los proyectos de la empresa que consiste en una tabla con 3 columnas donde se pueden agregar proyectos y cambiar su estado arrastrando y soltando cada uno de ellos en alguna de las 3 posibilidades: "Por Iniciar", "En Ejecución" y "Terminado". Quiero que me ayudes a refactorizar el código porque todo lo tengo en un componente App. Quiero que haya un componente para la tabla, un componente para el formulario y el componente App que maneje el flujo de información. Así, el proyecto podrá ser más modular y mantenible. Dame el código completo de todos los componentes, los estilos correspondientes y una explicación de un párrafo. No incluyas comentarios en el código.
+
+`App.jsx`
+```javascript
+import React, { useState } from "react";
+import "./App.css";
+
+const App = () => {
+  const [proyectos, setProyectos] = useState({
+    porIniciar: [],
+    enEjecucion: [],
+    terminados: [],
+  });
+
+  const [nombreProyecto, setNombreProyecto] = useState("");
+
+  const agregarProyecto = () => {
+    if (nombreProyecto.trim()) {
+      setProyectos((prev) => ({
+        ...prev,
+        porIniciar: [
+          ...prev.porIniciar,
+          { nombre: nombreProyecto, id: Date.now().toString() },
+        ],
+      }));
+      setNombreProyecto("");
+    }
+  };
+
+  const moverProyecto = (origen, destino, proyectoId) => {
+    setProyectos((prev) => {
+      let proyectoMovido = null;
+      const arregloOrigen = prev[origen].filter((p) => {
+        if (p.id === proyectoId) {
+          proyectoMovido = p;
+          return false;
+        }
+        return true;
+      });
+
+      if (!proyectoMovido) return prev;
+
+      const arregloDestino = [...(prev[destino] || []), proyectoMovido];
+
+      return {
+        ...prev,
+        [origen]: arregloOrigen,
+        [destino]: arregloDestino,
+      };
+    });
+  };
+
+  const manejarInicioDrag = (e, proyecto, origenColumnaId) => {
+    const datos = JSON.stringify({
+      proyectoId: proyecto.id,
+      origen: origenColumnaId,
+    });
+    e.dataTransfer.setData("application/react-dnd-proyecto", datos);
+    e.dataTransfer.effectAllowed = "move";
+  };
+
+  const manejarDragOver = (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+  };
+
+  const manejarSoltar = (e, destinoColumnaId) => {
+    e.preventDefault();
+    const cadenaDatos = e.dataTransfer.getData(
+      "application/react-dnd-proyecto"
+    );
+    if (!cadenaDatos) return;
+
+    try {
+      const { proyectoId, origen } = JSON.parse(cadenaDatos);
+      if (origen !== destinoColumnaId) {
+        moverProyecto(origen, destinoColumnaId, proyectoId);
+      }
+    } catch (error) {
+      console.error("Error convirtiendo los datos:", error);
+    }
+  };
+
+  return (
+    <div className="aplicacion">
+      <h1>Administración de Proyectos</h1>
+      <div className="formulario">
+        <input
+          type="text"
+          value={nombreProyecto}
+          onChange={(e) => setNombreProyecto(e.target.value)}
+          placeholder="Nombre del proyecto"
+        />
+        <button onClick={agregarProyecto}>Agregar Proyecto</button>
+      </div>
+      <div className="contenedorColumnas">
+        <div
+          className="columna"
+          id="porIniciar"
+          onDragOver={manejarDragOver}
+          onDrop={(e) => manejarSoltar(e, "porIniciar")}
+        >
+          <h2>Por Iniciar</h2>
+          {proyectos.porIniciar.map((proyecto) => (
+            <div
+              key={proyecto.id}
+              className="proyecto"
+              draggable
+              onDragStart={(e) => manejarInicioDrag(e, proyecto, "porIniciar")}
+            >
+              {proyecto.nombre}
+            </div>
+          ))}
+        </div>
+        <div
+          className="columna"
+          id="enEjecucion"
+          onDragOver={manejarDragOver}
+          onDrop={(e) => manejarSoltar(e, "enEjecucion")}
+        >
+          <h2>En Ejecución</h2>
+          {proyectos.enEjecucion.map((proyecto) => (
+            <div
+              key={proyecto.id}
+              className="proyecto"
+              draggable
+              onDragStart={(e) => manejarInicioDrag(e, proyecto, "enEjecucion")}
+            >
+              {proyecto.nombre}
+            </div>
+          ))}
+        </div>
+        <div
+          className="columna"
+          id="terminados"
+          onDragOver={manejarDragOver}
+          onDrop={(e) => manejarSoltar(e, "terminados")}
+        >
+          <h2>Terminados</h2>
+          {proyectos.terminados.map((proyecto) => (
+            <div
+              key={proyecto.id}
+              className="proyecto"
+              draggable
+              onDragStart={(e) => manejarInicioDrag(e, proyecto, "terminados")}
+            >
+              {proyecto.nombre}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default App;
+```
+
+`App.css`
+```css
+.aplicacion {
+  font-family: "Arial", sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.formulario {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.contenedorColumnas {
+  display: flex;
+  justify-content: space-between;
+}
+
+.columna {
+  flex: 1;
+  min-width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #f9f9f9;
+}
+
+.columna h2 {
+  margin-top: 0;
+}
+
+.proyecto {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: move;
+}
+
+.proyecto:hover {
+  border-color: #aaaaaa;
+}
+```

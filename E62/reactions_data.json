@@ -1,0 +1,1521 @@
+{
+    "reactions": [
+        {
+            "reactant_concentration": 0.7553348365062513,
+            "reaction_rate_constant": 0.0475357646061894,
+            "temperature": 612.9169906757957,
+            "catalyst_type": "E",
+            "reaction_rate": 0.03590541898701572,
+            "activation_energy": -0.0413216037035325,
+            "catalyst_efficiency": 1.0000000196425403,
+            "half_life": 14.581593171001481
+        },
+        {
+            "reactant_concentration": 0.9010884975004524,
+            "reaction_rate_constant": 0.02764510156047733,
+            "temperature": 451.7501095284583,
+            "catalyst_type": "C",
+            "reaction_rate": 0.024910683028377928,
+            "activation_energy": -0.06603912536208519,
+            "catalyst_efficiency": 1.0000000182565834,
+            "half_life": 25.07305603647698
+        },
+        {
+            "reactant_concentration": 0.09172435836807281,
+            "reaction_rate_constant": 0.019941646251338284,
+            "temperature": 267.5834933809186,
+            "catalyst_type": "B",
+            "reaction_rate": 0.0018291347072070885,
+            "activation_energy": -0.12163998595841552,
+            "catalyst_efficiency": 1.0000000242570157,
+            "half_life": 34.75877426686516
+        },
+        {
+            "reactant_concentration": 1.3019285012109665,
+            "reaction_rate_constant": 0.0373024979183919,
+            "temperature": 440.9576612174137,
+            "catalyst_type": "F",
+            "reaction_rate": 0.04856518520631716,
+            "activation_energy": -0.062006429461325556,
+            "catalyst_efficiency": 1.000000023129947,
+            "half_life": 18.581789940083098
+        },
+        {
+            "reactant_concentration": 0.32238558860522554,
+            "reaction_rate_constant": 0.01886492097613839,
+            "temperature": -230.99755678812093,
+            "catalyst_type": "D",
+            "reaction_rate": 0.00608177865288344,
+            "activation_energy": 0.14290337536399278,
+            "catalyst_efficiency": 0.9999999730413912,
+            "half_life": 36.74264956830108
+        },
+        {
+            "reactant_concentration": 0.6907426799446559,
+            "reaction_rate_constant": 0.041063043976295975,
+            "temperature": -105.99908034282524,
+            "catalyst_type": "D",
+            "reaction_rate": 0.02836399704287194,
+            "activation_energy": 0.25041410615523024,
+            "catalyst_efficiency": 0.9999998971723455,
+            "half_life": 16.88007301553365
+        },
+        {
+            "reactant_concentration": 1.9708809513610521,
+            "reaction_rate_constant": 0.023553801569238027,
+            "temperature": -23.302040383428192,
+            "catalyst_type": "B",
+            "reaction_rate": 0.04642173884494929,
+            "activation_energy": 1.337426372218287,
+            "catalyst_efficiency": 0.9999996849852462,
+            "half_life": 29.428250829166206
+        },
+        {
+            "reactant_concentration": 0.861268536134366,
+            "reaction_rate_constant": 0.019216948031336927,
+            "temperature": 552.3519060758819,
+            "catalyst_type": "D",
+            "reaction_rate": 0.016550952699919744,
+            "activation_energy": -0.05948493587987688,
+            "catalyst_efficiency": 1.000000011431189,
+            "half_life": 36.06957667937883
+        },
+        {
+            "reactant_concentration": 0.6307844610853096,
+            "reaction_rate_constant": 0.016037816279165937,
+            "temperature": 604.1570322145334,
+            "catalyst_type": "B",
+            "reaction_rate": 0.010116405298638892,
+            "activation_energy": -0.05687287546437486,
+            "catalyst_efficiency": 1.0000000091211674,
+            "half_life": 43.21954862772584
+        },
+        {
+            "reactant_concentration": 1.939130521447222,
+            "reaction_rate_constant": 0.012907413501623676,
+            "temperature": 525.8443208742751,
+            "catalyst_type": "A",
+            "reaction_rate": 0.025029159473938432,
+            "activation_energy": -0.06877608350311148,
+            "catalyst_efficiency": 1.0000000088772134,
+            "half_life": 53.70147787337498
+        },
+        {
+            "reactant_concentration": 0.3704872055740138,
+            "reaction_rate_constant": 0.03405621158039518,
+            "temperature": -24.075831716159627,
+            "catalyst_type": "E",
+            "reaction_rate": 0.012617390660857979,
+            "activation_energy": 1.1671115782986283,
+            "catalyst_efficiency": 0.9999996025260115,
+            "half_life": 20.353032483476902
+        },
+        {
+            "reactant_concentration": 1.6603714862311545,
+            "reaction_rate_constant": 0.015877254862388977,
+            "temperature": 868.3867394346976,
+            "catalyst_type": "F",
+            "reaction_rate": 0.02636214125313561,
+            "activation_energy": -0.03966412721563466,
+            "catalyst_efficiency": 1.0000000062975745,
+            "half_life": 43.656613600246175
+        },
+        {
+            "reactant_concentration": 1.2297497691641057,
+            "reaction_rate_constant": 0.047153848811397635,
+            "temperature": 44.48146759020824,
+            "catalyst_type": "E",
+            "reaction_rate": 0.05798743469101538,
+            "activation_energy": -0.5708844868922199,
+            "catalyst_efficiency": 1.0000002691940078,
+            "half_life": 14.699694680965333
+        },
+        {
+            "reactant_concentration": 0.036671226600009564,
+            "reaction_rate_constant": 0.014138001733248522,
+            "temperature": -182.4036910124835,
+            "catalyst_type": "F",
+            "reaction_rate": 0.0005184578652312845,
+            "activation_energy": 0.19412108670846992,
+            "catalyst_efficiency": 0.9999999725551574,
+            "half_life": 49.02723833523532
+        },
+        {
+            "reactant_concentration": 0.6770640142680368,
+            "reaction_rate_constant": 0.008688905895194055,
+            "temperature": 589.8002215227133,
+            "catalyst_type": "B",
+            "reaction_rate": 0.005882945504997296,
+            "activation_energy": -0.0668969202847802,
+            "catalyst_efficiency": 1.0000000058126104,
+            "half_life": 79.77381605011212
+        },
+        {
+            "reactant_concentration": 1.8641899016713046,
+            "reaction_rate_constant": 0.01985135504681835,
+            "temperature": -133.23366881729237,
+            "catalyst_type": "A",
+            "reaction_rate": 0.03700669561277045,
+            "activation_energy": 0.24458218431728124,
+            "catalyst_efficiency": 0.9999999514471222,
+            "half_life": 34.91686985221891
+        },
+        {
+            "reactant_concentration": 1.6353462909378609,
+            "reaction_rate_constant": 0.01036624285037471,
+            "temperature": 671.223297185321,
+            "catalyst_type": "C",
+            "reaction_rate": 0.0169523967963214,
+            "activation_energy": -0.0565956727260897,
+            "catalyst_efficiency": 1.0000000058668448,
+            "half_life": 66.86580572776086
+        },
+        {
+            "reactant_concentration": 0.017601646090580386,
+            "reaction_rate_constant": 0.01234194663622591,
+            "temperature": 623.2259929679467,
+            "catalyst_type": "E",
+            "reaction_rate": 0.00021723857675967753,
+            "activation_energy": -0.05862715062147191,
+            "catalyst_efficiency": 1.0000000072357316,
+            "half_life": 56.16190062963239
+        },
+        {
+            "reactant_concentration": 0.8371279515049523,
+            "reaction_rate_constant": 0.015096533087175013,
+            "temperature": 646.5791700696241,
+            "catalyst_type": "E",
+            "reaction_rate": 0.012637729818093552,
+            "activation_energy": -0.0539191733831619,
+            "catalyst_efficiency": 1.0000000081399258,
+            "half_life": 45.914328578446664
+        },
+        {
+            "reactant_concentration": 1.2231657131972349,
+            "reaction_rate_constant": 0.0448021439420613,
+            "temperature": 712.4569487534678,
+            "catalyst_type": "C",
+            "reaction_rate": 0.05480044634765659,
+            "activation_energy": -0.03623955257854123,
+            "catalyst_efficiency": 1.0000000162360965,
+            "half_life": 15.471294888394894
+        },
+        {
+            "reactant_concentration": 1.0562548769226785,
+            "reaction_rate_constant": 0.012476968817545593,
+            "temperature": -231.66457496529335,
+            "catalyst_type": "D",
+            "reaction_rate": 0.013178859162744718,
+            "activation_energy": 0.15732876757569958,
+            "catalyst_efficiency": 0.9999999803701387,
+            "half_life": 55.55413263397878
+        },
+        {
+            "reactant_concentration": 0.4906583149863467,
+            "reaction_rate_constant": 0.017714212089533568,
+            "temperature": -112.1152744550975,
+            "catalyst_type": "D",
+            "reaction_rate": 0.008691625455161313,
+            "activation_energy": 0.2990991918831842,
+            "catalyst_efficiency": 0.9999999470169348,
+            "half_life": 39.12943895311555
+        },
+        {
+            "reactant_concentration": 1.4981987630800229,
+            "reaction_rate_constant": 0.0075312545528104825,
+            "temperature": 17.336135626133512,
+            "catalyst_type": "E",
+            "reaction_rate": 0.011283316255461456,
+            "activation_energy": -2.3445016715849896,
+            "catalyst_efficiency": 1.000000176570389,
+            "half_life": 92.03608451944828
+        },
+        {
+            "reactant_concentration": 0.605772913673643,
+            "reaction_rate_constant": 0.01162606710439935,
+            "temperature": -83.9614221945597,
+            "catalyst_type": "D",
+            "reaction_rate": 0.007042756544397289,
+            "activation_energy": 0.44109256457574364,
+            "catalyst_efficiency": 0.9999999487182825,
+            "half_life": 59.62009115685007
+        },
+        {
+            "reactant_concentration": 0.7807718107708749,
+            "reaction_rate_constant": 0.003309193276533188,
+            "temperature": -211.8371032172004,
+            "catalyst_type": "C",
+            "reaction_rate": 0.0025837248267096217,
+            "activation_energy": 0.2241423999035317,
+            "catalyst_efficiency": 0.9999999925826948,
+            "half_life": 209.46107484120947
+        },
+        {
+            "reactant_concentration": 0.07499153096114679,
+            "reaction_rate_constant": 0.023780333994908594,
+            "temperature": 237.76455748816124,
+            "catalyst_type": "F",
+            "reaction_rate": 0.0017833236530455992,
+            "activation_energy": -0.1307393520754521,
+            "catalyst_efficiency": 1.0000000310902546,
+            "half_life": 29.147916118770627
+        },
+        {
+            "reactant_concentration": 1.5205829957857204,
+            "reaction_rate_constant": 0.036376733982024526,
+            "temperature": 326.4406017401826,
+            "catalyst_type": "F",
+            "reaction_rate": 0.055313843135287075,
+            "activation_energy": -0.08439865709463908,
+            "catalyst_efficiency": 1.000000030701475,
+            "half_life": 19.054684263366312
+        },
+        {
+            "reactant_concentration": 0.5836206385630633,
+            "reaction_rate_constant": 0.014939844769841526,
+            "temperature": 797.1184845345879,
+            "catalyst_type": "E",
+            "reaction_rate": 0.008719201744607954,
+            "activation_energy": -0.04384512186126,
+            "catalyst_efficiency": 1.0000000065503931,
+            "half_life": 46.39587567597584
+        },
+        {
+            "reactant_concentration": 1.51271589871594,
+            "reaction_rate_constant": 0.029331609290264852,
+            "temperature": 724.5035422764124,
+            "catalyst_type": "F",
+            "reaction_rate": 0.04437039170830781,
+            "activation_energy": -0.04049787010385697,
+            "catalyst_efficiency": 1.000000011878677,
+            "half_life": 23.63140643599124
+        },
+        {
+            "reactant_concentration": 1.9148219574032768,
+            "reaction_rate_constant": 0.044507012534292255,
+            "temperature": 520.6823033102011,
+            "catalyst_type": "F",
+            "reaction_rate": 0.08522300485908567,
+            "activation_energy": -0.04969262455701405,
+            "catalyst_efficiency": 1.0000000221167027,
+            "half_life": 15.573886924580291
+        },
+        {
+            "reactant_concentration": 0.6850889157359343,
+            "reaction_rate_constant": 0.003122503932561739,
+            "temperature": 328.5029177993497,
+            "catalyst_type": "C",
+            "reaction_rate": 0.002139192833539913,
+            "activation_energy": -0.146009248476003,
+            "catalyst_efficiency": 1.0000000045591446,
+            "half_life": 221.9844059543839
+        },
+        {
+            "reactant_concentration": 1.0814060087810458,
+            "reaction_rate_constant": 0.04960678983828966,
+            "temperature": 758.1629131689757,
+            "catalyst_type": "C",
+            "reaction_rate": 0.05364508060746496,
+            "activation_energy": -0.03293772238484696,
+            "catalyst_efficiency": 1.0000000163393468,
+            "half_life": 13.972828776453712
+        },
+        {
+            "reactant_concentration": 1.781570877373584,
+            "reaction_rate_constant": 0.0057462022617521535,
+            "temperature": -229.56042264747435,
+            "catalyst_type": "C",
+            "reaction_rate": 0.010237266605035858,
+            "activation_energy": 0.18685155879815432,
+            "catalyst_efficiency": 0.9999999892631315,
+            "half_life": 120.62700701882154
+        },
+        {
+            "reactant_concentration": 1.4839205263225856,
+            "reaction_rate_constant": 0.02425141435821454,
+            "temperature": -135.18869410173104,
+            "catalyst_type": "E",
+            "reaction_rate": 0.03598717155850883,
+            "activation_energy": 0.2287328607320505,
+            "catalyst_efficiency": 0.9999999445290462,
+            "half_life": 28.581721887291064
+        },
+        {
+            "reactant_concentration": 0.12420976893966436,
+            "reaction_rate_constant": 0.029165779101962046,
+            "temperature": 789.1853461627796,
+            "catalyst_type": "B",
+            "reaction_rate": 0.003622674683199997,
+            "activation_energy": -0.037238385352373726,
+            "catalyst_efficiency": 1.0000000108608653,
+            "half_life": 23.765769401761524
+        },
+        {
+            "reactant_concentration": 0.48419644440065224,
+            "reaction_rate_constant": 0.011219924607009974,
+            "temperature": 349.70988313144494,
+            "catalyst_type": "C",
+            "reaction_rate": 0.005432647601157615,
+            "activation_energy": -0.10674674841917176,
+            "catalyst_efficiency": 1.0000000119769048,
+            "half_life": 61.77823869929406
+        },
+        {
+            "reactant_concentration": 1.592072958487656,
+            "reaction_rate_constant": 0.008168559132708081,
+            "temperature": -113.30975793387233,
+            "catalyst_type": "C",
+            "reaction_rate": 0.013004942104991916,
+            "activation_energy": 0.35274318825191237,
+            "catalyst_efficiency": 0.9999999711859641,
+            "half_life": 84.85550135573907
+        },
+        {
+            "reactant_concentration": 0.45234270561078466,
+            "reaction_rate_constant": 0.010406093623784042,
+            "temperature": 638.054244282384,
+            "catalyst_type": "C",
+            "reaction_rate": 0.004707120544621608,
+            "activation_energy": -0.05948778540442011,
+            "catalyst_efficiency": 1.0000000061903547,
+            "half_life": 66.60973902595845
+        },
+        {
+            "reactant_concentration": 0.8405920541829419,
+            "reaction_rate_constant": 0.007216457872330388,
+            "temperature": -125.75176620242776,
+            "catalyst_type": "F",
+            "reaction_rate": 0.0060660971468268635,
+            "activation_energy": 0.32603585932374657,
+            "catalyst_efficiency": 0.9999999764717595,
+            "half_life": 96.050887128107
+        },
+        {
+            "reactant_concentration": 1.6381097064443246,
+            "reaction_rate_constant": 0.033366925151535,
+            "temperature": -88.7015071643441,
+            "catalyst_type": "A",
+            "reaction_rate": 0.054658683964930746,
+            "activation_energy": 0.31870011775959933,
+            "catalyst_efficiency": 0.9999998936595702,
+            "half_life": 20.773480847037476
+        },
+        {
+            "reactant_concentration": 0.9798758677632773,
+            "reaction_rate_constant": 0.031254952542773745,
+            "temperature": 860.7382363478891,
+            "catalyst_type": "D",
+            "reaction_rate": 0.030625973744750474,
+            "activation_energy": -0.03347453333597375,
+            "catalyst_efficiency": 1.0000000104624496,
+            "half_life": 22.177195105682646
+        },
+        {
+            "reactant_concentration": 0.8908831480382619,
+            "reaction_rate_constant": 0.024263851850388738,
+            "temperature": 666.041183608057,
+            "catalyst_type": "F",
+            "reaction_rate": 0.021616256720008324,
+            "activation_energy": -0.046420303588787445,
+            "catalyst_efficiency": 1.0000000112633536,
+            "half_life": 28.56707108310341
+        },
+        {
+            "reactant_concentration": 1.2052071920824934,
+            "reaction_rate_constant": 0.003124925588129685,
+            "temperature": 600.4567088962465,
+            "catalyst_type": "C",
+            "reaction_rate": 0.0037661827935365115,
+            "activation_energy": -0.07986923623658926,
+            "catalyst_efficiency": 1.0000000024958542,
+            "half_life": 221.81237953086887
+        },
+        {
+            "reactant_concentration": 1.87377473396097,
+            "reaction_rate_constant": 0.015418297731688261,
+            "temperature": 772.0591323701155,
+            "catalyst_type": "B",
+            "reaction_rate": 0.028890416730325198,
+            "activation_energy": -0.044928778026121184,
+            "catalyst_efficiency": 1.0000000069272528,
+            "half_life": 44.95614189206914
+        },
+        {
+            "reactant_concentration": 1.2076344337797653,
+            "reaction_rate_constant": 0.0032259734335694035,
+            "temperature": 891.2085274481469,
+            "catalyst_type": "F",
+            "reaction_rate": 0.003895796600837152,
+            "activation_energy": -0.053515457105946164,
+            "catalyst_efficiency": 1.0000000017263944,
+            "half_life": 214.86450364007095
+        },
+        {
+            "reactant_concentration": 0.3537870633793638,
+            "reaction_rate_constant": 0.018968900544611127,
+            "temperature": 819.8352006271452,
+            "catalyst_type": "F",
+            "reaction_rate": 0.006710951619213185,
+            "activation_energy": -0.040208850885925046,
+            "catalyst_efficiency": 1.000000007627177,
+            "half_life": 36.541241751455196
+        },
+        {
+            "reactant_concentration": 0.37401662266454855,
+            "reaction_rate_constant": 0.018253013287063385,
+            "temperature": 266.32980189099396,
+            "catalyst_type": "D",
+            "reaction_rate": 0.006826930383078577,
+            "activation_energy": -0.12497465943758937,
+            "catalyst_efficiency": 1.0000000228116412,
+            "half_life": 37.97439741367007
+        },
+        {
+            "reactant_concentration": 1.0861074287558392,
+            "reaction_rate_constant": 0.04839852186870101,
+            "temperature": 61.24583869178491,
+            "catalyst_type": "E",
+            "reaction_rate": 0.052565994142398105,
+            "activation_energy": -0.4110837632169567,
+            "catalyst_efficiency": 1.000000198958465,
+            "half_life": 14.3216601209509
+        },
+        {
+            "reactant_concentration": 1.0593486823283627,
+            "reaction_rate_constant": 0.020139873916790705,
+            "temperature": 447.2534825707503,
+            "catalyst_type": "A",
+            "reaction_rate": 0.021335148896011593,
+            "activation_energy": -0.07259108610295281,
+            "catalyst_efficiency": 1.0000000146197532,
+            "half_life": 34.41665938047732
+        },
+        {
+            "reactant_concentration": 0.551758679587029,
+            "reaction_rate_constant": 0.019208653736915174,
+            "temperature": 733.1773619490997,
+            "catalyst_type": "F",
+            "reaction_rate": 0.010598541422524766,
+            "activation_energy": -0.044818905534755975,
+            "catalyst_efficiency": 1.0000000086091083,
+            "half_life": 36.08515151834174
+        },
+        {
+            "reactant_concentration": 0.9700229671735104,
+            "reaction_rate_constant": 0.004683778972921117,
+            "temperature": 654.6794108303972,
+            "catalyst_type": "C",
+            "reaction_rate": 0.004543373176897839,
+            "activation_energy": -0.06811484452619831,
+            "catalyst_efficiency": 1.0000000031903489,
+            "half_life": 147.988874916455
+        },
+        {
+            "reactant_concentration": 1.8126418822766033,
+            "reaction_rate_constant": 0.04192762180203263,
+            "temperature": 311.0438750129016,
+            "catalyst_type": "A",
+            "reaction_rate": 0.07599976330261798,
+            "activation_energy": -0.08478042519866646,
+            "catalyst_efficiency": 1.000000035546416,
+            "half_life": 16.531993725585977
+        },
+        {
+            "reactant_concentration": 1.313003745055678,
+            "reaction_rate_constant": 0.0114220641895687,
+            "temperature": 83.03162990607848,
+            "catalyst_type": "B",
+            "reaction_rate": 0.01499721305717005,
+            "activation_energy": -0.44780453150175875,
+            "catalyst_efficiency": 1.000000051148521,
+            "half_life": 60.684931292276225
+        },
+        {
+            "reactant_concentration": 1.1067712590275203,
+            "reaction_rate_constant": 0.03543433324475675,
+            "temperature": -101.59504481100674,
+            "catalyst_type": "C",
+            "reaction_rate": 0.03921770161810014,
+            "activation_energy": 0.2733339584917376,
+            "catalyst_efficiency": 0.9999999031459342,
+            "half_life": 19.561456843907482
+        },
+        {
+            "reactant_concentration": 1.292402107563335,
+            "reaction_rate_constant": 0.0014178441817188487,
+            "temperature": 724.6095103358053,
+            "catalyst_type": "B",
+            "reaction_rate": 0.001832424808649852,
+            "activation_energy": -0.075252045600247,
+            "catalyst_efficiency": 1.0000000010669567,
+            "half_life": 488.87401697388555
+        },
+        {
+            "reactant_concentration": 0.23887176428791468,
+            "reaction_rate_constant": 0.03474134167285617,
+            "temperature": 276.8702132339638,
+            "catalyst_type": "A",
+            "reaction_rate": 0.008298725579124406,
+            "activation_energy": -0.10089053596607028,
+            "catalyst_efficiency": 1.0000000350507259,
+            "half_life": 19.951652618572
+        },
+        {
+            "reactant_concentration": 0.9805605479475853,
+            "reaction_rate_constant": 0.031532178890291994,
+            "temperature": -141.99569171595093,
+            "catalyst_type": "A",
+            "reaction_rate": 0.030919210610645998,
+            "activation_energy": 0.20239622581038494,
+            "catalyst_efficiency": 0.99999993618006,
+            "half_life": 21.982216419980695
+        },
+        {
+            "reactant_concentration": 0.8411016216787184,
+            "reaction_rate_constant": 0.036832857109364174,
+            "temperature": -102.60582608898895,
+            "catalyst_type": "F",
+            "reaction_rate": 0.030980175845746718,
+            "activation_energy": 0.2675047748858492,
+            "catalyst_efficiency": 0.9999999014703485,
+            "half_life": 18.818718800495212
+        },
+        {
+            "reactant_concentration": 1.7462010020165115,
+            "reaction_rate_constant": 0.010782772496529732,
+            "temperature": -137.03858792701467,
+            "catalyst_type": "A",
+            "reaction_rate": 0.018828888137956298,
+            "activation_energy": 0.27481896870077516,
+            "catalyst_efficiency": 0.9999999703668958,
+            "half_life": 64.2828345662513
+        },
+        {
+            "reactant_concentration": 0.5142622340431515,
+            "reaction_rate_constant": 0.0252518972793922,
+            "temperature": -198.7154941343631,
+            "catalyst_type": "A",
+            "reaction_rate": 0.012986097108728412,
+            "activation_energy": 0.1539185063317947,
+            "catalyst_efficiency": 0.9999999611326569,
+            "half_life": 27.44931095239387
+        },
+        {
+            "reactant_concentration": 1.2727245173985542,
+            "reaction_rate_constant": 0.026636048390327224,
+            "temperature": 220.1528115694261,
+            "catalyst_type": "E",
+            "reaction_rate": 0.033900351832983754,
+            "activation_energy": -0.1369154534047844,
+            "catalyst_efficiency": 1.0000000364688664,
+            "half_life": 26.022898382015967
+        },
+        {
+            "reactant_concentration": 1.7485313070430533,
+            "reaction_rate_constant": 0.003778649133644716,
+            "temperature": 51.418513213804886,
+            "catalyst_type": "C",
+            "reaction_rate": 0.006607086308508896,
+            "activation_energy": -0.9019849232669728,
+            "catalyst_efficiency": 1.0000000340828454,
+            "half_life": 183.43782554146975
+        },
+        {
+            "reactant_concentration": 1.9580699975638107,
+            "reaction_rate_constant": 0.008620351026317448,
+            "temperature": 179.60795074010844,
+            "catalyst_type": "B",
+            "reaction_rate": 0.016879250713100598,
+            "activation_energy": -0.22004413097644626,
+            "catalyst_efficiency": 1.0000000189685765,
+            "half_life": 80.408231456446
+        },
+        {
+            "reactant_concentration": 1.021540271610622,
+            "reaction_rate_constant": 0.0011997483933792073,
+            "temperature": 128.1703353897296,
+            "catalyst_type": "D",
+            "reaction_rate": 0.001225591299637003,
+            "activation_energy": -0.4362709919854693,
+            "catalyst_efficiency": 1.0000000052341542,
+            "half_life": 577.7437872682865
+        },
+        {
+            "reactant_concentration": 1.8336801564433918,
+            "reaction_rate_constant": 0.002502063323560977,
+            "temperature": -54.34497012382849,
+            "catalyst_type": "A",
+            "reaction_rate": 0.004587983866578565,
+            "activation_energy": 0.9164818229248426,
+            "catalyst_efficiency": 0.9999999770690444,
+            "half_life": 277.03023102286915
+        },
+        {
+            "reactant_concentration": 0.07650180946306832,
+            "reaction_rate_constant": 0.040791226730413736,
+            "temperature": 287.0933774861322,
+            "catalyst_type": "F",
+            "reaction_rate": 0.003120602655094931,
+            "activation_energy": -0.09264888921670944,
+            "catalyst_efficiency": 1.0000000377926184,
+            "half_life": 16.99255541248869
+        },
+        {
+            "reactant_concentration": 1.8309145227074577,
+            "reaction_rate_constant": 0.043389234437593786,
+            "temperature": 194.26114153143237,
+            "catalyst_type": "D",
+            "reaction_rate": 0.07944197946094901,
+            "activation_energy": -0.13428079321907918,
+            "catalyst_efficiency": 1.000000058263408,
+            "half_life": 15.975095885982745
+        },
+        {
+            "reactant_concentration": 1.9567562771379863,
+            "reaction_rate_constant": 0.043705315699514476,
+            "temperature": 181.44489135292594,
+            "catalyst_type": "F",
+            "reaction_rate": 0.08552065083932232,
+            "activation_energy": -0.14343304909319401,
+            "catalyst_efficiency": 1.000000062687867,
+            "half_life": 15.859562377389382
+        },
+        {
+            "reactant_concentration": 0.1060610550463831,
+            "reaction_rate_constant": 5.211395742280531e-05,
+            "temperature": 460.41050957167465,
+            "catalyst_type": "C",
+            "reaction_rate": 5.527261306905019e-06,
+            "activation_energy": -0.1780874082904386,
+            "catalyst_efficiency": 1.0000000000928084,
+            "half_life": 13300.605343332089
+        },
+        {
+            "reactant_concentration": 1.3259948849508647,
+            "reaction_rate_constant": 0.045562896335562576,
+            "temperature": 233.14639832344693,
+            "catalyst_type": "B",
+            "reaction_rate": 0.06041616748450247,
+            "activation_energy": -0.11014166413047624,
+            "catalyst_efficiency": 1.0000000501837323,
+            "half_life": 15.212974510115432
+        },
+        {
+            "reactant_concentration": 0.07090493771043943,
+            "reaction_rate_constant": 0.014166283457357048,
+            "temperature": 342.9189669514027,
+            "catalyst_type": "E",
+            "reaction_rate": 0.00100445944613233,
+            "activation_energy": -0.10320743784489866,
+            "catalyst_efficiency": 1.0000000146206582,
+            "half_life": 48.92935981737466
+        },
+        {
+            "reactant_concentration": 0.4677009005713157,
+            "reaction_rate_constant": 0.0002870408561666893,
+            "temperature": 519.5771210907589,
+            "catalyst_type": "A",
+            "reaction_rate": 0.0001342492669299221,
+            "activation_energy": -0.1305062009492317,
+            "catalyst_efficiency": 1.0000000003746061,
+            "half_life": 2414.80320891122
+        },
+        {
+            "reactant_concentration": 1.6280790437505792,
+            "reaction_rate_constant": 0.0016711169258651448,
+            "temperature": -128.61533198378044,
+            "catalyst_type": "A",
+            "reaction_rate": 0.0027207104466579323,
+            "activation_energy": 0.41334032456427067,
+            "catalyst_efficiency": 0.9999999930925999,
+            "half_life": 414.7807791493105
+        },
+        {
+            "reactant_concentration": 0.1144594460665295,
+            "reaction_rate_constant": 0.021371712695669454,
+            "temperature": 844.1223615822939,
+            "catalyst_type": "C",
+            "reaction_rate": 0.0024461943966393417,
+            "activation_energy": -0.03787726014441262,
+            "catalyst_efficiency": 1.0000000080950193,
+            "half_life": 32.432926196897526
+        },
+        {
+            "reactant_concentration": 1.8665954716484883,
+            "reaction_rate_constant": 0.012093405500290241,
+            "temperature": 689.5419070973314,
+            "catalyst_type": "B",
+            "reaction_rate": 0.022573495943650684,
+            "activation_energy": -0.053234037327798744,
+            "catalyst_efficiency": 1.000000006437808,
+            "half_life": 57.31612824388546
+        },
+        {
+            "reactant_concentration": 1.4279585981746639,
+            "reaction_rate_constant": 0.018395778361388497,
+            "temperature": 155.53162623152218,
+            "catalyst_type": "C",
+            "reaction_rate": 0.026268409881260134,
+            "activation_energy": -0.21358808189590275,
+            "catalyst_efficiency": 1.00000003929119,
+            "half_life": 37.67968753172275
+        },
+        {
+            "reactant_concentration": 1.2375993032131256,
+            "reaction_rate_constant": 0.026705550402603192,
+            "temperature": 18.53779166136772,
+            "catalyst_type": "B",
+            "reaction_rate": 0.03305077057018472,
+            "activation_energy": -1.624824408437029,
+            "catalyst_efficiency": 1.0000004339183013,
+            "half_life": 25.955172992516903
+        },
+        {
+            "reactant_concentration": 1.576051846700964,
+            "reaction_rate_constant": 0.023090864894446977,
+            "temperature": 921.9480183414885,
+            "catalyst_type": "B",
+            "reaction_rate": 0.03639240025881562,
+            "activation_energy": -0.03398217348636257,
+            "catalyst_efficiency": 1.0000000078467777,
+            "half_life": 30.0182424403963
+        },
+        {
+            "reactant_concentration": 0.7895382496260447,
+            "reaction_rate_constant": 0.0294639987900931,
+            "temperature": 84.96858271642424,
+            "catalyst_type": "E",
+            "reaction_rate": 0.023262954031714005,
+            "activation_energy": -0.34487346073863107,
+            "catalyst_efficiency": 1.0000001016135123,
+            "half_life": 23.52522430841965
+        },
+        {
+            "reactant_concentration": 1.6110198655288164,
+            "reaction_rate_constant": 0.03077581225469689,
+            "temperature": -117.27949354214714,
+            "catalyst_type": "B",
+            "reaction_rate": 0.049580444920101885,
+            "activation_energy": 0.2467716313271916,
+            "catalyst_efficiency": 0.999999924054026,
+            "half_life": 22.52246585154417
+        },
+        {
+            "reactant_concentration": 0.826571812728184,
+            "reaction_rate_constant": 0.04941950554211451,
+            "temperature": 309.56100158221534,
+            "catalyst_type": "C",
+            "reaction_rate": 0.04084877028007613,
+            "activation_energy": -0.08077118018096914,
+            "catalyst_efficiency": 1.000000039916718,
+            "half_life": 14.02578137835184
+        },
+        {
+            "reactant_concentration": 0.31876796008731556,
+            "reaction_rate_constant": 0.0288340892146423,
+            "temperature": 721.9935097250426,
+            "catalyst_type": "E",
+            "reaction_rate": 0.009191383799927193,
+            "activation_energy": -0.04083565980818524,
+            "catalyst_efficiency": 1.0000000117745906,
+            "half_life": 24.039156409627697
+        },
+        {
+            "reactant_concentration": 1.1089079854287127,
+            "reaction_rate_constant": 0.027883504719873196,
+            "temperature": 86.92381602662971,
+            "catalyst_type": "C",
+            "reaction_rate": 0.03092024104560659,
+            "activation_energy": -0.342389386337105,
+            "catalyst_efficiency": 1.0000000954701607,
+            "half_life": 24.85868213208951
+        },
+        {
+            "reactant_concentration": 0.35467522521222505,
+            "reaction_rate_constant": 0.0027214519773811475,
+            "temperature": 525.7520988126319,
+            "catalyst_type": "A",
+            "reaction_rate": 0.0009652315929819137,
+            "activation_energy": -0.09340407217003617,
+            "catalyst_efficiency": 1.0000000025419469,
+            "half_life": 254.69756083183236
+        },
+        {
+            "reactant_concentration": 1.7998593761259551,
+            "reaction_rate_constant": 0.039541242020072045,
+            "temperature": 439.3595617395649,
+            "catalyst_type": "F",
+            "reaction_rate": 0.07116867519349228,
+            "activation_energy": -0.06112906104360331,
+            "catalyst_efficiency": 1.00000002417119,
+            "half_life": 17.529727068464055
+        },
+        {
+            "reactant_concentration": 0.841465487145868,
+            "reaction_rate_constant": 0.008291145995278585,
+            "temperature": -55.835895248982496,
+            "catalyst_type": "A",
+            "reaction_rate": 0.006976713203914607,
+            "activation_energy": 0.7136162594819114,
+            "catalyst_efficiency": 0.9999999408330341,
+            "half_life": 83.60088954586733
+        },
+        {
+            "reactant_concentration": 0.07410856729624202,
+            "reaction_rate_constant": 0.02312728462984201,
+            "temperature": 128.69091045375552,
+            "catalyst_type": "C",
+            "reaction_rate": 0.0017139299293699901,
+            "activation_energy": -0.24334814780183753,
+            "catalyst_efficiency": 1.0000000562798188,
+            "half_life": 29.970971156101538
+        },
+        {
+            "reactant_concentration": 0.015188852151341133,
+            "reaction_rate_constant": 0.031412343462427585,
+            "temperature": 446.8784914136571,
+            "catalyst_type": "B",
+            "reaction_rate": 0.0004771174405779598,
+            "activation_energy": -0.0643822638524267,
+            "catalyst_efficiency": 1.0000000202239778,
+            "half_life": 22.06607671245608
+        },
+        {
+            "reactant_concentration": 0.4943057296786883,
+            "reaction_rate_constant": 0.006460066706519666,
+            "temperature": 758.0289775749766,
+            "catalyst_type": "A",
+            "reaction_rate": 0.0031932479871392043,
+            "activation_energy": -0.05530151304344638,
+            "catalyst_efficiency": 1.0000000035725147,
+            "half_life": 107.29721720371761
+        },
+        {
+            "reactant_concentration": 1.2348506782311732,
+            "reaction_rate_constant": 0.00642816933426792,
+            "temperature": 486.01648515645047,
+            "catalyst_type": "F",
+            "reaction_rate": 0.00793782926220557,
+            "activation_energy": -0.08633719997296872,
+            "catalyst_efficiency": 1.0000000055499014,
+            "half_life": 107.82963928234557
+        },
+        {
+            "reactant_concentration": 0.0791368703854306,
+            "reaction_rate_constant": 0.02343720760754619,
+            "temperature": 227.24879565880275,
+            "catalyst_type": "A",
+            "reaction_rate": 0.0018547472606348107,
+            "activation_energy": -0.13732095114955686,
+            "catalyst_efficiency": 1.0000000321841964,
+            "half_life": 29.574648659798935
+        },
+        {
+            "reactant_concentration": 0.2162013874532835,
+            "reaction_rate_constant": 0.04185388521650891,
+            "temperature": 402.69986920540487,
+            "catalyst_type": "A",
+            "reaction_rate": 0.009048868054119696,
+            "activation_energy": -0.06552042451162911,
+            "catalyst_efficiency": 1.0000000274228433,
+            "half_life": 16.561119164309726
+        },
+        {
+            "reactant_concentration": 0.7462333238676803,
+            "reaction_rate_constant": 0.0075749843499776145,
+            "temperature": 64.4780344937156,
+            "catalyst_type": "D",
+            "reaction_rate": 0.005652705749729455,
+            "activation_energy": -0.6296169559376662,
+            "catalyst_efficiency": 1.000000047693386,
+            "half_life": 91.50476734146568
+        },
+        {
+            "reactant_concentration": 1.6644677737234874,
+            "reaction_rate_constant": 0.0020133034625360144,
+            "temperature": 38.95956781770491,
+            "catalyst_type": "B",
+            "reaction_rate": 0.0033510787321171086,
+            "activation_energy": -1.324787086835862,
+            "catalyst_efficiency": 1.0000000266719844,
+            "half_life": 344.28350889877146
+        },
+        {
+            "reactant_concentration": 0.9229918319278121,
+            "reaction_rate_constant": 0.013691757143691754,
+            "temperature": 906.1726741524128,
+            "catalyst_type": "B",
+            "reaction_rate": 0.012637380008366759,
+            "activation_energy": -0.03936893401107094,
+            "catalyst_efficiency": 1.0000000053902989,
+            "half_life": 50.62514425909907
+        },
+        {
+            "reactant_concentration": 1.978520986338205,
+            "reaction_rate_constant": 0.019827564838996642,
+            "temperature": 912.4915183372507,
+            "catalyst_type": "C",
+            "reaction_rate": 0.03922925314193635,
+            "activation_energy": -0.03572258010688657,
+            "catalyst_efficiency": 1.0000000070829178,
+            "half_life": 34.95876504192138
+        },
+        {
+            "reactant_concentration": 0.8255937364333814,
+            "reaction_rate_constant": 0.02458489761390253,
+            "temperature": 775.6122863333661,
+            "catalyst_type": "C",
+            "reaction_rate": 0.020297137480893915,
+            "activation_energy": -0.039721584725372634,
+            "catalyst_efficiency": 1.0000000097655108,
+            "half_life": 28.19402347919387
+        },
+        {
+            "reactant_concentration": 1.433813517751035,
+            "reaction_rate_constant": 0.04044655643358235,
+            "temperature": 289.5814261419008,
+            "catalyst_type": "D",
+            "reaction_rate": 0.057992819360950465,
+            "activation_energy": -0.09209648382332972,
+            "catalyst_efficiency": 1.0000000372498563,
+            "half_life": 17.137359559847038
+        },
+        {
+            "reactant_concentration": 1.7326187986902055,
+            "reaction_rate_constant": 0.007542321053613771,
+            "temperature": -219.12383302665995,
+            "catalyst_type": "F",
+            "reaction_rate": 0.013067967243248137,
+            "activation_energy": 0.1854311814699936,
+            "catalyst_efficiency": 0.9999999860141849,
+            "half_life": 91.90104420546191
+        },
+        {
+            "reactant_concentration": 1.0756616940393504,
+            "reaction_rate_constant": 0.04289018906319225,
+            "temperature": -166.71915350467387,
+            "catalyst_type": "E",
+            "reaction_rate": 0.0461353334253814,
+            "activation_energy": 0.15704085613855123,
+            "catalyst_efficiency": 0.9999999326448799,
+            "half_life": 16.160972840168576
+        },
+        {
+            "reactant_concentration": 1.6534682078742144,
+            "reaction_rate_constant": 0.013235654187172617,
+            "temperature": 605.7002958440545,
+            "catalyst_type": "E",
+            "reaction_rate": 0.02188473340890715,
+            "activation_energy": -0.05936389407984326,
+            "catalyst_efficiency": 1.0000000078571998,
+            "half_life": 52.369695578153696
+        },
+        {
+            "reactant_concentration": 0.9330052203476495,
+            "reaction_rate_constant": 0.030456421990042632,
+            "temperature": -226.49162375524423,
+            "catalyst_type": "D",
+            "reaction_rate": 0.028416000709820723,
+            "activation_energy": 0.12816361458237208,
+            "catalyst_efficiency": 0.9999999609659487,
+            "half_life": 22.758654341818666
+        },
+        {
+            "reactant_concentration": 0.811702820908707,
+            "reaction_rate_constant": 0.03253901871569073,
+            "temperature": 375.72305460367716,
+            "catalyst_type": "E",
+            "reaction_rate": 0.02641201328112738,
+            "activation_energy": -0.0757953799668578,
+            "catalyst_efficiency": 1.000000024663073,
+            "half_life": 21.302030851523522
+        },
+        {
+            "reactant_concentration": 0.553891593720902,
+            "reaction_rate_constant": 0.014886694683077788,
+            "temperature": 414.77987778983754,
+            "catalyst_type": "F",
+            "reaction_rate": 0.008245615043246434,
+            "activation_energy": -0.08433241254709559,
+            "catalyst_efficiency": 1.0000000125543087,
+            "half_life": 46.56152324718994
+        },
+        {
+            "reactant_concentration": 0.3267433936148308,
+            "reaction_rate_constant": 0.032873910971438824,
+            "temperature": 772.7554574233599,
+            "catalyst_type": "A",
+            "reaction_rate": 0.01074133323219974,
+            "activation_energy": -0.03674246605144167,
+            "catalyst_efficiency": 1.0000000120786856,
+            "half_life": 21.085023353690968
+        },
+        {
+            "reactant_concentration": 1.9481609132389441,
+            "reaction_rate_constant": 0.0225761404418946,
+            "temperature": -104.8822478519412,
+            "catalyst_type": "C",
+            "reaction_rate": 0.043981954380692044,
+            "activation_energy": 0.3005010334162599,
+            "catalyst_efficiency": 0.9999999321584647,
+            "half_life": 30.70264301127709
+        },
+        {
+            "reactant_concentration": 1.9856461663445368,
+            "reaction_rate_constant": 0.031129922306228224,
+            "temperature": -192.60868284389292,
+            "catalyst_type": "A",
+            "reaction_rate": 0.06181301088596536,
+            "activation_energy": 0.14976550296057373,
+            "catalyst_efficiency": 0.9999999533781153,
+            "half_life": 22.266267603927364
+        },
+        {
+            "reactant_concentration": 0.6273713351470143,
+            "reaction_rate_constant": 0.0035466027455302047,
+            "temperature": 344.3935058970495,
+            "catalyst_type": "B",
+            "reaction_rate": 0.002225036899699351,
+            "activation_energy": -0.13619779204476976,
+            "catalyst_efficiency": 1.0000000048303945,
+            "half_life": 195.439757506961
+        },
+        {
+            "reactant_concentration": 0.8790778907297766,
+            "reaction_rate_constant": 0.032606046817208786,
+            "temperature": -172.9296634533453,
+            "catalyst_type": "C",
+            "reaction_rate": 0.028663254861108246,
+            "activation_energy": 0.16458115094137749,
+            "catalyst_efficiency": 0.9999999463365928,
+            "half_life": 21.258240363996435
+        },
+        {
+            "reactant_concentration": 0.01621745579826954,
+            "reaction_rate_constant": 0.0437386933538043,
+            "temperature": 780.5976049952224,
+            "catalyst_type": "E",
+            "reaction_rate": 0.000709330326139387,
+            "activation_energy": -0.033331958594588484,
+            "catalyst_efficiency": 1.0000000145789631,
+            "half_life": 15.847459706970346
+        },
+        {
+            "reactant_concentration": 0.5782304463603716,
+            "reaction_rate_constant": 0.007853787146072835,
+            "temperature": 285.59476644404367,
+            "catalyst_type": "B",
+            "reaction_rate": 0.004541298847093044,
+            "activation_energy": -0.14109487494222062,
+            "catalyst_efficiency": 1.0000000110812912,
+            "half_life": 88.25642555216724
+        },
+        {
+            "reactant_concentration": 0.9869541443247662,
+            "reaction_rate_constant": 0.021735291020904077,
+            "temperature": 421.5577584213711,
+            "catalyst_type": "E",
+            "reaction_rate": 0.02145173555118616,
+            "activation_energy": -0.07551229321481044,
+            "catalyst_efficiency": 1.0000000164128167,
+            "half_life": 31.890402566650977
+        },
+        {
+            "reactant_concentration": 0.9415230684547147,
+            "reaction_rate_constant": 0.03702617771575778,
+            "temperature": 729.2075908374342,
+            "catalyst_type": "E",
+            "reaction_rate": 0.03486100045608984,
+            "activation_energy": -0.03758055467942467,
+            "catalyst_efficiency": 1.000000013914643,
+            "half_life": 18.720462746143856
+        },
+        {
+            "reactant_concentration": 1.4905435215655407,
+            "reaction_rate_constant": 0.024308748257993982,
+            "temperature": 133.63393218218363,
+            "catalyst_type": "A",
+            "reaction_rate": 0.036233247233320554,
+            "activation_energy": -0.23124713849568448,
+            "catalyst_efficiency": 1.0000000562132847,
+            "half_life": 28.514309877391668
+        },
+        {
+            "reactant_concentration": 1.3427941567770219,
+            "reaction_rate_constant": 0.04706114053312944,
+            "temperature": 621.4119786516729,
+            "catalyst_type": "E",
+            "reaction_rate": 0.06319342451914847,
+            "activation_energy": -0.04089097532764327,
+            "catalyst_efficiency": 1.0000000192437595,
+            "half_life": 14.728652402123432
+        },
+        {
+            "reactant_concentration": 0.31189025285652566,
+            "reaction_rate_constant": 0.03810206552884,
+            "temperature": 553.5682756652272,
+            "catalyst_type": "B",
+            "reaction_rate": 0.011883662852145817,
+            "activation_energy": -0.049074136514672656,
+            "catalyst_efficiency": 1.0000000186982596,
+            "half_life": 18.191853143375976
+        },
+        {
+            "reactant_concentration": 0.47746345965116477,
+            "reaction_rate_constant": 0.03383865029544079,
+            "temperature": 264.28932220520056,
+            "catalyst_type": "C",
+            "reaction_rate": 0.016156719039987066,
+            "activation_energy": -0.10652138503479472,
+            "catalyst_efficiency": 1.0000000360453989,
+            "half_life": 20.48388970919847
+        },
+        {
+            "reactant_concentration": 0.9096323756514499,
+            "reaction_rate_constant": 0.007849762778137676,
+            "temperature": 555.2361800352361,
+            "catalyst_type": "C",
+            "reaction_rate": 0.007140398364177699,
+            "activation_energy": -0.07258212015470057,
+            "catalyst_efficiency": 1.0000000056975242,
+            "half_life": 88.30167231173216
+        },
+        {
+            "reactant_concentration": 0.9400437823916489,
+            "reaction_rate_constant": 0.03618424472527229,
+            "temperature": 338.82196464208164,
+            "catalyst_type": "C",
+            "reaction_rate": 0.034014774274530035,
+            "activation_energy": -0.08144471738350623,
+            "catalyst_efficiency": 1.0000000294701559,
+            "half_life": 19.156049430425945
+        },
+        {
+            "reactant_concentration": 0.18451645123299554,
+            "reaction_rate_constant": 0.023779028267605928,
+            "temperature": 757.1998441585971,
+            "catalyst_type": "C",
+            "reaction_rate": 0.004387621909707731,
+            "activation_energy": -0.041053416675687605,
+            "catalyst_efficiency": 1.0000000097621036,
+            "half_life": 29.149516656415134
+        },
+        {
+            "reactant_concentration": 0.7330323230885903,
+            "reaction_rate_constant": 0.004238680917022956,
+            "temperature": 303.7045381056703,
+            "catalyst_type": "B",
+            "reaction_rate": 0.0031070901194366137,
+            "activation_energy": -0.149564987001259,
+            "catalyst_efficiency": 1.0000000063395826,
+            "half_life": 163.52898322121834
+        },
+        {
+            "reactant_concentration": 0.385967825342902,
+            "reaction_rate_constant": 0.007880358517501275,
+            "temperature": 39.6119717126266,
+            "catalyst_type": "E",
+            "reaction_rate": 0.0030415648399223826,
+            "activation_energy": -1.0165582575429073,
+            "catalyst_efficiency": 1.0000000801084352,
+            "half_life": 87.95883829657667
+        },
+        {
+            "reactant_concentration": 1.9901121377620106,
+            "reaction_rate_constant": 0.0012766519296896173,
+            "temperature": 807.1241429502163,
+            "catalyst_type": "C",
+            "reaction_rate": 0.0025406805009726002,
+            "activation_energy": -0.06863932697261482,
+            "catalyst_efficiency": 1.0000000008762853,
+            "half_life": 542.9413957244125
+        },
+        {
+            "reactant_concentration": 0.8692456543435512,
+            "reaction_rate_constant": 0.03806592741318771,
+            "temperature": 716.3622800473261,
+            "catalyst_type": "F",
+            "reaction_rate": 0.033088641982470475,
+            "activation_energy": -0.037933005531411206,
+            "catalyst_efficiency": 1.0000000144395504,
+            "half_life": 18.209123687862878
+        },
+        {
+            "reactant_concentration": 0.30560485150486205,
+            "reaction_rate_constant": 0.00021967958136987511,
+            "temperature": 888.5619672292198,
+            "catalyst_type": "B",
+            "reaction_rate": 6.713514584319094e-05,
+            "activation_energy": -0.07881459670709806,
+            "catalyst_efficiency": 1.0000000001731395,
+            "half_life": 3155.2644821955096
+        },
+        {
+            "reactant_concentration": 1.5960812292513906,
+            "reaction_rate_constant": 0.038721654666910146,
+            "temperature": -208.5660083082895,
+            "catalyst_type": "D",
+            "reaction_rate": 0.06180290617940979,
+            "activation_energy": 0.12960777433862652,
+            "catalyst_efficiency": 0.9999999498137252,
+            "half_life": 17.90076344935432
+        },
+        {
+            "reactant_concentration": 1.7947877012415958,
+            "reaction_rate_constant": 0.016143674348528456,
+            "temperature": -132.00507660008992,
+            "catalyst_type": "E",
+            "reaction_rate": 0.028974468173588307,
+            "activation_energy": 0.2598797868652729,
+            "catalyst_efficiency": 0.9999999580458535,
+            "half_life": 42.936147347591145
+        },
+        {
+            "reactant_concentration": 0.5182686382055892,
+            "reaction_rate_constant": 0.01084146947816031,
+            "temperature": -226.89583179694472,
+            "catalyst_type": "F",
+            "reaction_rate": 0.005618793622593604,
+            "activation_energy": 0.1657838658705475,
+            "catalyst_efficiency": 0.9999999820265928,
+            "half_life": 63.93479979409263
+        },
+        {
+            "reactant_concentration": 0.9581270152247189,
+            "reaction_rate_constant": 0.006245040778719068,
+            "temperature": -36.73436729140636,
+            "catalyst_type": "F",
+            "reaction_rate": 0.005983542281270755,
+            "activation_energy": 1.1488314018923997,
+            "catalyst_efficiency": 0.9999999282550105,
+            "half_life": 110.9916180086366
+        },
+        {
+            "reactant_concentration": 1.2689608362453506,
+            "reaction_rate_constant": 5.2464748952768284e-05,
+            "temperature": 312.9701468479192,
+            "catalyst_type": "A",
+            "reaction_rate": 6.657571170450722e-05,
+            "activation_energy": -0.26180624321550733,
+            "catalyst_efficiency": 1.000000000137356,
+            "half_life": 13211.674398441424
+        },
+        {
+            "reactant_concentration": 1.7393088218240875,
+            "reaction_rate_constant": 0.03816491433439482,
+            "temperature": 770.942006267334,
+            "catalyst_type": "B",
+            "reaction_rate": 0.06638057218597349,
+            "activation_energy": -0.035219487827561125,
+            "catalyst_efficiency": 1.0000000134414873,
+            "half_life": 18.161895359876915
+        },
+        {
+            "reactant_concentration": 0.15061099742202863,
+            "reaction_rate_constant": 0.014234999604286426,
+            "temperature": 539.2963928092566,
+            "catalyst_type": "E",
+            "reaction_rate": 0.0021439474887037617,
+            "activation_energy": -0.06555125781998246,
+            "catalyst_efficiency": 1.0000000093312214,
+            "half_life": 48.6931647227602
+        },
+        {
+            "reactant_concentration": 0.5636868991016422,
+            "reaction_rate_constant": 0.02019842104315148,
+            "temperature": 698.9947346334314,
+            "catalyst_type": "A",
+            "reaction_rate": 0.011385585324563414,
+            "activation_energy": -0.046413056505291136,
+            "catalyst_efficiency": 1.0000000093747046,
+            "half_life": 34.31689928035069
+        },
+        {
+            "reactant_concentration": 1.222400157647798,
+            "reaction_rate_constant": 0.030475470317932667,
+            "temperature": 109.090334763518,
+            "catalyst_type": "D",
+            "reaction_rate": 0.03725321972103168,
+            "activation_energy": -0.2660436146350107,
+            "catalyst_efficiency": 1.0000000810780427,
+            "half_life": 22.744429317373882
+        },
+        {
+            "reactant_concentration": 0.14995825754203482,
+            "reaction_rate_constant": 0.024165992250980442,
+            "temperature": 624.5759823584146,
+            "catalyst_type": "B",
+            "reaction_rate": 0.003623890089731343,
+            "activation_energy": -0.049555913415209506,
+            "catalyst_efficiency": 1.0000000119756782,
+            "half_life": 28.68275274448222
+        },
+        {
+            "reactant_concentration": 1.4244888374934297,
+            "reaction_rate_constant": 0.0327182556621607,
+            "temperature": 781.7889374356972,
+            "catalyst_type": "F",
+            "reaction_rate": 0.046606789973004124,
+            "activation_energy": -0.036368384623236806,
+            "catalyst_efficiency": 1.000000011899101,
+            "half_life": 21.185334197433498
+        },
+        {
+            "reactant_concentration": 0.4958388362030482,
+            "reaction_rate_constant": 0.040709130652972395,
+            "temperature": -111.50464330259317,
+            "catalyst_type": "C",
+            "reaction_rate": 0.020185167965807667,
+            "activation_energy": 0.23869528015957958,
+            "catalyst_efficiency": 0.9999999028292266,
+            "half_life": 17.026823453163935
+        },
+        {
+            "reactant_concentration": 0.04977810790033162,
+            "reaction_rate_constant": 0.0027872053184449432,
+            "temperature": 828.5213013531568,
+            "catalyst_type": "F",
+            "reaction_rate": 0.00013874180708193054,
+            "activation_energy": -0.059031553692426464,
+            "catalyst_efficiency": 1.0000000016453305,
+            "half_life": 248.68895591325534
+        },
+        {
+            "reactant_concentration": 1.7276365854210909,
+            "reaction_rate_constant": 0.029222488765567656,
+            "temperature": 12.712739320479159,
+            "catalyst_type": "A",
+            "reaction_rate": 0.050485840708451496,
+            "activation_energy": -2.310425576084904,
+            "catalyst_efficiency": 1.0000006751638544,
+            "half_life": 23.71964914147451
+        },
+        {
+            "reactant_concentration": 0.3071093862956468,
+            "reaction_rate_constant": 0.00879888997173062,
+            "temperature": 92.02845674409605,
+            "catalyst_type": "B",
+            "reaction_rate": 0.002702221699301112,
+            "activation_energy": -0.42759861199287685,
+            "catalyst_efficiency": 1.0000000376239313,
+            "half_life": 78.77666191836842
+        },
+        {
+            "reactant_concentration": 0.12821191804263427,
+            "reaction_rate_constant": 0.04150382483718066,
+            "temperature": -36.264308980757136,
+            "catalyst_type": "D",
+            "reaction_rate": 0.005321284988480455,
+            "activation_energy": 0.7295022780391549,
+            "catalyst_efficiency": 0.9999996972286523,
+            "half_life": 16.700802474932345
+        },
+        {
+            "reactant_concentration": 0.5683106531739509,
+            "reaction_rate_constant": 0.04932284213444957,
+            "temperature": 814.057218008646,
+            "catalyst_type": "D",
+            "reaction_rate": 0.0280306966298247,
+            "activation_energy": -0.030734799469199436,
+            "catalyst_efficiency": 1.0000000151592767,
+            "half_life": 14.053269247349723
+        },
+        {
+            "reactant_concentration": 1.194069457261618,
+            "reaction_rate_constant": 0.04993269727652527,
+            "temperature": 858.7505784029524,
+            "catalyst_type": "A",
+            "reaction_rate": 0.0596231087365892,
+            "activation_energy": -0.029016244512121665,
+            "catalyst_efficiency": 1.0000000144885934,
+            "half_life": 13.88162904001208
+        },
+        {
+            "reactant_concentration": 1.405883784589393,
+            "reaction_rate_constant": 0.005853705891770366,
+            "temperature": -87.09553704708986,
+            "catalyst_type": "B",
+            "reaction_rate": 0.008229630192995349,
+            "activation_energy": 0.4907210832349765,
+            "catalyst_efficiency": 0.999999971274631,
+            "half_life": 118.41168541358222
+        },
+        {
+            "reactant_concentration": 1.538255318050721,
+            "reaction_rate_constant": 0.004077155021698384,
+            "temperature": 35.081802021844226,
+            "catalyst_type": "D",
+            "reaction_rate": 0.006271705394644742,
+            "activation_energy": -1.3039976213892448,
+            "catalyst_efficiency": 1.0000000531660045,
+            "half_life": 170.00756087788076
+        },
+        {
+            "reactant_concentration": 1.0348766399534493,
+            "reaction_rate_constant": 0.04985676411483754,
+            "temperature": 696.6004862392781,
+            "catalyst_type": "A",
+            "reaction_rate": 0.051595600526114775,
+            "activation_energy": -0.03578861924151744,
+            "catalyst_efficiency": 1.0000000178430475,
+            "half_life": 13.902771125767112
+        },
+        {
+            "reactant_concentration": 1.0374406235437532,
+            "reaction_rate_constant": 0.0009717585782684047,
+            "temperature": 92.81689948891523,
+            "catalyst_type": "A",
+            "reaction_rate": 0.0010081418253727649,
+            "activation_energy": -0.6213227999960671,
+            "catalyst_efficiency": 1.0000000060377576,
+            "half_life": 713.291547984148
+        },
+        {
+            "reactant_concentration": 1.361841557656823,
+            "reaction_rate_constant": 0.005531417454690184,
+            "temperature": -112.27558315508,
+            "catalyst_type": "E",
+            "reaction_rate": 0.00753291416254542,
+            "activation_energy": 0.3848605716200895,
+            "catalyst_efficiency": 0.9999999787117552,
+            "half_life": 125.31095080741264
+        },
+        {
+            "reactant_concentration": 1.3463402977499945,
+            "reaction_rate_constant": 0.00494804215970412,
+            "temperature": 534.3317294102209,
+            "catalyst_type": "D",
+            "reaction_rate": 0.0066617485545755716,
+            "activation_energy": -0.08260235295706868,
+            "catalyst_efficiency": 1.0000000040871992,
+            "half_life": 140.08514038235148
+        },
+        {
+            "reactant_concentration": 1.2794244408081454,
+            "reaction_rate_constant": 0.047663213572706704,
+            "temperature": 900.4151853052031,
+            "catalyst_type": "C",
+            "reaction_rate": 0.060981480372379486,
+            "activation_energy": -0.028103093354542256,
+            "catalyst_efficiency": 1.0000000133948375,
+            "half_life": 14.542602745461142
+        }
+    ],
+    "summary_statistics": {
+        "reaction_rate": {
+            "mean": 0.021873957242798562,
+            "median": 0.012811913463410981,
+            "std_dev": 0.02131653734717138
+        },
+        "catalyst_efficiency": {
+            "mean": 1.0000000081747416,
+            "median": 1.0000000089991903,
+            "std_dev": 9.384839547820717e-08
+        },
+        "half_life": {
+            "mean": 285.139348847184,
+            "median": 34.366779330414005,
+            "std_dev": 1543.9392801889228
+        }
+    }
+}

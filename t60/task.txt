@@ -1,0 +1,6 @@
+67d47795b0c8eaba92084e7c
+
+67e83797b74a473cc5cc2979
+
+
+Trabajo para una tienda de ropa en Chicago que maneja un volumen considerable de ventas. Me han pedido automatizar el sistema de gestión de ventas para analizar los datos de cada compra. Quiero desarrollar un programa en JavaScript que permita leer los datos desde un archivo JSON donde cada compra se identifica con una llave del objeto principal. Cada valor de las llaves contiene un objeto con un valor de la compra en USD y con un objeto de productos vendidos, donde cada producto vendido contiene un nombre como llave y la cantidad como valor. Agrega validación de entradas para que la llave que identifica la compra pueda ser solo un entero positivo, el total de la compra un número positivo, los productos vendidos sea un objeto no vacío, y la cantidad vendida de cada producto sea un entero positivo. Si una compra tiene alguna propiedad no válida ignora su procesamiento e imprime un mensaje de advertencia. Encuentra e imprime el producto menos vendido de las compras entre 0 y 100 dólares, entre 100 y 200 y en compras de más de 200 dólares. Dame el código completo sin comentarios, un ejemplo del archivo JSON y una explicación de un párrafo.

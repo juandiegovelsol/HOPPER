@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minijuego</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .game-container {
+        position: relative;
+        width: 500px;
+        height: 500px;
+        background-color: rgb(240, 240, 240);
+      }
+      .character,
+      .enemy,
+      .target {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+      }
+      .character {
+        background-color: blue;
+      }
+      .target {
+        background-color: green;
+      }
+      .enemy {
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game-container" id="gameContainer"></div>
+    <script>
+      const container = document.getElementById("gameContainer");
+      const character = document.createElement("div");
+      character.className = "character";
+      container.appendChild(character);
+
+      let score = 0;
+      let posIndex = 0;
+      const positions = [
+        { target: { x: 100, y: 100 }, enemy: { x: 200, y: 200 } },
+        { target: { x: 150, y: 150 }, enemy: { x: 250, y: 300 } },
+        { target: { x: 300, y: 100 }, enemy: { x: 350, y: 250 } },
+        { target: { x: 400, y: 400 }, enemy: { x: 100, y: 200 } },
+        { target: { x: 200, y: 300 }, enemy: { x: 400, y: 100 } },
+      ];
+
+      let charX = 0,
+        charY = 0;
+      moveCharacter(charX, charY);
+
+      const setPositions = () => {
+        container
+          .querySelectorAll(".target, .enemy")
+          .forEach((el) => el.remove());
+        const currentPosition = positions[posIndex];
+        const target = document.createElement("div");
+        target.className = "target";
+        target.style.top = `${currentPosition.target.y}px`;
+        target.style.left = `${currentPosition.target.x}px`;
+        container.appendChild(target);
+
+        const enemy = document.createElement("div");
+        enemy.className = "enemy";
+        enemy.style.top = `${currentPosition.enemy.y}px`;
+        enemy.style.left = `${currentPosition.enemy.x}px`;
+        container.appendChild(enemy);
+
+        posIndex = (posIndex + 1) % positions.length;
+      };
+
+      setPositions();
+      setInterval(setPositions, 2000);
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowUp") charY = Math.max(0, charY - 20);
+        if (e.key === "ArrowDown") charY = Math.min(480, charY + 20);
+        if (e.key === "ArrowLeft") charX = Math.max(0, charX - 20);
+        if (e.key === "ArrowRight") charX = Math.min(480, charX + 20);
+        moveCharacter(charX, charY);
+
+        const targets = Array.from(container.getElementsByClassName("target"));
+        const enemies = Array.from(container.getElementsByClassName("enemy"));
+
+        targets.forEach((target) => {
+          if (isColliding(character, target)) {
+            container.removeChild(target);
+            score++;
+          }
+        });
+
+        enemies.forEach((enemy) => {
+          if (isColliding(character, enemy)) {
+            alert(`Perdiste. Puntaje: ${score}`);
+            location.reload();
+          }
+        });
+      });
+
+      function moveCharacter(x, y) {
+        character.style.left = `${x}px`;
+        character.style.top = `${y}px`;
+      }
+
+      function isColliding(a, b) {
+        const aRect = a.getBoundingClientRect();
+        const bRect = b.getBoundingClientRect();
+        return !(
+          aRect.right < bRect.left ||
+          aRect.left > bRect.right ||
+          aRect.bottom < bRect.top ||
+          aRect.top > bRect.bottom
+        );
+      }
+    </script>
+  </body>
+</html>

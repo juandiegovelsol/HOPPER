@@ -1,0 +1,7 @@
+edad,nombre,fecha_compra,monto,estado
+23,Alicia,2021-01-01,250,A
+45,Bob,2021-01-02,320,B
+31,Charlie,2021-01-03,150,A
+35,David,2021-01-01,400,B
+22,Eva,2021-01-04,180,A
+33,Frank,2021-01-05,220,C

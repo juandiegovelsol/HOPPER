@@ -1,0 +1,57 @@
+{
+    "Asistentes": [
+        {
+            "Nombre": "John Doe",
+            "Email": "john.doe@example.com",
+            "Pais": "Estados Unidos",
+            "EstadoPago": "pendiente",
+            "PreferenciaComida": "vegano",
+            "SesionesInscritas": [
+                "IA",
+                "Marketing"
+            ]
+        },
+        {
+            "Nombre": "John Doe",
+            "Email": "john.doe@example.com",
+            "Pais": "Estados Unidos",
+            "EstadoPago": "pendiente",
+            "PreferenciaComida": "vegano",
+            "SesionesInscritas": [
+                "IA",
+                "Marketing"
+            ]
+        },
+        {
+            "Nombre": "John Doe",
+            "Email": "john.doe@example.com",
+            "Pais": "Estados Unidos",
+            "EstadoPago": "pendiente",
+            "PreferenciaComida": "vegano",
+            "SesionesInscritas": [
+                "IA",
+                "Marketing"
+            ]
+        },
+        {
+            "Nombre": "John Doe",
+            "Email": "john.doe@example.com",
+            "Pais": "Estados Unidos",
+            "EstadoPago": "pendiente",
+            "PreferenciaComida": "vegano",
+            "SesionesInscritas": [
+                "IA",
+                "Marketing"
+            ]
+        }
+    ],
+    "ResumenPreferenciasComida": {
+        "vegetariano": 1,
+        "vegano": 2,
+        "normal": 1
+    },
+    "ResumenEstadoPago": {
+        "pendiente": 2,
+        "completado": 2
+    }
+}

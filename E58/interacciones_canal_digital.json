@@ -1,0 +1,14 @@
+{
+  "cliente1": {
+    "nombre": "Juan",
+    "apellido": "Pérez",
+    "edad": 30,
+    "servicios_solicitados": [
+      "adquisicion_vehiculo",
+      "taller_vehiculo",
+      "accesorios"
+    ],
+    "canal_de_atencion": "Facebook",
+    "nivel_satisfaccion": 5
+  }
+}

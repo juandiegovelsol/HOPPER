@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba TodoApp</title>
+  </head>
+  <body>
+    <h1>TodoApp</h1>
+    <input type="text" id="taskInput" placeholder="Ingrese una tarea" />
+    <button id="addTaskButton">Agregar Tarea</button>
+    <ul id="taskList"></ul>
+
+    <script>
+      class TodoApp {
+        constructor() {
+          this.tasks = [];
+          this.loadTasks();
+          this.setupEventListeners();
+        }
+
+        // Carga las tareas desde el almacenamiento local o inicializa una lista vacía
+        loadTasks() {
+          this.tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+          this.renderTasks();
+        }
+
+        // Guarda las tareas en el almacenamiento local
+        saveTasks() {
+          localStorage.setItem("tasks", JSON.stringify(this.tasks));
+        }
+
+        // Agrega una nueva tarea a la lista
+        addTask(taskText) {
+          if (!taskText) return; // Evita agregar tareas vacías
+          const task = { text: taskText, completed: false };
+          this.tasks.push(task);
+          this.saveTasks(); // Guarda la tarea inmediatamente después de agregarla
+          this.renderTasks();
+        }
+
+        // Elimina una tarea de la lista
+        deleteTask(index) {
+          if (index < 0 || index >= this.tasks.length) return; // Verifica que el índice sea válido
+          this.tasks.splice(index, 1);
+          this.saveTasks(); // Guarda inmediatamente después de eliminar
+          this.renderTasks();
+        }
+
+        // Renderiza la lista de tareas en el DOM
+        renderTasks() {
+          const list = document.getElementById("taskList");
+          list.innerHTML = "";
+          this.tasks.forEach((task, index) => {
+            const li = document.createElement("li");
+            li.textContent = task.text;
+
+            // Crea el botón de eliminar
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Eliminar";
+            deleteButton.addEventListener("click", () =>
+              this.deleteTask(index)
+            );
+
+            // Agrega el botón de eliminar al elemento li
+            li.appendChild(deleteButton);
+            list.appendChild(li);
+          });
+        }
+
+        // Configura los manejadores de eventos para los botones
+        setupEventListeners() {
+          document
+            .getElementById("addTaskButton")
+            .addEventListener("click", () => {
+              const input = document.getElementById("taskInput");
+              this.addTask(input.value);
+              input.value = ""; // Reinicia el campo de entrada
+            });
+        }
+      }
+
+      // Inicializar la aplicación
+      const app = new TodoApp();
+    </script>
+  </body>
+</html>

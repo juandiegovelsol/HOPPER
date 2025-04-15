@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ping-Pong para dos jugadores</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #000;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      #juego {
+        position: relative;
+        width: 800px;
+        height: 400px;
+        background-color: #222;
+        border: 2px solid #fff;
+        overflow: hidden;
+      }
+
+      #barraIzq,
+      #barraDer {
+        position: absolute;
+        width: 10px;
+        height: 80px;
+        background-color: #fff;
+      }
+
+      #barraIzq {
+        left: 20px;
+      }
+
+      #barraDer {
+        right: 20px;
+      }
+
+      #bola {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #fff;
+        border-radius: 50%;
+      }
+
+      #puntuacion {
+        position: absolute;
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        color: #fff;
+        font-size: 24px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="juego">
+      <div id="barraIzq"></div>
+      <div id="barraDer"></div>
+      <div id="bola"></div>
+      <div id="puntuacion">
+        <span id="puntosIzq">0</span> | <span id="puntosDer">0</span>
+      </div>
+    </div>
+
+    <script>
+      const barraIzq = document.getElementById("barraIzq");
+      const barraDer = document.getElementById("barraDer");
+      const bola = document.getElementById("bola");
+      const puntosIzq = document.getElementById("puntosIzq");
+      const puntosDer = document.getElementById("puntosDer");
+
+      const velocidadBolaInicial = {
+        x: Math.random() > 0.5 ? -5 : 5,
+        y: Math.random() > 0.5 ? -5 : 5,
+      };
+      let posBola = { x: 400, y: 200 };
+      let puntosIzquierda = 0;
+      let puntosDerecha = 0;
+      let velocidadBola = velocidadBolaInicial;
+
+      function moverBola() {
+        posBola.x += velocidadBola.x;
+        posBola.y += velocidadBola.y;
+
+        if (
+          posBola.x <= barraIzq.offsetLeft + barraIzq.offsetWidth &&
+          posBola.y >= barraIzq.offsetTop &&
+          posBola.y <= barraIzq.offsetTop + barraIzq.offsetHeight
+        ) {
+          velocidadBola.x = -velocidadBola.x;
+        }
+        if (
+          posBola.x >= barraDer.offsetLeft - barraIzq.offsetWidth &&
+          posBola.y >= barraDer.offsetTop &&
+          posBola.y <= barraDer.offsetTop + barraDer.offsetHeight
+        ) {
+          velocidadBola.x = -velocidadBola.x;
+        }
+
+        if (posBola.y <= 0 || posBola.y >= 400) {
+          velocidadBola.y = -velocidadBola.y;
+        }
+
+        if (posBola.x < 0) {
+          puntosDerecha++;
+          posBola = { x: 400, y: 200 };
+          velocidadBola = { ...velocidadBolaInicial };
+        }
+        if (posBola.x > 800) {
+          puntosIzquierda++;
+          posBola = { x: 400, y: 200 };
+          velocidadBola = { ...velocidadBolaInicial };
+        }
+
+        bola.style.left = posBola.x + "px";
+        bola.style.top = posBola.y + "px";
+
+        puntosIzq.textContent = puntosIzquierda;
+        puntosDer.textContent = puntosDerecha;
+
+        setInterval(moverBola, 10); // Se ejecuta a intervalos regulares de 10ms
+      }
+
+      function moverBarra(evento, barra) {
+        if (evento.key === "w" && barraIzq.offsetTop > 0) {
+          barraIzq.style.top = barraIzq.offsetTop - 10 + "px";
+        }
+        if (evento.key === "s" && barraIzq.offsetTop < 320) {
+          barraIzq.style.top = barraIzq.offsetTop + 10 + "px";
+        }
+        if (evento.key === "ArrowUp" && barraDer.offsetTop > 0) {
+          barraDer.style.top = barraDer.offsetTop - 10 + "px";
+        }
+        if (evento.key === "ArrowDown" && barraDer.offsetTop < 320) {
+          barraDer.style.top = barraDer.offsetTop + 10 + "px";
+        }
+      }
+
+      document.addEventListener("keydown", (e) => moverBarra(e, barraIzq));
+      document.addEventListener("keydown", (e) => moverBarra(e, barraDer));
+
+      moverBola();
+    </script>
+  </body>
+</html>

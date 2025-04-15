@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pelota en Canvas</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+        display: block;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      const ball = {
+        radius: 15,
+        x: canvas.width / 2,
+        y: canvas.height / 2,
+        dx: 2,
+        dy: 2,
+        color: "green",
+      };
+
+      const repelRadius = 50;
+
+      function drawBall() {
+        ctx.beginPath();
+        ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2, false);
+        ctx.fillStyle = ball.color;
+        ctx.fill();
+        ctx.closePath();
+      }
+
+      function updateBallPosition() {
+        ball.x += ball.dx;
+        ball.y += ball.dy;
+
+        // Rebotar en los bordes
+        if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
+          ball.dx *= -1;
+        }
+
+        if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
+          ball.dy *= -1;
+        }
+      }
+
+      function repelMouse(event) {
+        const mousePos = {
+          x: event.clientX - canvas.getBoundingClientRect().left,
+          y: event.clientY - canvas.getBoundingClientRect().top,
+        };
+
+        const distX = ball.x - mousePos.x;
+        const distY = ball.y - mousePos.y;
+        const distance = Math.sqrt(distX * distX + distY * distY);
+
+        if (distance < repelRadius) {
+          const angle = Math.atan2(distY, distX);
+          ball.dx = Math.cos(angle) * 5;
+          ball.dy = Math.sin(angle) * 5;
+        }
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawBall();
+        updateBallPosition();
+        requestAnimationFrame(animate);
+      }
+
+      canvas.addEventListener("mousemove", repelMouse);
+      animate();
+    </script>
+  </body>
+</html>

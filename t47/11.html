@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Saltar y Esquivar</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #f0f0f0;
+      }
+      #gameCanvas {
+        position: relative;
+        background-color: #ffffff;
+        width: 100vw;
+        height: 100vh;
+      }
+      #character {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: blue;
+        left: 50px;
+      }
+      .obstacle {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gameCanvas">
+      <div id="character"></div>
+    </div>
+    <script>
+      let character = document.getElementById("character");
+      let gameCanvas = document.getElementById("gameCanvas");
+      let isJumping = false;
+      let isFalling = true;
+      let jumpHeight = 150;
+      let gameActive = false;
+      let obstacles = [];
+
+      function initCharacter() {
+        const canvasHeight = gameCanvas.clientHeight;
+        character.style.top = canvasHeight / 2 - 25 + "px";
+      }
+
+      initCharacter();
+      function applyGravity() {
+        if (!gameActive) return;
+
+        const canvasHeight = gameCanvas.clientHeight;
+        const floorPosition = canvasHeight - 50;
+        let currentTop = parseInt(character.style.top) || 0;
+
+        if (!isJumping && currentTop < floorPosition) {
+          currentTop += 5;
+          character.style.top = currentTop + "px";
+        }
+
+        requestAnimationFrame(applyGravity);
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if (event.code === "Space") {
+          if (!gameActive) {
+            startGame();
+          } else {
+            jump();
+          }
+        }
+      });
+
+      function startGame() {
+        gameActive = true;
+        applyGravity();
+        setInterval(createObstacle, 2000);
+      }
+
+      function createObstacle() {
+        if (!gameActive) return;
+
+        let obstacle = document.createElement("div");
+        obstacle.className = "obstacle";
+
+        const canvasHeight = gameCanvas.clientHeight;
+        const randomPosition = Math.floor(Math.random() * (canvasHeight - 50));
+        obstacle.style.top = randomPosition + "px";
+        obstacle.style.right = "0px";
+
+        gameCanvas.appendChild(obstacle);
+        obstacles.push(obstacle);
+        moveObstacle(obstacle);
+      }
+
+      function moveObstacle(obstacle) {
+        const canvasWidth = gameCanvas.clientWidth;
+        let position = 0;
+
+        let obstacleInterval = setInterval(function () {
+          if (!gameActive) {
+            clearInterval(obstacleInterval);
+            return;
+          }
+
+          position += 5;
+          obstacle.style.right = position + "px";
+
+          if (position > canvasWidth) {
+            clearInterval(obstacleInterval);
+            gameCanvas.removeChild(obstacle);
+            obstacles = obstacles.filter((obs) => obs !== obstacle);
+          } else {
+            checkCollision(obstacle);
+          }
+        }, 20);
+      }
+
+      function jump() {
+        if (isJumping) return;
+
+        isJumping = true;
+        const currentTop = parseInt(character.style.top) || 0;
+        const jumpTarget = Math.max(0, currentTop - jumpHeight);
+
+        let jumpPosition = 0;
+        let jumpInterval = setInterval(function () {
+          if (!gameActive) {
+            clearInterval(jumpInterval);
+            return;
+          }
+
+          jumpPosition += 10;
+          const newTop = currentTop - jumpPosition;
+
+          if (newTop <= jumpTarget) {
+            clearInterval(jumpInterval);
+            character.style.top = jumpTarget + "px";
+            isJumping = false;
+          } else {
+            character.style.top = newTop + "px";
+          }
+        }, 20);
+      }
+
+      function checkCollision(obstacle) {
+        let characterRect = character.getBoundingClientRect();
+        let obstacleRect = obstacle.getBoundingClientRect();
+
+        if (
+          characterRect.left < obstacleRect.right &&
+          characterRect.right > obstacleRect.left &&
+          characterRect.top < obstacleRect.bottom &&
+          characterRect.bottom > obstacleRect.top
+        ) {
+          gameOver();
+        }
+      }
+
+      function gameOver() {
+        gameActive = false;
+        alert("Fin del juego");
+
+        obstacles.forEach((obstacle) => {
+          if (gameCanvas.contains(obstacle)) {
+            gameCanvas.removeChild(obstacle);
+          }
+        });
+
+        obstacles = [];
+        initCharacter();
+      }
+
+      window.addEventListener("resize", initCharacter);
+    </script>
+  </body>
+</html>

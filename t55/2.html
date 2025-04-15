@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de plataformas</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      #gameArea {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        background: #87ceeb;
+      }
+      .player {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: #ff4500;
+      }
+      .platform {
+        position: absolute;
+        width: 100px;
+        height: 20px;
+        background: #8b4513;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gameArea">
+      <div id="player" class="player"></div>
+    </div>
+    <script>
+      const gameArea = document.getElementById("gameArea");
+      const player = document.getElementById("player");
+      let playerX = 50; // Inicializa la posición del jugador en X
+      let playerY = 50; // Inicializa la posición del jugador en Y
+      let platforms = [];
+      const platformSpeed = 2;
+      let gameRunning = false;
+      let game

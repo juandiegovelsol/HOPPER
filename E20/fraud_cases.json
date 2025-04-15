@@ -1,0 +1,74 @@
+{
+    "fraud_cases": [
+        {
+            "case_id": "FRAUD001",
+            "date": "2024-07-01",
+            "transaction_amount": 4500.00,
+            "transaction_id": "TXN987654",
+            "account_number": "ACCT001234567",
+            "customer_id": "CUST001",
+            "location": "New York",
+            "fraud_type": "Credit Card Fraud",
+            "description": "Suspicious transaction exceeding normal spending patterns.",
+            "status": "Resolved",
+            "investigator": "John Doe",
+            "resolution_date": "2024-07-02"
+        },
+        {
+            "case_id": "FRAUD002",
+            "date": "2024-07-03",
+            "transaction_amount": 3200.00,
+            "transaction_id": "TXN987655",
+            "account_number": "ACCT001234568",
+            "customer_id": "CUST002",
+            "location": "Los Angeles",
+            "fraud_type": "Account Takeover",
+            "description": "Account accessed from an unusual location.",
+            "status": "In Progress",
+            "investigator": "Jane Smith",
+            "resolution_date": None
+        },
+        {
+            "case_id": "FRAUD003",
+            "date": "2024-07-05",
+            "transaction_amount": 1500.00,
+            "transaction_id": "TXN987656",
+            "account_number": "ACCT001234569",
+            "customer_id": "CUST003",
+            "location": "Chicago",
+            "fraud_type": "Phishing Scam",
+            "description": "Unusual login attempts following a phishing email.",
+            "status": "Resolved",
+            "investigator": "Emily Davis",
+            "resolution_date": "2024-07-06"
+        },
+        {
+            "case_id": "FRAUD004",
+            "date": "2024-07-07",
+            "transaction_amount": 6000.00,
+            "transaction_id": "TXN987657",
+            "account_number": "ACCT001234570",
+            "customer_id": "CUST004",
+            "location": "Houston",
+            "fraud_type": "Identity Theft",
+            "description": "New account opened using stolen identity information.",
+            "status": "Resolved",
+            "investigator": "Michael Brown",
+            "resolution_date": "2024-07-08"
+        },
+        {
+            "case_id": "FRAUD005",
+            "date": "2024-07-10",
+            "transaction_amount": 2000.00,
+            "transaction_id": "TXN987658",
+            "account_number": "ACCT001234571",
+            "customer_id": "CUST005",
+            "location": "Miami",
+            "fraud_type": "Insurance Fraud",
+            "description": "False insurance claim detected after review.",
+            "status": "Resolved",
+            "investigator": "Laura Wilson",
+            "resolution_date": "2024-07-11"
+        }
+    ]
+}

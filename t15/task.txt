@@ -1,0 +1,5 @@
+67d459a7a902106a134d6df7
+
+67d723150ec701fbd21425fc
+
+Soy un manejador de un supermercado y mi jefe me esta pidiendo reorganizar los productos agrupándolos en secciones diferentes. Para esto, quiero desarrollar un programa con JavaScript que reciba un archivo JSON con un arreglo de strings (productos) no vacías y otro con un arreglo de strings (categorías) no vacías y sin espacios. Luego, el programa debe organizar los productos por la primer categoría que coincida e imprimir en consola un arreglo con las categorias y dentro de cada una los productos correspondientes. Para categorizar el producto se debe validar que la categoría esté incluida en la cadena de texto del producto sin importar mayúsculas. Dame el código completo sin comentarios y con solo una explicación de un párrafo.

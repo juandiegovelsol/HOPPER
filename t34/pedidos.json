@@ -1,0 +1,18 @@
+[
+  {
+    "id": "001",
+    "fecha": "20/03/2025",
+    "items": [
+      { "idProducto": "001", "cantidad": 3, "precio": 5100 },
+      { "idProducto": "003", "cantidad": 1, "precio": 1200 }
+    ]
+  },
+  {
+    "id": "002",
+    "fecha": "21/03/2025",
+    "items": [
+      { "idProducto": "001", "cantidad": 1, "precio": 4800 },
+      { "idProducto": "002", "cantidad": 1, "precio": 9000 }
+    ]
+  }
+]

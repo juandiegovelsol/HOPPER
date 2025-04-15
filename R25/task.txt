@@ -1,0 +1,52 @@
+67d44ba4f7493d01340015a0
+
+67e21c57a803f5a335d94369
+
+
+Estoy trabajando en una aplicación para hacer reservas en hoteles en Python, este permite hacer reservas por rangos de fecha, revisar disponibilidad por rangos de fecha y cancelar reservas, refactoriza el código para que sea lo más modular posible, por ejemplo reutilizar codigo para formatear las fechas, además agrega comentarios para que se pueda entender el flujo del código, por ultimo agrega los tipos de datos que reciben las funciones y agrega el tipo de retorno.
+
+```python
+from datetime import datetime, timedelta
+
+class Hotel:
+    def __init__(self, nombre, habitaciones):
+        self.nombre = nombre
+        self.habitaciones = {num: set() for num in habitaciones}
+
+    def _generar_rango_fechas(self, fecha_inicio, fecha_fin):
+        fecha_actual = fecha_inicio
+        fechas = set()
+        while fecha_actual <= fecha_fin:
+            fechas.add(fecha_actual.strftime("%d/%m/%Y"))
+            fecha_actual += timedelta(days=1)
+        return fechas
+
+    def reservar_habitacion(self, numero_habitacion, fecha_inicio, fecha_fin):
+        if numero_habitacion in self.habitaciones:
+            fechas_reserva = self._generar_rango_fechas(fecha_inicio, fecha_fin)
+            if not self.habitaciones[numero_habitacion].intersection(fechas_reserva):
+                self.habitaciones[numero_habitacion].update(fechas_reserva)
+                print(f"Habitación {numero_habitacion} reservada del {fecha_inicio.strftime('%d/%m/%Y')} al {fecha_fin.strftime('%d/%m/%Y')} en {self.nombre}.")
+            else:
+                print(f"Habitación {numero_habitacion} no disponible en {self.nombre} para el rango {fecha_inicio.strftime('%d/%m/%Y')} - {fecha_fin.strftime('%d/%m/%Y')}.")
+        else:
+            print(f"Habitación {numero_habitacion} no existe en {self.nombre}.")
+
+    def cancelar_reserva(self, numero_habitacion, fecha_inicio, fecha_fin):
+        if numero_habitacion in self.habitaciones:
+            fechas_reserva = self._generar_rango_fechas(fecha_inicio, fecha_fin)
+            if fechas_reserva.issubset(self.habitaciones[numero_habitacion]):
+                self.habitaciones[numero_habitacion].difference_update(fechas_reserva)
+                print(f"Reserva de la habitación {numero_habitacion} cancelada del {fecha_inicio.strftime('%d/%m/%Y')} al {fecha_fin.strftime('%d/%m/%Y')} en {self.nombre}.")
+            else:
+                print(f"No se puede cancelar la reserva. No todas las fechas del rango {fecha_inicio.strftime('%d/%m/%Y')} - {fecha_fin.strftime('%d/%m/%Y')} están reservadas.")
+        else:
+            print(f"Habitación {numero_habitacion} no existe en {self.nombre}.")
+
+    def habitaciones_disponibles(self, fecha_inicio, fecha_fin):
+        fechas_consulta = self._generar_rango_fechas(fecha_inicio, fecha_fin)
+        disponibles = [num for num, reservas in self.habitaciones.items() if not reservas.intersection(fechas_consulta)]
+        print(f"Habitaciones disponibles en {self.nombre} del {fecha_inicio.strftime('%d/%m/%Y')} al {fecha_fin.strftime('%d/%m/%Y')}: {disponibles}")
+        return disponibles
+
+```

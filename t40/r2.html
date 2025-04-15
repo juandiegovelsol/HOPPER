@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Juego Espacial</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #000;
+      }
+      #gameCanvas {
+        position: relative;
+        width: 600px;
+        height: 800px;
+        margin: 20px auto;
+        background-color: #111;
+        overflow: hidden;
+      }
+      #turret {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.1s;
+      }
+      .turret-body {
+        width: 100%;
+        height: 40px;
+        background-color: #bbb;
+        border-radius: 5px 5px 0 0;
+      }
+      .turret-cannon {
+        width: 6px;
+        height: 20px;
+        background-color: #ddd;
+        margin-top: 5px;
+        position: relative;
+      }
+      .ship {
+        position: absolute;
+        top: 0;
+        width: 30px;
+        height: 30px;
+      }
+      .friendly {
+        background-color: lightgreen;
+      }
+      .enemy {
+        background-color: lightcoral;
+      }
+      .ship-body {
+        width: 100%;
+        height: 100%;
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      }
+      .shot {
+        position: absolute;
+        width: 4px;
+        height: 10px;
+        background-color: yellow;
+      }
+      #score {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: white;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gameCanvas">
+      <div id="turret">
+        <div class="turret-cannon"></div>
+        <div class="turret-body"></div>
+      </div>
+      <div id="score">Puntaje: 0</div>
+    </div>
+
+    <script>
+      class Game {
+        constructor() {
+          this.gameCanvas = document.getElementById("gameCanvas");
+          this.turret = document.getElementById("turret");
+          this.scoreDisplay = document.getElementById("score");
+          this.score = 0;
+          this.turretRotation = 0;
+          this.shipWidth = 30;
+          this.shipHeight = 30;
+          this.shotSpeed = 5;
+          this.shipSpeed = 1;
+          this.ships = [];
+          this.shots = [];
+          this.running = true;
+
+          this.setupEventListeners();
+          this.startGameLoop();
+        }
+
+        setupEventListeners() {
+          document.addEventListener("keydown", (event) =>
+            this.handleKeyPress(event)
+          );
+        }
+
+        handleKeyPress(event) {
+          if (event.key === "ArrowLeft") {
+            this.turretRotation -= 10;
+          } else if (event.key === "ArrowRight") {
+            this.turretRotation += 10;
+          } else if (event.key === " ") {
+            if (this.turretRotation < 90 && this.turretRotation > -90) {
+              this.createShot();
+            }
+          }
+
+          this.turretRotation = Math.max(
+            -90,
+            Math.min(90, this.turretRotation)
+          );
+          this.turret.style.transform = `translateX(-50%) rotate(${this.turretRotation}deg)`;
+        }
+
+        updateScore(points) {
+          this.score += points;
+          this.scoreDisplay.textContent = `Puntaje: ${this.score}`;
+        }
+
+        createShip(type) {
+          const ship = document.createElement("div");
+          ship.classList.add("ship");
+          ship.classList.add(type);
+          ship.innerHTML = '<div class="ship-body"></div>';
+          const startX =
+            Math.random() * (this.gameCanvas.offsetWidth - this.shipWidth);
+          ship.style.left = `${startX}px`;
+          ship.style.top = `${-this.shipHeight}px`;
+          ship.dataset.type = type;
+          this.gameCanvas.appendChild(ship);
+          this.ships.push(ship);
+          this.moveShip(ship);
+        }
+
+        moveShip(ship) {
+          let currentTop = -this.shipHeight;
+          const canvasBottom = this.gameCanvas.offsetHeight;
+
+          const intervalId = setInterval(() => {
+            if (!this.running) {
+              clearInterval(intervalId);
+              return;
+            }
+
+            currentTop += this.shipSpeed;
+            ship.style.top = `${currentTop}px`;
+
+            if (currentTop > canvasBottom) {
+              clearInterval(intervalId);
+              this.handleShipBottom(ship);
+              ship.remove();
+              this.ships = this.ships.filter((s) => s !== ship);
+            }
+          }, 20);
+        }
+
+        handleShipBottom(ship) {
+          if (ship.dataset.type === "friendly") {
+            this.updateScore(1); // Sumar punto por llegar al fondo
+          }
+          // ya no se restan puntos por llegar al fondo
+          ship.remove(); // Se elimina la nave del juego
+        }
+
+        createShot() {
+          const shot = document.createElement("div");
+          shot.classList.add("shot");
+
+          const turretRect = this.turret.getBoundingClientRect();
+          const gameRect = this.gameCanvas.getBoundingClientRect();
+
+          const startX =
+            turretRect.left + turretRect.width / 2 - 2 - gameRect.left;
+          const startY = turretRect.top - gameRect.top;
+
+          shot.style.left = `${startX}px`;
+          shot.style.top = `${startY}px`;
+
+          const angleRad = (this.turretRotation * Math.PI) / 180;
+          shot.dataset.angle = angleRad;
+
+          this.gameCanvas.appendChild(shot);
+          this.shots.push(shot);
+          this.moveShot(shot);
+        }
+
+        moveShot(shot) {
+          if (!this.running) return;
+
+          let currentX = parseFloat(shot.style.left);
+          let currentY = parseFloat(shot.style.top);
+          const angle = parseFloat(shot.dataset.angle);
+
+          currentX += this.shotSpeed * Math.sin(angle);
+          currentY -= this.shotSpeed * Math.cos(angle);
+
+          shot.style.left = `${currentX}px`;
+          shot.style.top = `${currentY}px`;
+
+          if (
+            currentY < 0 ||
+            currentX < 0 ||
+            currentX > this.gameCanvas.offsetWidth
+          ) {
+            shot.remove();
+            this.shots = this.shots.filter((s) => s !== shot);
+            return;
+          }
+
+          if (this.checkCollision(shot)) {
+            return;
+          }
+
+          requestAnimationFrame(() => this.moveShot(shot));
+        }
+
+        checkCollision(shot) {
+          const shotRect = shot.getBoundingClientRect();
+
+          for (let i = 0; i < this.ships.length; i++) {
+            const ship = this.ships[i];
+            const shipRect = ship.getBoundingClientRect();
+
+            if (
+              shotRect.left < shipRect.right &&
+              shotRect.right > shipRect.left &&
+              shotRect.top < shipRect.bottom &&
+              shotRect.bottom > shipRect.top
+            ) {
+              this.handleShotHit(ship);
+              shot.remove();
+              this.shots = this.shots.filter((s) => s !== shot);
+              ship.remove();
+              this.ships = this.ships.filter((s) => s !== ship);
+              return true;
+            }
+          }
+
+          return false;
+        }
+
+        handleShotHit(ship) {
+          if (ship.dataset.type === "enemy") {
+            this.updateScore(1); // Sumar punto por hit a enemigo
+          } else if (ship.dataset.type === "friendly" && this.running) {
+            this.updateScore(-1); // Restar punto por hit a aliado
+          }
+          ship.remove(); // Se elimina la nave del juego
+        }
+
+        gameLoop() {
+          if (!this.running) return;
+
+          if (Math.random() < 0.01) {
+            const shipType = Math.random() < 0.5 ? "friendly" : "enemy";
+            this.createShip(shipType);
+          }
+
+          requestAnimationFrame(() => this.gameLoop());
+        }
+
+        startGameLoop() {
+          this.gameLoop();
+        }
+      }
+
+      const game = new Game();
+    </script>
+  </body>
+</html>

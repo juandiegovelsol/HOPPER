@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Entrenamiento de fórmula 1</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      .program-container {
+        text-align: center;
+      }
+      #instructions {
+        margin-bottom: 20px;
+      }
+      #circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 2px solid #333;
+        cursor: pointer;
+        background-color: transparent;
+        margin: 20px auto;
+      }
+      #results {
+        margin-top: 30px;
+        text-align: center;
+      }
+      #results h2 {
+        margin-bottom: 10px;
+      }
+      #ranking {
+        list-style: none;
+        padding: 0;
+      }
+      #ranking li {
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="program-container">
+      <p id="instructions">
+        Bienvenido, aprieta el círculo cuando estés listo. Aprieta nuevamente
+        cuando se vuelva rojo!
+      </p>
+      <div id="circle"></div>
+      <div id="results">
+        <h2>Clasificación de tiempos</h2>
+        <ul id="ranking"></ul>
+      </div>
+    </div>
+    <script>
+      const instructions = document.getElementById("instructions");
+      const circle = document.getElementById("circle");
+      const ranking = document.getElementById("ranking");
+      let startTime = null,
+        times = [],
+        active = false;
+
+      // Genera un retraso aleatorio entre 1 y 10 segundos (1000 a 10000 ms)
+      const getDelay = () => Math.random() * 9000 + 1000;
+
+      // Formatea el tiempo en milisegundos a un formato legible (mm:ss)
+      const format = (ms) => {
+        const sec = Math.floor(ms / 1000),
+          msec = ms % 1000;
+        return `${String(sec).padStart(2, "0")}:${String(msec).padStart(
+          3,
+          "0"
+        )}`;
+      };
+
+      // Actualiza la clasificación mostrando los mejores 10 tiempos
+      const updateRanking = () => {
+        const top10 = times
+          .slice()
+          //Ordena los tiempos de menor a mayor
+          .sort((a, b) => a - b)
+          .slice(0, 10);
+        ranking.innerHTML = "";
+        // Se muestra cada registro de la clasificación
+        top10.forEach((t) => {
+          const li = document.createElement("li");
+          li.textContent = format(t);
+          ranking.appendChild(li);
+        });
+      };
+
+      // Inicia la sesión de entrenamiento
+      const startSession = () => {
+        active = true;
+        circle.style.backgroundColor = "transparent";
+        instructions.textContent = "Prepárate...";
+
+        // Cambia el color del círculo y guarda el momento exacto
+        setTimeout(() => {
+          if (active) {
+            circle.style.backgroundColor = "red";
+            startTime = Date.now();
+            instructions.textContent = "Ahora!";
+          }
+          // Obtiene un tiempo aleatorio para el setTimeout
+        }, getDelay());
+      };
+
+      // Maneja el evento de clic en el círculo
+      circle.addEventListener("click", () => {
+        if (!active) {
+          // Si no está activo, inicia la sesión
+          startSession();
+        } else if (startTime) {
+          const reaction = Date.now() - startTime;
+          times.push(reaction);
+
+          // Actualiza el ranking con el nuevo tiempo
+          updateRanking();
+          active = false;
+          instructions.textContent = `Tu tiempo fue: ${format(
+            reaction
+          )}. Aprieta el círculo para intentarlo de nuevo.`;
+          circle.style.backgroundColor = "transparent";
+          startTime = null;
+        }
+      });
+    </script>
+  </body>
+</html>

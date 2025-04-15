@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gráfico de Precios con Media Móvil</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #toggleButton {
+        margin: 20px;
+        padding: 10px;
+        cursor: pointer;
+      }
+      canvas {
+        max-width: 90%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Gráfico de Precios con Media Móvil</h1>
+    <button id="toggleButton">Mostrar Media Móvil</button>
+    <canvas id="priceChart" width="800" height="400"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const generateRandomPrices = () =>
+        Array.from({ length: 289 }, () =>
+          (Math.random() * 100 + 100).toFixed(2)
+        );
+      const calculateMovingAverage = (prices, n = 10) =>
+        prices.map((_, idx, arr) =>
+          idx >= n
+            ? arr
+                .slice(idx - n, idx)
+                .reduce((a, b) => parseFloat(a) + parseFloat(b), 0) / n
+            : null
+        );
+
+      const prices = generateRandomPrices();
+      const movingAverages = calculateMovingAverage(prices).map((val) =>
+        val ? val.toFixed(2) : null
+      );
+
+      const ctx = document.getElementById("priceChart").getContext("2d");
+      const priceChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: Array.from({ length: prices.length }, (_, i) => i + 1),
+          datasets: [
+            {
+              label: "Precio",
+              data: prices,
+              borderColor: "blue",
+              fill: false,
+              pointRadius: 2,
+            },
+            {
+              label: "Media Móvil",
+              data: movingAverages,
+              borderColor: "red",
+              fill: false,
+              pointRadius: 2,
+              hidden: true,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: { display: true, title: { display: true, text: "Días" } },
+            y: {
+              display: true,
+              title: { display: true, text: "Precio (USD)" },
+            },
+          },
+        },
+      });
+
+      const toggleButton = document.getElementById("toggleButton");
+      toggleButton.addEventListener("click", function () {
+        const dataset = priceChart.data.datasets[1];
+        dataset.hidden = !dataset.hidden;
+        priceChart.update();
+        toggleButton.textContent = dataset.hidden
+          ? "Mostrar Media Móvil"
+          : "Ocultar Media Móvil";
+      });
+    </script>
+  </body>
+</html>

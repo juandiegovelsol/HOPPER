@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Saltos</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      #juego {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        background-color: #00bfa5;
+        border-radius: 50%;
+      }
+
+      .obstaculo {
+        position: absolute;
+        bottom: 0;
+        width: 50px;
+        height: 50px;
+        background-color: #ff4444;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="juego"></div>
+    <script>
+      const juego = document.getElementById("juego");
+      const intervalObstaculos = 2000;
+      let juegoIniciado = false;
+      let salto = false;
+      let obstaculos = [];
+      let intervalId;
+      let obstaculoId = 0;
+
+      document.addEventListener("keydown", (e) => {
+        if (e.code === "Space" && !juegoIniciado) {
+          juegoIniciado = true;
+          iniciarJuego();
+        } else if (e.code === "Space" && juegoIniciado) {
+          salto = true;
+        }
+      });
+
+      function iniciarJuego() {
+        crearObstaculo();
+        intervalId = setInterval(crearObstaculo, intervalObstaculos);
+      }
+
+      function crearObstaculo() {
+        const obstaculo = document.createElement("div");
+        obstaculo.className = "obstaculo";
+        obstaculo.style.left = `100%`;
+        obstaculo.id = obstaculoId++;
+        juego.appendChild(obstaculo);
+        obstaculos.push(obstaculo);
+      }
+
+      function moverObstaculos() {
+        obstaculos.forEach((obstaculo) => {
+          const rectObstaculo = obstaculo.getBoundingClientRect();
+          if (rectObstaculo.left < 0) {
+            juego.removeChild(obstaculo);
+            const index = obstaculos.indexOf(obstaculo);
+            obstaculos.splice(index, 1);
+          } else {
+            obstaculo.style.left = `${rectObstaculo.left - 2}px`;
+          }
+        });
+      }
+
+      function chequearColision() {
+        const rectJuego = juego.getBoundingClientRect();
+        obstaculos.forEach((obstaculo) => {
+          const rectObstaculo = obstaculo.getBoundingClientRect();
+          if (
+            rectJuego.left + 10 > rectObstaculo.left &&
+            rectJuego.left - 10 < rectObstaculo.left + rectObstaculo.width
+          ) {
+            if (
+              rectJuego.bottom + 10 > rectObstaculo.top &&
+              rectJuego.top - 10 < rectObstaculo.bottom
+            ) {
+              clearInterval(intervalId);
+              alert("Game Over");
+              location.reload();
+            }
+          }
+        });
+      }
+
+      function actualizarPosicion() {
+        if (salto) {
+          if (juego.offsetTop > 0) {
+            juego.style.top = `${juego.offsetTop - 2}px`;
+          } else {
+            salto = false;
+          }
+        } else {
+          if (juego.offsetTop < 90) {
+            juego.style.top = `${juego.offsetTop + 2}px`;
+          }
+        }
+      }
+
+      setInterval(() => {
+        if (juegoIniciado) {
+          moverObstaculos();
+          chequearColision();
+          actualizarPosicion();
+        }
+      }, 10);
+    </script>
+  </body>
+</html>

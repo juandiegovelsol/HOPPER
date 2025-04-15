@@ -1,0 +1,6 @@
+
+67d45c028ff752852e4674bd
+
+67dcf3998dafa5f83e3c2f7a
+
+Soy un desarrollador de videojuegos de una empresa ubicada en Santiago de Chile. Me pidieron desarrollar un juego para una página web con HTML, CSS, y JavaScript que tenga un personaje que salte con la tecla espaciadora y se mueva solo hacia arriba y hacia abajo, mientras el fondo se mueve hacia la izquierda simulando que el personaje se mueve hacia la derecha del fondo. En el fondo deben aparecer enemigos de forma continua solo a nivel del suelo y a la altura del salto del personaje y el jugador debe esquivarlos. El juego debe continuar indefinidamente hasta que el personaje choque con uno de los enemigos. Dame el código completo, sin comentarios y con una explicación cortita de un párrafo.

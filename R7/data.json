@@ -1,0 +1,8 @@
+{
+  "productos": [
+    { "id": 1, "nombre": "Manzana", "precio": 0.5 },
+    { "id": 2, "nombre": "Banana", "precio": 0.3 },
+    { "id": 3, "nombre": "Naranja", "precio": 0.4 }
+  ],
+  "mensaje": "Datos cargados exitosamente."
+}

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Breakout Game</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+
+      .game-container {
+        position: relative;
+        width: 80vw;
+        height: 60vh;
+        background-color: #fff;
+        border: 2px solid #000;
+        overflow: hidden;
+      }
+
+      .control-bar {
+        position: absolute;
+        bottom: 10px;
+        width: 30%;
+        height: 10px;
+        background-color: #000;
+        cursor: pointer;
+      }
+
+      .block {
+        position: absolute;
+        width: calc((80vw - 20px) / 10 - 2px);
+        height: 20px;
+        background-color: #f00;
+        border: 1px solid #000;
+      }
+
+      .ball {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #0f0;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game-container">
+      <div class="control-bar" tabindex="0"></div>
+      <div id="blocks">
+        <!-- Blocks will be generated here -->
+      </div>
+      <div class="ball" id="ball"></div>
+    </div>
+
+    <script>
+      const gameContainer = document.querySelector(".game-container");
+      const controlBar = document.querySelector(".control-bar");
+      const blocksContainer = document.getElementById("blocks");
+      const ball = document.getElementById("ball");
+
+      let blocks = [];
+      let ballDirection = { x: 1, y: -1 };
+      let ballPosition = {
+        x: gameContainer.clientWidth / 2,
+        y: gameContainer.clientHeight - 40,
+      };
+      let controlBarPosition = {};
+      let gameInterval;
+      let isGameActive = false;
+      let gameEnded = false;
+
+      function createBlocks() {
+        const blockWidth = (gameContainer.clientWidth - 2) / 10 - 2;
+        for (let i = 0; i < 30; i++) {
+          const block = document.createElement("div");
+          block.classList.add("block");
+          block.style.left = `${(i % 10) * (blockWidth + 2)}px`;
+          block.style.top = `${Math.floor(i / 10) * 22}px`;
+          block.style.width = `${blockWidth}px`;
+          blocksContainer.appendChild(block);
+          blocks.push(block);
+        }
+      }
+
+      function updateBallPosition() {
+        ballPosition.x += ballDirection.x;
+        ballPosition.y += ballDirection.y;
+
+        // Ball collision with walls
+        if (
+          ballPosition.x <= 0 ||
+          ballPosition.x + 10 >= gameContainer.clientWidth
+        ) {
+          ballDirection.x *= -1;
+        }
+        if (ballPosition.y <= 0) {
+          ballDirection.y *= -1;
+        }
+
+        // Get current control bar position directly from DOM
+        controlBarPosition = {
+          x: controlBar.offsetLeft,
+          y: controlBar.offsetTop,
+        };
+
+        // Ball collision with control bar
+        if (
+          ballPosition.y + 10 >= controlBarPosition.y &&
+          ballPosition.y <= controlBarPosition.y + 10 &&
+          ballPosition.x + 10 > controlBarPosition.x &&
+          ballPosition.x < controlBarPosition.x + controlBar.clientWidth
+        ) {
+          ballDirection.y *= -1;
+          // Ensure ball is above the bar after collision
+          if (ballPosition.y + 10 > controlBarPosition.y) {
+            ballPosition.y = controlBarPosition.y - 10;
+          }
+        }
+
+        // Ball collision with blocks
+        for (let i = blocks.length - 1; i >= 0; i--) {
+          if (
+            ballPosition.y <= blocks[i].offsetTop + 20 &&
+            ballPosition.y + 10 >= blocks[i].offsetTop &&
+            ballPosition.x + 10 > blocks[i].offsetLeft &&
+            ballPosition.x <
+              blocks[i].offsetLeft + parseInt(blocks[i].style.width)
+          ) {
+            ballDirection.y *= -1;
+            blocks[i].remove();
+            blocks.splice(i, 1);
+            break;
+          }
+        }
+
+        // Check win condition
+        if (blocks.length === 0) {
+          endGame(true);
+          return;
+        }
+
+        // Check lose condition
+        if (ballPosition.y + 10 >= gameContainer.clientHeight) {
+          gameEnded = true;
+          isGameActive = false;
+          clearInterval(gameInterval);
+          return;
+        }
+
+        ball.style.left = `${ballPosition.x}px`;
+        ball.style.top = `${ballPosition.y}px`;
+      }
+
+      function endGame(win) {
+        isGameActive = false;
+        gameEnded = true;
+        clearInterval(gameInterval);
+        const message = win ? "You Won!" : "You Lost!";
+        const overlay = document.createElement("div");
+        overlay.style.position = "absolute";
+        overlay.style.top = "0";
+        overlay.style.left = "0";
+        overlay.style.width = "100%";
+        overlay.style.height = "100%";
+        overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+        overlay.style.display = "flex";
+        overlay.style.justifyContent = "center";
+        overlay.style.alignItems = "center";
+
+        const text = document.createElement("div");
+        text.style.color = "#000";
+        text.style.fontSize = "2em";
+        text.textContent = message;
+        overlay.appendChild(text);
+
+        gameContainer.appendChild(overlay);
+      }
+
+      function startGame() {
+        if (isGameActive) return;
+
+        // Remove any existing game over overlay
+        const overlay = gameContainer.querySelector(
+          "div:not(.control-bar):not(#blocks):not(.ball)"
+        );
+        if (overlay) {
+          overlay.remove();
+        }
+
+        isGameActive = true;
+        gameEnded = false;
+        blocks.length = 0;
+        blocksContainer.innerHTML = "";
+        createBlocks();
+
+        // Initialize control bar position at center
+        const barWidth = controlBar.clientWidth;
+        const initialX = (gameContainer.clientWidth - barWidth) / 2;
+        controlBar.style.left = `${initialX}px`;
+
+        // Initialize ball position
+        ballPosition = {
+          x: gameContainer.clientWidth / 2,
+          y: gameContainer.clientHeight - 40,
+        };
+        ballDirection = { x: 1, y: -1 };
+        ball.style.left = `${ballPosition.x}px`;
+        ball.style.top = `${ballPosition.y}px`;
+
+        gameInterval = setInterval(updateBallPosition, 10);
+      }
+
+      function moveControlBar(event) {
+        if (gameEnded) {
+          startGame();
+          return;
+        }
+
+        if (!isGameActive && !gameEnded) {
+          startGame();
+        }
+
+        // Get current position directly from DOM
+        const currentX = controlBar.offsetLeft;
+        const step = 15;
+        let newX = currentX;
+
+        switch (event.key) {
+          case "ArrowLeft":
+            newX = Math.max(currentX - step, 0);
+            break;
+          case "ArrowRight":
+            newX = Math.min(
+              currentX + step,
+              gameContainer.clientWidth - controlBar.clientWidth
+            );
+            break;
+        }
+
+        // Update CSS position directly
+        controlBar.style.left = `${newX}px`;
+      }
+
+      // Initialize control bar position at center
+      function initializeControlBar() {
+        const barWidth = controlBar.clientWidth;
+        const initialX = (gameContainer.clientWidth - barWidth) / 2;
+        controlBar.style.left = `${initialX}px`;
+      }
+
+      // Call after the DOM has loaded
+      window.addEventListener("load", initializeControlBar);
+
+      controlBar.addEventListener("keydown", moveControlBar);
+      controlBar.focus();
+      startGame();
+    </script>
+  </body>
+</html>

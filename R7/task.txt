@@ -1,0 +1,19 @@
+67d45c972665e84b5915f438
+
+67dd941ac7adb008d678affd
+
+
+Soy analista de datos en una empresa de bolsa de valores, mis funciones son analizar y procesar la información de diversas criptomonedas para ayudar al equipo de inversiones a tomar decisiones de forma automática en la compra y venta de criptomonedas. Necesito un script en Javascript que lea archivos JSON, extraiga datos clave como nombre, precio actual(CLP), variación del último año y proyección de precio(CLP), y calcule la rentabilidad con la siguiente fórmula: Rentabilidad = ((Proyección - Precio Actual) / Precio Actual) * 100. Donde un valor positivo indica rentabilidad y uno negativo no rentabilidad. Luego de realizar los cálculos mostrar los resultados en un gráfico de barras donde en el eje X se muestren los nombres de las criptomonedas con un Angulo de 30 grados y en el eje Y la rentabilidad, ordenando las barras de menor a mayor para visualizar mejor las oportunidades de inversión. Utiliza la siguiente data de prueba:
+
+```JSON
+[
+    { "Nombre": "Bitcoin", "PrecioActual": 40000000, "VariacionAnual": -5000000, "Proyeccion": 45000000 },
+    { "Nombre": "Ethereum", "PrecioActual": 2500000, "VariacionAnual": 300000, "Proyeccion": 3200000 },
+    { "Nombre": "Cardano", "PrecioActual": 1200, "VariacionAnual": -200, "Proyeccion": 1500 },
+    { "Nombre": "Solana", "PrecioActual": 130000, "VariacionAnual": 20000, "Proyeccion": 160000 },
+    { "Nombre": "XRP", "PrecioActual": 700, "VariacionAnual": -100, "Proyeccion": 850 },
+    { "Nombre": "Polkadot", "PrecioActual": 18000, "VariacionAnual": -3000, "Proyeccion": 22000 },
+    { "Nombre": "Dogecoin", "PrecioActual": 60, "VariacionAnual": 10, "Proyeccion": 75 },
+    { "Nombre": "Shiba Inu", "PrecioActual": 0.03, "VariacionAnual": 0.002, "Proyeccion": 0.04 }
+]
+```

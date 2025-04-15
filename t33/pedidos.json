@@ -1,0 +1,18 @@
+[
+  {
+    "id": "01",
+    "fecha": "22/03/2025",
+    "items": [
+      { "idPlato": 1, "cantidad": 2, "precio": 8500 },
+      { "idPlato": 3, "cantidad": 1, "precio": 6300 }
+    ]
+  },
+  {
+    "id": "02",
+    "fecha": "22/03/2025",
+    "items": [
+      { "idPlato": 1, "cantidad": 1, "precio": 8500 },
+      { "idPlato": 2, "cantidad": 3, "precio": 7200 }
+    ]
+  }
+]

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Plátano</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+        background: #a9d9d0;
+      }
+
+      #juego {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .plátano {
+        width: 50px;
+        height: 50px;
+        background: yellow;
+        position: absolute;
+        bottom: 50px;
+        left: 50px;
+        border-radius: 50%;
+      }
+
+      .enemigo {
+        width: 50px;
+        height: 50px;
+        background: red;
+        position: absolute;
+        bottom: 50px;
+        left: 1200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="juego">
+      <div class="plátano" id="plátano"></div>
+      <div class="enemigo" id="enemigo1"></div>
+    </div>
+
+    <script>
+      const plátano = document.getElementById("plátano");
+      const suelo = document.getElementById("juego").offsetHeight - 50;
+      let salto = false;
+      let cayendo = false;
+      let velocidadCaída = 0;
+      let gravedad = 1;
+      let puntos = 0;
+      const enemigos = [...document.querySelectorAll(".enemigo")];
+
+      function moverPlátano() {
+        if (salto) {
+          if (plátano.offsetTop > 100) {
+            plátano.style.bottom = `${plátano.offsetBottom - 10}px`;
+            velocidadCaída += gravedad;
+          } else {
+            salto = false;
+            cayendo = true;
+          }
+        }
+
+        if (cayendo) {
+          if (plátano.offsetBottom < suelo) {
+            plátano.style.bottom = `${plátano.offsetBottom + 10}px`;
+            velocidadCaída += gravedad;
+          } else {
+            cayendo = false;
+          }
+        }
+
+        verificarColisiones();
+        requestAnimationFrame(moverPlátano);
+      }
+
+      function iniciarJuego() {
+        document.addEventListener("keydown", (e) => {
+          if (e.code === "Space") {
+            if (plátano.offsetBottom === suelo) {
+              salto = true;
+              cayendo = false;
+              velocidadCaída = 0;
+            }
+          }
+        });
+        requestAnimationFrame(moverPlátano);
+        setInterval(crearEnemigo, 2000);
+      }
+
+      function crearEnemigo() {
+        const enemigo = document.createElement("div");
+        enemigo.classList.add("enemigo");
+        enemigo.style.left = `${
+          document.getElementById("juego").offsetWidth
+        }px`;
+        document.getElementById("juego").appendChild(enemigo);
+        enemigos.push(enemigo);
+      }
+
+      function verificarColisiones() {
+        enemigos.forEach((enemigo, index) => {
+          if (
+            plátano.offsetBottom === parseInt(enemigo.style.bottom) &&
+            plátano.offsetLeft + 50 > parseInt(enemigo.style.left) &&
+            plátano.offsetLeft < parseInt(enemigo.style.left) + 50
+          ) {
+            enemigos.splice(index, 1);
+            document.querySelector(".enemigo").remove();
+            document.querySelector("body").innerHTML = "<h1>GAMEOVER</h1>";
+          }
+        });
+      }
+
+      iniciarJuego();
+    </script>
+  </body>
+</html>

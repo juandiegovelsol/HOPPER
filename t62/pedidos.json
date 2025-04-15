@@ -1,0 +1,33 @@
+[
+  {
+    "id": 1,
+    "total": 50,
+    "zapatos": {
+      "zapato 1": 1,
+      "zapato 2": 4
+    }
+  },
+  {
+    "id": 2,
+    "total": 130,
+    "zapatos": {
+      "zapato 3": 4,
+      "zapato 1": 5
+    }
+  },
+  {
+    "id": 3,
+    "total": 250,
+    "zapatos": {
+      "zapato 2": 10
+    }
+  },
+  {
+    "id": 4,
+    "total": 120,
+    "zapatos": {
+      "zapato 1": 1,
+      "zapato 2": 2
+    }
+  }
+]

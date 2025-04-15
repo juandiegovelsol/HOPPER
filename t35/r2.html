@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de la Resortera</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      #game-area {
+        position: relative;
+        width: 80vw;
+        height: 90vh;
+        background-color: #fff;
+        border: 2px solid #000;
+        overflow: hidden;
+      }
+
+      .item {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: #f00;
+        border-radius: 10px;
+      }
+
+      .projectile {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #000;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="game-area"></div>
+    <script>
+      const gameArea = document.getElementById('game-area');
+      const player = document.createElement('div');
+      player.style.position = 'absolute';
+      player.style.bottom = '20px';
+      player.style.left = '45%';
+      player.style.width = '20px';
+      player.style.height = '20px';
+      player.style.backgroundColor = '#00f';
+      player.style.borderRadius = '50%';
+      gameArea.appendChild(player);
+
+      let projectiles = [];
+      let items = [];
+      let gameInterval;
+      let playerX = 0;
+      const playerSpeed = 10;
+      const itemSpeed = 5;
+      const gravity = 1;
+
+      function startGame() {
+          gameArea.innerHTML = '';
+          gameArea.appendChild(player);
+          projectiles = [];
+          items = [];
+          playerX = 0;
+          document.addEventListener('keydown', movePlayer);
+          gameInterval = setInterval(gameLoop, 30);
+          itemInterval = setInterval(spawnItem, 2000);
+      }
+
+      function gameLoop() {
+          moveProjectiles();
+          moveItems();
+          detectCollisions();
+          checkGameOver();
+      }
+
+      function spawnItem() {
+          const item = document.createElement('div');
+          item.classList.add('item');
+          item.style.left = `${Math.random() * 80}vw`;
+          item.style.top = '0px';
+          items.push(item);
+          gameArea.appendChild(item);
+      }
+
+      function movePlayer(e) {
+          if (e.key === 'ArrowRight') playerX += playerSpeed;
+          if (e.key === 'ArrowLeft') playerX -= playerSpeed;
+          player.style.left = `${playerX}px`;
+      }
+
+      function moveProjectiles() {
+          projectiles.forEach((p, i) => {
+              p.style.top = (p.offsetTop - itemSpeed) + 'px';
+              if (p.offsetTop <= 0) {
+                  projectiles.splice(i, 1);
+              }
+          });
+      }
+
+      function moveItems() {
+          items.forEach((item, i) => {
+              item.style.top = (item.offsetTop + gravity) + 'px';
+              if (item.offsetTop > 90vh) {
+                  items.splice(i, 1);
+              }
+          });
+      }
+
+      function detectCollisions() {
+          projectiles.forEach((p, pi) => {
+              items.forEach((item, ii) => {
+                  if (
+                      p.offsetLeft < item.offsetLeft + item.offsetWidth &&
+                      p.offsetLeft + p.offsetWidth > item.offsetLeft &&
+                      p.offsetTop < item.offsetTop + item.offsetHeight &&
+                      p.offsetHeight + p.offsetTop > item.offsetTop
+                  ) {
+                      items.splice(ii, 1);
+                      projectiles.splice(pi, 1);
+                  }
+              });
+          });
+      }
+
+      function checkGameOver() {
+          items.forEach(item => {
+              if (item.offsetTop + item.offsetHeight > 90vh) {
+                  clearInterval(gameInterval);
+                  clearInterval(itemInterval);
+                  alert('Juego terminado');
+                  startGame();
+              }
+          });
+      }
+
+      document.addEventListener('keydown', (e) => {
+          if (e.key === ' ') {
+              const projectile = document.createElement('div');
+              projectile.classList.add('projectile');
+              projectile.style.left = `${playerX + 10}px`;
+              projectile.style.bottom = '0px';
+              projectiles.push(projectile);
+              gameArea.appendChild(projectile);
+          }
+      });
+
+      startGame();
+    </script>
+  </body>
+</html>

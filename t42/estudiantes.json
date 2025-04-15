@@ -1,0 +1,41 @@
+[
+  {
+    "id": 4001,
+    "nombre": "Laura Sánchez",
+    "semestre": 6,
+    "cursos": [
+      {
+        "id": 401,
+        "nombre": "Desarrollo Móvil",
+        "nota": 7.0
+      },
+      {
+        "id": 402,
+        "nombre": "Seguridad Informática",
+        "nota": 9.1
+      },
+      {
+        "id": 403,
+        "nombre": "Gestión de Proyectos",
+        "nota": 8.4
+      }
+    ]
+  },
+  {
+    "id": 4001,
+    "nombre": "Laura S.",
+    "semestre": 7,
+    "cursos": [
+      {
+        "id": 404,
+        "nombre": "Probabilidad y Estadística",
+        "nota": 7.8
+      },
+      {
+        "id": 405,
+        "nombre": "Economía para Ingenieros",
+        "nota": 8.5
+      }
+    ]
+  }
+]

@@ -1,0 +1,42 @@
+{
+  "id": 3,
+  "name": "Ana Garcia",
+  "guests": 3,
+  "table": "2B",
+  "status": "pendiente",
+  "invitationSent": false,
+  "phone": "555-5678"
+} 
+
+{ "error": "Datos inválidos" }
+
+{
+  "id": 1,
+  "name": "Ana Garcia",
+  "guests": 3,
+  "table": "2B",
+  "status": "confirmado",
+  "invitationSent": true,
+  "phone": "555-5678"
+}
+
+[
+  {
+    "id": 2,
+    "name": "Maria Lopez",
+    "guests": 1,
+    "table": "1B",
+    "status": "pendiente",
+    "invitationSent": false,
+    "phone": "555-5678"
+  },
+  {
+    "id": 3,
+    "name": "Ana Garcia",
+    "guests": 3,
+    "table": "2B",
+    "status": "pendiente",
+    "invitationSent": false,
+    "phone": "555-5678"
+  }
+]

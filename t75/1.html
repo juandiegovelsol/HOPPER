@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minijuego de Naves Espaciales</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      canvas {
+        background: black;
+        display: block;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="gameCanvas"></canvas>
+    <script>
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      let ship = {
+        x: canvas.width / 2,
+        y: canvas.height / 2,
+        angle: 0,
+        speed: 0,
+      };
+      let bullets = [];
+      let enemies = [];
+      let keys = {};
+
+      function update() {
+        if (keys["w"]) {
+          ship.x += Math.cos(ship.angle) * 5;
+          ship.y += Math.sin(ship.angle) * 5;
+        }
+        if (keys["s"]) {
+          ship.x -= Math.cos(ship.angle) * 2;
+          ship.y -= Math.sin(ship.angle) * 2;
+        }
+        if (keys["a"]) {
+          ship.angle -= 0.05;
+        }
+        if (keys["d"]) {
+          ship.angle += 0.05;
+        }
+        bullets.forEach((bullet) => {
+          bullet.x += Math.cos(bullet.angle) * 10;
+          bullet.y += Math.sin(bullet.angle) * 10;
+        });
+        bullets = bullets.filter(
+          (bullet) =>
+            bullet.x > 0 &&
+            bullet.x < canvas.width &&
+            bullet.y > 0 &&
+            bullet.y < canvas.height
+        );
+
+        enemies.forEach((enemy) => {
+          if (Math.random() < 0.01) {
+            enemy.shoot();
+          }
+          enemy.update();
+        });
+        enemies = enemies.filter((enemy) => enemy.alive);
+        checkCollisions();
+      }
+
+      function checkCollisions() {
+        bullets.forEach((bullet) => {
+          enemies.forEach((enemy) => {
+            if (Math.hypot(bullet.x - enemy.x, bullet.y - enemy.y) < 20) {
+              enemy.alive = false;
+              bullet.alive = false;
+            }
+          });
+        });
+        bullets = bullets.filter((bullet) => bullet.alive);
+        enemies.forEach((enemy) => {
+          if (Math.hypot(ship.x - enemy.x, ship.y - enemy.y) < 40) {
+            alert("Game Over");
+            document.location.reload();
+          }
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.translate(ship.x, ship.y);
+        ctx.rotate(ship.angle);
+        ctx.fillStyle = "white";
+        ctx.beginPath();
+        ctx.moveTo(10, 0);
+        ctx.lineTo(-10, -5);
+        ctx.lineTo(-10, 5);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+
+        bullets.forEach((bullet) => {
+          ctx.fillStyle = "yellow";
+          ctx.fillRect(bullet.x, bullet.y, 5, 5);
+        });
+
+        enemies.forEach((enemy) => {
+          ctx.fillStyle = "red";
+          ctx.fillRect(enemy.x, enemy.y, 30, 30);
+        });
+      }
+
+      document.addEventListener("keydown", (e) => {
+        keys[e.key] = true;
+      });
+      document.addEventListener("keyup", (e) => {
+        keys[e.key] = false;
+      });
+
+      function shoot() {
+        bullets.push({ x: ship.x, y: ship.y, angle: ship.angle, alive: true });
+      }
+
+      class Enemy {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.alive = true;
+        }
+        shoot() {
+          bullets.push({
+            x: this.x,
+            y: this.y,
+            angle: Math.atan2(ship.y - this.y, ship.x - this.x),
+            alive: true,
+          });
+        }
+        update() {
+          if (!this.alive) return;
+        }
+      }
+
+      setInterval(() => {
+        if (Math.random() < 0.02) {
+          enemies.push(
+            new Enemy(
+              Math.random() * canvas.width,
+              Math.random() * canvas.height
+            )
+          );
+        }
+      }, 1000);
+
+      document.addEventListener("keydown", (e) => {
+        if (e.code === "Space") {
+          shoot();
+        }
+      });
+
+      function gameLoop() {
+        update();
+        draw();
+        requestAnimationFrame(gameLoop);
+      }
+
+      gameLoop();
+    </script>
+  </body>
+</html>

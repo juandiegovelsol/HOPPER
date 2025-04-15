@@ -1,0 +1,91 @@
+67d3d14336d99bf7cd115adf
+
+67e7b17b9dc96f5b944b5477
+
+Trabajo para un hotel de Miami como desarrollador de software encargado. Uno de mis programadores desarrolló un programa para automatizar el cálculo del cobro de las penalidades a los diferentes huéspedes que tardan en entregar sus habitaciones, de acuerdo al tiempo que tardan en entregar la habitación en formato HH:MM:SS y a la tasa de cobro por hora en USD. El programa valida los datos, después calcula el monto a pagar para cada huésped y el total recaudado durante el día.
+
+```javascript
+const fs = require("fs");
+const readline = require("readline");
+
+function validarTiempo(tiempo) {
+  const regexFormato = /^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/;
+  if (!regexFormato.test(tiempo)) return false;
+
+  const partes = tiempo.split(":");
+  if (partes.length !== 3) return false;
+  const [horas, minutos, segundos] = partes.map(Number);
+  if (
+    !Number.isInteger(horas) ||
+    !Number.isInteger(minutos) ||
+    !Number.isInteger(segundos)
+  )
+    return false;
+  return (
+    horas >= 0 &&
+    horas < 24 &&
+    minutos >= 0 &&
+    minutos < 60 &&
+    segundos >= 0 &&
+    segundos < 60
+  );
+}
+
+function validarTasa(tasa) {
+  return parseFloat(tasa) > 0;
+}
+
+function calcularPenalidad(tiempo, tasa) {
+  const [horas, minutos, segundos] = tiempo.split(":").map(Number);
+  const totalHoras = horas + minutos / 60 + segundos / 3600;
+  return parseFloat(tasa) * totalHoras;
+}
+
+async function procesarCSV(rutaArchivo) {
+  const archivoStream = fs.createReadStream(rutaArchivo);
+  const lineas = readline.createInterface({ input: archivoStream });
+  const penalidades = {};
+  let totalPenalidades = 0;
+
+  for await (const linea of lineas) {
+    const [id, tiempo, tasa] = linea.split(",");
+    if (penalidades.hasOwnProperty(id)) continue;
+    if (!validarTiempo(tiempo) || !validarTasa(tasa)) continue;
+    const penalidad = calcularPenalidad(tiempo, tasa);
+    penalidades[id] = penalidad;
+    totalPenalidades += penalidad;
+  }
+
+  return { penalidades, totalPenalidades };
+}
+
+procesarCSV("huespedes.csv").then((resultados) => {
+  console.log("Penalidades por huésped:", resultados.penalidades);
+  console.log("Total de penalidades del día:", resultados.totalPenalidades);
+});
+```
+
+Necesito que me des el resultado de consola para cada una de las siguientes entradas (archivos CSV), y me des una explicación de cada salida. 
+
+Entrada 1
+
+```csv
+123,02:15:30,30
+1234A,10:45:00,50
+789,03:00:00,40
+```
+
+Entrada 2
+
+```csv
+AAA,2:15:30,30
+BBB,010:45:00,50
+CCC,03:00:00,40
+```
+
+Entrada 3
+```csv
+123,02:15:30,30
+123,010:45:00,-50
+123,03:00:00,-40
+```

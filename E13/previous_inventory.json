@@ -1,0 +1,20 @@
+[
+  {
+    "store_id": "001",
+    "location": "Downtown",
+    "products": {
+      "Shampoo": 30,
+      "Toothpaste": 20,
+      "Soap": 50
+    }
+  },
+  {
+    "store_id": "002",
+    "location": "Downtown",
+    "products": {
+      "Shampoo": 10,
+      "Toothpaste": 30,
+      "Soap": 20
+    }
+  }
+]

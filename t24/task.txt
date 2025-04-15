@@ -1,0 +1,5 @@
+67d463bb2faab6d8c845e552
+
+67dce6f92047e30f8622ca59
+
+Quiero desarrollar una calculadora de mi consumo eléctrico con React, JavaScript y CSS que me permita saber un aproximado de mi factura a fin de mes. La calculadora debe tener un formulario para ingresar y validar el nombre del electródomestico (no vacío), la cantidad del mismo electrodoméstico (entero positivo), el consumo unitario en Wh (número positivo) y la cantidad de horas que se usa cada uno al día. Al presionar un botón de Agregar se debe incluir el nuevo registro. También, la interfaz debe tener un campo para ingresar el costo del KWh en pesos chilenos. Debajo, se debe mostrar una tabla con todos los electrodomésticos ingresados, el cálculo de consumo en KWh mensual (30 dias) de cada fila, el cálculo de consumo en pesos de cada fila, y debajo de toda la tabla el total de consumo mensual en KWh y en pesos. Dame el código completo sin comentarios junto con sólo una explicación breve.

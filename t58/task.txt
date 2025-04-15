@@ -1,0 +1,5 @@
+67d46c59f06dab165216a2fe
+
+67e22ab71f0e3692a4e09f2b
+
+Trabajo para un centro de desarrollo web en Miami y quiero implementar una interfaz visual con React y JavaScript que me permita tener un control sobre los proyectos que me encuentro desarrollando. Quiero que haya una interfaz con 3 columnas: proyectos por iniciar, en ejecución y terminados. La interfaz me debe permitir agregar nuevos proyectos ingresando un nombre a cada uno a través de un formulario con un botón. Debe mostrar cada proyecto ubicado en una de las 3 columnas y permitirme arrastrar y soltar los proyectos como yo los desee mover entre las 3 opciones. Al añadir un nuevo proyecto, este se debe ubicar en la columna de proyectos por iniciar. Dame el código completo sin comentarios, dame estilos de CSS para darle una apariencia visual trabajada, y una explicación breve de un párrafo de cómo funciona el código.

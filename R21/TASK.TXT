@@ -1,0 +1,26 @@
+67d4618dca04a28b6f6facdd
+
+67e21ca7892e6dfba92384ad
+
+
+Necesito crear un archivo para llevar un registro de los ingresos proporcionados mensualmente por las diferentes atracciones turísticas de París. Las columnas deben ser: 'Total Visitantes', 'Ingresos Generados', 'Tarifa de Entrada (CLP)', 'Atracción', 'Visitantes Iniciales', 'Visitantes Adicionales', 'ID'. Utilizando Javascript crear un código que contenga las siguientes funciones primero obtener el total de visitantes para esto se debe considera que 'Total Visitantes' debe calcularse agrupando cada atracción la cual tiene un id único y luego sumando 'Visitantes Iniciales' y 'Visitantes Adicionales', luego crear una funcion para determinar los ingresos generados para cada atracción que serán calculados multiplicando el total de visitantes por la tarifa de entrada. Por ultimo  luego de determinar los valores del total visitantes y  los ingresos generados, determinar el ranking de atracciones por rentabilidad y con ese dato ordenar el listado de salida de forma descendente. Los resultados deben ser mostrados en una lista donde la primera columna debe ser 'ID' y las dos ultimas deben ser 'Total Visitantes' y 'Ingresos Generados', las columnas restantes pueden tener cualquier orden.
+
+considera los siguientes datos para realizar las pruebas:
+
+| ID  | Atracción                 | Visitantes Adicionales | Visitantes Iniciales | Tarifa de Entrada (CLP) |
+|-----|---------------------------|----------------------|----------------------|----------------------|
+| 001 | Torre Eiffel              | 30000               | 120000               | 12000                |
+| 002 | Museo del Louvre          | 25000               | 180000               | 10500                |
+| 003 | Catedral de Notre Dame    | 12000               | 95000                | 8000                 |
+| 004 | Arco de Triunfo           | 10000               | 85000                | 7500                 |
+| 005 | Palacio de Versalles      | 35000               | 140000               | 11000                |
+| 006 | Montmartre                | 9000                | 75000                | 5000                 |
+| 001 | Torre Eiffel              | 28000               | 115000               | 12000                |
+| 002 | Museo del Louvre          | 27000               | 175000               | 10500                |
+| 003 | Catedral de Notre Dame    | 11000               | 94000                | 8000                 |
+| 004 | Arco de Triunfo           | 12000               | 86000                | 7500                 |
+| 005 | Palacio de Versalles      | 37000               | 138000               | 11000                |
+| 006 | Montmartre                | 9500                | 73000                | 5000                 |
+| 001 | Torre Eiffel              | 31000               | 122000               | 12000                |
+| 002 | Museo del Louvre          | 26000               | 185000               | 10500                |
+| 003 | Catedral de Notre Dame    | 11500               | 93000                | 8000                 |

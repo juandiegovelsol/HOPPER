@@ -1,0 +1,40 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.game-container {
+  width: 500px;
+  height: 500px;
+  border: 2px solid #000;
+  display: grid;
+  grid-template-columns: repeat(10, 50px);
+  grid-template-rows: repeat(10, 50px);
+}
+
+.player,
+.objective,
+.enemy {
+  width: 50px;
+  height: 50px;
+}
+
+.player {
+  background-color: #00f;
+}
+
+.objective {
+  background-color: #0f0;
+}
+
+.enemy {
+  background-color: #f00;
+}
+
+#restart-button {
+  display: none;
+}

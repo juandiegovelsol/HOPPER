@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1001,
+    "fecha": "10/01/2025",
+    "dispositivos": [
+      { "idDispositivo": 0, "horasUso": 5.5, "potenciaKW": 1.2 },
+      { "idDispositivo": 2, "horasUso": 2.0, "potenciaKW": 0.8 }
+    ]
+  },
+  {
+    "id": 1002,
+    "fecha": "11/01/2025",
+    "dispositivos": [
+      { "idDispositivo": 0, "horasUso": 4.0, "potenciaKW": 1.2 },
+      { "idDispositivo": 1, "horasUso": 8.5, "potenciaKW": 0.5 }
+    ]
+  }
+]

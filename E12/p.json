@@ -1,0 +1,172 @@
+{
+  "informes_diarios": [
+    {
+      "ID de ubicación": "L001",
+      "Nombre de la ubicación": "Deli en el centro",
+      "Fecha": "2024-08-14",
+      "Inventario utilizado": [
+        {
+          "Nombre del ingrediente": "Lechuga",
+          "Cantidad utilizada": 5,
+          "Unidad de medida": "kg"
+        },
+        {
+          "Nombre del ingrediente": "Tomates",
+          "Cantidad utilizada": 3,
+          "Unidad de medida": "kg"
+        },
+        {
+          "Nombre del ingrediente": "Pechuga de pollo",
+          "Cantidad utilizada": 10,
+          "Unidad de medida": "kg"
+        }
+      ],
+      "Inventario restante": [
+        {
+          "Nombre del ingrediente": "Lechuga",
+          "Cantidad restante": 15,
+          "Unidad de medida": "kg"
+        },
+        {
+          "Nombre del ingrediente": "Tomates",
+          "Cantidad restante": 7,
+          "Unidad de medida": "kg"
+        },
+        {
+          "Nombre del ingrediente": "Pechuga de pollo",
+          "Cantidad restante": 20,
+          "Unidad de medida": "kg"
+        }
+      ],
+      "Datos de ventas": [
+        {
+          "Artículo de menú": "Ensalada de pollo",
+          "Cantidad vendida": 30,
+          "Precio por artículo": 8.99
+        },
+        {
+          "Artículo de menú": "Sándwich BLT",
+          "Cantidad vendida": 25,
+          "Precio por artículo": 7.99
+        },
+        {
+          "Artículo de menú": "Wrap de pollo a la parrilla",
+          "Cantidad vendida": 20,
+          "Precio por artículo": 9.99
+        }
+      ]
+    },
+    {
+      "ID de ubicación": "L002",
+      "Nombre de la ubicación": "Uptown Bistro",
+      "Fecha": "2024-08-14",
+      "Inventario utilizado": [
+        {
+          "Nombre del ingrediente": "Lechuga",
+          "Cantidad utilizada": 4,
+          "Unidad de medida": "kg"
+        },
+        {
+          "Nombre del ingrediente": "Tomates",
+          "Cantidad utilizada": 2,
+          "Unidad de medida": "kg"
+        },
+        {
+          "Nombre del ingrediente": "Pechuga de pollo",
+          "Cantidad utilizada": 12,
+          "Unidad de medida": "kg"
+        }
+      ],
+      "Inventario restante": [
+        {
+          "Nombre del ingrediente": "Lechuga",
+          "Cantidad restante": 16,
+          "Unidad de medida": "kg"
+        },
+        {
+          "Nombre del ingrediente": "Tomates",
+          "Cantidad restante": 8,
+          "Unidad de medida": "kg"
+        },
+        {
+          "Nombre del ingrediente": "Pechuga de pollo",
+          "Cantidad restante": 18,
+          "Unidad de medida": "kg"
+        }
+      ],
+      "Datos de ventas": [
+        {
+          "Artículo de menú": "Ensalada César con pollo",
+          "Cantidad vendida": 35,
+          "Precio por artículo": 10.99
+        },
+        {
+          "Artículo de menú": "Club Sandwich de pavo",
+          "Cantidad vendida": 28,
+          "Precio por artículo": 8.99
+        },
+        {
+          "Artículo de menú": "Tacos de pollo",
+          "Cantidad vendida": 18,
+          "Precio por artículo": 9.49
+        }
+      ]
+    },
+    {
+      "ID de ubicación": "L003",
+      "Nombre de la ubicación": "Restaurante Midtown",
+      "Fecha": "2024-08-14",
+      "Inventario utilizado": [
+        {
+          "Nombre del ingrediente": "Lechuga",
+          "Cantidad utilizada": 6,
+          "Unidad de medida": "kg"
+        },
+        {
+          "Nombre del ingrediente": "Tomates",
+          "Cantidad utilizada": 4,
+          "Unidad de medida": "kg"
+        },
+        {
+          "Nombre del ingrediente": "Pechuga de pollo",
+          "Cantidad utilizada": 15,
+          "Unidad de medida": "kg"
+        }
+      ],
+      "Inventario restante": [
+        {
+          "Nombre del ingrediente": "Lechuga",
+          "Cantidad restante": 14,
+          "Unidad de medida": "kg"
+        },
+        {
+          "Nombre del ingrediente": "Tomates",
+          "Cantidad restante": 6,
+          "Unidad de medida": "kg"
+        },
+        {
+          "Nombre del ingrediente": "Pechuga de pollo",
+          "Cantidad restante": 15,
+          "Unidad de medida": "kg"
+        }
+      ],
+      "Datos de ventas": [
+        {
+          "Artículo de menú": "Ensalada Cobb",
+          "Cantidad vendida": 40,
+          "Precio por artículo": 12.99
+        },
+        {
+          "Artículo de menú": "Sándwich de pollo a la barbacoa",
+          "Cantidad vendida": 30,
+          "Precio por artículo": 10.99
+        },
+        {
+          "Artículo de Menú": "Quesadilla de Pollo",
+          "Cantidad Vendida": 25,
+          "Precio por Artículo": 11.49
+        }
+      ]
+    }
+  ]
+}

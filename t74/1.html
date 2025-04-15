@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rompe Ladrillos Elegante</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: linear-gradient(135deg, #1a1a1a, #4a4a4a);
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
+
+      .contenedor-juego {
+        position: relative;
+        width: 80vw;
+        height: 60vh;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        backdrop-filter: blur(5px);
+      }
+
+      .barra-control {
+        position: absolute;
+        bottom: 20px;
+        width: 30%;
+        height: 8px;
+        background: linear-gradient(90deg, #00ff88, #00ffcc);
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+      }
+
+      .bloque {
+        position: absolute;
+        width: calc((80vw - 20px) / 10 - 2px);
+        height: 20px;
+        background: linear-gradient(45deg, #ff3366, #ff6b6b);
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .bola {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        background: #ffffff;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      }
+
+      .capa-juego {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        backdrop-filter: blur(3px);
+      }
+
+      .mensaje {
+        color: #ffffff;
+        font-size: 2.5em;
+        padding: 30px 50px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="contenedor-juego">
+      <div class="barra-control" tabindex="0"></div>
+      <div id="bloques"></div>
+      <div class="bola" id="bola"></div>
+    </div>
+
+    <script>
+      const contenedorJuego = document.querySelector(".contenedor-juego"); // Contenedor del juego
+      const barraControl = document.querySelector(".barra-control"); // Barra de control
+      const contenedorBloques = document.getElementById("bloques"); // Contenedor de los bloques
+      const bola = document.getElementById("bola"); // Bola
+
+      let bloques = []; // Arreglo de bloques en el juego
+      let direccionBola = { x: 1, y: -1 }; // Dirección inicial de la bola
+      let posicionBola = {
+        x: contenedorJuego.clientWidth / 2,
+        y: contenedorJuego.clientHeight - 40,
+      }; // Posición inicial de la bola
+      let intervaloJuego; // Intervalo para actualizar el movimiento de la bola
+      let juegoActivo = false; // Estado del juego (en progreso o detenido)
+      let juegoTerminado = false; // Estado del juego (terminado o no)
+
+      function crearBloques() {
+        const anchoBloques = (contenedorJuego.clientWidth - 2) / 10 - 2; // Define el ancho de cada bloque
+        for (let i = 0; i < 30; i++) {
+          const bloque = document.createElement("div"); // Creación de cada bloque
+          bloque.classList.add("bloque");
+          bloque.style.left = `${(i % 10) * (anchoBloques + 2)}px`;
+          bloque.style.top = `${Math.floor(i / 10) * 22}px`;
+          bloque.style.width = `${anchoBloques}px`;
+          contenedorBloques.appendChild(bloque);
+          bloques.push(bloque);
+        }
+      }
+
+      function actualizarPosicionBola() {
+        // Constante para detección de colisión de la bola con la barra
+        const posicionBarra = {
+          x: barraControl.offsetLeft,
+          y: barraControl.offsetTop,
+        };
+
+        posicionBola.x += direccionBola.x;
+        posicionBola.y += direccionBola.y;
+
+        if (
+          posicionBola.x <= 0 ||
+          posicionBola.x + 12 >= contenedorJuego.clientWidth
+        ) {
+          direccionBola.x *= -1;
+        }
+
+        if (posicionBola.y <= 0) {
+          direccionBola.y *= -1;
+        }
+
+        if (
+          posicionBola.y + 12 >= posicionBarra.y &&
+          posicionBola.y <= posicionBarra.y + 8 &&
+          posicionBola.x + 12 > posicionBarra.x &&
+          posicionBola.x < posicionBarra.x + barraControl.clientWidth
+        ) {
+          direccionBola.y *= -1;
+          if (posicionBola.y + 12 > posicionBarra.y) {
+            posicionBola.y = posicionBarra.y - 12;
+          }
+        }
+
+        for (let i = bloques.length - 1; i >= 0; i--) {
+          if (
+            posicionBola.y <= bloques[i].offsetTop + 20 &&
+            posicionBola.y + 12 >= bloques[i].offsetTop &&
+            posicionBola.x + 12 > bloques[i].offsetLeft &&
+            posicionBola.x <
+              bloques[i].offsetLeft + parseInt(bloques[i].style.width)
+          ) {
+            direccionBola.y *= -1;
+            bloques[i].remove();
+            bloques.splice(i, 1);
+            break;
+          }
+        }
+
+        if (bloques.length === 0) {
+          terminarJuego(true);
+          return;
+        }
+
+        if (posicionBola.y + 12 >= contenedorJuego.clientHeight) {
+          terminarJuego(false);
+          return;
+        }
+
+        bola.style.left = `${posicionBola.x}px`;
+        bola.style.top = `${posicionBola.y}px`;
+      }
+
+      function terminarJuego(victoria) {
+        const mensaje = victoria ? "¡Victoria!" : "¡Fin del Juego!"; // Mensaje para mostrar al fin del juego
+        const capaExistente = document.querySelector(".capa-juego"); // Selección de capa existente
+        const capa = document.createElement("div"); // Creación de nueva capa
+        const divMensaje = document.createElement("div"); // Creación de elemento para mensaje
+
+        juegoActivo = false;
+        juegoTerminado = true;
+        clearInterval(intervaloJuego);
+
+        if (capaExistente) {
+          capaExistente.remove();
+        }
+
+        capa.className = "capa-juego";
+        divMensaje.className = "mensaje";
+        divMensaje.textContent = mensaje;
+
+        capa.appendChild(divMensaje);
+        contenedorJuego.appendChild(capa);
+      }
+
+      function iniciarJuego() {
+        const capa = document.querySelector(".capa-juego"); // Selección de capa con mensaje
+        const anchoBarra = barraControl.clientWidth; // Ancho de la barra
+        const xInicial = (contenedorJuego.clientWidth - anchoBarra) / 2; // Posición inicial de la barra
+
+        if (juegoActivo) return;
+        if (capa) {
+          capa.remove();
+        }
+
+        juegoActivo = true;
+        juegoTerminado = false;
+        bloques.length = 0;
+        contenedorBloques.innerHTML = "";
+        crearBloques();
+        barraControl.style.left = `${xInicial}px`;
+
+        posicionBola = {
+          x: contenedorJuego.clientWidth / 2,
+          y: contenedorJuego.clientHeight - 40,
+        };
+        direccionBola = { x: 1, y: -1 };
+        bola.style.left = `${posicionBola.x}px`;
+        bola.style.top = `${posicionBola.y}px`;
+
+        intervaloJuego = setInterval(actualizarPosicionBola, 10);
+      }
+
+      function moverBarraControl(evento) {
+        const xActual = barraControl.offsetLeft; // Posición actual de la barra
+        const paso = 15; // Paso para mover la barra
+        let nuevoX = xActual; // Inicializar posición nueva de la barra
+
+        if (juegoTerminado) {
+          iniciarJuego();
+          return;
+        }
+
+        if (!juegoActivo && !juegoTerminado) {
+          iniciarJuego();
+        }
+
+        switch (evento.key) {
+          case "ArrowLeft":
+            nuevoX = Math.max(xActual - paso, 0);
+            break;
+          case "ArrowRight":
+            nuevoX = Math.min(
+              xActual + paso,
+              contenedorJuego.clientWidth - barraControl.clientWidth
+            );
+            break;
+        }
+
+        barraControl.style.left = `${nuevoX}px`;
+      }
+
+      function inicializarBarraControl() {
+        const anchoBarra = barraControl.clientWidth; // Ancho de la barra
+        const xInicial = (contenedorJuego.clientWidth - anchoBarra) / 2; // Posición de la barra
+        barraControl.style.left = `${xInicial}px`;
+      }
+
+      document.addEventListener("keydown", function (evento) {
+        if (
+          juegoTerminado &&
+          (evento.key === "ArrowLeft" || evento.key === "ArrowRight")
+        ) {
+          iniciarJuego();
+        } else {
+          moverBarraControl(evento);
+        }
+      });
+
+      window.addEventListener("load", inicializarBarraControl);
+      barraControl.addEventListener("keydown", moverBarraControl);
+      barraControl.focus();
+      iniciarJuego();
+    </script>
+  </body>
+</html>

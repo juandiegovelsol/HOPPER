@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gráficos de Interacción</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      #chart1,
+      #chart2 {
+        width: 90%;
+        margin: 20px auto;
+        height: 400px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Visualización de Datos de Interacción en Redes Sociales</h2>
+
+    <div>
+      <h3>Porcentaje de Interacciones por Red Social (Día Actual)</h3>
+      <canvas id="chart1"></canvas>
+    </div>
+
+    <div>
+      <h3>Cambio de Interacciones en los Últimos 7 Días</h3>
+      <canvas id="chart2"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      // Datos simulados para el gráfico circular
+      const data1 = {
+        labels: ["Red A", "Red B", "Red C"],
+        datasets: [
+          {
+            data: [40, 35, 25], // Porcentaje de interacciones para el día actual
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.8)",
+              "rgba(54, 162, 235, 0.8)",
+              "rgba(255, 206, 86, 0.8)",
+            ],
+          },
+        ],
+      };
+
+      const config1 = {
+        type: "pie",
+        data: data1,
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: "Porcentaje de Interacciones por Red Social (Día Actual)",
+            },
+          },
+        },
+      };
+
+      // Datos simulados para el gráfico de barras
+      const data2 = {
+        labels: ["Día 1", "Día 2", "Día 3", "Día 4", "Día 5", "Día 6", "Día 7"],
+        datasets: [
+          {
+            label: "Red A",
+            data: [20, 25, 30, 15, 20, 30, 25], // Interacciones por día para Red A
+            backgroundColor: "rgba(255, 99, 132, 0.5)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            stack: "Stack 1",
+          },
+          {
+            label: "Red B",
+            data: [15, 20, 25, 10, 15, 25, 20], // Interacciones por día para Red B
+            backgroundColor: "rgba(54, 162, 235, 0.5)",
+            borderColor: "rgba(54, 162, 235, 1)",
+            stack: "Stack 1",
+          },
+          {
+            label: "Red C",
+            data: [10, 15, 20, 5, 10, 15, 10], // Interacciones por día para Red C
+            backgroundColor: "rgba(255, 206, 86, 0.5)",
+            borderColor: "rgba(255, 206, 86, 1)",
+            stack: "Stack 1",
+          },
+        ],
+      };
+
+      const config2 = {
+        type: "bar",
+        data: data2,
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: "Cambio de Interacciones en los Últimos 7 Días",
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      };
+
+      // Renderizar los gráficos
+      const ctx1 = document.getElementById("chart1").getContext("2d");
+      new Chart(ctx1, config1);
+
+      const ctx2 = document.getElementById("chart2").getContext("2d");
+      new Chart(ctx2, config2);
+    </script>
+  </body>
+</html>

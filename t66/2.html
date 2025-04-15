@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gráficos de Interacción</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      .chart-container {
+        width: 45%;
+        display: inline-block;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chart-container">
+      <canvas id="pieChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="barChart"></canvas>
+    </div>
+
+    <script>
+      const pieCtx = document.getElementById("pieChart").getContext("2d");
+      const barCtx = document.getElementById("barChart").getContext("2d");
+      const todayData = {
+        A: Math.floor(Math.random() * 100),
+        B: Math.floor(Math.random() * 100),
+        C: Math.floor(Math.random() * 100),
+      };
+      const totalToday = todayData.A + todayData.B + todayData.C;
+
+      new Chart(pieCtx, {
+        type: "pie",
+        data: {
+          labels: ["Red Social A", "Red Social B", "Red Social C"],
+          datasets: [
+            {
+              data: [
+                ((todayData.A / totalToday) * 100).toFixed(2),
+                ((todayData.B / totalToday) * 100).toFixed(2),
+                ((todayData.C / totalToday) * 100).toFixed(2),
+              ],
+              backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+            },
+          ],
+        },
+      });
+
+      const pastWeekData = [];
+      for (let i = 0; i < 7; i++) {
+        pastWeekData.push({
+          day: `Día ${i + 1}`,
+          A: Math.floor(Math.random() * 100),
+          B: Math.floor(Math.random() * 100),
+          C: Math.floor(Math.random() * 100),
+        });
+      }
+      console.log(pastWeekData);
+
+      new Chart(barCtx, {
+        type: "bar",
+        data: {
+          labels: pastWeekData.map((data) => data.day),
+          datasets: [
+            {
+              label: "Red Social A",
+              data: pastWeekData.map((data) => data.A),
+              backgroundColor: "#FF6384",
+            },
+            {
+              label: "Red Social B",
+              data: pastWeekData.map((data) => data.B),
+              backgroundColor: "#36A2EB",
+            },
+            {
+              label: "Red Social C",
+              data: pastWeekData.map((data) => data.C),
+              backgroundColor: "#FFCE56",
+            },
+          ],
+        },
+        options: {
+          scales: {
+            x: { stacked: true },
+            y: { beginAtZero: true },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

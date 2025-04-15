@@ -1,0 +1,5 @@
+67d46b6b0d2cc42fa1841c5b
+
+67e86decc21dc6dbaaee1f29
+
+Soy un ingeniero informático especializado en desarrollo web y trabajo para un estudio de desarrollo en los Estados Unidos. Me pidieron hacer una página web interactiva en la cual visualizar los precios en USD de un activo como puntos en un gráfico. Los precios son obtenidos normalmente de una API pero para poder implementar la solución quiero que me ayudes a generar 289 valores del precio del activo. La gráfica debe representar los precios en el eje vertical. Quiero además implementar un botón para activar o desactivar un indicador de media móvil de los 10 datos anteriores, calculada a partir del dato 11 hasta el último dato obtenido, los valores de la media móvil deben aparecer como puntos pero de otro color para poder entender la diferencia. Dame el código completo de HTML, CSS y JavaScript, sin comentarios en el código y con una explicación de un párrafo.

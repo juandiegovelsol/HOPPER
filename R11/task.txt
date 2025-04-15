@@ -1,0 +1,9 @@
+67d45cbcfa9a84431a821938
+
+67dce6f69d5a769698dd67c0
+
+Soy un desarrollador de software trabajando como consultor para una cadena de bares a lo largo de Chile. En todos estos bares, los baristas realizan un seguimiento de la cuenta de cada cliente usando papel y lápiz. Esto lleva a errores de escritura y, por ende, pérdidas económicas para la empresa.
+Necesito un programa escrito en Swift que provea una interfaz en la terminal, y que permita a los baristas registrar nuevas cuentas, agregar bebidas a cuentas existentes, listar todas las cuentas (con cantidad de bebidas asignadas) y cerrar cuentas. 
+Para crear una cuenta, se requiere la fecha actual (esta debe ser validada, y estar en formato DD/MM/YYYY), y el código de identificación del cliente (que también debe ser validado). Este debe ser el número de pasaporte. 
+El programa debe validar que la identificación ingresada sea válida, es decir, que la entrada siga el formato "LLNNNNNNN", donde 'L' es una letra, y 'N' es un dígito para el pasaporte.
+Para agregar bebidas a cuentas existentes, el barista sólo debe proporcionar un número (no negativo) que representa el tipo de bebida.

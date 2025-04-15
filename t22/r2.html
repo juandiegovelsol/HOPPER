@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de memoria</title>
+    <style>
+      .container {
+        display: flex;
+        gap: 20px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(5, 50px);
+        grid-template-rows: repeat(5, 50px);
+        gap: 5px;
+      }
+      .cell {
+        width: 50px;
+        height: 50px;
+        border: 1px solid black;
+        cursor: pointer;
+      }
+      .colored {
+        background-color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Juego de memoria</h1>
+    <div class="container">
+      <div id="leftGrid" class="grid"></div>
+      <div id="rightGrid" class="grid"></div>
+    </div>
+    <div>
+      <button id="startButton">Inicio</button>
+      <button id="finishButton" disabled>Fin</button>
+    </div>
+    <div id="message"></div>
+
+    <script>
+      const leftGrid = document.getElementById("leftGrid");
+      const rightGrid = document.getElementById("rightGrid");
+      const startButton = document.getElementById("startButton");
+      const finishButton = document.getElementById("finishButton");
+      const messageDiv = document.getElementById("message");
+      let coloredCells = [];
+      let gameStarted = false;
+
+      function createGrid(gridElement, isLeft) {
+        for (let i = 0; i < 25; i++) {
+          const cell = document.createElement("div");
+          cell.classList.add("cell");
+          cell.dataset.index = i;
+          if (!isLeft) {
+            cell.addEventListener("click", function () {
+              if (gameStarted) {
+                this.classList.toggle("colored");
+              }
+            });
+          }
+          gridElement.appendChild(cell);
+        }
+      }
+
+      createGrid(leftGrid, true);
+      createGrid(rightGrid, false);
+      const leftGridCells = leftGrid.querySelectorAll(".cell");
+      const rightGridCells = rightGrid.querySelectorAll(".cell");
+
+      function selectRandomCells() {
+        coloredCells = [];
+        const indices = Array.from({ length: 25 }, (_, i) => i);
+        for (let i = 0; i < 10; i++) {
+          const randomIndex = Math.floor(Math.random() * indices.length);
+          const selectedIndex = indices.splice(randomIndex, 1)[0];
+          coloredCells.push(selectedIndex);
+        }
+      }
+
+      function colorLeftGrid() {
+        leftGridCells.forEach((cell) => cell.classList.remove("colored"));
+        coloredCells.forEach((index) => {
+          leftGridCells[index].classList.add("colored");
+        });
+      }
+
+      function hideLeftGrid() {
+        leftGrid.style.display = "none";
+      }
+
+      function showLeftGrid() {
+        leftGrid.style.display = "grid";
+      }
+
+      function checkMatch() {
+        let match = true;
+        for (let i = 0; i < 25; i++) {
+          const leftColored = leftGridCells[i].classList.contains("colored");
+          const rightColored = rightGridCells[i].classList.contains("colored");
+          if (leftColored !== rightColored) {
+            match = false;
+            break;
+          }
+        }
+        if (match) {
+          messageDiv.textContent = "Corecto!";
+        } else {
+          messageDiv.textContent = "Incorecto, intenta de nuevo!";
+        }
+        gameStarted = false;
+        finishButton.disabled = true;
+        startButton.disabled = false;
+
+        showLeftGrid();
+        selectRandomCells();
+        colorLeftGrid();
+      }
+
+      selectRandomCells();
+      colorLeftGrid();
+
+      startButton.addEventListener("click", () => {
+        hideLeftGrid();
+        finishButton.disabled = false;
+        startButton.disabled = true;
+        messageDiv.textContent = "";
+        gameStarted = true;
+      });
+
+      finishButton.addEventListener("click", checkMatch);
+    </script>
+  </body>
+</html>

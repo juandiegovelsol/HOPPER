@@ -1,0 +1,29 @@
+{
+  "Ingresos": {
+    "Salario": 3000,
+    "Freelance": 500,
+    "Otros": 200
+  },
+  "Gastos": {
+    "Alquiler": 1200,
+    "Comestibles": 300,
+    "Servicios": 200,
+    "Entretenimiento": 100,
+    "Transporte": 150,
+    "Salud": 100
+  },
+  "Miembros": [
+    {
+      "Nombre": "Juan",
+      "Contribución": 1000
+    },
+    {
+      "Nombre": "Ana",
+      "Contribución": 800
+    },
+    {
+      "Nombre": "Carlos",
+      "Contribución": 700
+    }
+  ]
+}

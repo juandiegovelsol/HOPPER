@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gráfico de Ventas</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div>
+      <canvas id="salesChart" width="400" height="400"></canvas>
+    </div>
+    <div>
+      <button onclick="updateChart(0)">Día 1</button>
+      <button onclick="updateChart(1)">Día 2</button>
+      <button onclick="updateChart(2)">Día 3</button>
+      <button onclick="updateChart(3)">Día 4</button>
+      <button onclick="updateChart(4)">Día 5</button>
+      <button onclick="updateChart(5)">Día 6</button>
+      <button onclick="updateChart(6)">Día 7</button>
+    </div>
+    <script>
+      const salesData = [
+        { food: 200, hygiene: 150, tech: 300 },
+        { food: 250, hygiene: 100, tech: 200 },
+        { food: 300, hygiene: 200, tech: 150 },
+        { food: 400, hygiene: 250, tech: 100 },
+        { food: 350, hygiene: 300, tech: 250 },
+        { food: 450, hygiene: 350, tech: 300 },
+        { food: 500, hygiene: 400, tech: 350 },
+      ];
+      const ctx = document.getElementById("salesChart").getContext("2d");
+      const salesChart = new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: ["Comida", "Aseo", "Tecnología"],
+          datasets: [
+            {
+              label: "Ventas en USD",
+              data: [],
+              backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+        },
+      });
+
+      function updateChart(dayIndex) {
+        const data = salesData[dayIndex];
+        const totalSales = data.food + data.hygiene + data.tech;
+        salesChart.data.datasets[0].data = [
+          ((data.food / totalSales) * 100).toFixed(2),
+          ((data.hygiene / totalSales) * 100).toFixed(2),
+          ((data.tech / totalSales) * 100).toFixed(2),
+        ];
+        salesChart.update();
+      }
+    </script>
+  </body>
+</html>

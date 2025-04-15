@@ -1,0 +1,12 @@
+Alquiler
+1000
+Supermercado
+300
+150
+Transporte
+200
+Luz
+50
+
+Agua
+40

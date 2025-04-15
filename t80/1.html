@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Tanques</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+      }
+      canvas {
+        background-color: #ffffff;
+        border: 2px solid #000000;
+        display: block;
+        margin: 20px;
+      }
+      #gameOver {
+        display: none;
+        font-size: 24px;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <div id="gameOver">Juego Terminado</div>
+
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      const gameOverElem = document.getElementById("gameOver");
+      const rows = 5;
+      const cols = 5;
+      const cellSize = 80;
+      const tank = { x: 0, y: 0 };
+      const enemies = [];
+      let gameInterval;
+      let gameOver = false;
+
+      const board = [
+        [0, 1, 0, 1, 0],
+        [0, 0, 0, 1, 0],
+        [0, 1, 0, 1, 0],
+        [0, 0, 0, 1, 0],
+        [0, 1, 0, 1, 0],
+      ];
+
+      function drawGrid() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let y = 0; y < rows; y++) {
+          for (let x = 0; x < cols; x++) {
+            if (x === tank.x && y === tank.y) {
+              ctx.fillStyle = "#00ff00";
+            } else if (board[y][x] === 1) {
+              ctx.fillStyle = "#ff0000";
+            } else if (enemies.some((e) => e.x === x && e.y === y)) {
+              ctx.fillStyle = "#0000ff";
+            } else {
+              ctx.fillStyle = "#ffffff";
+            }
+            ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+            ctx.strokeStyle = "#000000";
+            ctx.strokeRect(x * cellSize, y * cellSize, cellSize, cellSize);
+          }
+        }
+      }
+
+      function moveTank(dx, dy) {
+        const newX = tank.x + dx;
+        const newY = tank.y + dy;
+        if (
+          newX >= 0 &&
+          newX < cols &&
+          newY >= 0 &&
+          newY < rows &&
+          board[newY][newX] === 0 &&
+          !enemies.some((e) => e.x === newX && e.y === newY)
+        ) {
+          tank.x = newX;
+          tank.y = newY;
+        }
+      }
+
+      function spawnEnemy() {
+        const availablePositions = [];
+        for (let y = 0; y < rows; y++) {
+          for (let x = 0; x < cols; x++) {
+            if (
+              board[y][x] === 0 &&
+              !enemies.some((e) => e.x === x && e.y === y)
+            ) {
+              availablePositions.push({ x, y });
+            }
+          }
+        }
+        if (availablePositions.length > 0) {
+          const randomPosition =
+            availablePositions[
+              Math.floor(Math.random() * availablePositions.length)
+            ];
+          enemies.push({
+            x: randomPosition.x,
+            y: randomPosition.y,
+            spawnTime: Date.now(),
+          });
+        }
+      }
+
+      function checkGameOver() {
+        return (
+          enemies.some((e) => e.x === tank.x && e.y === tank.y) ||
+          enemies.some((e) => Date.now() - e.spawnTime > 5000)
+        );
+      }
+
+      function draw() {
+        if (gameOver) {
+          gameOverElem.style.display = "block";
+          clearInterval(gameInterval);
+          return;
+        }
+        drawGrid();
+        if (Math.random() < 0.2) spawnEnemy();
+        if (checkGameOver()) gameOver = true;
+      }
+
+      function keyPress(e) {
+        if (gameOver) return;
+        switch (e.key) {
+          case "a":
+            moveTank(-1, 0);
+            break;
+          case "d":
+            moveTank(1, 0);
+            break;
+          case "w":
+            moveTank(0, -1);
+            break;
+          case "s":
+            moveTank(0, 1);
+            break;
+        }
+        draw();
+      }
+
+      document.addEventListener("keydown", keyPress);
+
+      gameInterval = setInterval(draw, 1000);
+      draw();
+    </script>
+  </body>
+</html>

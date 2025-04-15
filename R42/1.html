@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba de Reservas</title>
+  </head>
+  <body>
+    <h2>Reservas Hospedadas</h2>
+
+    <!-- Simulación de elementos con datos de reservas -->
+    <div data-slot="checked_in" data-reservation-id="12345"></div>
+    <div data-slot="checked_in" data-reservation-id="67890"></div>
+    <div data-slot="checked_in" data-reservation-id="11223"></div>
+
+    <script>
+          const button = document.createElement("button");
+          button.id = "floatingDownloadBtn";
+          button.innerText = "Hospedados";
+          document.body.appendChild(button);
+
+          const button = document.createElement("button");
+      button.id = "floatingDownloadBtn";
+      button.innerText = "Hospedados";
+      document.body.appendChild(button);
+
+      const fetchReservations = () => {
+        button.disabled = true;
+        button.innerText = "Descargando...";
+
+        const reservations = [...document.querySelectorAll('div[data-slot="checked_in"]')]
+          .map(div => div.getAttribute("data-reservation-id"));
+
+        if (!reservations.length) return resetButton();
+
+        const reservationsData = reservations.map(fetchReservationData);
+        downloadCSV(reservationsData);
+        alert(formatearTexto(reservationsData));
+        resetButton();
+      };
+
+      const fetchReservationData = (id) => {
+        const response = await fetch("https://hotels.cloudbeds.com/connect/reservations/get_reservation", {
+          method: "POST",
+          headers: { "content-type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({ id, property_id: "270733" })
+        });
+        const data = await response.json();
+        return { "Full Name": data.name, Phone: data.phone, Email: data.email };
+      };
+
+      const downloadCSV = (data) => {
+        const blob = new Blob([convertToCSV(data)], { type: "text/csv" });
+        const link = document.createElement(a);
+        link.href = URL.createObjectURL(blob);
+        link.download = "in-house.csv";
+        link.click();
+      };
+
+      const convertToCSV = (data) => {
+        const header = Object.keys(data[0]).join(",");
+        const rows = data.map(row => Object.values(row).join(","));
+        return [header, ...rows].join("\n");
+      };
+
+      const formatearTexto = (data) => {
+        return "🛎️ Huéspedes en la casa : \n" + data
+          .map(g => `- ${g["Full Name"]} ${g["Phone"] || ""} ${g["Email"]}`)
+          .join("\n");
+      };
+
+      const resetButton = () => {
+        button.disabled = false;
+        button.innerText = "In House";
+      };
+
+      button.addEventListener("click", fetchReservations);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+67d46c3fe9d0037f898b8648
+
+67e7954a53d639a0e16c5139
+
+Trabajo para un restaurante ubicado en Miami. El restaurante maneja un volumen de ventas importante al día por lo que requiero desarrollar un programa en JavaScript para procesar y analizar los datos de venta. El programa debe recibir datos de órdenes en un archivo JSON, donde cada orden se identifica con una llave (número positivo) del objeto principal, cada valor contiene un objeto con un precio total de la orden en USD (número positivo), un arreglo de platos pedidos donde cada plato contiene un nombre (texto no vacío) y una cantidad (entero positivo). Quiero que el programa valide los datos, alerte al usuario e ignore las órdenes no válidas, y posteriormente encuentre los platos más pedidos en órdenes de 0 a 50 dólares, de 50 a 100 dólares y más de 100 dólares, imprimiendo en consola los resultados. Dame el código completo, sin comentarios y con una explicación de un párrafo.
+

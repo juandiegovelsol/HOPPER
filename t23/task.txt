@@ -1,0 +1,120 @@
+67d45902a902106a134d5dc0
+
+67dceeec5b7ba9ca354974ad
+
+Estoy armando un servidor con Node y Express que me permitirá clasificar el inventario de mi pagína web de acuerdo con la categoría de la prenda a la que pertenece. El servidor recibe un arreglo en un JSON a traves de una petición HTTP, valida los datos y clasifica cada artículo según las categorías predefinidas en el código.
+
+```javascript
+const express = require("express");
+
+const app = express();
+const PORT = 3000;
+
+app.use(express.json());
+
+app.post("/clasificar", (req, res) => {
+  const prendas = req.body.prendas;
+
+  if (!prendas || !Array.isArray(prendas)) {
+    return res.status(400).json({ error: "Se requiere un arreglo de prendas" });
+  }
+
+  for (const prenda of prendas) {
+    if (typeof prenda !== "string" || prenda.trim() === "") {
+      return res
+        .status(400)
+        .json({ error: "Todas las prendas deben ser cadenas no vacías" });
+    }
+  }
+
+  const categorias = {
+    camisetas: ["polera", "polo", "remera"],
+    pantalones: ["pantalón", "blue jean", "jeans", "legging", "pantalones"],
+    abrigos: [
+      "abrigo",
+      "chaqueta",
+      "parka",
+      "cazadora",
+      "sudadera",
+      "suéter",
+      "chaleco",
+    ],
+    calzado: ["zapato", "zapatillas", "zapatilla", "bota", "sandalia", "chala"],
+    accesorios: [
+      "gorro",
+      "sombrero",
+      "bufanda",
+      "guante",
+      "cinturón",
+      "corbata",
+      "pañuelo",
+    ],
+  };
+
+  const clasificacion = {
+    camisetas: [],
+    pantalones: [],
+    abrigos: [],
+    calzado: [],
+    accesorios: [],
+    otros: [],
+  };
+
+  prendas.forEach((prenda) => {
+    let categorizado = false;
+    const prendaLower = prenda.toLowerCase();
+
+    for (const [categoria, palabrasClave] of Object.entries(categorias)) {
+      if (
+        !categorizado &&
+        palabrasClave.some((palabra) => prendaLower.includes(palabra))
+      ) {
+        clasificacion[categoria].push(prenda);
+        categorizado = true;
+      }
+    }
+
+    if (!categorizado) {
+      clasificacion.otros.push(prenda);
+    }
+  });
+
+  res.json({ clasificacion });
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
+```
+
+Quiero estar seguro que el servidor funciona bien, necesito que me des la salida de cada una de las siguientes entradas (peticiones HTTP), junto con una explicación cortita de cada salida.
+
+Entrada 1
+
+```bash
+curl -X POST http://localhost:3000/clasificar \
+     -H "Content-Type: application/json" \
+     -d '{
+       "prendas": ["polera", "jeans", "parka", "zapatillas", "sombrero"]
+     }'
+```
+
+Entrada 2
+
+```bash
+curl -X POST http://localhost:3000/clasificar \
+     -H "Content-Type: application/json" \
+     -d '{
+       "prendas": ["zapatilla", "", 123]
+     }'
+```
+
+Entrada 3
+
+```bash
+curl -X POST http://localhost:3000/clasificar \
+     -H "Content-Type: application/json" \
+     -d '{
+       "prendas": ["legging con polera", "abrigo y gorro", "jeans ajustados", "pantalones deportivos"]
+     }'
+```
