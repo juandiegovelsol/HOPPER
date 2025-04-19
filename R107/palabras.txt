@@ -1,0 +1,6 @@
+Hola mundo esto es una prueba
+Esta línea tiene varias palabras, algunas: repetidas, repetidas y más repetidas.
+Una línea vacía sigue:
+
+Ahora números y símbolos 123 456 ¡prueba!
+FIN de la prueba.
