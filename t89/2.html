@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comparación de Productos</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+      #comparador {
+        width: 80%;
+        max-width: 800px;
+      }
+      #seleccionar {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="comparador">
+      <div id="seleccionar">
+        <label>Producto 1:</label>
+        <select id="producto1">
+          <option value="0">Producto A</option>
+          <option value="1">Producto B</option>
+          <option value="2">Producto C</option>
+          <option value="3">Producto D</option>
+        </select>
+        <label>Producto 2:</label>
+        <select id="producto2">
+          <option value="0">Producto A</option>
+          <option value="1">Producto B</option>
+          <option value="2">Producto C</option>
+          <option value="3">Producto D</option>
+        </select>
+        <button onclick="actualizarGrafico()">Comparar</button>
+      </div>
+      <canvas id="grafico"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const datos = [
+        {
+          nombre: "Producto A",
+          precio: 7,
+          durabilidad: 9,
+          peso: 5,
+          materiales: 8,
+          garantia: 6,
+        },
+        {
+          nombre: "Producto B",
+          precio: 5,
+          durabilidad: 6,
+          peso: 8,
+          materiales: 7,
+          garantia: 9,
+        },
+        {
+          nombre: "Producto C",
+          precio: 9,
+          durabilidad: 5,
+          peso: 6,
+          materiales: 9,
+          garantia: 5,
+        },
+        {
+          nombre: "Producto D",
+          precio: 6,
+          durabilidad: 8,
+          peso: 7,
+          materiales: 5,
+          garantia: 7,
+        },
+      ];
+
+      const contexto = document.getElementById("grafico").getContext("2d");
+      let grafico = new Chart(contexto, {
+        type: "radar",
+        data: {
+          labels: ["Precio", "Durabilidad", "Peso", "Materiales", "Garantía"],
+          datasets: [],
+        },
+        options: {
+          responsive: true,
+          scale: {
+            ticks: { beginAtZero: true, max: 10 },
+          },
+        },
+      });
+
+      function actualizarGrafico() {
+        const indice1 = document.getElementById("producto1").value;
+        const indice2 = document.getElementById("producto2").value;
+        const prod1 = datos[indice1];
+        const prod2 = datos[indice2];
+        grafico.data.datasets = [
+          {
+            label: prod1.nombre,
+            data: [
+              prod1.precio,
+              prod1.durabilidad,
+              prod1.peso,
+              prod1.materiales,
+              prod1.garantia,
+            ],
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+          },
+          {
+            label: prod2.nombre,
+            data: [
+              prod2.precio,
+              prod2.durabilidad,
+              prod2.peso,
+              prod2.materiales,
+              prod2.garantia,
+            ],
+            backgroundColor: "rgba(54, 162, 235, 0.2)",
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 1,
+          },
+        ];
+        grafico.update();
+      }
+
+      actualizarGrafico();
+    </script>
+  </body>
+</html>

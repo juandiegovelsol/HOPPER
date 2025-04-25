@@ -1,0 +1,17 @@
+6807b7732b87880ba9f8c249
+
+67d3d10d7084a35a49efd415
+
+Trabajo para una empresa desarrolladora de software ubicada en Madrid,
+y me han contratado para desarrollar un programa que sirva para automatizar
+el cálculo de las estadísticas del equipo ganador en la liga española de fútbol.
+Para ello, el programa debe leer la información de los partidos a partir de un archivo JSON,
+donde cada elemento de un arreglo representa un objeto con claves para ambos equipos
+(cadena de texto no vacía) y para la cantidad de goles hechos por cada equipo (entero positivo).
+El programa debe validar el tipo de datos y después calcular el ganador de la liga,
+acumulando 3 puntos para el equipo ganador de un partido, 1 punto para equipos que
+empaten un partido y 0 puntos para el perdedor de un partido. Al final, el programa
+debe imprimir la cantidad de partidos ganados, de goles a favor, de goles en contra,
+de partidos empatados y de partidos perdidos, todo sólo para el equipo ganador.
+Dame el código completo, sin comentarios ni explicaciones, y un archivo JSON de prueba
+con 10 partidos.

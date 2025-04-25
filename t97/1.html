@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Plataformas</title>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(to bottom, #83a4d4, #b6fbff);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      canvas {
+        border: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+      }
+
+      .modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-content {
+        background: white;
+        padding: 30px 50px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .modal-content h2 {
+        margin-top: 0;
+        color: #2c3e50;
+      }
+
+      .modal-content button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 1rem;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .modal-content button:hover {
+        background-color: #2980b9;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+    <div id="victoryModal" class="modal">
+      <div class="modal-content">
+        <h2>¡Has ganado!</h2>
+        <button onclick="restartGame()">OK</button>
+      </div>
+    </div>
+
+    <script>
+      // Referencia al elemento del canvas donde se dibujará el juego.
+      const canvas = document.getElementById("gameCanvas");
+      // Contexto 2D del canvas para poder dibujar.
+      const ctx = canvas.getContext("2d");
+      // Referencia al div que mostrará el modal de victoria.
+      const modal = document.getElementById("victoryModal");
+
+      // Variable que contendrá el estado del jugador.
+      let player;
+      // Variable que contendrá la lista de plataformas del juego.
+      let platforms;
+
+      // Objeto que almacena el estado de las teclas de control del jugador.
+      const keys = {
+        right: false, // Estado de la tecla derecha.
+        left: false, // Estado de la tecla izquierda.
+        space: false, // Estado de la tecla de espacio.
+      };
+
+      // Función para inicializar las variables del juego.
+      function initGame() {
+        // Definición del jugador y sus propiedades.
+        player = {
+          x: 50, // Posición inicial en el eje X.
+          y: 550, // Posición inicial en el eje Y.
+          width: 50, // Ancho del jugador.
+          height: 50, // Alto del jugador.
+          color: "#3498db", // Color del jugador.
+          dy: 0, // Cambio en Y para el movimiento.
+          gravity: 1, // Valor de la gravedad que afecta al jugador.
+          jumpHeight: -20, // Altura del salto del jugador.
+          grounded: false, // Estado de si el jugador está en el suelo.
+        };
+
+        // Array que define las plataformas del juego y sus propiedades.
+        platforms = [
+          { x: 0, y: 500, width: 200, height: 20 },
+          { x: 300, y: 400, width: 200, height: 20 },
+          { x: 600, y: 300, width: 200, height: 20 },
+          { x: 400, y: 200, width: 200, height: 20 },
+          { x: 200, y: 100, width: 200, height: 20 },
+        ];
+      }
+
+      // Función para reiniciar el juego.
+      function restartGame() {
+        modal.style.display = "none"; // Oculta el modal de victoria.
+        initGame(); // Reinicia las variables del juego.
+        update(); // Inicia la actualización del juego.
+      }
+
+      // Event listener para detectar las teclas presionadas.
+      document.addEventListener("keydown", (e) => {
+        if (e.code === "ArrowRight") keys.right = true; // Tecla derecha.
+        if (e.code === "ArrowLeft") keys.left = true; // Tecla izquierda.
+        if (e.code === "Space") keys.space = true; // Tecla de espacio.
+      });
+
+      // Event listener para detectar cuando se sueltan las teclas.
+      document.addEventListener("keyup", (e) => {
+        if (e.code === "ArrowRight") keys.right = false;
+        if (e.code === "ArrowLeft") keys.left = false;
+        if (e.code === "Space") keys.space = false;
+      });
+
+      // Función que actualiza el estado del juego.
+      function update() {
+        // Almacena la posición Y del jugador antes de actualizar.
+        const prevY = player.y;
+        if (keys.right) player.x += 5; // Movimiento a la derecha.
+        if (keys.left) player.x -= 5; // Movimiento a la izquierda.
+        if (keys.space && player.grounded) {
+          player.dy = player.jumpHeight; // Salto del jugador.
+          player.grounded = false;
+        }
+        player.dy += player.gravity; // Aplica gravedad al jugador.
+        player.y += player.dy; // Actualiza la posición Y del jugador.
+
+        // Verifica si el jugador toca el suelo del canvas.
+        if (player.y + player.height > canvas.height) {
+          player.y = canvas.height - player.height; // Ajusta la posición Y.
+          player.grounded = true;
+          player.dy = 0;
+        }
+
+        // Colisiones con plataformas.
+        for (let platform of platforms) {
+          const hitX =
+            player.x < platform.x + platform.width &&
+            player.x + player.width > platform.x;
+          const hitY =
+            player.y < platform.y + platform.height &&
+            player.y + player.height > platform.y;
+
+          if (hitX && hitY) {
+            if (prevY + player.height <= platform.y) {
+              player.y = platform.y - player.height;
+              player.grounded = true;
+              player.dy = 0;
+            } else if (prevY >= platform.y + platform.height) {
+              player.y = platform.y + platform.height;
+              player.dy = 0;
+            }
+          }
+        }
+
+        // Verifica si el jugador ha llegado a la cima.
+        if (player.y <= 0) {
+          modal.style.display = "flex"; // Muestra el modal de victoria.
+          return;
+        }
+
+        draw(); // Dibuja el estado actualizado del juego.
+        requestAnimationFrame(update); // Continúa la actualización.
+      }
+
+      // Función para dibujar los elementos en el canvas.
+      function draw() {
+        ctx.fillStyle = "#ecf0f1"; // Color de fondo del canvas.
+        ctx.fillRect(0, 0, canvas.width, canvas.height); // Dibuja el fondo.
+        ctx.fillStyle = player.color; // Color del jugador.
+        ctx.fillRect(player.x, player.y, player.width, player.height); // Dibuja el jugador.
+        ctx.fillStyle = "#2c3e50"; // Color de las plataformas.
+        platforms.forEach((p) => ctx.fillRect(p.x, p.y, p.width, p.height)); // Dibuja las plataformas.
+      }
+
+      initGame(); // Inicializa el juego.
+      update(); // Inicia la actualización del juego.
+    </script>
+  </body>
+</html>

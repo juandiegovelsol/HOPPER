@@ -1,0 +1,12 @@
+[
+  { "team1": "Real Madrid", "goals1": 2, "team2": "Barcelona", "goals2": 1 },
+  { "team1": "Atletico", "goals1": 1, "team2": "Sevilla", "goals2": 1 },
+  { "team1": "Valencia", "goals1": 3, "team2": "Real Sociedad", "goals2": 2 },
+  { "team1": "Real Betis", "goals1": 2, "team2": "Celta", "goals2": 2 },
+  { "team1": "Real Madrid", "goals1": 1, "team2": "Atletico", "goals2": 0 },
+  { "team1": "Barcelona", "goals1": 2, "team2": "Valencia", "goals2": 2 },
+  { "team1": "Sevilla", "goals1": 0, "team2": "Real Sociedad", "goals2": 1 },
+  { "team1": "Celta", "goals1": 1, "team2": "Real Madrid", "goals2": 3 },
+  { "team1": "Real Betis", "goals1": 4, "team2": "Barcelona", "goals2": 3 },
+  { "team1": "Atletico", "goals1": 2, "team2": "Sevilla", "goals2": 0 }
+]

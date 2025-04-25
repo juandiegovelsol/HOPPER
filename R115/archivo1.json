@@ -1,0 +1,24 @@
+[
+  {
+    "nombre": "Antonio Romero",
+    "edad": 25,
+    "nacionalidad": "Argentina",
+    "posicion": "Delantero",
+    "equipo": "Inter Miami",
+    "valor": 85,
+    "goles": 800,
+    "asistencias": 300,
+    "minutos_jugados": 1000
+  },
+  {
+    "nombre": "Luca Bianchi",
+    "edad": 23,
+    "nacionalidad": "Italia",
+    "posicion": "Delantero",
+    "equipo": "AC Milan",
+    "valor": 45,
+    "goles": 120,
+    "asistencias": 40,
+    "minutos_jugados": 850
+  }
+]

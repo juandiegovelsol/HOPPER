@@ -1,0 +1,12 @@
+67d3d10ff98edda71f68cc1b
+
+6807b771a608b15a76d3aff2
+
+Estoy planeando implementar un sistema en un hospital de Madrid para automatizar el proceso
+de asignación de pacientes al cuerpo de enfermería del hospital. Mi idea es que solo los médicos
+pueden asignar pacientes a los enfermeros o enfermeras y solo estos últimos pueden confirmar cuando
+el tratamiento asignado se haya cumplido. Todo el personal y el paciente deben tener los mismos datos
+almacenados (como nombre, apellido, identificación) y un rol (médico, enfermero o paciente).
+Quiero que reflexiones acerca de por lo menos dos implementaciones para este sistema por consola
+en JavaScript, que me permitan reutilizar código, y sugieras cuál sería la mejor opción con proyección
+de crecimiento. No quiero código, solo la reflexión.

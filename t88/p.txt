@@ -1,0 +1,251 @@
+Trabajo para un estudio en Barcelona de desarrollo de páginas web y he creado un juego de bloques que ya está listo para la siguiente etapa de desarrollo. El juego crea una cuadrícula sobre la que aparecen bloques desde arriba y van cayendo hacia la parte inferior de la misma, donde paran una vez tocan el fondo o el último bloque puesto en el fondo. Me hace falta agregar documentación para que cualquier persona pueda entender cómo funciona el código, quiero que generes comentarios sólo encima de cada método de una clase y encima de la definición de cada función del código. Dame el código completo con los comentarios y no incluyas texto adicional en la respuesta.
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Bloques</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(to right, #6dd5ed, #2193b0);
+        margin: 0;
+      }
+
+      canvas {
+        border: none;
+        background-color: rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="lienzoJuego" width="300" height="500"></canvas>
+    <script>
+      const lienzo = document.getElementById("lienzoJuego");
+      const contexto = lienzo.getContext("2d");
+      const tamanoBloque = 20;
+      const columnas = 15;
+      const filas = 25;
+      const tiempoIntervaloCaida = 50;
+
+      let contadorCaida = 0;
+      let ultimoTiempo = 0;
+      let juegoTerminado = false;
+
+      const tablero = [];
+      for (let r = 0; r < filas; r++) {
+        tablero[r] = Array(columnas).fill(0);
+      }
+      const colores = [
+        "#FF6B6B",
+        "#4ECDC4",
+        "#45B7D1",
+        "#FFC107",
+        "#A7FFEB",
+        "#F06292",
+      ];
+
+      class Bloque {
+        constructor(columna, color) {
+          this.columna = columna;
+          this.fila = 0;
+          this.color = color;
+        }
+
+        dibujar() {
+          contexto.fillStyle = this.color;
+          contexto.fillRect(
+            this.columna * tamanoBloque,
+            this.fila * tamanoBloque,
+            tamanoBloque,
+            tamanoBloque
+          );
+          contexto.strokeStyle = "#333";
+          contexto.strokeRect(
+            this.columna * tamanoBloque,
+            this.fila * tamanoBloque,
+            tamanoBloque,
+            tamanoBloque
+          );
+        }
+
+        caer() {
+          if (
+            this.fila + 1 >= filas ||
+            (tablero[this.fila + 1][this.columna] !== 0 &&
+              this.fila + 1 < filas)
+          ) {
+            return true;
+          }
+          this.fila++;
+          return false;
+        }
+
+        mover(deltaColumna) {
+          const nuevaColumna = this.columna + deltaColumna;
+          if (
+            nuevaColumna >= 0 &&
+            nuevaColumna < columnas &&
+            tablero[this.fila][nuevaColumna] === 0
+          ) {
+            this.columna = nuevaColumna;
+            return true;
+          }
+          return false;
+        }
+
+        caidaForzada() {
+          while (
+            this.fila + 1 < filas &&
+            tablero[this.fila + 1][this.columna] === 0
+          ) {
+            this.fila++;
+          }
+          return true;
+        }
+      }
+
+      let bloqueActivo = null;
+
+      function dibujarTablero() {
+        contexto.clearRect(0, 0, lienzo.width, lienzo.height);
+        for (let r = 0; r < filas; r++) {
+          for (let c = 0; c < columnas; c++) {
+            if (tablero[r][c] !== 0) {
+              contexto.fillStyle = colores[tablero[r][c] - 1];
+              contexto.fillRect(
+                c * tamanoBloque,
+                r * tamanoBloque,
+                tamanoBloque,
+                tamanoBloque
+              );
+              contexto.strokeStyle = "#333";
+              contexto.strokeRect(
+                c * tamanoBloque,
+                r * tamanoBloque,
+                tamanoBloque,
+                tamanoBloque
+              );
+            }
+          }
+        }
+        if (juegoTerminado) {
+          contexto.fillStyle = "rgba(0, 0, 0, 0.7)";
+          contexto.fillRect(0, 0, lienzo.width, lienzo.height);
+          contexto.fillStyle = "#fff";
+          contexto.font = "40px Arial";
+          contexto.textAlign = "center";
+          contexto.fillText(
+            "¡Juego Terminado!",
+            lienzo.width / 2,
+            lienzo.height / 2
+          );
+        }
+      }
+
+      function verificarLineas() {
+        for (let r = filas - 1; r >= 0; r--) {
+          if (tablero[r].every((celda) => celda !== 0)) {
+            tablero.splice(r, 1);
+            tablero.unshift(Array(columnas).fill(0));
+            r++;
+          }
+        }
+      }
+
+      function crearNuevoBloque() {
+        if (juegoTerminado) return;
+
+        const colorIndex = Math.floor(Math.random() * colores.length);
+        const color = colores[colorIndex];
+        const columnaInicial = Math.floor(columnas / 2);
+
+        if (tablero[0][columnaInicial] !== 0) {
+          terminarJuego();
+          return;
+        }
+
+        bloqueActivo = new Bloque(columnaInicial, color);
+      }
+
+      function terminarJuego() {
+        juegoTerminado = true;
+      }
+
+      function actualizar(tiempoActual) {
+        if (juegoTerminado) return;
+
+        const deltaTime = tiempoActual - ultimoTiempo;
+        ultimoTiempo = tiempoActual;
+        contadorCaida += deltaTime;
+
+        if (contadorCaida > tiempoIntervaloCaida) {
+          if (bloqueActivo) {
+            if (bloqueActivo.caer()) {
+              tablero[bloqueActivo.fila][bloqueActivo.columna] =
+                colores.indexOf(bloqueActivo.color) + 1;
+              bloqueActivo = null;
+              verificarLineas();
+              crearNuevoBloque();
+            }
+          }
+          contadorCaida = 0;
+        }
+
+        dibujarTablero();
+        if (bloqueActivo) {
+          bloqueActivo.dibujar();
+        }
+
+        requestAnimationFrame(actualizar);
+      }
+
+      document.addEventListener("keydown", (evento) => {
+        if (juegoTerminado || !bloqueActivo) return;
+
+        switch (evento.key) {
+          case "ArrowLeft":
+            bloqueActivo.mover(-1);
+            break;
+          case "ArrowRight":
+            bloqueActivo.mover(1);
+            break;
+          case "ArrowDown":
+            if (bloqueActivo.caer()) {
+              tablero[bloqueActivo.fila][bloqueActivo.columna] =
+                colores.indexOf(bloqueActivo.color) + 1;
+              bloqueActivo = null;
+              verificarLineas();
+              crearNuevoBloque();
+            }
+            break;
+          case " ":
+            bloqueActivo.caidaForzada();
+            tablero[bloqueActivo.fila][bloqueActivo.columna] =
+              colores.indexOf(bloqueActivo.color) + 1;
+            bloqueActivo = null;
+            verificarLineas();
+            crearNuevoBloque();
+            break;
+        }
+        if (!juegoTerminado) {
+          dibujarTablero();
+          if (bloqueActivo) {
+            bloqueActivo.dibujar();
+          }
+        }
+      });
+
+      crearNuevoBloque();
+      requestAnimationFrame(actualizar);
+    </script>
+  </body>
+</html>
+```

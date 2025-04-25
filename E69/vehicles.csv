@@ -1,0 +1,6 @@
+VehicleID,VehicleType,LicensePlate,Capacity
+V001,Camión,ABC-1234,1500 kg
+V002,Furgoneta,DEF-5678,800 kg
+V003,Camión,GHI-9101,1500 kg
+V004,Furgoneta,JKL-1123,800 kg
+V005,Camión,MNO-3145,1500 kg

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comparación de Productos</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 50px;
+      }
+      #chart-container {
+        width: 80%;
+        margin: auto;
+        position: relative;
+      }
+      .chartjs-size-dragable {
+        cursor: crosshair !important;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Comparador de Productos</h1>
+    <div>
+      <label for="product1">Seleccione el Producto 1:</label>
+      <select id="product1" onchange="updateChart()">
+        <option value="productoA">Producto A</option>
+        <option value="productoB">Producto B</option>
+        <option value="productoC">Producto C</option>
+        <option value="productoD">Producto D</option>
+      </select>
+    </div>
+    <div>
+      <label for="product2">Seleccione el Producto 2:</label>
+      <select id="product2" onchange="updateChart()">
+        <option value="productoA">Producto A</option>
+        <option value="productoB">Producto B</option>
+        <option value="productoC">Producto C</option>
+        <option value="productoD">Producto D</option>
+      </select>
+    </div>
+    <div id="chart-container">
+      <canvas id="radarChart" width="600" height="600"></canvas>
+    </div>
+
+    <script>
+      const productos = {
+        productoA: {
+          precio: 5,
+          durabilidad: 7,
+          peso: 3,
+          materiales: 6,
+          garantia: 8,
+        },
+        productoB: {
+          precio: 3,
+          durabilidad: 9,
+          peso: 5,
+          materiales: 7,
+          garantia: 6,
+        },
+        productoC: {
+          precio: 7,
+          durabilidad: 6,
+          peso: 2,
+          materiales: 9,
+          garantia: 5,
+        },
+        productoD: {
+          precio: 4,
+          durabilidad: 8,
+          peso: 6,
+          materiales: 5,
+          garantia: 7,
+        },
+      };
+
+      const labels = [
+        "Precio",
+        "Durabilidad",
+        "Peso",
+        "Materiales",
+        "Garantía",
+      ];
+
+      function updateChart() {
+        const product1 = document.getElementById("product1").value;
+        const product2 = document.getElementById("product2").value;
+        const data = {
+          labels: labels,
+          datasets: [
+            {
+              label: product1,
+              data: [
+                productos[product1].precio,
+                productos[product1].durabilidad,
+                productos[product1].peso,
+                productos[product1].materiales,
+                productos[product1].garantia,
+              ],
+              backgroundColor: "rgba(255, 99, 132, 0.2)",
+              borderColor: "rgba(255, 99, 132, 1)",
+              borderWidth: 2,
+              tension: 0.5,
+            },
+            {
+              label: product2,
+              data: [
+                productos[product2].precio,
+                productos[product2].durabilidad,
+                productos[product2].peso,
+                productos[product2].materiales,
+                productos[product2].garantia,
+              ],
+              backgroundColor: "rgba(54, 162, 235, 0.2)",
+              borderColor: "rgba(54, 162, 235, 1)",
+              borderWidth: 2,
+              tension: 0.5,
+            },
+          ],
+        };
+
+        const ctx = document.getElementById("radarChart").getContext("2d");
+        new Chart(ctx, {
+          type: "radar",
+          data: data,
+          options: {
+            legend: {
+              position: "top",
+              labels: {
+                font: {
+                  size: 14,
+                },
+              },
+            },
+            scale: {
+              ticks: {
+                beginAtZero: true,
+                max: 10,
+                stepSize: 1,
+              },
+            },
+            maintainAspectRatio: false,
+          },
+        });
+      }
+      updateChart();
+    </script>
+  </body>
+</html>

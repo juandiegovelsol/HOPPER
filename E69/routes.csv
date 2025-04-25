@@ -1,0 +1,6 @@
+RouteID,RouteName,StartLocation,EndLocation,Distance
+R001,Route A,Madrid,Barcelona,620 km
+R002,Route B,Valencia,Málaga,530 km
+R003,Route C,Bilbao,Zaragoza,340 km
+R004,Route D,Sevilla,Granada,250 km
+R005,Route E,Barcelona,Valencia,350 km

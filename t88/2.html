@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Bloques</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(to right, #6dd5ed, #2193b0);
+        margin: 0;
+      }
+
+      canvas {
+        border: none;
+        background-color: rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="lienzoJuego" width="300" height="500"></canvas>
+    <script>
+      const lienzo = document.getElementById("lienzoJuego");
+      const contexto = lienzo.getContext("2d");
+
+      // Definición del tamaño de cada bloque
+      const tamanoBloque = 20;
+      // Definición del número de columnas y filas de la cuadrícula
+      const columnas = 15;
+      const filas = 25;
+      // Tiempo en milisegundos entre cada caída de bloque
+      const tiempoIntervaloCaida = 50;
+
+      let contadorCaida = 0; // Contador de tiempo para la caída de bloques
+      let ultimoTiempo = 0; // Marca el tiempo inicial para calcular el delta
+      let juegoTerminado = false; // Bandera para determinar si el juego ha terminado
+
+      // Creación del tablero de juego con bloques vacíos (0)
+      const tablero = [];
+      for (let r = 0; r < filas; r++) {
+        tablero[r] = Array(columnas).fill(0);
+      }
+
+      // Definición de colores disponibles para los bloques
+      const colores = [
+        "#FF6B6B",
+        "#4ECDC4",
+        "#45B7D1",
+        "#FFC107",
+        "#A7FFEB",
+        "#F06292",
+      ];
+
+      class Bloque {
+        // Constructor de la clase Bloque que inicializa la posición y color del bloque
+        constructor(columna, color) {
+          this.columna = columna;
+          this.fila = 0;
+          this.color = color;
+        }
+
+        // Método para dibujar el bloque en el lienzo
+        dibujar() {
+          contexto.fillStyle = this.color;
+          contexto.fillRect(
+            this.columna * tamanoBloque,
+            this.fila * tamanoBloque,
+            tamanoBloque,
+            tamanoBloque
+          );
+          contexto.strokeStyle = "#333";
+          contexto.strokeRect(
+            this.columna * tamanoBloque,
+            this.fila * tamanoBloque,
+            tamanoBloque,
+            tamanoBloque
+          );
+        }
+
+        // Método para hacer caer el bloque una fila
+        caer() {
+          if (
+            this.fila + 1 >= filas ||
+            (tablero[this.fila + 1][this.columna] !== 0 &&
+              this.fila + 1 < filas)
+          ) {
+            return true;
+          }
+          this.fila++;
+          return false;
+        }
+
+        // Método para mover el bloque a una nueva columna
+        mover(deltaColumna) {
+          const nuevaColumna = this.columna + deltaColumna;
+          if (
+            nuevaColumna >= 0 &&
+            nuevaColumna < columnas &&
+            tablero[this.fila][nuevaColumna] === 0
+          ) {
+            this.columna = nuevaColumna;
+            return true;
+          }
+          return false;
+        }
+
+        // Método para forzar la caída del bloque hasta el fondo o próximo bloque
+        caidaForzada() {
+          while (
+            this.fila + 1 < filas &&
+            tablero[this.fila + 1][this.columna] === 0
+          ) {
+            this.fila++;
+          }
+          return true;
+        }
+      }
+
+      let bloqueActivo = null; // Variable para mantener el bloque activo actual
+
+      // Función para dibujar el tablero completo en el lienzo
+      function dibujarTablero() {
+        contexto.clearRect(0, 0, lienzo.width, lienzo.height);
+        for (let r = 0; r < filas; r++) {
+          for (let c = 0; c < columnas; c++) {
+            if (tablero[r][c] !== 0) {
+              contexto.fillStyle = colores[tablero[r][c] - 1];
+              contexto.fillRect(
+                c * tamanoBloque,
+                r * tamanoBloque,
+                tamanoBloque,
+                tamanoBloque
+              );
+              contexto.strokeStyle = "#333";
+              contexto.strokeRect(
+                c * tamanoBloque,
+                r * tamanoBloque,
+                tamanoBloque,
+                tamanoBloque
+              );
+            }
+          }
+        }
+        // Si el juego ha terminado, dibuja un mensaje de juego terminado
+        if (juegoTerminado) {
+          contexto.fillStyle = "rgba(0, 0, 0, 0.7)";
+          contexto.fillRect(0, 0, lienzo.width, lienzo.height);
+          contexto.fillStyle = "#fff";
+          contexto.font = "40px Arial";
+          contexto.textAlign = "center";
+          contexto.fillText(
+            "¡Juego Terminado!",
+            lienzo.width / 2,
+            lienzo.height / 2
+          );
+        }
+      }
+
+      // Función para verificar y eliminar líneas completas en el tablero
+      function verificarLineas() {
+        for (let r = filas - 1; r >= 0; r--) {
+          if (tablero[r].every((celda) => celda !== 0)) {
+            tablero.splice(r, 1);
+            tablero.unshift(Array(columnas).fill(0));
+            r++;
+          }
+        }
+      }
+
+      // Función para crear un nuevo bloque en la parte superior del tablero
+      function crearNuevoBloque() {
+        if (juegoTerminado) return;
+
+        const colorIndex = Math.floor(Math.random() * colores.length);
+        const color = colores[colorIndex];
+        const columnaInicial = Math.floor(columnas / 2);
+
+        if (tablero[0][columnaInicial] !== 0) {
+          terminarJuego();
+          return;
+        }
+
+        bloqueActivo = new Bloque(columnaInicial, color);
+      }
+
+      // Función para finalizar el juego
+      function terminarJuego() {
+        juegoTerminado = true;
+      }
+
+      // Función principal de actualización del juego
+      function actualizar(tiempoActual) {
+        // Si el juego ha terminado, no continúes actualizando
+        if (juegoTerminado) return;
+
+        const deltaTime = tiempoActual - ultimoTiempo;
+        ultimoTiempo = tiempoActual;
+        contadorCaida += deltaTime;
+
+        // Si ha pasado el tiempo suficiente, hacemos caer el bloque activo
+        if (contadorCaida > tiempoIntervaloCaida) {
+          if (bloqueActivo) {
+            if (bloqueActivo.caer()) {
+              // Si el bloque ha tocado fondo o otro bloque, guardamos su posición en el tablero
+              tablero[bloqueActivo.fila][bloqueActivo.columna] =
+                colores.indexOf(bloqueActivo.color) + 1;
+              bloqueActivo = null;
+              verificarLineas();
+              crearNuevoBloque();
+            }
+          }
+          contadorCaida = 0;
+        }
+
+        // Dibujar el estado actual del tablero y bloque activo
+        dibujarTablero();
+        if (bloqueActivo) {
+          bloqueActivo.dibujar();
+        }
+
+        // Solicitud para volver a pintar el siguiente cuadro
+        requestAnimationFrame(actualizar);
+      }
+
+      // Controla la presión de teclas para mover el bloque activo
+      document.addEventListener("keydown", (evento) => {
+        if (juegoTerminado || !bloqueActivo) return;
+
+        switch (evento.key) {
+          case "ArrowLeft":
+            bloqueActivo.mover(-1);
+            break;
+          case "ArrowRight":
+            bloqueActivo.mover(1);
+            break;
+          case "ArrowDown":
+            if (bloqueActivo.caer()) {
+              tablero[bloqueActivo.fila][bloqueActivo.columna] =
+                colores.indexOf(bloqueActivo.color) + 1;
+              bloqueActivo = null;
+              verificarLineas();
+              crearNuevoBloque();
+            }
+            break;
+          case " ":
+            bloqueActivo.caidaForzada();
+            tablero[bloqueActivo.fila][bloqueActivo.columna] =
+              colores.indexOf(bloqueActivo.color) + 1;
+            bloqueActivo = null;
+            verificarLineas();
+            crearNuevoBloque();
+            break;
+        }
+        if (!juegoTerminado) {
+          dibujarTablero();
+          if (bloqueActivo) {
+            bloqueActivo.dibujar();
+          }
+        }
+      });
+
+      // Inicia la secuencia de creación del primer bloque y actualización del juego
+      crearNuevoBloque();
+      requestAnimationFrame(actualizar);
+    </script>
+  </body>
+</html>

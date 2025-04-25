@@ -1,0 +1,32 @@
+[
+  {
+    "equipoLocal": "Real Madrid",
+    "golesLocal": 1,
+    "equipoVisitante": "2",
+    "golesVisitante": 1
+  },
+  {
+    "equipoLocal": "Real Madrid",
+    "golesLocal": 3,
+    "equipoVisitante": "Atletico",
+    "golesVisitante": 3
+  },
+  {
+    "equipoLocal": "Barcelona",
+    "golesLocal": 4,
+    "equipoVisitante": "Valencia",
+    "golesVisitante": 2
+  },
+  {
+    "equipoLocal": "Sevilla",
+    "golesLocal": 3,
+    "equipoVisitante": "Real Madrid",
+    "golesVisitante": 3
+  },
+  {
+    "equipoLocal": "Real Madrid",
+    "golesLocal": 1,
+    "equipoVisitante": "2",
+    "golesVisitante": 1
+  }
+]

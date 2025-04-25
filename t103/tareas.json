@@ -1,0 +1,21 @@
+[
+  {
+    "descripcion": "Tarea sin entrega",
+    "asignado_a": "Nadie",
+    "entregada": true
+  },
+  {
+    "descripcion": "Tarea con entrega mal",
+    "asignado_a": "Otro",
+    "entregada": "sí"
+  },
+  {
+    "descripcion": "",
+    "asignado_a": "Vacio",
+    "entregada": false
+  },
+  {
+    "descripcion": "Tarea sin asignado",
+    "entregada": false
+  }
+]

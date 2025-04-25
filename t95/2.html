@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mapa Electoral Interactivo de Provincias</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      #map-container {
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      svg {
+        display: block;
+        margin: auto;
+      }
+
+      .province {
+        stroke: #fff;
+        stroke-width: 0.5px;
+        cursor: pointer;
+        transition: fill 0.2s ease-in-out;
+      }
+
+      .province:hover {
+        opacity: 0.7;
+      }
+
+      #tooltip {
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.75);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        pointer-events: none;
+        white-space: nowrap;
+        transition: opacity 0.2s;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map-container">
+      <svg id="map"></svg>
+    </div>
+    <div id="tooltip" style="opacity: 0"></div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    <script>
+      const width = 800;
+      const height = 650;
+      const mapUrl = "https://unpkg.com/es-atlas@0.5.0/es/provinces.json";
+
+      const svg = d3
+        .select("#map")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("viewBox", `0 0 ${width} ${height}`)
+        .style("max-width", "100%")
+        .style("height", "auto");
+
+      const tooltip = d3.select("#tooltip");
+
+      const projection = d3.geoMercator();
+      const pathGenerator = d3.geoPath().projection(projection);
+
+      const partyAColor = "#d62728";
+      const partyBColor = "#1f77b4";
+      const defaultColor = "#cccccc";
+
+      function simulateResults(features) {
+        features.forEach((feature) => {
+          const provinceName = feature.properties.name;
+          const partyA_votes = Math.floor(Math.random() * 10000);
+          const partyB_votes = Math.floor(Math.random() * 10000);
+          const winner =
+            partyA_votes > partyB_votes ? "Partido A" : "Partido B";
+
+          feature.properties.partyA_votes = partyA_votes;
+          feature.properties.partyB_votes = partyB_votes;
+          feature.properties.winner = winner;
+        });
+      }
+
+      d3.json(mapUrl)
+        .then((topologyData) => {
+          const geojsonFeatures = topojson.feature(
+            topologyData,
+            topologyData.objects.provinces
+          );
+
+          simulateResults(geojsonFeatures.features);
+
+          projection.fitSize([width, height], geojsonFeatures);
+
+          svg
+            .selectAll("path")
+            .data(geojsonFeatures.features)
+            .join("path")
+            .attr("class", "province")
+            .attr("d", pathGenerator)
+            .attr("fill", (d) => {
+              if (!d.properties.winner) return defaultColor;
+              return d.properties.winner === "Partido A"
+                ? partyAColor
+                : partyBColor;
+            })
+            .on("mouseover", (event, d) => {
+              tooltip.transition().duration(100).style("opacity", 0.9);
+              tooltip.html(`
+                <strong>${d.properties.name}</strong><br/>
+                Partido A: ${d.properties.partyA_votes}<br/>
+                Partido B: ${d.properties.partyB_votes}
+            `);
+            })
+            .on("mousemove", (event) => {
+              tooltip
+                .style("left", event.pageX + 15 + "px")
+                .style("top", event.pageY - 28 + "px");
+            })
+            .on("mouseout", () => {
+              tooltip.transition().duration(200).style("opacity", 0);
+            });
+        })
+        .catch((error) => {
+          console.error("Error loading or processing map data:", error);
+          svg
+            .append("text")
+            .attr("x", width / 2)
+            .attr("y", height / 2)
+            .attr("text-anchor", "middle")
+            .text("Error al cargar el mapa.");
+        });
+    </script>
+  </body>
+</html>

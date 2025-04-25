@@ -1,0 +1,74 @@
+import Foundation
+
+// Array de participantes
+let jugadores = ["Juan", "Carmen", "María", "José"]
+
+// Función para lanzar un dado y devolver el resultado como un entero aleatorio entre 1 y 6
+func lanzarDado() -> Int {
+    return Int.random(in: 1...6)
+}
+
+// Función para determinar el orden de preguntas según los lanzamientos de dados
+func determinarOrdenPreguntadores() -> [String] {
+    var tiradas = jugadores.map { ($0, lanzarDado()) }
+    tiradas.sort { $0.1 > $1.1 } // Ordena de mayor a menor
+    return tiradas.map { $0.0 }
+}
+
+// Función para determinar el orden de respuestas en cada ronda
+func determinarOrdenRespondientes(paraPreguntador preguntador: String) -> [String] {
+    let otrosJugadores = jugadores.filter { $0 != preguntador }
+    var tiradas = otrosJugadores.map { ($0, lanzarDado()) }
+    tiradas.sort { $0.1 < $1.1 } // Ordena de menor a mayor
+    return tiradas.map { $0.0 }
+}
+
+// Diccionario para llevar la puntuación de cada jugador
+var puntuaciones = Dictionary(uniqueKeysWithValues: jugadores.map { ($0, 0) })
+
+// Determinar el orden de preguntadores una vez al inicio
+let ordenPreguntadores = determinarOrdenPreguntadores()
+
+// Bucle para realizar varias rondas
+for ronda in 0..<4 { // Usamos 0..<4 para indexar correctamente
+    print("\n--- Ronda \(ronda + 1) ---")
+    let preguntador = ordenPreguntadores[ronda]
+    print("Preguntador: \(preguntador)")
+
+    // Determina el orden de los respondientes en la ronda
+    let respondientes = determinarOrdenRespondientes(paraPreguntador: preguntador)
+    print("Orden de respuesta:")
+    for (i, jugador) in respondientes.enumerated() {
+        print("\(i + 1). \(jugador)")
+    }
+
+    // Solicitud al usuario para que indique quién acertó la pregunta
+    print("¿Quién acertó la pregunta? (Ingrese el número del jugador): ", terminator: "")
+    if let input = readLine(), let elegido = Int(input), elegido > 0, elegido <= respondientes.count {
+        // El usuario indicó un número válido
+        let ganador = respondientes[elegido - 1]
+        puntuaciones[ganador, default: 0] += 1 // Actualiza la puntuación del ganador
+        print("Ganador de la ronda: \(ganador)")
+    } else {
+        // El usuario no ingresó un número válido
+        print("Respuesta inválida. Nadie gana puntos en esta ronda.")
+    }
+}
+
+// Al final de todas las rondas, muestra el resultado final
+print("\nResultado final:")
+for (jugador, puntos) in puntuaciones {
+    print("\(jugador): \(puntos) punto(s)")
+}
+
+// Determina el ganador general con la puntuación más alta
+if let maxPuntos = puntuaciones.values.max() {
+    let ganadores = puntuaciones.filter { $0.value == maxPuntos }.keys
+    if ganadores.count == 1 {
+        print("¡El ganador es \(ganadores.first!) con \(maxPuntos) punto(s)!")
+    } else {
+        print("¡Hay un empate entre: \(ganadores.joined(separator: " y ")) con \(maxPuntos) punto(s)!")
+    }
+} else {
+    print("No se jugaron rondas o no se otorgaron puntos.")
+}

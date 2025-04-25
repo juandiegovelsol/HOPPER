@@ -1,0 +1,42 @@
+Aquí tienes un código en Swift que lee los datos de los archivos CSV proporcionados y los estructura en el formato JSON deseado:
+
+SWIFT
+
+
+
+4243444546474849505152535455565758596061626339404137383435363233293031
+import Foundation
+
+// Estructuras para representar los datos
+struct Shipment: Codable {
+    let ShipmentID: String
+    let VehicleID: String
+    let DriverID: String
+    let Route: String
+    let DepartureTime: String
+    let ArrivalTime: String
+
+
+See less
+
+Este código en Swift está diseñado para leer datos de cuatro archivos CSV (shipments.csv, vehicles.csv, drivers.csv, routes.csv) y convertir estos datos en una estructura JSON organizada. A continuación, te explico cómo funciona el código:
+
+Estructuras de Datos:
+
+Se definen estructuras Shipment, Vehicle, Driver, y Route que se alinean con la estructura JSON esperada. Cada estructura contiene propiedades que corresponden a los campos del CSV.
+Función readCSV(fileName:):
+
+Esta función lee el contenido de un archivo CSV y lo convierte en Data. Si ocurre un error al leer el archivo, se muestra un mensaje de error y se retorna nil.
+Función convertCSVToDataModels(from:):
+
+Esta función toma la Data del archivo CSV y la convierte en un diccionario de estructuras Swift. Para cada tipo de dato (envíos, vehículos, conductores, rutas), se procesan las líneas del CSV, se convierten a valores apropiados, y se almacenan en un array dentro del diccionario.
+Función csvToJson(shipmentsCSV:vehiclesCSV:driversCSV:routesCSV:):
+
+Esta es la función principal que orquesta el proceso. Lee los archivos CSV, los combina en una sola Data, y luego utiliza convertCSVToDataModels para convertir los datos en un diccionario. Finalmente, convierte ese diccionario a JSON utilizando JSONSerialization y lo retorna como una cadena de texto.
+Ejemplo de Uso:
+
+Se llama a csvToJson con los nombres de los archivos CSV y se imprime el resultado JSON generado. Si ocurre un error durante la conversión, se mostrará un mensaje apropiado.
+Este código proporciona una manera efectiva de transformar datos de CSV estructurados en un formato JSON fácilmente manejable, lo que facilita su uso en aplicaciones de gestión de logística y análisis de datos.
+
+
+furgoneta

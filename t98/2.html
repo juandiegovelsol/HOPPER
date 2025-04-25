@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Plataformas</title>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow: hidden;
+      }
+
+      canvas {
+        border: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+      }
+
+      .game-container {
+        position: relative;
+      }
+
+      .controls {
+        position: absolute;
+        bottom: -40px;
+        color: #fff;
+        text-align: center;
+        width: 100%;
+        font-size: 0.9rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 10;
+      }
+
+      .modal-content {
+        background: linear-gradient(145deg, #2c3e50, #34495e);
+        padding: 40px 60px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        color: white;
+        border: 2px solid #3498db;
+      }
+
+      .modal-content h2 {
+        margin-top: 0;
+        color: #3498db;
+        font-size: 2.5rem;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      }
+
+      .modal-content button {
+        margin-top: 20px;
+        padding: 12px 35px;
+        font-size: 1.2rem;
+        background: linear-gradient(to right, #3498db, #2980b9);
+        color: white;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .modal-content button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      .modal-content button:active {
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game-container">
+      <canvas id="gameCanvas" width="800" height="600"></canvas>
+      <div class="controls">← → para moverse | Espacio para saltar</div>
+    </div>
+
+    <div id="victoryModal" class="modal">
+      <div class="modal-content">
+        <h2>¡Victoria!</h2>
+        <p>Has llegado a la cima</p>
+        <button onclick="restartGame()">Jugar de nuevo</button>
+      </div>
+    </div>
+
+    <script>
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+      const modal = document.getElementById("victoryModal");
+
+      let player;
+      let platforms = [];
+      let particles = [];
+      let stars = [];
+      let gameActive = true;
+
+      function createResources() {
+        const patternCanvas = document.createElement("canvas");
+        const patternContext = patternCanvas.getContext("2d");
+        patternCanvas.width = 60;
+        patternCanvas.height = 20;
+        patternContext.fillStyle = "#2ecc71";
+        patternContext.fillRect(0, 0, 60, 20);
+        patternContext.fillStyle = "#27ae60";
+        for (let i = 0; i < 6; i++) {
+          patternContext.fillRect(i * 10, 0, 5, 5);
+          patternContext.fillRect(i * 10 + 5, 15, 5, 5);
+        }
+
+        return ctx.createPattern(patternCanvas, "repeat-x");
+      }
+
+      const keys = {
+        right: false,
+        left: false,
+        space: false,
+      };
+
+      function initGame() {
+        gameActive = true;
+
+        player = {
+          x: 50,
+          y: 550,
+          width: 40,
+          height: 50,
+          dx: 0,
+          dy: 0,
+          speed: 6,
+          gravity: 0.8,
+          jumpHeight: -18,
+          grounded: false,
+          jumpCount: 0,
+          maxJumps: 2,
+          color: "#3498db",
+          trail: [],
+        };
+
+        platforms = [];
+        platforms.push({ x: 0, y: 550, width: 200, height: 20 });
+
+        let lastY = 500;
+        let lastX = 100;
+
+        while (lastY > 30) {
+          const width = Math.random() * 100 + 100;
+          const x = Math.max(
+            0,
+            Math.min(canvas.width - width, lastX + (Math.random() * 200 - 100))
+          );
+          const y = lastY - (Math.random() * 70 + 60);
+
+          platforms.push({ x, y, width, height: 20 });
+
+          lastY = y;
+          lastX = x;
+        }
+
+        stars = [];
+        for (let i = 0; i < 100; i++) {
+          stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2 + 1,
+            opacity: Math.random() * 0.8 + 0.2,
+          });
+        }
+
+        particles = [];
+      }
+
+      function restartGame() {
+        modal.style.display = "none";
+        initGame();
+        update();
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.code === "ArrowRight") keys.right = true;
+        if (e.code === "ArrowLeft") keys.left = true;
+        if (e.code === "Space") {
+          keys.space = true;
+          if (player.jumpCount < player.maxJumps && gameActive) {
+            player.dy = player.jumpHeight;
+            player.jumpCount++;
+
+            for (let i = 0; i < 10; i++) {
+              particles.push({
+                x: player.x + player.width / 2,
+                y: player.y + player.height,
+                dx: Math.random() * 6 - 3,
+                dy: Math.random() * 2 + 1,
+                radius: Math.random() * 4 + 2,
+                opacity: 1,
+                color: "#fff",
+              });
+            }
+          }
+        }
+      });
+
+      document.addEventListener("keyup", (e) => {
+        if (e.code === "ArrowRight") keys.right = false;
+        if (e.code === "ArrowLeft") keys.left = false;
+        if (e.code === "Space") keys.space = false;
+      });
+
+      function update() {
+        if (!gameActive) return;
+        if (keys.right) player.dx = player.speed;
+        else if (keys.left) player.dx = -player.speed;
+        else player.dx *= 0.8;
+
+        player.x += player.dx;
+        player.dy += player.gravity;
+        player.y += player.dy;
+
+        if (player.x < 0) player.x = 0;
+        if (player.x + player.width > canvas.width)
+          player.x = canvas.width - player.width;
+
+        if (player.y > canvas.height) {
+          initGame();
+        }
+
+        player.trail.push({
+          x: player.x + player.width / 2,
+          y: player.y + player.height / 2,
+        });
+        if (player.trail.length > 10) {
+          player.trail.shift();
+        }
+
+        player.grounded = false;
+        platforms.forEach((platform) => {
+          if (
+            player.x < platform.x + platform.width &&
+            player.x + player.width > platform.x &&
+            player.y + player.height > platform.y &&
+            player.y + player.height < platform.y + platform.height &&
+            player.dy > 0
+          ) {
+            player.y = platform.y - player.height;
+            player.grounded = true;
+            player.jumpCount = 0;
+            player.dy = 0;
+
+            if (Math.abs(player.dy) > 5) {
+              for (let i = 0; i < 5; i++) {
+                particles.push({
+                  x: player.x + player.width / 2,
+                  y: player.y + player.height,
+                  dx: Math.random() * 6 - 3,
+                  dy: -Math.random() * 2 - 1,
+                  radius: Math.random() * 3 + 1,
+                  opacity: 1,
+                  color: "#2ecc71",
+                });
+              }
+            }
+          }
+        });
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+          particles[i].x += particles[i].dx;
+          particles[i].y += particles[i].dy;
+          particles[i].opacity -= 0.04;
+
+          if (particles[i].opacity <= 0) {
+            particles.splice(i, 1);
+          }
+        }
+
+        if (player.y <= 10) {
+          modal.style.display = "flex";
+          gameActive = false;
+          return;
+        }
+
+        draw();
+        requestAnimationFrame(update);
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        gradient.addColorStop(0, "#000428");
+        gradient.addColorStop(1, "#004e92");
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        stars.forEach((star) => {
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+          ctx.fill();
+        });
+
+        platforms.forEach((platform) => {
+          ctx.fillStyle = createResources();
+          ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
+
+          ctx.strokeStyle = "#27ae60";
+          ctx.lineWidth = 2;
+          ctx.strokeRect(
+            platform.x,
+            platform.y,
+            platform.width,
+            platform.height
+          );
+
+          ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
+          ctx.fillRect(platform.x, platform.y, platform.width, 5);
+        });
+
+        for (let i = 0; i < player.trail.length; i++) {
+          const point = player.trail[i];
+          const size = (i / player.trail.length) * player.width * 0.7;
+          const alpha = (i / player.trail.length) * 0.5;
+
+          ctx.beginPath();
+          ctx.arc(point.x, point.y, size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(52, 152, 219, ${alpha})`;
+          ctx.fill();
+        }
+
+        ctx.save();
+
+        const gradient2 = ctx.createLinearGradient(
+          player.x,
+          player.y,
+          player.x + player.width,
+          player.y + player.height
+        );
+        gradient2.addColorStop(0, "#3498db");
+        gradient2.addColorStop(1, "#2980b9");
+
+        ctx.fillStyle = gradient2;
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(
+          player.x + player.width * 0.7,
+          player.y + player.height * 0.2,
+          player.width * 0.2,
+          player.height * 0.2
+        );
+
+        ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
+        ctx.fillRect(player.x, player.y, player.width, player.height * 0.3);
+
+        ctx.restore();
+        particles.forEach((particle) => {
+          ctx.beginPath();
+          ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
+          ctx.fill();
+        });
+      }
+
+      initGame();
+      update();
+    </script>
+  </body>
+</html>

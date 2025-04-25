@@ -1,0 +1,27 @@
+[
+  {
+    "descripcion": "Resolver problema del usuario 34",
+    "asignado_a": "Luis",
+    "entregada": true
+  },
+  {
+    "descripcion": "Configurar entorno de desarrollo",
+    "asignado_a": "Mariela",
+    "entregada": false
+  },
+  {
+    "descripcion": "Revisar código de Ana",
+    "asignado_a": "Roberto",
+    "entregada": true
+  },
+  {
+    "descripcion": "Subir aplicación a producción",
+    "asignado_a": "Luis",
+    "entregada": false
+  },
+  {
+    "descripcion": "Documentar el proyecto",
+    "asignado_a": "Ana",
+    "entregada": false
+  }
+]

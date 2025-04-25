@@ -1,0 +1,262 @@
+{
+  "courseProgress": {
+    "courseGrade": {},
+    "referralInfo": {},
+    "_id": "6806cbf6b48c48e1aba95af9",
+    "worker": "666551489082b5376455194b",
+    "course": {
+      "enableMLCheatingDetection": false,
+      "_id": "67e62f64343b8d8c646ef730",
+      "name": "UPDATE: Difficulty added in the task",
+      "title": "UPDATE: Difficulty added in the task",
+      "description": "",
+      "archived": false,
+      "disabled": false,
+      "projectIds": [],
+      "courseDuration": 17,
+      "courseType": "native",
+      "sections": [
+        {
+          "id": "c5623c4d-5537-41b2-a970-cbb1861b6923",
+          "estimatedTime": 0,
+          "recommendedEstimatedTime": 1,
+          "title": "Welcome to the project update course",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "38fe83c6-4686-4591-85b2-240cd15a56f7",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p><strong class=\"ql-size-large\" style=\"background-color: rgb(255, 255, 0);\">PLEASE READ CAREFULLY</strong></p><p><br></p><p>MAJOR UPDATE: The tasks now include an assigned difficulty. This defines the difficulty the ask in the prompt should have. The different difficulties the task may have are: Easy, Medium and Hard. Whether the task aligns with the difficulty or not is not a reason to fail the task, <span style=\"background-color: rgb(255, 255, 0);\">but this will be evaluated and can heavily impact the score you receive from it.</span> In the following sections you will see the specifics for each of the difficulties.</p><p><br></p><p><br></p><p>DISCLAIMER: DO NOT COPY EXAMPLES FROM THIS COURSE FOR YOUR TASKS, THIS WILL FAIL THE TASK AND MAY BE CAUSE OF OFFBOARDING FROM THE PROJECT</p>"
+              },
+              "_id": "67ea480d664a34951c0de454",
+              "textHistory": []
+            }
+          ],
+          "_id": "67ea480d664a34951c0de453"
+        },
+        {
+          "id": "73f99094-dd99-4cef-9968-1e0cfe046fed",
+          "estimatedTime": 0,
+          "recommendedEstimatedTime": 4,
+          "title": "Easy Difficulty",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "b55ea5d4-c8da-4bbf-8a85-a6b376603fd1",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p>It's important to remember that e<span style=\"background-color: rgba(232, 232, 232, 0.04);\">asy does not mean too simple. Don't request to calculate a fibonacci number or multiply two numbers as these are very simple requests.</span></p><p><span style=\"background-color: rgba(232, 232, 232, 0.04);\">Easy refers to:</span></p><ul><li><span style=\"background-color: transparent;\">Tasks use straightforward logic or standard library functions.</span></li><li><span style=\"background-color: transparent;\">Minimal corner cases; typical input sizes or simple data (e.g., small arrays, single function).</span></li><li><span style=\"background-color: transparent;\">Basic knowledge of the language syntax and standard operations (e.g., loops, conditionals).</span></li><li><span style=\"background-color: transparent;\">No advanced data structures (linked lists, trees, or graphs are usually out of scope).</span></li><li><span style=\"background-color: transparent;\">It is usually solvable in a few minutes.</span></li><li><span style=\"background-color: transparent;\">Focused on verifying that the developer can handle simple tasks or syntax correctly.</span></li></ul><p><br></p><p><span style=\"background-color: transparent;\">IMPORTANT NOTES:</span></p><ul><li>Remember it's prohibited to use problems from Leetcode or hacker rank </li></ul><p><br></p><p><span class=\"ql-size-large\">Examples</span></p><p><strong>Code Generation</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\"> “Write a Python function named group_elements that takes a list of integers and returns a dictionary with two keys: 'even' and 'odd'. Each key should map to a sorted list containing the unique even or odd integers from the input. Do not use external libraries.”</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Requires iterating, categorizing, handling duplicates, sorting, and building a dictionary structure</span></li><li><span style=\"background-color: transparent;\">Slightly beyond basic iteration due to multiple operations involved.</span></li></ul><p><br></p><p><strong style=\"background-color: transparent;\">Problem Reflection</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\"> “Consider designing a simple function for user password validation that checks for a minimum length (at least 8 characters), includes at least one uppercase letter, one number, and one special character. Reflect briefly (3–5 sentences) on common edge cases, the validation order, and potential pitfalls when performing these checks.</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Requires awareness of multiple conditions</span></li><li><span style=\"background-color: transparent;\">Needs recognition of potential ordering effects and subtle validation pitfalls.</span></li></ul><p><br></p><p><strong style=\"background-color: transparent;\">Tests Reasoning</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\">We have a Python function remove_duplicates(items) which preserves order while removing duplicate entries from a list. It was tested with the inputs [1, 2, 2, 3, 1, 4], ['a', 'b', 'a', 'c'], and [True, False, True], resulting in [1, 2, 3, 4], ['a', 'b', 'c'], and [True, False]. Explain why these outputs are correct, including how the function preserves order and identifies duplicates.\"</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Requires understanding of order preservation, boolean handling, and duplication logic.</span></li><li><span style=\"background-color: transparent;\">Slightly more nuanced than straightforward numeric/string reasoning.</span></li></ul><p><br></p><p><strong style=\"background-color: transparent;\">Code refactoring</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\">\"Below is a Python function that calculates and prints the prime numbers from 1 to n, but it's inefficient and difficult to read due to nested loops and poor naming. Refactor the function to improve readability, remove redundant checks, and slightly optimize its performance by reducing unnecessary iterations.\"</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Involves basic optimization of nested loops.</span></li><li><span style=\"background-color: transparent;\">Requires identifying logical redundancies and improving readability without advanced optimizations.</span></li></ul><p><br></p><p><strong style=\"background-color: transparent;\">Bug Fixing</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\"> \"Here's a Python function intended to compute the average word length from a given sentence. It currently returns incorrect results for sentences containing punctuation or multiple consecutive spaces. Identify these bugs and fix them, ensuring punctuation is ignored and extra spaces don't affect the calculation.\"</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Requires handling of string processing edge cases.</span></li><li><span style=\"background-color: transparent;\">Slightly more involved logic due to punctuation and whitespace issues.</span></li></ul><p><br></p><p><strong style=\"background-color: transparent;\">Test Generation</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\">\"Create four detailed unit tests in Python using pytest for a function parse_date(date_str) that parses a date string ('YYYY-MM-DD') into a dictionary containing 'year', 'month', and 'day'. Tests should include valid input, invalid date formats, out-of-range dates (e.g., month 13), and leap-year-specific dates.\"</span></li><li class=\"ql-indent-1\"><span style=\"background-color: transparent;\">Includes validation of formats, ranges, and special cases (leap year).</span></li><li class=\"ql-indent-1\"><span style=\"background-color: transparent;\">Slightly more demanding due to multiple edge cases to consider.</span></li></ul><p><br></p><p><strong style=\"background-color: transparent;\">Solution Reasoning</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\">\"Provide a JavaScript function countVowels(sentence) that counts and returns the number of vowels (a, e, i, o, u) in a given sentence (case-insensitive). Then, in three concise bullet points, justify how your solution handles uppercase letters, non-letter characters, and empty strings.\"</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Basic string manipulation with clear handling of multiple edge cases.</span></li><li><span style=\"background-color: transparent;\">Requires explicit handling of non-alphabetic characters and empty inputs.</span></li></ul>"
+              },
+              "_id": "67ea480d664a34951c0de456",
+              "textHistory": []
+            }
+          ],
+          "_id": "67ea480d664a34951c0de455"
+        },
+        {
+          "id": "2f1d7179-9a79-40ee-a70a-9b42126c0851",
+          "estimatedTime": 0,
+          "recommendedEstimatedTime": 4,
+          "title": "Medium Difficulty",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "2da17532-b806-48da-a613-e6dda2cfdc8c",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p>Medium difficulty refers to:</p><ul><li><span style=\"background-color: transparent;\">Tasks involve more intricate logic or require combining multiple language features (e.g., OOP concepts, moderate data structures).</span></li><li><span style=\"background-color: transparent;\">Additional corner cases or constraints (like efficiency or handling of invalid inputs).</span></li><li><span style=\"background-color: transparent;\">Understanding of common algorithms or patterns (e.g., sorting, searching, basic concurrency).</span></li><li><span style=\"background-color: transparent;\">Some familiarity with debugging or performance considerations.</span></li><li><span style=\"background-color: transparent;\">Usually takes longer than a trivial problem due to multiple considerations (e.g., error handling, partial optimizations).</span></li><li><span style=\"background-color: transparent;\">May need to break down the task into sub-steps before coding the solution.</span></li></ul><p><br></p><p><span class=\"ql-size-large\">Examples</span></p><p><strong>Code Generation</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\"> “Create a Java class UserManager that stores user profiles in a list. It should support adding a new user, removing a user by ID, and retrieving a user by username. Include a short method to display all users’ names in alphabetical order.”</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Multiple functions in a class.</span></li><li><span style=\"background-color: transparent;\">Basic collection usage (ArrayList, sorting, searching).</span></li><li><span style=\"background-color: transparent;\">Requires some understanding of OOP design and data handling.</span></li></ul><p><br></p><p><strong style=\"background-color: transparent;\">Problem Reflection</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\"> “We want to parse a CSV file with user contact info. Reflect on how we might handle different delimiters, missing data fields, and large file sizes. Summarize constraints, potential solutions, and/or any special libraries”</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Handling file I/O and data parsing.</span></li><li><span style=\"background-color: transparent;\">Some performance considerations with large files.</span></li><li><span style=\"color: rgb(0, 0, 0); background-color: transparent;\">Awareness of libraries or frameworks (e.g., Python’s csv module).</span></li></ul><p><br></p><p><strong style=\"background-color: transparent;\">Tests Reasoning</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\"> “We have a function rotate_array(arr, k) in C++ that rotates the array to the right by k steps. For arr = [1, 2, 3, 4, 5] and k = 2, the output is [4, 5, 1, 2, 3]. Explain step by step why this is correct, including edge cases if k is larger than len(arr).”</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Involves index manipulation and modulo arithmetic.</span></li><li><span style=\"background-color: transparent;\">Requires an understanding of boundary conditions.</span></li></ul><p><br></p><p><strong style=\"background-color: transparent;\">Code refactoring</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\"> “We have a Java function that calculates Fibonacci numbers using recursion, but it’s very slow for large n. Refactor it to use memoization (dynamic programming) in an OOP style. Keep the overall structure, but reduce repeated computation.”</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Requires knowledge of recursion vs. dynamic programming.</span></li><li><span style=\"background-color: transparent;\">Performance improvement is central to the refactoring.</span></li></ul><p><br></p><p><strong style=\"background-color: transparent;\">Bug Fixing</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\"> “Here’s a C++ function that tries to calculate the median of a list of integers. Sometimes, it crashes if the list is empty, and other times, it returns the wrong median when the list length is even. Identify the bugs and correct them.”</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Involves boundary checks (empty list) and algorithm correctness (median in even-length arrays).</span></li><li><span style=\"background-color: transparent;\">Requires more than one fix (null check + correct index handling).</span></li></ul><p><br></p><p><strong style=\"background-color: transparent;\">Test Generation</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\"> “We have a Python function that reads user profiles from a JSON file and returns them as a list of dictionaries. Write tests covering the following: valid JSON input, missing fields, and invalid JSON structure. Use pytest and include expected exceptions or outcomes.”</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li class=\"ql-indent-1\"><span style=\"background-color: transparent;\">Must be able to handle both valid and invalid inputs.</span></li><li class=\"ql-indent-1\"><span style=\"background-color: transparent;\">Testing file I/O plus JSON parsing logic.</span></li></ul><p><br></p><p><strong style=\"background-color: transparent;\">Solution Reasoning</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\"> “Present the final code to implement a singly linked list in C++ that supports insertion at the head, insertion at the tail, and a method to reverse the list. Then, in bullet points, explain the time complexity for each operation and any edge cases you handle (e.g., empty list).”</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Requires knowledge of pointers and linked list operations.</span></li><li><span style=\"background-color: transparent;\">Involves explaining complexities (O(1), O(n)) for different operations.</span></li></ul>"
+              },
+              "_id": "67ea480d664a34951c0de458",
+              "textHistory": []
+            }
+          ],
+          "_id": "67ea480d664a34951c0de457"
+        },
+        {
+          "id": "e5ca58b7-1408-45dd-95ed-cac331634eed",
+          "estimatedTime": 0,
+          "recommendedEstimatedTime": 4,
+          "title": "Hard Difficulty",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "03721cc2-e479-403c-9cb0-445719403037",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p>Hard difficulty refers to;</p><ul><li><span style=\"background-color: transparent;\">Complex algorithms, advanced data structures, or domain-specific knowledge (machine learning, image processing, concurrency, distributed systems).</span></li><li><span style=\"background-color: transparent;\">Might involve optimization or multi-threading</span></li><li><span style=\"background-color: transparent;\">Strong proficiency in data structures and algorithms, plus knowledge of advanced features in the chosen language.</span></li><li><span style=\"background-color: transparent;\">Ability to handle significant corner cases, large input sizes, or memory constraints.</span></li><li><span style=\"background-color: transparent;\">Can take significantly more effort and planning, including testing, profiling, or significant architectural decisions.</span></li><li><span style=\"background-color: transparent;\">Errors are often subtle (e.g., race conditions, hidden performance bottlenecks).</span></li></ul><p><br></p><p><span class=\"ql-size-large\">Examples</span></p><p><strong>Code Generation</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\"> “Implement a basic web crawler in Go that takes a starting URL, crawls up to three levels deep, and stores all unique links in a thread-safe data structure. Return the list of unique URLs at the end. Use concurrency with goroutines and channels for efficiency.</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Advanced concurrency concepts (goroutines, channels).</span></li><li><span style=\"background-color: transparent;\">Thread-safe data structure or careful synchronization.</span></li><li><span style=\"background-color: transparent;\">Network I/O plus multiple layers of recursion/loop.</span></li></ul><p><br></p><p><strong style=\"background-color: transparent;\">Problem Reflection</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\"> “We have a large-scale recommendation system for an e-commerce platform. Reflect on the main challenges, such as partial updates to user profiles, real-time recommendation generation, and the possibility of A/B testing. Summarize how these constraints might affect both system design and algorithmic choice.”</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Requires understanding of big data, performance, and real-time systems.</span></li><li><span style=\"background-color: transparent;\">Involves advanced domain-specific knowledge (recommendation engines, distributed data).</span></li></ul><p><br></p><p><strong style=\"background-color: transparent;\">Tests Reasoning</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\"> “We have a program that implements the Bellman-Ford algorithm for shortest paths in a weighted graph. Tests include negative edge weights and a scenario with a negative cycle. Explain how each test is processed, why the outputs are as expected, and the significance of detecting negative cycles.”</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Involves knowledge of graph algorithms and negative cycle detection.</span></li><li><span style=\"background-color: transparent;\">Explanation must address multiple passes and relaxation steps.</span></li></ul><p><br></p><p><strong style=\"background-color: transparent;\">Code refactoring</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\"> “We have a Node.js microservice handling user authentication. It’s grown organically and now has cyclical dependencies, global variables, and inconsistent error handling. Refactor the code to implement proper module boundaries, an error-handling middleware, and environment-based configuration. Provide a summary of structural changes.”</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Multiple architectural concerns (modular design, error handling, environment config).</span></li><li><span style=\"background-color: transparent;\">Involves reorganizing code and removing design anti-patterns.</span></li></ul><p><br></p><p><strong style=\"background-color: transparent;\">Bug Fixing</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\"> “We have a multi-threaded Python application using the threading module and a shared resource. Occasionally, data is overwritten or corrupted. Review the code, identify the concurrency bug (including potential race conditions), and fix it by implementing proper synchronization (e.g., locks, semaphores).”</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Involves concurrency and potential race conditions.</span></li><li><span style=\"background-color: transparent;\">Requires knowledge of thread-safe mechanisms and correct usage.</span></li></ul><p><br></p><p><strong style=\"background-color: transparent;\">Test Generation</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\"> “Generate a suite of tests for a microservice-based e-commerce system (in any language) that covers unit tests for the cart service, integration tests between the cart and payment services, and load tests simulating 10k concurrent users. Outline the testing tools and data sets needed.”</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Multiple levels of testing (unit, integration, load).</span></li><li><span style=\"background-color: transparent;\">Requires system-wide perspective and knowledge of concurrency testing.</span></li></ul><p><br></p><p><strong style=\"background-color: transparent;\">Solution Reasoning</strong></p><p><span style=\"background-color: transparent;\">Prompt:</span></p><ul><li><span style=\"background-color: transparent;\"> “Show a final, optimized solution in Java for solving the ‘N-Queens’ problem using backtracking. Provide bullet points on how you prune invalid states, your approach’s time complexity, and how you handle symmetrical board states for efficiency.”</span></li></ul><p><span style=\"background-color: transparent;\">Complexity Rationale:</span></p><ul><li><span style=\"background-color: transparent;\">Complex backtracking with multiple constraints.</span></li><li><span style=\"background-color: transparent;\">Potential optimizations (pruning, symmetry checks).</span></li><li><span style=\"background-color: transparent;\">Must clearly explain correctness and performance trade-offs.</span></li></ul>"
+              },
+              "_id": "67ea480d664a34951c0de45a",
+              "textHistory": []
+            }
+          ],
+          "_id": "67ea480d664a34951c0de459"
+        },
+        {
+          "id": "32fa0c4c-8c0a-44db-be0c-18af68b7345a",
+          "estimatedTime": 0,
+          "recommendedEstimatedTime": 4,
+          "title": "Knowledge Check",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "b83f566f-8f2c-4de9-8f6a-cc0dbe17b1df",
+              "weight": 25,
+              "type": "multiple_choice",
+              "contents": {
+                "singleSelect": true,
+                "skipGrading": false,
+                "question": "<p>What happens if you don't follow the assigned difficulty of the task</p>",
+                "choices": [
+                  {
+                    "id": "39b41885-3a5d-4626-bc16-deca7684de7f",
+                    "answer": "<p>The task automatically fails</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "46dc8844-67c7-4a23-8f28-646fc6611708",
+                    "answer": "<p>Nothing, the difficulty doesn't matter</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "5fa9a6b3-053d-4ab8-8834-71c1bd573ab8",
+                    "answer": "<p>The task won't fail, but you're score will be affected deeply</p>",
+                    "isCorrect": true
+                  }
+                ]
+              },
+              "_id": "67ea480d664a34951c0de45c",
+              "textHistory": []
+            },
+            {
+              "id": "3efdef4c-37c0-406a-a9f2-a99a52364c3d",
+              "weight": 25,
+              "type": "multiple_choice",
+              "contents": {
+                "singleSelect": true,
+                "skipGrading": false,
+                "question": "<p>What does it mean the task should be of Easy difficulty?</p>",
+                "choices": [
+                  {
+                    "id": "a76b191d-aeb3-4fa7-a492-7516e95c1e53",
+                    "answer": "<p>Very simple asks, like a request for a Fibonacci number</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "2d852f7c-184d-4a08-9e12-8b2ed0fc9df3",
+                    "answer": "<p>It asks for a straightforward request, were basic knowledge is needed</p>",
+                    "isCorrect": true
+                  },
+                  {
+                    "id": "0600c949-dd44-48e8-a018-2b47b33e52e9",
+                    "answer": "<p>It can be easily solved by the model</p>",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              "_id": "67ea480d664a34951c0de45d",
+              "textHistory": []
+            },
+            {
+              "id": "dea7fa93-3e81-427c-a91f-ff448204cd58",
+              "weight": 25,
+              "type": "multiple_choice",
+              "contents": {
+                "singleSelect": true,
+                "skipGrading": false,
+                "question": "<p>Which of the following is not true for Medium difficulty?</p>",
+                "choices": [
+                  {
+                    "id": "7c096017-d16d-4e80-ac3f-f9d201371f32",
+                    "answer": "<p>Involves common knowledge from algorithms/patterns</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "1ef9d4ed-7d64-4139-8ca4-1999e8562bf1",
+                    "answer": "<p>Added handling for edge cases and is more efficient</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "89785aa1-59c1-4ef4-b45e-55c792d0f18f",
+                    "answer": "<p>The request should take at least 30 minutes to solve but less than an hour</p>",
+                    "isCorrect": true
+                  }
+                ]
+              },
+              "_id": "67ea480d664a34951c0de45e",
+              "textHistory": []
+            },
+            {
+              "id": "033fbb0b-240b-44d6-967c-3148c67ada5c",
+              "weight": 25,
+              "type": "multiple_choice",
+              "contents": {
+                "singleSelect": true,
+                "skipGrading": false,
+                "question": "<p>Which of the following belongs to the Hard difficulty?</p>",
+                "choices": [
+                  {
+                    "id": "3d04dab6-f6f4-4845-b2e0-955cdaf58606",
+                    "answer": "<p><span style=\"background-color: transparent;\">Ability to handle significant corner cases, large input sizes, or memory constraints.</span></p>",
+                    "isCorrect": true
+                  },
+                  {
+                    "id": "7eae68d4-caf8-446f-9caa-e4badae25c01",
+                    "answer": "<p><span style=\"background-color: transparent;\">Some familiarity with debugging or performance considerations.</span></p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "8f2a5abf-ea8c-4272-96ac-069ef0c9e349",
+                    "answer": "<p>Focused on verifying the correct use of syntax and simple task handling</p>",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              "_id": "67ea480d664a34951c0de45f",
+              "textHistory": []
+            }
+          ],
+          "_id": "67ea480d664a34951c0de45b"
+        }
+      ],
+      "translatedSections": {},
+      "minReviewLevel": "-1",
+      "passingGradeThreshold": 0,
+      "isTemplate": false,
+      "showFinalGrade": false,
+      "grantedTagsUponCompletion": [],
+      "grantedTagsUponPass": [],
+      "grantedTagsUponFail": [],
+      "createdBy": "6639450adf383338199b5e10",
+      "updatedBy": "6639450adf383338199b5e10",
+      "allowFreeTextGrading": false,
+      "useCustomQuestionWeights": false,
+      "isTimed": false,
+      "createdAt": "2025-03-28T05:11:00.981Z",
+      "updatedAt": "2025-03-31T07:45:17.878Z",
+      "__v": 12
+    },
+    "currentSection": 1,
+    "status": "in_progress",
+    "attemptNumber": 1,
+    "completed": false,
+    "courseAnswer": {},
+    "assigned": false,
+    "passingGrade": 0,
+    "fullstorySessions": [],
+    "remainingTime": 1020,
+    "projectId": "67d27d962216e1f2cd2ea23b",
+    "createdAt": "2025-04-21T22:51:34.433Z",
+    "updatedAt": "2025-04-21T22:52:10.852Z",
+    "__v": 0
+  }
+}
+choices

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tetris Básico</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #000;
+      }
+
+      canvas {
+        border: 2px solid #fff;
+        background-color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="tetris" width="300" height="500"></canvas>
+    <script>
+      const canvas = document.getElementById("tetris");
+      const ctx = canvas.getContext("2d");
+      const cols = 15;
+      const rows = 25;
+      const size = 20;
+      const interval = 500;
+      let currentX = Math.floor(cols / 2) - 1;
+      let currentY = 0;
+      let currentBlock;
+      let board = Array.from({ length: rows }, () => Array(cols).fill(0));
+
+      function drawSquare(x, y, color) {
+        ctx.fillStyle = color;
+        ctx.fillRect(x * size, y * size, size, size);
+      }
+
+      function drawBoard() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        board.forEach((row, y) => {
+          row.forEach((val, x) => {
+            if (val) drawSquare(x, y, val);
+          });
+        });
+      }
+
+      function checkCollision(x, y, block) {
+        for (let i = 0; i < block.length; i++) {
+          for (let j = 0; j < block[i].length; j++) {
+            if (block[i][j]) {
+              const nx = x + j;
+              const ny = y + i;
+              if (nx < 0 || ny >= rows || nx >= cols || board[ny][nx])
+                return true;
+            }
+          }
+        }
+        return false;
+      }
+
+      function placeBlock() {
+        for (let i = 0; i < currentBlock.length; i++) {
+          for (let j = 0; j < currentBlock[i].length; j++) {
+            if (currentBlock[i][j]) {
+              board[currentY + i][currentX + j] = currentBlock[i][j];
+            }
+          }
+        }
+        clearInterval(gameInterval);
+        if (detectGameOver()) {
+          alert("Game Over");
+          resetGame();
+        } else {
+          newBlock();
+          gameInterval = setInterval(moveDown, interval);
+        }
+      }
+
+      function moveDown() {
+        if (!checkCollision(currentX, currentY + 1, currentBlock)) {
+          currentY++;
+        } else {
+          placeBlock();
+        }
+        drawBoard();
+      }
+
+      function detectGameOver() {
+        return board[0].some((cell) => cell > 0);
+      }
+
+      function resetGame() {
+        currentX = Math.floor(cols / 2) - 1;
+        currentY = 0;
+        currentBlock = null;
+        board = Array.from({ length: rows }, () => Array(cols).fill(0));
+        newBlock();
+      }
+
+      function newBlock() {
+        const shapes = [
+          [[1]],
+          [[1, 1, 1, 1]],
+          [
+            [1, 0],
+            [1, 1],
+          ],
+          [
+            [1, 0],
+            [1, 1],
+          ],
+          [
+            [1, 1, 0],
+            [0, 1, 1],
+          ],
+          [
+            [0, 1, 1],
+            [1, 1, 0],
+          ],
+          [
+            [1, 1, 1],
+            [1, 0, 0],
+          ],
+        ];
+        currentBlock = shapes[Math.floor(Math.random() * shapes.length)];
+        currentY = 0;
+        currentX = Math.floor(cols / 2) - 1;
+        if (checkCollision(currentX, currentY, currentBlock)) {
+          placeBlock();
+        }
+      }
+
+      canvas.addEventListener("click", () => {
+        if (!currentBlock) return;
+        if (!checkCollision(currentX, currentY + 1, currentBlock)) {
+          currentY++;
+        } else {
+          placeBlock();
+        }
+        drawBoard();
+      });
+
+      const gameInterval = setInterval(moveDown, interval);
+      resetGame();
+      drawBoard();
+    </script>
+  </body>
+</html>

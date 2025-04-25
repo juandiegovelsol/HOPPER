@@ -1,0 +1,3 @@
+6807b7be53a0d57430624cc7
+
+Trabajo para una empresa de desarrollo de video juegos en Nueva York, y me asignaron el desarrollo de un video juego de plataformas, en el que un personaje debe iniciar desde la parte de abajo de la pantalla, moviendose con las teclas de dirección hacia la izquierda o la derecha y saltando con la tecla de espacio. En el juego, deberán aparecer plataformas que el jugador debe poder alcanzar al saltar y el objetivo es subir saltando entre plataformas para alcanzar la parte superior de la pantalla. Una vez se alcance la parte superior el juego deberá imprimir un mensaje que indique que ganó la partida. Dame el código completo de HTML, CSS y JavaScript, sin comentarios ni explicaciones.

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diagrama de Flujo</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- O /src/style.css -->
+  </head>
+  <body>
+    <div id="app">
+      <div class="toolbar">
+        <button id="add-rectangle">Rectángulo</button>
+        <button id="add-diamond">Rombo</button>
+        <button id="add-ellipse">Elipse</button>
+        <button id="connect-mode">Conectar</button>
+        <button id="export-btn">Exportar PNG</button>
+        <button id="clear-btn">Limpiar</button>
+      </div>
+      <div class="canvas-container">
+        <canvas id="flowchart-canvas"></canvas>
+      </div>
+    </div>
+    <script type="module" src="src/main.js"></script>
+    <!-- O /src/main.js -->
+  </body>
+</html>

@@ -1,0 +1,4 @@
+id,nombre,apellido,identificacion,medico,prioridad,tratamiento
+1,Juan,Pérez,P12345,,15,Antibiótico oral
+2,María,,P23456,Dra. Rodríguez,45,Fisioterapia
+3,Carlos,Sánchez,P34567,Dr. Martínez,,Quimioterapia

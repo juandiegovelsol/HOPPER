@@ -1,0 +1,6 @@
+EmployeeID,Name,Role,Department,Location
+E001,Laura Gómez,Desarrolladora de Software,Desarrollo,Barcelona
+E002,Pedro Martínez,Analista de Datos,Data Science,Madrid
+E003,Ana Ruiz,Gestiona de Proyectos,Gestion de Proyectos,Bogotá
+E004,Juan Pérez,Ingeniero de Redes,Infraestructura,México D.F.
+E005,Lucía Fernández,Diseñadora UX/UI,Diseño,Valencia

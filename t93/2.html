@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Plataformas</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+
+      canvas {
+        border: 1px solid #000;
+        background-color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <script>
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+
+      const player = {
+        x: 50,
+        y: 550,
+        width: 50,
+        height: 50,
+        color: "#00f",
+        dy: 0,
+        gravity: 1,
+        jumpHeight: -25,
+        grounded: false,
+      };
+
+      const platforms = [
+        { x: 0, y: 500, width: 200, height: 20 },
+        { x: 300, y: 400, width: 200, height: 20 },
+        { x: 600, y: 300, width: 200, height: 20 },
+        { x: 200, y: 200, width: 200, height: 20 },
+        { x: 500, y: 100, width: 200, height: 20 },
+      ];
+
+      const keys = {
+        right: false,
+        left: false,
+        space: false,
+      };
+
+      document.addEventListener("keydown", (e) => {
+        if (e.code === "ArrowRight") keys.right = true;
+        if (e.code === "ArrowLeft") keys.left = true;
+        if (e.code === "Space") keys.space = true;
+      });
+
+      document.addEventListener("keyup", (e) => {
+        if (e.code === "ArrowRight") keys.right = false;
+        if (e.code === "ArrowLeft") keys.left = false;
+        if (e.code === "Space") keys.space = false;
+      });
+
+      function update() {
+        // Movimiento lateral
+        if (keys.right) player.x += 5;
+        if (keys.left) player.x -= 5;
+
+        // Salto
+        if (keys.space && player.grounded) {
+          player.dy = player.jumpHeight;
+          player.grounded = false;
+        }
+
+        // Gravedad
+        player.dy += player.gravity;
+        player.y += player.dy;
+
+        // Colisión con el suelo
+        if (player.y + player.height > canvas.height) {
+          player.y = canvas.height - player.height;
+          player.grounded = true;
+          player.dy = 0;
+        }
+
+        // Colisión con plataformas
+        platforms.forEach((platform) => {
+          if (
+            player.x < platform.x + platform.width &&
+            player.x + player.width > platform.x &&
+            player.y < platform.y + platform.height &&
+            player.y + player.height > platform.y
+          ) {
+            player.y = platform.y - player.height;
+            player.grounded = true;
+            player.dy = 0;
+          }
+        });
+
+        // Verificar si ganó
+        if (player.y <= 0) {
+          alert("¡Has ganado!");
+          document.location.reload();
+        }
+
+        draw();
+        requestAnimationFrame(update);
+      }
+
+      function draw() {
+        // Dibujar el fondo
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Dibujar el jugador
+        ctx.fillStyle = player.color;
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+
+        // Dibujar las plataformas
+        ctx.fillStyle = "#000";
+        platforms.forEach((platform) => {
+          ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
+        });
+      }
+
+      update();
+    </script>
+  </body>
+</html>

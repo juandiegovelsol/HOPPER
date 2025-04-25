@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard en Tiempo Real</title>
+    <script type="module" src="dashboard-component.js"></script>
+  </head>
+  <body>
+    <dashboard-component></dashboard-component>
+
+    <script>
+      const worker = new Worker("dashboard.js");
+
+      const dashboard = document.querySelector("dashboard-component");
+
+      worker.onmessage = (event) => {
+        // Enviar los datos al Web Component
+        dashboard.updateData(event.data);
+      };
+
+      worker.onerror = (error) => {
+        console.error("Error en el worker:", error.message);
+      };
+
+      // Simulación de un feed de precios
+      setInterval(() => {
+        const priceFeed = { price: (Math.random() * 100).toFixed(2) };
+        worker.postMessage(priceFeed);
+      }, 1000);
+    </script>
+  </body>
+</html>

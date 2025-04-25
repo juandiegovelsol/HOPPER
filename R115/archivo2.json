@@ -1,0 +1,24 @@
+[
+  {
+    "nombre": "Jack Wilson",
+    "edad": 24,
+    "nacionalidad": "Inglaterra",
+    "posicion": "Delantero",
+    "equipo": "Chelsea",
+    "valor": 78,
+    "goles": 185,
+    "asistencias": 75,
+    "minutos_jugados": 980
+  },
+  {
+    "nombre": "Mohamed Saleh",
+    "edad": 26,
+    "nacionalidad": "Egipto",
+    "posicion": "Delantero",
+    "equipo": "Liverpool",
+    "valor": 82,
+    "goles": 210,
+    "asistencias": 90,
+    "minutos_jugados": 1050
+  }
+]

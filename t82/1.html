@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tetris Básico</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #000;
+      }
+
+      canvas {
+        border: 2px solid #fff;
+        background-color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="tetris" width="300" height="500"></canvas>
+    <script>
+      const canvas = document.getElementById("tetris");
+      const ctx = canvas.getContext("2d");
+      const blockSize = 20;
+      const cols = 15;
+      const rows = 25;
+      const intervalTime = 500;
+
+      let dropCounter = 0;
+      let dropInterval = null;
+      let lastTime = 0;
+
+      const board = [];
+      for (let r = 0; r < rows; r++) {
+        board[r] = Array(cols).fill(0);
+      }
+
+      const colors = ["#000", "#FF0", "#0F0", "#0FF", "#F00", "#FF0", "#0FF"];
+
+      class Block {
+        constructor(col, color) {
+          this.col = col;
+          this.row = 0;
+          this.color = color;
+        }
+
+        draw() {
+          ctx.fillStyle = this.color;
+          ctx.fillRect(
+            this.col * blockSize,
+            this.row * blockSize,
+            blockSize,
+            blockSize
+          );
+        }
+
+        fall() {
+          if (this.row + 1 >= rows || board[this.row + 1][this.col]) {
+            board[this.row][this.col] = colors.indexOf(this.color) + 1;
+            return true;
+          }
+          this.row++;
+          return false;
+        }
+      }
+
+      function drawBoard() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            if (board[r][c] !== 0) {
+              ctx.fillStyle = colors[board[r][c] - 1];
+              ctx.fillRect(c * blockSize, r * blockSize, blockSize, blockSize);
+            }
+          }
+        }
+      }
+
+      function checkLines() {
+        for (let r = 0; r < rows; r++) {
+          if (board[r].every((cell) => cell !== 0)) {
+            board.splice(r, 1);
+            board.unshift(Array(cols).fill(0));
+          }
+        }
+      }
+
+      function detectGameOver() {
+        return board[0].some((cell) => cell !== 0);
+      }
+
+      function update(time) {
+        dropCounter += time - lastTime;
+        lastTime = time;
+        if (dropCounter > intervalTime) {
+          for (const block of activeBlocks) {
+            if (block.fall()) {
+              if (block.row === 0) {
+                alert("Game Over!");
+                clearInterval(dropInterval);
+                return;
+              }
+            }
+          }
+          dropCounter = 0;
+        }
+        drawBoard();
+        activeBlocks.forEach((block) => block.draw());
+        requestAnimationFrame(update);
+      }
+
+      function controlBlocks() {
+        document.addEventListener("keydown", (event) => {
+          switch (event.key) {
+            case "ArrowLeft":
+              activeBlocks.forEach((block) => {
+                if (block.col > 0 && !board[block.row][block.col - 1])
+                  block.col--;
+              });
+              break;
+            case "ArrowRight":
+              activeBlocks.forEach((block) => {
+                if (block.col < cols - 1 && !board[block.row][block.col + 1])
+                  block.col++;
+              });
+              break;
+            case "ArrowDown":
+              for (const block of activeBlocks) {
+                if (block.fall()) {
+                  if (block.row === 0) {
+                    alert("Game Over!");
+                    clearInterval(dropInterval);
+                    return;
+                  }
+                }
+              }
+              break;
+          }
+          drawBoard();
+          activeBlocks.forEach((block) => block.draw());
+        });
+      }
+
+      const activeBlocks = [];
+
+      function newBlock() {
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const col = Math.floor(Math.random() * cols);
+        const block = new Block(col, color);
+        activeBlocks.push(block);
+      }
+
+      dropInterval = setInterval(newBlock, 1000);
+      controlBlocks();
+      requestAnimationFrame(update);
+    </script>
+  </body>
+</html>

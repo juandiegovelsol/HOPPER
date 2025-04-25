@@ -1,0 +1,17 @@
+[
+  {
+    "descripcion": "",
+    "persona": "Juan Pérez",
+    "entregada": false
+  },
+  {
+    "descripcion": "Asignar prioridades",
+    "persona": "",
+    "entregada": true
+  },
+  {
+    "descripcion": "Registrar casos de usuario",
+    "persona": "Elena López",
+    "entregada": "No"
+  }
+]

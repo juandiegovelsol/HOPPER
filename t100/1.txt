@@ -1,0 +1,47 @@
+Para implementar un sistema de asignación de pacientes en un hospital mediante consola en JavaScript, podemos considerar dos enfoques diferentes que permiten reutilizar código y se adaptan a posibles expansiones futuras. Aquí te presento una reflexión sobre cada enfoque:
+
+
+
+
+
+Implementación orientada a objetos (OOP):
+
+
+
+
+
+Estructura: Utilizar clases para representar a los usuarios (médicos, enfermeros y pacientes) y el sistema de gestión. Las clases pueden compartir métodos y propiedades comunes, lo que permite reutilizar código de manera eficaz.
+
+
+
+Roles y permisos: Cada clase podría tener un método para realizar acciones según su rol. Por ejemplo, los médicos tendrían un método asignarPaciente, mientras que los enfermeros tendrían un método confirmarTratamiento.
+
+
+
+Reutilización de código: A través de la herencia, puedes definir una clase base Usuario con atributos comunes (nombre, apellido, identificación) y métodos comunes, y luego extender estas clases para médicos, enfermeros y pacientes.
+
+
+
+Proyección de crecimiento: Este enfoque es muy escalable. Puedes fácilmente añadir más tipos de usuarios o más funcionalidades compartidas, como historiales médicos o registros de actividad, ya que el sistema está bien organizado y modular.
+
+
+
+Implementación basada en funciones:
+
+
+
+
+
+Estructura: Usar funciones para gestionar las interacciones entre los diferentes tipos de usuarios. Podrías tener funciones separadas para cada acción (asignarPaciente, confirmarTratamiento), y los usuarios serían objetos simples con propiedades.
+
+
+
+Flexibilidad inicial: Dado que no se definen clases, este enfoque puede parecer más flexible al inicio, especialmente si las necesidades del proyecto son menos definidas o están sujetas a cambios frecuentes.
+
+
+
+Menos escalabilidad: A medida que el sistema crece, este enfoque puede volverse difícil de mantener y extender, debido a la falta de una estructura rígida y modularidad que ofrecen las clases. La duplicación de código es más probable, lo que va en contra de la reutilización.
+
+Mejor opción con proyección de crecimiento:
+
+La implementación orientada a objetos es generalmente la mejor opción cuando se busca escalabilidad y reutilización de código. Al definir claramente los roles y las acciones a través de clases, el sistema se vuelve más fácil de mantener y extender. Además, si en el futuro se decide pasar a un entorno visual o incorporar una interfaz gráfica, la estructura OOP se adaptará mejor. El enfoque basado en funciones podría resultar en un inicio más rápido, pero a largo plazo, la falta de estructura conducirá a complejidades imprevistas, especialmente si el sistema debe evolucionar o crecer en funcionalidades.

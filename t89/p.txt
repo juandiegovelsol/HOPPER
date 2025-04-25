@@ -1,0 +1,12 @@
+6807b76887dc4b2ea7e5d627
+
+
+Estoy trabajando en una interfaz para mi tienda en línea que le permita a mis clientes
+comparar las mismas características para diferentes artículos de una selección.
+Estoy pensando en implementar un gráfico de tipo radar interactivo de Chart.js
+que permita al usuario escoger 2 de entre 4 productos diferentes para comparar las
+características de precio (normalizado de 0 a 10 a partir del precio en Euros),
+durabilidad (de 0 a 10), peso (normalizado de 0 a 10 a partir del peso en gramos),
+materiales de construcción (de 0 a 10 en calidad) y garantía (de 0 a 10).
+Simula los datos para los 4 productos y genera la interfaz interactiva con
+HTML, CSS y JavaScript. No incluyas ningún comentario ni explicación del código.

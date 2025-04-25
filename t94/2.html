@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mapa de Votaciones España</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #f4f4f4;
+      }
+
+      #map {
+        background-color: #e0e0e0;
+        border: 1px solid #ccc;
+      }
+
+      .region {
+        stroke: #ffffff;
+        stroke-width: 0.5px;
+        transition: opacity 0.2s ease-in-out, stroke 0.2s ease-in-out;
+      }
+
+      .region:hover {
+        opacity: 0.7;
+        stroke: #333333;
+        stroke-width: 1.5px;
+        cursor: pointer;
+      }
+
+      #tooltip {
+        position: absolute;
+        visibility: hidden;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        pointer-events: none;
+        white-space: nowrap;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
+  </head>
+  <body>
+    <svg id="map"></svg>
+    <div id="tooltip"></div>
+    <script>
+      const electionData = {
+        Andalucía: { CandidatoA: 1850342, CandidatoB: 1985765 },
+        Aragón: { CandidatoA: 310567, CandidatoB: 295876 },
+        "Principado de Asturias": { CandidatoA: 250876, CandidatoB: 270123 },
+        "Illes Balears": { CandidatoA: 210987, CandidatoB: 235678 },
+        Canarias: { CandidatoA: 480123, CandidatoB: 450987 },
+        Cantabria: { CandidatoA: 140567, CandidatoB: 155876 },
+        "Castilla y León": { CandidatoA: 650876, CandidatoB: 710234 },
+        "Castilla-La Mancha": { CandidatoA: 495123, CandidatoB: 520678 },
+        "Cataluña/Catalunya": { CandidatoA: 1650987, CandidatoB: 1580456 },
+        "Comunitat Valenciana": { CandidatoA: 1200345, CandidatoB: 1280987 },
+        Extremadura: { CandidatoA: 270678, CandidatoB: 295123 },
+        Galicia: { CandidatoA: 680987, CandidatoB: 720345 },
+        "Comunidad de Madrid": { CandidatoA: 1550876, CandidatoB: 1680234 },
+        "Región de Murcia": { CandidatoA: 340123, CandidatoB: 375678 },
+        "Comunidad Foral de Navarra": {
+          CandidatoA: 160456,
+          CandidatoB: 150789,
+        },
+        "País Vasco/Euskadi": { CandidatoA: 510789, CandidatoB: 490345 },
+        "La Rioja": { CandidatoA: 75234, CandidatoB: 80567 },
+        "Ciudad Autónoma de Ceuta": { CandidatoA: 15876, CandidatoB: 18234 },
+        "Ciudad Autónoma de Melilla": { CandidatoA: 14567, CandidatoB: 16987 },
+      };
+
+      const width = 800;
+      const height = 600;
+
+      const svg = d3.select("#map").attr("width", width).attr("height", height);
+
+      const tooltip = d3.select("#tooltip");
+
+      const projection = d3
+        .geoConicConformal()
+        .rotate([3.4, 0])
+        .center([0, 36])
+        .parallels([28, 44])
+        .scale(1600)
+        .translate([width / 2 - 100, height / 2 + 150]);
+
+      const path = d3.geoPath().projection(projection);
+
+      const colorScale = d3
+        .scaleOrdinal()
+        .domain(["CandidatoA", "CandidatoB"])
+        .range(["#1f77b4", "#ff7f0e"]);
+
+      const url = "https://unpkg.com/es-atlas@0.5.0/es/autonomous_regions.json";
+
+      d3.json(url)
+        .then((topologyData) => {
+          const regions = topojson.feature(
+            topologyData,
+            topologyData.objects.autonomous_regions
+          );
+
+          projection.fitSize([width, height], regions);
+
+          svg
+            .append("g")
+            .selectAll("path")
+            .data(regions.features)
+            .join("path")
+            .attr("class", "region")
+            .attr("d", path)
+            .attr("fill", (d) => {
+              const regionName = d.properties.NAMEUNIT;
+              const data = electionData[regionName];
+              if (!data) return "#cccccc";
+              const winner =
+                data.CandidatoA > data.CandidatoB ? "CandidatoA" : "CandidatoB";
+              return colorScale(winner);
+            })
+            .on("mouseover", function (event, d) {
+              d3.select(this).raise();
+              const regionName = d.properties.NAMEUNIT;
+              const data = electionData[regionName];
+              if (data) {
+                tooltip
+                  .style("visibility", "visible")
+                  .html(
+                    `<strong>${regionName}</strong><br>Candidato A: ${data.CandidatoA.toLocaleString()}<br>Candidato B: ${data.CandidatoB.toLocaleString()}`
+                  );
+              } else {
+                tooltip
+                  .style("visibility", "visible")
+                  .html(
+                    `<strong>${regionName}</strong><br>Datos no disponibles`
+                  );
+              }
+            })
+            .on("mousemove", (event) => {
+              tooltip
+                .style("top", event.pageY - 10 + "px")
+                .style("left", event.pageX + 10 + "px");
+            })
+            .on("mouseout", function (event, d) {
+              tooltip.style("visibility", "hidden");
+            });
+        })
+        .catch((error) => {
+          console.error("Error loading or processing map data:", error);
+        });
+    </script>
+  </body>
+</html>

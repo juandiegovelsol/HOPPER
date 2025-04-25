@@ -1,0 +1,101 @@
+Para implementar un sistema de asignación de pacientes en un hospital por consola en JavaScript, podemos considerar varias formas de estructurar el código para asegurar modularidad y reutilización. A continuación, reflexiono sobre dos posibles implementaciones y sugiero una opción con mejor proyección de crecimiento:
+
+Implementación 1: Orientada a Objetos
+
+
+
+
+
+Estructura básica:
+
+
+
+
+
+Crear una clase Persona que contenga información compartida como nombre, apellido y identificación.
+
+
+
+Definir clases derivadas Medico, Enfermero y Paciente que hereden de Persona y agreguen el atributo rol.
+
+
+
+Implementar una clase Asignacion para manejar la lógica de asignación de pacientes a enfermeros.
+
+
+
+Reutilización y encapsulación:
+
+
+
+
+
+La clase Persona se encarga de mantener los datos comunes, mientras que las clases derivadas manejan funcionalidades específicas de cada rol.
+
+
+
+La interacción entre médicos, enfermeros y pacientes se gestiona mediante métodos públicos en sus respectivas clases.
+
+
+
+Ventajas:
+
+
+
+
+
+Modularidad: cada clase tiene responsabilidades bien definidas.
+
+
+
+Flexibilidad: es fácil extender esta implementación añadiendo nuevos roles o funcionalidades.
+
+Implementación 2: Programación Procedimental con Funciones de Orden Superior
+
+
+
+
+
+Estructura básica:
+
+
+
+
+
+Usar objetos literales o la clase Object para representar a los usuarios con propiedades de nombre, apellido, identificación y rol.
+
+
+
+Crear funciones separadas para gestionar tareas específicas: asignarPaciente, confirmarTratamiento, etc.
+
+
+
+Reutilización mediante funciones de orden superior:
+
+
+
+
+
+Utilizar funciones anónimas y manejo de arrays para almacenar y procesar colecciones de objetos Persona.
+
+
+
+Usar prototipos para extender el comportamiento compartido.
+
+
+
+Ventajas:
+
+
+
+
+
+Flexibilidad en la manipulación de colecciones y fácil iteración sobre datos.
+
+
+
+Se mantiene una estructura menos acoplada y permite agregar comportamientos mediante prototipos o funciones adicionales.
+
+Mejor Opción con Proyección de Crecimiento:
+
+La implementación orientada a objetos suele ser más clara y mantener una mejor escalabilidad para sistemas más complejos en el futuro. Esta estrategia proporciona una delineación natural de responsabilidades entre las diferentes partes del sistema, lo que facilita la modificación y la ampliación de funcionalidades. Además, ofrece una estructura más comprensible cuando más desarrolladores se unen al proyecto, porque el paradigma orientado a objetos es generalmente más conocido y documentado. En un entorno hospitalario, donde los roles y procedimientos claros son fundamentales, esta estructura puede facilitar la integración de nuevas características, como interfases gráficas o módulos adicionales, basándose en clases ya definidas.
