@@ -1,0 +1,420 @@
+{
+  "courseProgress": {
+    "courseGrade": {},
+    "referralInfo": {},
+    "_id": "680f8d3e1f2abc3c5125f903",
+    "worker": "666551489082b5376455194b",
+    "course": {
+      "_id": "680becfe08b79d6c6653d0e6",
+      "name": "natural_coding_prompts",
+      "title": "Writing Natural Coding Prompts",
+      "description": "Let's remember how to write natural, human-sounding coding prompts without using any LLM or translation tool. Let's better align our linguistic technology.",
+      "archived": false,
+      "disabled": false,
+      "projectIds": [],
+      "courseDuration": 14,
+      "courseType": "native",
+      "sections": [
+        {
+          "id": "4e19be21-3b3b-451d-97ef-71d8bcdce366",
+          "recommendedEstimatedTime": 1,
+          "title": "Writing Natural Coding Prompts",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "cec34774-0cc8-4478-a61b-347fc3348dcb",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "body": "<p>Learn how to craft authentic, easy-to-solve prompts for coding tasks without relying on AI assistance. This course will guide you through what a prompt is, how to sound natural, and how to self-check your work for clarity and human tone.</p>",
+                "singleSelect": true
+              },
+              "_id": "680d6d7a11c6d3f17f1d8ae6",
+              "textHistory": []
+            }
+          ],
+          "_id": "680d6d7a11c6d3f17f1d8ae5"
+        },
+        {
+          "id": "61e0c3b9-8c96-44d6-baeb-6feb58c287da",
+          "estimatedTime": 0,
+          "recommendedEstimatedTime": 2,
+          "title": "What is a User Prompt?",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "8b8e676b-11fa-46b3-b048-bd264b5f4554",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "body": "<p>A <strong>user prompt</strong> is a short request that a real person would write into an AI chat window to get coding help.</p><p>Think of it like asking a question to a colleague or an LLM while you’re coding and getting stuck — casual, direct, and focused on solving a real problem you have.</p><p>🔵 <strong>Example</strong>:</p><h2><em>\"Hey, I’m building a CLI in Go and can’t figure out how to stream large JSON files. Can you show me a simple pattern?\"</em></h2>",
+                "singleSelect": true
+              },
+              "_id": "680d6d7a11c6d3f17f1d8ae8",
+              "textHistory": []
+            },
+            {
+              "id": "b7d54ec3-f56c-492a-aca4-b6c08f5229c8",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<h3>✅ The Three Essential Checks for a Strong Prompt</h3><p>Every strong user prompt needs to pass these <strong>three checks</strong>:</p><ul><li><strong>It’s clear</strong>: Someone else reading it immediately knows exactly what you’re asking for.</li><li><strong>It’s solvable</strong>: All the information is present (it's complete); you're not asking for the impossible (like \"divide by zero\" or \"predict the future\").</li><li><strong>It matches the assigned topic</strong>: If you were asked to write about JSON parsing, your prompt should stay on JSON parsing, not drift into web server design or something unrelated.</li></ul><p><br></p>"
+              },
+              "_id": "680d6d7a11c6d3f17f1d8ae9",
+              "textHistory": []
+            },
+            {
+              "id": "f7a51606-221c-4729-966c-caa237752826",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<h3>🧪 Quick Activity</h3><p>Read this prompt:</p><p><em>\"Build a function that finds errors in JSON files without using any libraries. Use recursion, provide benchmarks, and don't exceed O(n) time complexity.\"</em></p><p>Ask yourself:</p><ul><li>Is it clear?</li><li>Is it solvable?</li><li>Does it stick to a simple topic?</li></ul><p><strong>Hint</strong>: This prompt is not great.</p><p>It piles on too many constraints, making it sound like a test case instead of a casual request for help.</p>"
+              },
+              "_id": "680d6d7a11c6d3f17f1d8aea",
+              "textHistory": []
+            },
+            {
+              "id": "be3b79ab-1300-4815-a0b5-64d22f2f1289",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<h3>🛠️ Quick Tips for Writing Good Prompts</h3><ul><li>Pretend you’re DM’ing a friend about a coding question: when you finish the prompt, this should be indistinguishable from an ordinary conversation between coders.</li><li>Include one line of personal context if needed (“I’m building X and stuck on Y.”). If such a personal context wouldn't make any difference in the expected solution, it's unnecessary.</li><li>Ask one clear question. You can break down the question into intermediate steps if needed, but nobody should doubt which the main question is.</li><li>Intermediate steps are needed only if you want the solution to be developed in a specific form rather than others. For example, \"<em>How can I average these age values grouped by gender without getting a Pandas Series but a DataFrame at once? I often use \"reset_index()\", but can I get a simpler code? — guess that \"groupby()\" could have a special param for doing so.</em>\" Here, the main question is how to aggregate grouped data, but a subsidiary question is added to <strong>specify which solution to the main question is preferable</strong>.</li><li>Don’t overthink — trust how you’d normally ask for help.</li></ul>"
+              },
+              "_id": "680d6d7a11c6d3f17f1d8aeb",
+              "textHistory": []
+            }
+          ],
+          "_id": "680d6d7a11c6d3f17f1d8ae7"
+        },
+        {
+          "id": "62cd47e3-afb8-4c40-bbc2-ec5f4a2973f1",
+          "estimatedTime": 0,
+          "recommendedEstimatedTime": 2,
+          "title": "Writing a prompt: your style!",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "e1a9f3b5-7a39-4c0b-830f-ce43509f9e82",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p>When you write a user prompt, you should sound like you’re chatting with a teammate. Not like you’re writing a school essay.</p><p>Here’s how:</p><ul><li><strong>Write conversationally</strong>:</li><li>Use the words and tone you would naturally use when talking to another developer.</li><li>Example: <em>\"Hey, I’m building a tool to manage API keys and I’m stuck on encrypting them properly. Could you show me a simple way to do it?\"</em></li><li><strong>Add a little personal context</strong>:</li><li>One line is enough. It helps the AI (and the reviewers) understand where you’re coming from. But if the request or question was understood just as well without that ado, just drop it.  </li><li><strong>Keep constraints minimal</strong>:</li><li>One clear ask is better than a huge list of rules.</li><li>Simpler prompts → better model responses.</li><li><strong>Let small imperfections happen</strong>:</li><li>Real people make small grammar mistakes or aren’t super formal. That's okay. A perfectly polished sentence often sounds fake.</li></ul><h3><br></h3>"
+              },
+              "_id": "680d6d7a11c6d3f17f1d8aed",
+              "textHistory": []
+            },
+            {
+              "id": "c82cd450-b664-47c8-9a9c-00691269a92d",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p>What NOT to Do</p><p><br></p><p>If you want your prompt to sound natural, avoid these traps:</p><ul><li><strong>Don’t run your prompts through Grammarly, DeepL, Google Translate, or similar tools</strong>:</li><li>These tools overcorrect your writing and make it sound polished and robotic.</li><li><strong>Don’t copy, spin, or modify outputs from LLMs</strong>:</li><li>Even if you change a few words, if it sounds like AI-generated text, it’s not good. You must write <em>fresh</em> prompts by yourself.</li><li><strong>Don’t stack 5+ rules into a single prompt</strong>:</li><li>People don’t talk like that. Too many “must/must-not” conditions make the prompt sound like a coding exam, not a real question.</li></ul>"
+              },
+              "_id": "680d6d7a11c6d3f17f1d8aee",
+              "textHistory": []
+            }
+          ],
+          "_id": "680d6d7a11c6d3f17f1d8aec"
+        },
+        {
+          "id": "e534ea71-13fa-4d61-a033-90939edafb4c",
+          "estimatedTime": 0,
+          "recommendedEstimatedTime": 2,
+          "title": "Writing a prompt: examples",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "ab6d6b9c-7095-423e-80ee-1efab6014e91",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "body": "<p>A <strong>natural</strong> prompt sounds like a real person asking for help.</p><p> It’s short, clear, and has a personal tone.</p><p> You can usually tell it was written by someone who’s actually coding — not by someone trying to create a test case.</p>",
+                "singleSelect": true
+              },
+              "_id": "680d6d7a11c6d3f17f1d8af0",
+              "textHistory": []
+            },
+            {
+              "id": "eced3423-1f72-4dcc-9e63-4ee462079a93",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p>✅Here’s a <strong>good example</strong>:</p><blockquote><em>\"I’m a junior Go developer trying to build a CLI tool to parse JSON. I can’t figure out how to stream large files without loading everything into memory. Could you show me a simple pattern?\"﻿</em></blockquote><p><strong>Why it's good:</strong></p><ul><li>It includes one line of personal context.</li><li class=\"ql-indent-1\">This line makes sense because it allows the reader (or the AI) to infer which simple pattern would be useful to know for a junior Go developer, given the user's knowledge — this context <em>restricts the solution search space </em>for it to be more <em>precise and customized</em>.</li><li>It asks one clear question.</li><li class=\"ql-indent-1\">The question <em>is about a single topic</em>: memory-saving streaming of large files, and the question <em>asks for a single thing</em>: how to do it with a simple pattern.</li><li>It sounds real and conversational.</li><li class=\"ql-indent-1\">What makes it real is not just because the style is akin to informal, conversational interchanges, but also because the situation is verisimilar.  </li></ul>"
+              },
+              "_id": "680d6d7a11c6d3f17f1d8af1",
+              "textHistory": []
+            },
+            {
+              "id": "264cf2c9-a94c-4aa1-9f3d-830303f06253",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<h3>❌ What Does a \"Robotic\" (that is, artificial) or Over-Engineered Prompt Look Like?</h3><p>A <strong>bad</strong> prompt sounds like it was <em>designed</em> for an exam or a coding test.</p><p>It often piles up multiple demands, technical jargon, and meta-instructions that no normal person would say casually.</p><p>Here’s a <strong>bad example</strong>:</p><blockquote><em>\"Write a Go program that: 1) performs streaming JSON parsing; 2) uses no external libraries; 3) prints memory usage; 4) follows SOLID principles; 5) returns only code, no explanation.\" </em>— Of course, this would be even worse if it were to start with the meta-instruction \"<em>Write a program that, </em><strong><em>according to the project's instructions</em></strong><em>, performs streaming JSON parsing...</em>\"  </blockquote><p><strong>Why it’s bad:</strong></p><ul><li>It reads like a list of test requirements.</li><li>It stacks too many conditions at once.</li><li>It sounds mechanical, not human.</li><li><em>In sum, it's like it doesn't have our animal heart and breathe!</em> </li></ul>"
+              },
+              "_id": "680d6d7a11c6d3f17f1d8af2",
+              "textHistory": []
+            }
+          ],
+          "_id": "680d6d7a11c6d3f17f1d8aef"
+        },
+        {
+          "id": "fd90b9a0-637d-45cc-b2e4-4d2fc5a37b01",
+          "estimatedTime": 0,
+          "recommendedEstimatedTime": 1,
+          "title": "When and How to Tweak Your Prompt",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "2a37d912-653e-48c5-8653-b63281fc6a8a",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "body": "<p>When Should You Fix Your Prompt?</p><p><br></p><p>Most of the time, if you write casually and clearly, your prompt will be good enough on the first try.</p><p> But sometimes, you’ll need to tweak it a little.</p><p> Here’s when you should definitely stop and make a correction:</p><ul><li><strong>You realize you left out key information</strong></li><li> Example: You ask for help with a function, but you forgot to mention the input format.</li><li><strong>You accidentally created an impossible scenario</strong></li><li> Example: You ask for a program that \"divides by zero\" or \"runs infinite loops safely.\" (Not realistic.)</li><li><strong>You start adding extra rules just to make it harder</strong></li><li> Example: \"Write a parser, but it has to be done without strings, recursion, or loops.\"</li><li> ➔ No need to make prompts difficult on purpose.</li></ul><p><br></p>",
+                "singleSelect": true
+              },
+              "_id": "680d6d7a11c6d3f17f1d8af4",
+              "textHistory": []
+            }
+          ],
+          "_id": "680d6d7a11c6d3f17f1d8af3"
+        },
+        {
+          "id": "8bb9f9e0-7271-4d92-b866-ceee2c4b19a3",
+          "estimatedTime": 0,
+          "recommendedEstimatedTime": 5,
+          "title": "Final Quiz",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "31a45e96-2c1e-4490-8645-947d256bda98",
+              "weight": 20,
+              "type": "multiple_choice",
+              "contents": {
+                "singleSelect": true,
+                "skipGrading": false,
+                "question": "<p>What are the three essential checks for a strong user prompt?</p>",
+                "choices": [
+                  {
+                    "id": "3617764d-5d2d-4eca-9ee5-689e26842f00",
+                    "answer": "<p>Be solvable, match the assigned topic, and have perfect grammar</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "dc787477-47c3-47ed-8e67-4294758d1a1c",
+                    "answer": "<p>Be clear, be solvable, and match the assigned topic</p>",
+                    "isCorrect": true
+                  },
+                  {
+                    "id": "6f3d9dae-e064-4adc-bf98-cabda6d29111",
+                    "answer": "<p>Sound fancy, list many requirements, and stay formal</p>",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              "_id": "680d6d7a11c6d3f17f1d8af6",
+              "textHistory": []
+            },
+            {
+              "id": "2267c9d7-5b62-4f11-98ea-7e4f49fc43f5",
+              "weight": 20,
+              "type": "multiple_choice",
+              "contents": {
+                "singleSelect": true,
+                "skipGrading": false,
+                "question": "<p>What’s wrong with running prompts through tools like Grammarly or DeepL?</p>",
+                "choices": [
+                  {
+                    "id": "b4355914-bc28-4e9f-835b-6dd1e241ae93",
+                    "answer": "<p>They make your writing too simple</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "aa3dd0bb-86b3-4679-8d8b-78c104e7a8e1",
+                    "answer": "<p>They correct mistakes that should stay uncorrected</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "8ee0d7be-34ff-44d6-9ffe-22aa4ecde0b3",
+                    "answer": "<p>They make your prompt sound polished and unnatural</p>",
+                    "isCorrect": true
+                  }
+                ]
+              },
+              "_id": "680d6d7a11c6d3f17f1d8af7",
+              "textHistory": []
+            },
+            {
+              "id": "0c567731-f7e0-4486-b0e6-ade1a74d227c",
+              "weight": 20,
+              "type": "multiple_choice",
+              "contents": {
+                "singleSelect": true,
+                "skipGrading": false,
+                "question": "<h3>What’s the goal when writing a user prompt?</h3><p><br></p>",
+                "choices": [
+                  {
+                    "id": "82ee90f1-59d7-4aeb-b397-5cb042e52593",
+                    "answer": "<p>Make it sound like an exam question</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "81ea1da6-4685-4e36-a661-2032ccfe6186",
+                    "answer": "<p>Create something tricky to confuse the model</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "679eb5db-6981-4837-af8d-7a5931c9db78",
+                    "answer": "<p>Write a casual, clear request like you would to a teammate</p>",
+                    "isCorrect": true
+                  }
+                ]
+              },
+              "_id": "680d6d7a11c6d3f17f1d8af8",
+              "textHistory": []
+            },
+            {
+              "id": "14006240-6c30-4db3-88c5-9b36e1dcdf61",
+              "weight": 20,
+              "type": "multiple_choice",
+              "contents": {
+                "singleSelect": true,
+                "skipGrading": false,
+                "question": "<p>Which of these is a good reason to tweak your prompt?</p>",
+                "choices": [
+                  {
+                    "id": "8ceb5ebd-e55e-4447-b89d-5da558f9b8ab",
+                    "answer": "<p>You realize you made the task impossible</p>",
+                    "isCorrect": true
+                  },
+                  {
+                    "id": "576ec56a-5955-40e8-b481-a48d9ed8f6be",
+                    "answer": "<p>You want to sound fancier</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "6792092b-9b40-485c-a9c1-54339713ddea",
+                    "answer": "<p>You want to add more complicated words</p>",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              "_id": "680d6d7a11c6d3f17f1d8af9",
+              "textHistory": []
+            },
+            {
+              "id": "4e8189c0-e83f-42b8-a652-be06ff0d2667",
+              "weight": 20,
+              "type": "multiple_choice",
+              "contents": {
+                "singleSelect": false,
+                "skipGrading": false,
+                "question": "<p>Which descriptions of the following prompt <em>are more likely to be true</em>?</p><p><br></p><p>_______________________________________________________________________________</p><p>\"<strong>Code reflection and analysis in JavaScript (es-ES):</strong></p><p>Below is a function written in JavaScript:</p><p>```javascript</p><p>function calculateAveragesPerStudent(students) {</p><p>&nbsp;const results = {};</p><p><br></p><p>&nbsp;students.forEach(student =&gt; {</p><p>&nbsp;&nbsp;const { name, notes } = student;</p><p>&nbsp;&nbsp;const average = notes.reduce((acc, note) =&gt; acc + note, 0) / notes.length;</p><p>&nbsp;&nbsp;results[name] = average;</p><p>&nbsp;});</p><p><br></p><p>&nbsp;return results;</p><p>}</p><p>```</p><p>The calculateAveragesPerStudent function takes as input an array of objects, where each object represents a student with its name and an array of grades. Returns an object where the keys are the students' names and the values ​​are their averages.</p><p><br></p><p><strong>Task:</strong> Reflect and answer the following questions:</p><p><br></p><p>What assumptions does this function make about the input data? Are they reasonable?</p><p>What possible errors or problems could arise if poorly formatted data is provided?</p><p>How could you improve this feature to make it more robust and secure against unexpected or incomplete input?</p><p>Is this implementation suitable for working with large volumes of data? Why yes or why not?</p><p>If you wanted to extend this function to also rank students based on their average (for example, \"Excellent\", \"Good\", \"Fair\"), how would you do it?</p><p><strong>Restrictions</strong>:</p><p>Your answers must be written in Spanish (es-ES), with appropriate technical language and examples if necessary.</p><p>You must justify each statement or suggestion with strong arguments or code snippets.</p><p>You cannot modify the original function until you critically answer questions 1 to 4.</p><p><strong>Objective:</strong> Assess your ability to reflect on code quality, identify risks, and propose solid improvements, all within the context of JavaScript development.\"</p><p>_______________________________________________________________________________</p>",
+                "choices": [
+                  {
+                    "id": "9b859972-77d0-4546-8f37-c2d77c8afa68",
+                    "answer": "<p>The prompt is organized into sections to guide attention to the right point, as someone would do it in a conversation.</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "344b9af3-286e-4299-8b63-48ed0ec5c862",
+                    "answer": "<p>Even if the sub-headers were absent, the information is organized artificially when compared with a fluid, spontaneous, situated conversation between two persons.</p>",
+                    "isCorrect": true
+                  },
+                  {
+                    "id": "11bf2662-0cee-4470-b4ca-0225e1757a6a",
+                    "answer": "<p>The questions sound like real questions someone would ask about a code when ignoring the answer.</p><ul><li>For example, the question \"What possible errors or problems could arise if poorly formatted data is provided?\" could be genuinely asked by someone who doesn't fully realize the kind of issues the code could arise.</li></ul>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "0aba9994-b0d4-4db2-a48f-aac65bf67c0a",
+                    "answer": "<p>The questions sound more like questions that one could find in an academic exam, rather than like questions a person would ask with the genuine interest of learning something that she or he ignore.</p><ul><li>For example, the question \"What possible errors or problems could arise if poorly formatted data is provided?\" would more likely be asked by someone who realizes the kind of situations where this code could raise issues.</li></ul>",
+                    "isCorrect": true
+                  },
+                  {
+                    "id": "d01511d8-da98-4ff5-bb53-b73cd4c40f44",
+                    "answer": "<p>Even if the \"Restrictions\" section were put there without the header, the sentence \"Your answers must be written in Spanish (es-ES), with appropriate technical language and examples if necessary\" would not be appropriate for someone asking for help to do something.</p>",
+                    "isCorrect": true
+                  }
+                ],
+                "explanation": "",
+                "labelOptions": false
+              },
+              "_id": "680d6d7a11c6d3f17f1d8afa",
+              "textHistory": []
+            }
+          ],
+          "_id": "680d6d7a11c6d3f17f1d8af5"
+        },
+        {
+          "id": "526e14db-6eed-4317-98f0-f0e8eb4f30fd",
+          "estimatedTime": 0,
+          "recommendedEstimatedTime": 1,
+          "title": "Conclusions ",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "72537232-30a0-46a8-b161-8441284a0396",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p>By now, you should feel confident about writing coding prompts that are:</p><ul><li><strong>Natural</strong> — They sound like real conversations, not exam questions.</li><li><strong>Clear</strong> — Another developer (or an AI) can easily understand what you're asking for.</li><li><strong>Solvable</strong> — You’re giving just enough information without creating impossible tasks.</li><li><strong>Focused</strong> — You stay on topic without drifting into unnecessary complexity.</li></ul>"
+              },
+              "_id": "680d6d7a11c6d3f17f1d8afc",
+              "textHistory": []
+            },
+            {
+              "id": "5e76799a-b142-4ef1-838a-c6e7db1ce937",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<h3><span class=\"ql-cursor\">﻿</span>Final Reminders:</h3><ul><li>Always <strong>trust your natural voice</strong> when writing.</li><li><strong>Avoid polishing</strong> your prompts too much — small mistakes are fine.</li><li><strong>Keep prompts simple</strong> — one clear ask is better than stacking rules.</li><li><strong>Never use LLMs, Grammarly, or translation tools</strong> to rewrite your prompts.</li><li><strong>Self-check</strong> by reading your prompt aloud. If it sounds like you talking to a teammate, you’re doing it right.</li></ul><p><br></p>"
+              },
+              "_id": "680d6d7a11c6d3f17f1d8afd",
+              "textHistory": []
+            }
+          ],
+          "_id": "680d6d7a11c6d3f17f1d8afb"
+        }
+      ],
+      "translatedSections": {},
+      "minReviewLevel": "-1",
+      "passingGradeThreshold": 0,
+      "isTemplate": false,
+      "showFinalGrade": false,
+      "grantedTagsUponCompletion": [],
+      "grantedTagsUponPass": [],
+      "grantedTagsUponFail": [],
+      "createdBy": "65d4b468796479b4e20c2822",
+      "updatedBy": "6797ca29cda1fdd509c8ddc1",
+      "allowFreeTextGrading": false,
+      "useCustomQuestionWeights": false,
+      "isTimed": false,
+      "enableMLCheatingDetection": false,
+      "createdAt": "2025-04-25T20:13:50.102Z",
+      "updatedAt": "2025-04-26T23:34:18.767Z",
+      "__v": 37
+    },
+    "currentSection": 1,
+    "status": "in_progress",
+    "attemptNumber": 1,
+    "completed": false,
+    "courseAnswer": {},
+    "assigned": false,
+    "passingGrade": 0,
+    "fullstorySessions": [],
+    "remainingTime": 840,
+    "projectId": "67d27d962216e1f2cd2ea23b",
+    "createdAt": "2025-04-28T14:14:22.031Z",
+    "updatedAt": "2025-04-28T14:14:51.568Z",
+    "__v": 0
+  }
+}
