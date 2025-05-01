@@ -1,0 +1,5 @@
+681232b3e7deb45a584b8f16
+
+67d46b66f2a95d4d0559700e
+
+Quiero desarrollar un programa en Python para una fábrica ubicada en Nueva York, que monitorea información de sensores del proceso desde una API en formato JSON que debes simular por el momento. La información de entrada es un objeto con marcas temporales como claves, ids de los sensores como claves internas y valores de lectura de cada sensor (mayores que cero). El objetivo del programa es validar la información, imprimir un mensaje e ignorar la marca temporal completa si alguno de los valores es incorrecto, y encontrar los valores máximo/mínimo para cada sensor junto con la fecha MM/DD/YYYY en que se produjo cada uno. Dame el código completo con una breve explicación.
