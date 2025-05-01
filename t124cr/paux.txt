@@ -1,0 +1,214 @@
+Trabajo en una empresa de inteligencia artificial y desarrollé un código para predecir fallos en infraestructuras de red mediante análisis de métricas críticas, permitiendo a nuestros clientes implementar mantenimiento preventivo y reducir tiempos de inactividad en sus sistemas.
+
+```Python
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+class PredictorFallosRed:
+    def __init__(self):
+        self.modelo = RandomForestClassifier(random_state=42)
+        self.normalizador = StandardScaler()
+        self.columnas_modelo = None
+        
+    def cargar_datos(self, ruta_archivo):
+        try:
+            datos = pd.read_csv(ruta_archivo)
+            print(f"Datos cargados correctamente. Forma: {datos.shape}")
+            return datos
+        except Exception as e:
+            print(f"Error al cargar los datos: {e}")
+            return None
+    
+    def preparar_datos(self, datos, col_objetivo='fallo'):
+        print("Valores faltantes por columna:")
+        print(datos.isnull().sum())
+        
+        columnas_numericas = datos.select_dtypes(include=['number']).columns
+        
+        if columnas_numericas.size > 0:
+            datos[columnas_numericas] = datos[columnas_numericas].fillna(datos[columnas_numericas].median())
+            
+        columnas_no_numericas = datos.select_dtypes(exclude=['number']).columns
+        for col in columnas_no_numericas:
+            if col != col_objetivo and datos[col].isnull().sum() > 0:
+                datos[col] = datos[col].fillna(datos[col].mode()[0])
+        
+        if col_objetivo in datos.columns:
+            columnas_a_eliminar = [col for col in columnas_no_numericas if col != col_objetivo]
+            
+            if columnas_a_eliminar:
+                print(f"Eliminando columnas no numéricas para el análisis: {columnas_a_eliminar}")
+                X = datos.drop(columnas_a_eliminar + [col_objetivo], axis=1)
+            else:
+                X = datos.drop(col_objetivo, axis=1)
+                
+            y = datos[col_objetivo]
+        else:
+            raise ValueError(f"La columna '{col_objetivo}' no existe en los datos")
+        
+        print(f"Columnas usadas para el análisis: {X.columns.tolist()}")
+        self.columnas_modelo = X.columns.tolist()
+        
+        X_entrenamiento, X_prueba, y_entrenamiento, y_prueba = train_test_split(
+            X, y, test_size=0.25, random_state=42, stratify=y
+        )
+        
+        self.normalizador.fit(X_entrenamiento)
+        X_entrenamiento_escalado = self.normalizador.transform(X_entrenamiento)
+        X_prueba_escalado = self.normalizador.transform(X_prueba)
+        
+        print(f"Datos de entrenamiento: {X_entrenamiento.shape}")
+        print(f"Datos de prueba: {X_prueba.shape}")
+        
+        return X_entrenamiento_escalado, X_prueba_escalado, y_entrenamiento, y_prueba, X.columns
+    
+    def entrenar_modelo(self, X_entrenamiento, y_entrenamiento, optimizar=True):
+        if optimizar:
+            param_grid = {
+                'n_estimators': [50, 100, 200],
+                'max_depth': [None, 10, 20, 30],
+                'min_samples_split': [2, 5, 10],
+                'min_samples_leaf': [1, 2, 4]
+            }
+            
+            print("Optimizando hiperparámetros...")
+            busqueda_grid = GridSearchCV(self.modelo, param_grid, cv=5, 
+                                      scoring='accuracy', n_jobs=-1)
+            busqueda_grid.fit(X_entrenamiento, y_entrenamiento)
+            
+            self.modelo = busqueda_grid.best_estimator_
+            print(f"Mejores parámetros: {busqueda_grid.best_params_}")
+        else:
+            self.modelo.fit(X_entrenamiento, y_entrenamiento)
+        
+        print("Modelo entrenado correctamente")
+    
+    def evaluar_modelo(self, X_prueba, y_prueba):
+        y_pred = self.modelo.predict(X_prueba)
+        
+        precision = accuracy_score(y_prueba, y_pred)
+        print(f"Precisión del modelo: {precision:.4f}")
+        
+        print("\nReporte de clasificación:")
+        print(classification_report(y_prueba, y_pred))
+        
+        mc = confusion_matrix(y_prueba, y_pred)
+        
+        return precision, mc
+    
+    def importancia_caracteristicas(self, nombres_caracteristicas):
+        importancias = self.modelo.feature_importances_
+        indices = np.argsort(importancias)[::-1]
+        
+        df_importancia = pd.DataFrame({
+            'Característica': nombres_caracteristicas[indices],
+            'Importancia': importancias[indices]
+        })
+        
+        return df_importancia
+    
+    def predecir_estado_red(self, nuevos_datos):
+        if self.columnas_modelo is None:
+            raise ValueError("El modelo no ha sido entrenado. Ejecute primero el método 'preparar_datos'.")
+        
+        columnas_faltantes = [col for col in self.columnas_modelo if col not in nuevos_datos.columns]
+        if columnas_faltantes:
+            print(f"Faltan columnas requeridas: {columnas_faltantes}")
+            print("Añadiendo columnas faltantes con valores promedio estándar...")
+            
+            valores_predeterminados = {
+                'costo_hora_inactividad_usd': 300.00,
+                'distancia_servidor_millas': 3.0
+            }
+            
+            for col in columnas_faltantes:
+                if col in valores_predeterminados:
+                    nuevos_datos[col] = valores_predeterminados[col]
+                else:
+                    nuevos_datos[col] = 0
+        
+        nuevos_datos_ordenados = nuevos_datos[self.columnas_modelo]
+        
+        datos_escalados = self.normalizador.transform(nuevos_datos_ordenados)
+        
+        predicciones = self.modelo.predict(datos_escalados)
+        probabilidades = self.modelo.predict_proba(datos_escalados)[:, 1]
+        
+        return predicciones, probabilidades
+    
+    def obtener_columnas_requeridas(self):
+        if self.columnas_modelo is None:
+            return []
+        return self.columnas_modelo
+
+def visualizar_resultados(df_importancia, matriz_confusion):
+    plt.figure(figsize=(15, 10))
+    
+    plt.subplot(2, 1, 1)
+    sns.barplot(x='Importancia', y='Característica', data=df_importancia.head(10))
+    plt.title('Top 10 - Importancia de Características')
+    plt.tight_layout()
+    
+    plt.subplot(2, 1, 2)
+    sns.heatmap(matriz_confusion, annot=True, fmt='d', cmap='Blues',
+               xticklabels=['No Fallo', 'Fallo'],
+               yticklabels=['No Fallo', 'Fallo'])
+    plt.xlabel('Predicción')
+    plt.ylabel('Valor Real')
+    plt.title('Matriz de Confusión')
+    
+    plt.tight_layout()
+    plt.show()
+
+if __name__ == "__main__":
+    predictor = PredictorFallosRed()
+    
+    datos = predictor.cargar_datos('/Users/eudesz/Documents/ScaleAI/hopper_v2/06_04_2025/network_data.csv')
+    
+    if datos is not None:
+        X_entrenamiento, X_prueba, y_entrenamiento, y_prueba, nombres_caracteristicas = predictor.preparar_datos(datos)
+        
+        predictor.entrenar_modelo(X_entrenamiento, y_entrenamiento, optimizar=True)
+        
+        precision, mc = predictor.evaluar_modelo(X_prueba, y_prueba)
+        
+        df_importancia = predictor.importancia_caracteristicas(nombres_caracteristicas)
+        print("\nImportancia de características:")
+        print(df_importancia.head(10))
+        
+        visualizar_resultados(df_importancia, mc)
+        
+        columnas_requeridas = predictor.obtener_columnas_requeridas()
+        print(f"\nColumnas requeridas para predicciones: {columnas_requeridas}")
+        
+        nuevos_datos_red = pd.DataFrame({
+            'latencia': [120],
+            'perdida_paquetes': [0.05],
+            'ancho_banda': [50],
+            'fluctuacion': [15],
+            'tasa_error': [0.02],
+            'uso_cpu': [85],
+            'uso_memoria': [90],
+            'contador_conexiones': [500],
+            'costo_hora_inactividad_usd': [325.00],
+            'distancia_servidor_millas': [2.8]
+        })
+        
+        predicciones, probabilidades = predictor.predecir_estado_red(nuevos_datos_red)
+        print("\nPredicción para nuevos datos:")
+        print(f"Estado de la red: {'Fallará' if predicciones[0] == 1 else 'Estable'}")
+        print(f"Probabilidad de fallo: {probabilidades[0]:.4f}")
+        
+        print("\nEstimación de costos:")
+        costo_fallo = nuevos_datos_red['costo_hora_inactividad_usd'].values[0]
+        horas_estimadas = 2.5
+        print(f"Costo estimado si ocurre un fallo: ${costo_fallo * horas_estimadas:.2f} USD")
+```
+
+Agregar cadena de documención para cada una de las funciones definidas. Cada comentarios debe detallar la entrada, el proceso y salida de cada una. Proveer el código completo y sin ningún otro comentario a lo solicitado.
