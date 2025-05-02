@@ -1,0 +1,5 @@
+67d46757512161000c802c2d
+
+681232b157f8f391f3e846c0
+
+Trabajo para una empresa en santiago de chile que me paga por hora a una tasa fija en clp, ellos me entregan un archivo csv con el registro de la hora de entrada y hora de salida en formato ss:mm:HH:DD:MM:YYYY para cada día. Quiero que a partir de los datos de entrada te asegures que los registros son válidos, imprimas un mensaje si no e ignores esa fila, y me generes un resumen de cuanto me pagaron cada dia en clp. Dame el código completo en Python y un ejemplo de csv.
