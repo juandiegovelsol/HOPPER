@@ -1,0 +1,3 @@
+6807b7b21e064a379c4e29f3
+
+Estoy planeando desarrollar un programa con Swift para calcular el total de mis gastos mensuales en Euros a partir de un archivo de entrada en formato CSV. Sugiereme por lo menos dos librerías para poder procesar la información de entrada con son sus ventajas y desventajas. No quiero código solo tu explicación.

@@ -1,0 +1,171 @@
+{
+  "courseProgress": {
+    "courseGrade": {},
+    "referralInfo": {},
+    "_id": "681d4eb538a3faa4115f283c",
+    "worker": "666551489082b5376455194b",
+    "course": {
+      "enableMLCheatingDetection": false,
+      "useTipTap": false,
+      "_id": "67e7337894c19315c8e2c7db",
+      "name": "Kratos L1 Reviewers Course",
+      "title": "🌍L1 Reviewer Course & Checklist",
+      "description": "This course is to help you ensure all tasks are accurately rated, well-justified, linguistically aligned, and flawlessly formatted, with no egregious issues slipping through.",
+      "archived": false,
+      "disabled": false,
+      "projectIds": [],
+      "courseDuration": 6,
+      "courseType": "native",
+      "sections": [
+        {
+          "id": "a29123f4-0c52-42db-ad3c-41f49ce2ecaa",
+          "estimatedTime": 0,
+          "recommendedEstimatedTime": 1,
+          "title": "🎯 Goal",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "094684c4-fbe9-4192-9aab-58464245ca75",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\" class=\"ql-size-large\">Ensure all tasks are:</span></p><p><strong style=\"background-color: rgb(204, 232, 204); color: rgb(0, 0, 0);\" class=\"ql-size-large\">✅Accurately rated</strong></p><p><strong style=\"background-color: rgb(204, 232, 204); color: rgb(0, 0, 0);\" class=\"ql-size-large\">✅Well justified</strong></p><p><strong style=\"background-color: rgb(204, 232, 204); color: rgb(0, 0, 0);\" class=\"ql-size-large\">✅Linguistically aligned</strong></p><p><strong style=\"background-color: rgb(204, 232, 204); color: rgb(0, 0, 0);\" class=\"ql-size-large\">✅Flawlessly formatted</strong></p><p><strong class=\"ql-size-large\" style=\"background-color: rgb(250, 204, 204); color: rgb(0, 0, 0);\">❌With no egregious issues slipping through</strong><span style=\"background-color: rgb(250, 204, 204); color: rgb(0, 0, 0);\" class=\"ql-size-large\">.</span></p>"
+              },
+              "_id": "67e787f7a640a5418bd6ae1c",
+              "textHistory": []
+            },
+            {
+              "id": "23739311-3d13-4fe3-86b2-c7dfff3e9195",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p><span style=\"color: rgb(0, 0, 0); background-color: transparent;\" class=\"ql-size-large\">As an L1 reviewer we need you to:</span></p><ol><li><span style=\"background-color: rgb(255, 255, 204);\" class=\"ql-size-large\">FIX all of the tasks</span></li><li><span style=\"background-color: rgb(255, 235, 204);\" class=\"ql-size-large\">Only SBQ if the PROMPT is bad</span></li></ol><p><br></p>"
+              },
+              "_id": "67e787f7a640a5418bd6ae1d",
+              "textHistory": []
+            }
+          ],
+          "_id": "67e787f7a640a5418bd6ae1b"
+        },
+        {
+          "id": "82cb4b2a-1c3c-4133-8437-0d35f1999d9d",
+          "estimatedTime": 2,
+          "recommendedEstimatedTime": 1,
+          "title": "🚀Workflow",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "6dfdeeae-e8a4-46c9-a2b4-69b4177f5c11",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p class=\"ql-align-center\"><img src=\"https://static.remotasks.com/uploads//Screenshot%202025-03-28%20at%2022.28.12.png\"></p>"
+              },
+              "_id": "67e787f7a640a5418bd6ae1f",
+              "textHistory": []
+            }
+          ],
+          "_id": "67e787f7a640a5418bd6ae1e"
+        },
+        {
+          "id": "6cca2b78-7fcf-49c7-8ec8-66065ccf787a",
+          "estimatedTime": 2,
+          "recommendedEstimatedTime": 1,
+          "title": "✅ Reviewer Checklist",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "d9ebb2d1-24b8-4106-a6ae-e1f9aa090bd4",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<h3><strong style=\"background-color: transparent;\" class=\"ql-size-large\">☑️ Likert Rating Justifications</strong></h3><ul><li><strong style=\"background-color: transparent;\" class=\"ql-size-large\">✅ Ensure:</strong><span style=\"background-color: transparent;\" class=\"ql-size-large\"> The justification clearly explains </span><em style=\"background-color: transparent;\" class=\"ql-size-large\">why</em><span style=\"background-color: transparent;\" class=\"ql-size-large\"> the rating was given and a response was chosen.</span></li><li><strong style=\"background-color: transparent;\" class=\"ql-size-large\">🌐 Language Check:</strong></li><li><span style=\"background-color: transparent;\" class=\"ql-size-large\">Make sure these are properly written and detailed.</span></li><li><strong style=\"background-color: rgb(204, 232, 204);\" class=\"ql-size-large\">Quick Fix</strong><strong style=\"background-color: transparent;\" class=\"ql-size-large\">:</strong><span style=\"background-color: transparent;\" class=\"ql-size-large\"> Make sure the likert justification clearly explains why the response was chosen</span></li></ul><p><br></p><h3><strong style=\"background-color: transparent;\" class=\"ql-size-large\">☑️ Language &amp; Localization</strong></h3><h3><br></h3><ul><li><strong style=\"background-color: transparent;\" class=\"ql-size-large\">📝 Important:</strong><span style=\"background-color: transparent;\" class=\"ql-size-large\"> </span><strong style=\"background-color: transparent;\" class=\"ql-size-large\">Prompts and rewrites should be fully localized</strong></li><li><strong style=\"background-color: rgb(204, 232, 204);\" class=\"ql-size-large\">Quick Fix:</strong><span style=\"background-color: transparent;\" class=\"ql-size-large\"> Fix any glaring spelling, grammar, or formatting issues that impact readability or localization.</span></li></ul><p><br></p><h3><strong style=\"background-color: transparent;\" class=\"ql-size-large\">☑️ Spelling, Grammar, and Formatting</strong></h3><ul><li><strong style=\"background-color: transparent;\" class=\"ql-size-large\">✅ Ensure:</strong><span style=\"background-color: transparent;\" class=\"ql-size-large\"> Overall rewrites are clean.</span></li><li><strong style=\"background-color: transparent;\" class=\"ql-size-large\">📛 If:</strong><span style=\"background-color: transparent;\" class=\"ql-size-large\"> There are </span><strong style=\"background-color: transparent;\" class=\"ql-size-large\">egregious</strong><span style=\"background-color: transparent;\" class=\"ql-size-large\"> spelling, grammar, or formatting issues make sure to FIX them.</span></li><li><strong style=\"background-color: rgb(204, 232, 204);\" class=\"ql-size-large\">Quick Fix</strong><strong style=\"background-color: transparent;\" class=\"ql-size-large\">:</strong><span style=\"background-color: transparent;\" class=\"ql-size-large\"> Clean up basic typos or poor formatting if they </span><em style=\"background-color: transparent;\" class=\"ql-size-large\">significantly</em><span style=\"background-color: transparent;\" class=\"ql-size-large\"> affect comprehension.</span></li></ul><p><br></p><h3><strong style=\"background-color: transparent;\" class=\"ql-size-large\">☑️ Prompt Instruction Type</strong></h3><ul><li><strong style=\"background-color: transparent;\" class=\"ql-size-large\">✅ Ensure:</strong><span style=\"background-color: transparent;\" class=\"ql-size-large\"> Prompt category is labeled, but…</span></li><li><strong style=\"background-color: transparent;\" class=\"ql-size-large\">🚫 Do NOT change the prompt</strong><span style=\"background-color: transparent;\" class=\"ql-size-large\">.</span></li><li><span style=\"background-color: transparent;\" class=\"ql-size-large\">If the prompt is not good the task should be SBQed, for any other issues please fix.</span></li><li class=\"ql-indent-1\"><br></li></ul><h3><strong style=\"background-color: transparent;\" class=\"ql-size-large\">☑️ Strict Dimension Ratings (Instruction Following, Truthfulness)</strong></h3><ul><li><strong style=\"background-color: transparent;\" class=\"ql-size-large\">✅ Ensure:</strong><span style=\"background-color: transparent;\" class=\"ql-size-large\"> Ratings reflect whether the response:</span></li><li><span class=\"ql-size-large\">Follow instructions</span></li><li><span style=\"background-color: transparent;\" class=\"ql-size-large\">Is factually accurate</span></li><li><strong style=\"background-color: transparent;\" class=\"ql-size-large\">👌 Note:</strong><span style=\"background-color: transparent;\" class=\"ql-size-large\"> Some overlap between instruction-following and truthfulness is fine.</span></li><li><strong style=\"background-color: transparent;\" class=\"ql-size-large\">⚠️ NOT a reject</strong><span style=\"background-color: transparent;\" class=\"ql-size-large\"> if:</span></li><li class=\"ql-indent-1\"><span style=\"background-color: transparent;\" class=\"ql-size-large\">Major/minor differences aren’t </span><strong style=\"background-color: transparent;\" class=\"ql-size-large\">egregious</strong></li><li><strong style=\"background-color: rgb(204, 232, 204);\" class=\"ql-size-large\">Quick Fix:</strong><span style=\"background-color: rgb(204, 232, 204);\" class=\"ql-size-large\"> </span><span style=\"background-color: transparent;\" class=\"ql-size-large\">Adjust ratings so they align with reality.</span></li></ul><p><br></p><h3><strong style=\"background-color: transparent;\" class=\"ql-size-large\">☑️ Auditor Workflow Tips</strong></h3><ul><li><strong style=\"background-color: transparent;\" class=\"ql-size-large\">❌ SKIP task</strong><span style=\"background-color: transparent;\" class=\"ql-size-large\"> if </span><strong style=\"background-color: transparent;\" class=\"ql-size-large\">any model response is cut off</strong><span style=\"background-color: transparent;\" class=\"ql-size-large\">.</span></li></ul><p><br></p><h3><strong style=\"background-color: transparent;\" class=\"ql-size-large\">☑️ Spam Detection in Justifications</strong></h3><ul><li><strong style=\"background-color: transparent;\" class=\"ql-size-large\">✅ Ensure:</strong><span style=\"background-color: transparent;\" class=\"ql-size-large\"> Response justification isn’t spammy (e.g. generic, meaningless).</span></li><li><strong style=\"background-color: rgb(204, 232, 204); color: rgb(0, 0, 0);\" class=\"ql-size-large\">Quick Fix:</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\" class=\"ql-size-large\"> Reword generics into specific observations if possible.</span></li></ul>"
+              },
+              "_id": "67e787f7a640a5418bd6ae21",
+              "textHistory": []
+            }
+          ],
+          "_id": "67e787f7a640a5418bd6ae20"
+        },
+        {
+          "id": "c4ddc77a-acd3-4d97-8351-587ddb4e9816",
+          "estimatedTime": 2,
+          "recommendedEstimatedTime": 1,
+          "title": "💡 Training Recap",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "e5c8b7e0-eec4-4640-9de8-a6781307f9d2",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p><img src=\"https://static.remotasks.com/uploads//Screenshot%202025-03-28%20at%2022.38.49.png\"></p>"
+              },
+              "_id": "67e787f7a640a5418bd6ae23",
+              "textHistory": []
+            }
+          ],
+          "_id": "67e787f7a640a5418bd6ae22"
+        },
+        {
+          "id": "634382c1-17c0-475a-8f89-8da227fa5b01",
+          "estimatedTime": 0,
+          "recommendedEstimatedTime": 1,
+          "title": "🌟Thank you!",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "2c5ce133-c902-4fee-b576-a2fd70d84951",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p class=\"ql-align-center\"><span class=\"ql-size-large\">🚀Thank you for paying full attention to this quick course and happy task crafting!</span></p>"
+              },
+              "_id": "67e787f7a640a5418bd6ae25",
+              "textHistory": []
+            }
+          ],
+          "_id": "67e787f7a640a5418bd6ae24"
+        }
+      ],
+      "translatedSections": {},
+      "minReviewLevel": "1",
+      "passingGradeThreshold": 0,
+      "isTemplate": false,
+      "showFinalGrade": false,
+      "grantedTagsUponCompletion": [],
+      "grantedTagsUponPass": [],
+      "grantedTagsUponFail": [],
+      "createdBy": "64e3ed3eb0925784ddb36b29",
+      "updatedBy": "64e3ed3eb0925784ddb36b29",
+      "allowFreeTextGrading": false,
+      "useCustomQuestionWeights": false,
+      "isTimed": false,
+      "createdAt": "2025-03-28T23:40:40.523Z",
+      "updatedAt": "2025-03-29T05:41:11.630Z",
+      "__v": 5
+    },
+    "currentSection": 1,
+    "status": "in_progress",
+    "attemptNumber": 1,
+    "completed": false,
+    "courseAnswer": {},
+    "assigned": false,
+    "passingGrade": 0,
+    "fullstorySessions": [
+      "https://app.fullstory.com/ui/25WP4/client-session/e268fb31-9a0f-4481-91a7-66436a9e98fc%3Ab9ad4a79-1952-495d-af40-dcc1719bd468%3A1746751139319"
+    ],
+    "remainingTime": 360,
+    "projectId": "67d27d962216e1f2cd2ea23b",
+    "violationsDetected": [],
+    "createdAt": "2025-05-09T00:39:17.262Z",
+    "updatedAt": "2025-05-09T00:39:37.527Z",
+    "__v": 1
+  }
+}

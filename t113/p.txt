@@ -1,0 +1,48 @@
+67d3d0ff45ca5396ccd7fabf
+
+681232b5734fee6960826c0f
+
+Estoy desarrollando un código para calcular las ganancias y pérdidas de mis operaciones en largo y en corto a partir de un JSON. El código devuelve el resultado de cada operación y calcula el total de ganancias o pérdidas después de todas las operaciones. El problema es que el resultado que recibo no es exacto, porque una operación que debería calcular 200 euros en ganancias registra 200.00000000000006. Quiero que corrijas el problema pero sin redondear los resultados.
+
+```javascript
+const fs = require("fs");
+
+const trades = JSON.parse(fs.readFileSync("operaciones.json", "utf8"));
+
+let total = 0;
+
+for (const { name, entryPrice, exitPrice, quantity, isLong } of trades) {
+  const profit =
+    (isLong ? exitPrice - entryPrice : entryPrice - exitPrice) * quantity;
+  console.log(`${name}: ${profit}`);
+  total += profit;
+}
+
+console.log(`Total: ${total}`);
+```
+
+```json
+[
+  {
+    "name": "A/EUR",
+    "entryPrice": 45000,
+    "exitPrice": 47000,
+    "quantity": 0.1,
+    "isLong": true
+  },
+  {
+    "name": "B/EUR",
+    "entryPrice": 3000,
+    "exitPrice": 2800,
+    "quantity": 1.5,
+    "isLong": true
+  },
+  {
+    "name": "C/EUR",
+    "entryPrice": 0.8,
+    "exitPrice": 0.6,
+    "quantity": 1000,
+    "isLong": false
+  }
+]
+```

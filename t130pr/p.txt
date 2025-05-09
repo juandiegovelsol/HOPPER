@@ -1,0 +1,5 @@
+681232b79616782356246627
+
+Estoy desarrollando una aplicación por consola para gestionar el inventario de mi restaurante Español.
+El menú tiene diferentes platos clasificados en entrantes, fuertes, postres y bebidas y cada plato tiene sus correspondientes ingredientes.
+Recién inicio con el programa y quiero que me ayudes a evaluar al menos dos alternativas para la estructura de los datos en Swift, proporciona las ventajas y desventajas de cada una.

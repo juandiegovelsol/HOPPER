@@ -1,0 +1,5 @@
+67d3d12f43e2f2c820900a0f
+
+681232b7daea1432e59cfe33
+
+Trabajo para una desarrolladora de video juegos en Miami, me pidieron crear un juego con python en el que existe un personaje que salta con la tecla espacio y esquiva obstáculos que se dirigen hacia el en diferentes niveles. El jugador pierde cuando toca uno de los obstáculos. Dame el código completo sin comentarios.

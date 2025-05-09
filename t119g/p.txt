@@ -1,0 +1,5 @@
+67d3d12ee97a6007dd95fb82
+
+681232b02cdc808aa0cbb3a7
+
+Quiero programar un video juego en python que sea parecido al clásico pong, donde dos jugadores muevan cada uno su barra hacia arriba y abajo en los extremos laterales dentro de un contenedor y una bola rebote en las barras y en los bordes de arriba y abajo del contenedor. Un jugador suma un punto si logra que la bola no sea atrapada por el otro jugador y toque el respectivo borde lateral. Dame el código completo y sin comentarios.

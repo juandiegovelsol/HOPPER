@@ -1,0 +1,94 @@
+67d3d0ea787715a47cc7d092
+
+68197c23b63ce316a4c0bbfe
+
+Estoy trabajando en un programa para automatizar el cierre de mi restaurante al final del día, que me permite identificar órdenes con valores incorrectos y calcular el total en euros de las órdenes correctas.
+
+```swift
+import Foundation
+
+struct Orden {
+    let nombreCliente: String
+    let cantidadPlatos: Int
+    let subtotal: Double
+    let pagado: Bool
+}
+
+func calcularTotalVendido(ordenes: [Orden]) -> Double {
+    var total: Double = 0.0
+
+    for (index, orden) in ordenes.enumerated() {
+        if validarOrden(orden) {
+            total += orden.subtotal
+        } else {
+            print("Orden inválida en índice \(index): \(descripcionError(orden))")
+        }
+    }
+
+    return total
+}
+
+func validarOrden(_ orden: Orden) -> Bool {
+    return !orden.nombreCliente.isEmpty &&
+           orden.cantidadPlatos > 0 &&
+           orden.subtotal > 0 &&
+           orden.pagado
+}
+
+func descripcionError(_ orden: Orden) -> String {
+    var errores = [String]()
+
+    if orden.nombreCliente.isEmpty {
+        errores.append("nombre vacío")
+    }
+    if orden.cantidadPlatos <= 0 {
+        errores.append("cantidad de platos no válida")
+    }
+    if orden.subtotal <= 0 {
+        errores.append("subtotal no válido")
+    }
+    if !orden.pagado {
+        errores.append("orden no pagada")
+    }
+
+    return errores.joined(separator: ", ")
+}
+```
+
+Necesito verificar que el código funciona correctamente, dame la salida en consola de cada una de las siguientes entradas junto con una explicación de por qué se produce cada salida.
+
+Entrada 1
+
+```swift
+let ordenes = [
+    Orden(nombreCliente: "Ana", cantidadPlatos: 3, subtotal: 45.5, pagado: true),
+    Orden(nombreCliente: "Sofía", cantidadPlatos: 2, subtotal: 25.0, pagado: true)
+]
+
+let total = calcularTotalVendido(ordenes: ordenes)
+print("Total vendido: \(total)")
+```
+
+Entrada 2
+```swift
+let ordenes = [
+    Orden(nombreCliente: "Carlos", cantidadPlatos: 2, subtotal: 35, pagado: true),
+    Orden(nombreCliente: "Juan", cantidadPlatos: 3, subtotal: 30.0, pagado: false),
+    Orden(nombreCliente: "", cantidadPlatos: 0, subtotal: 0.0, pagado: false)
+]
+
+let total = calcularTotalVendido(ordenes: ordenes)
+print("Total vendido: \(total)")
+```
+
+Entrada 3
+```swift
+let ordenes = [
+    Orden(nombreCliente: "Carlos", cantidadPlatos: 2, subtotal: -35, pagado: true),
+    Orden(nombreCliente: "Juan", cantidadPlatos: 3, subtotal: 30.0, pagado: false),
+    Orden(nombreCliente: "", cantidadPlatos: 0, subtotal: 0.0, pagado: false)
+]
+
+let total = calcularTotalVendido(ordenes: ordenes)
+print("Total vendido: \(total)")
+```

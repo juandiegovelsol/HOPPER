@@ -1,0 +1,3 @@
+6807b76aec1e385f965d91e6
+
+Quiero crear una aplicación para controlar las órdenes de una tienda en línea en Nueva Jersey usando Swift. Quiero diseñar una estructura de datos que me permita almacenar información de órdenes como id, nombre del comprador, correo electrónico del comprador, pedidos (con id de varios artículos, nombre de varios artículos y precios de varios artículos). Quiero que me sugieras al menos dos estructuras de datos en las cuales almacenar la información incluyendo sus ventajas y desventajas.

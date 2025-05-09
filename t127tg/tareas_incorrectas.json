@@ -1,0 +1,12 @@
+[
+  {
+    "descripcion": 123,
+    "persona": "Persona 1",
+    "entregada": "false"
+  },
+  {
+    "descripcion": "Tarea 2",
+    "entregada": true
+  },
+  null
+]

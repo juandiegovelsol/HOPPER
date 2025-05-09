@@ -1,0 +1,16 @@
+[
+  {
+    "nombre": "Calamares a la Romana",
+    "categoria": "Entrantes",
+    "precio": 11.5,
+    "disponible": true,
+    "ingredientes": ["calamar", "harina", "huevo", "limón", "sal"]
+  },
+  {
+    "nombre": "Churros con Chocolate",
+    "categoria": "Postres",
+    "precio": 6.5,
+    "disponible": true,
+    "ingredientes": ["harina", "agua", "sal", "aceite", "chocolate", "azúcar"]
+  }
+]

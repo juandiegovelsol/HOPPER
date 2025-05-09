@@ -1,0 +1,449 @@
+{
+  "courseProgress": {
+    "courseGrade": {},
+    "referralInfo": {},
+    "_id": "681190aea15354b725fcf463",
+    "worker": "666551489082b5376455194b",
+    "course": {
+      "enableMLCheatingDetection": false,
+      "_id": "67e635997397b4aa841feda5",
+      "name": "Kratos Correct Localization",
+      "title": "Correct Localization (Code)",
+      "description": "This course will show you how to make prompts and responses feel natural, relevant, and specific to each locale. You’ll learn the key elements of good localization, see clear examples, and get simple tips to apply in your own work. Let’s make every task feel like it belongs right at home!🌏",
+      "archived": false,
+      "disabled": false,
+      "projectIds": [],
+      "courseDuration": 21,
+      "courseType": "native",
+      "sections": [
+        {
+          "id": "f47db719-2990-4202-a7e1-3391fd317a3b",
+          "estimatedTime": 0,
+          "recommendedEstimatedTime": 3,
+          "title": "Where's the Locale?",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "24577bbb-3e22-44c7-871b-32148750fbce",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p><span class=\"ql-size-large\">Hello! Welcome to this course on </span><strong class=\"ql-size-large\" style=\"color: rgb(0, 138, 0);\">Correct Localization</strong></p><p><br></p><p><span class=\"ql-size-large\">We have noticed that many tasks contain inaccurate localized information. </span><strong class=\"ql-size-large\">Each task has an assigned locale/language.</strong><span class=\"ql-size-large\"> According to the specified locale, all the information in a task - including the prompt, justification, and rewrites - must all contain </span><strong class=\"ql-size-large\">accurately localized information</strong><span class=\"ql-size-large\">. </span></p><p><br></p><p><span class=\"ql-size-large\">You can find the task's assigned locale and language in the </span><strong class=\"ql-size-large\">Language Assignment</strong><span class=\"ql-size-large\"> section right after the Prompt Guidelines. If you are unsure what the language code stands for, please look it up online:</span></p><p><br></p><p><img src=\"https://static.remotasks.com/uploads//Screenshot%202025-03-31%20at%2010.40.13%E2%80%AFPM.png\"></p>"
+              },
+              "_id": "67ec817b73d97ebc29cc14e2",
+              "textHistory": []
+            },
+            {
+              "id": "6c0ca625-e7ba-4f1e-96a8-59295fd7d1f4",
+              "weight": 16.67,
+              "type": "multiple_choice",
+              "contents": {
+                "singleSelect": true,
+                "skipGrading": false,
+                "choices": [
+                  {
+                    "id": "f2cf97c3-f715-4d50-95d3-fa1ecebf1da5",
+                    "answer": "<p>British English</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "a127f0a3-a6a9-4fe5-8882-6839a5c057c2",
+                    "answer": "<p>Singaporean English</p>",
+                    "isCorrect": true
+                  },
+                  {
+                    "id": "734a8300-a9bf-4cf0-b37e-f9aa3c18e8cc",
+                    "answer": "<p>Canadian French</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "f4ed1d66-2d22-4b2e-9cef-776969ac17ef",
+                    "answer": "<p>European Portuguese</p>",
+                    "isCorrect": false
+                  }
+                ],
+                "question": "<p>What is the assigned local language in the above screenshot</p>"
+              },
+              "_id": "67ec817b73d97ebc29cc14e3",
+              "textHistory": []
+            }
+          ],
+          "_id": "67ec817b73d97ebc29cc14e1"
+        },
+        {
+          "id": "8fb494aa-4c49-4986-8fbc-eceef305c949",
+          "estimatedTime": 2,
+          "recommendedEstimatedTime": 3,
+          "title": "🌍 Making Every Task Feel Like It Belongs at Home",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "f3322341-6d7c-4065-8fa2-5e9be75aae2c",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<h2><strong class=\"ql-size-large\" style=\"color: rgb(0, 138, 0);\">🌍 What is Localization?</strong></h2><p><span class=\"ql-size-large\">Now that you know how to find your task's </span><strong class=\"ql-size-large\">language and locale</strong><span class=\"ql-size-large\">, let’s talk about </span><strong class=\"ql-size-large\">localization</strong><span class=\"ql-size-large\"> — and why it matters.</span></p><h3><br></h3><h3><strong class=\"ql-size-large\">Definition:</strong></h3><p><span class=\"ql-size-large\">Localization means adapting content so it feels </span><strong class=\"ql-size-large\">natural, correct, and culturally appropriate</strong><span class=\"ql-size-large\"> for people in a specific region or language.</span></p><p><span class=\"ql-size-large\">It’s more than just translation — it’s about making content feel </span><strong class=\"ql-size-large\">local</strong><span class=\"ql-size-large\">.</span></p><ul><li><em class=\"ql-size-large\" style=\"color: rgb(0, 102, 204);\">Ask yourself: Would someone from this region feel like this content was made for them?</em></li></ul><p><br></p><h3><strong class=\"ql-size-large\" style=\"color: rgb(0, 138, 0);\">🔍 What to Check When Localizing:</strong></h3><ul><li><strong class=\"ql-size-large\">Punctuation</strong><span class=\"ql-size-large\">: Symbols like commas, periods, and quotation marks vary by language.</span></li><li class=\"ql-indent-1\"><em class=\"ql-size-large\">Example: English uses “quotes”, French uses « guillemets ».</em></li><li><strong class=\"ql-size-large\">Vocabulary</strong><span class=\"ql-size-large\">: Words can mean different things in different places.</span></li><li class=\"ql-indent-1\"><em class=\"ql-size-large\">Example: “Pants” in the US = trousers; in the UK = underwear.</em></li><li><strong class=\"ql-size-large\">Grammar</strong><span class=\"ql-size-large\">: Sentence structure and word forms change across locales.</span></li><li class=\"ql-indent-1\"><em class=\"ql-size-large\">Example: In German, articles like “der,” “die,” and “das” must match the noun’s gender.</em></li><li><strong class=\"ql-size-large\">Formatting</strong><span class=\"ql-size-large\">: Pay attention to how dates, numbers, and units are written.</span></li><li class=\"ql-indent-1\"><em class=\"ql-size-large\">Example: 03/04/2025 = March 4 in the US, but April 3 in many other places.</em></li><li><strong class=\"ql-size-large\">Cultural Sensitivity</strong><span class=\"ql-size-large\">: Avoid content that could be confusing or offensive.</span></li><li class=\"ql-indent-1\"><em class=\"ql-size-large\">Example: Some colors, symbols, or jokes don’t translate well across cultures.</em></li><li><span class=\"ql-size-large\">Plus anything else that relates to making sure the response makes sense according to the task's assigned language and locale!</span></li></ul><p><br></p><h2><strong class=\"ql-size-large\" style=\"color: rgb(0, 138, 0);\">🔑 Why It Matters</strong></h2><p><span class=\"ql-size-large\">If a coder from your locale interfaces with a chatbot for a coding question, they should perfectly understand the response! Any phrasing that is not found in your locale, or inaccurate conventions (e.g. wrong punctuation, slang, wrong date formatting, etc.) would create a bad user experience. Therefore, make sure your task is fully locally accurate.</span></p><p><br></p><p><strong style=\"background-color: rgb(255, 255, 204); color: rgb(230, 0, 0);\" class=\"ql-size-large\">Note: </strong><span class=\"ql-size-large\">You are encouraged to </span><strong class=\"ql-size-large\">include localization where it feels natural and contextually appropriate. </strong><span class=\"ql-size-large\">Do NOT try to force localization in prompts such that it sounds unnatural. </span></p><p><u class=\"ql-size-large\">Natural Localization</u><span class=\"ql-size-large\">: Local </span><strong class=\"ql-size-large\">currency</strong><span class=\"ql-size-large\">, </span><strong class=\"ql-size-large\">units</strong><span class=\"ql-size-large\">, or </span><strong class=\"ql-size-large\">number formatting</strong></p><ul><li><span class=\"ql-size-large\">“You bought snacks for </span><strong class=\"ql-size-large\">€4,50</strong><span class=\"ql-size-large\"> and a drink for </span><strong class=\"ql-size-large\">€1,20</strong><span class=\"ql-size-large\">...” (fr-FR)</span></li></ul><p><u class=\"ql-size-large\">Unnatural Localization</u><span class=\"ql-size-large\">: </span><strong class=\"ql-size-large\">forced or exaggerated localization</strong><span class=\"ql-size-large\"> that distracts from the task</span></p><ul><li><span class=\"ql-size-large\">“How many 20-inch baguettes do I need to stack on top of one another to reach the Eiffel Tower?” → too contrived </span><span class=\"ql-size-large\" style=\"background-color: rgb(255, 255, 255);\">(fr-FR)</span></li></ul>"
+              },
+              "_id": "67ec817b73d97ebc29cc14e5",
+              "textHistory": []
+            },
+            {
+              "id": "3f8192e4-8f82-4c61-8901-db3f8cc797ea",
+              "weight": 16.67,
+              "type": "multiple_choice",
+              "contents": {
+                "singleSelect": true,
+                "skipGrading": false,
+                "question": "<p>Which of the following <strong>best describes localization</strong>?</p>",
+                "choices": [
+                  {
+                    "id": "de5d83b4-cd34-4857-be14-f92c43c6e525",
+                    "answer": "<p><strong>A.</strong> Translating words from one language to another as directly as possible.</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "4eb2ba70-2234-4395-9116-0030ddaebd91",
+                    "answer": "<p><strong>B.</strong> Rewriting content so it works in all regions, without considering local preferences.</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "273abd73-a8b8-4269-ad3d-ffdd0cae16b2",
+                    "answer": "<p><strong>C.</strong> Making content look like it was written for users in a specific region, including correct language, formatting, and cultural context.</p>",
+                    "isCorrect": true
+                  },
+                  {
+                    "id": "83864166-ca40-4115-b99a-d18fc8f2ae18",
+                    "answer": "<p><strong>D.</strong> Using formal grammar rules to improve clarity in any language.</p>",
+                    "isCorrect": false
+                  }
+                ]
+              },
+              "_id": "67ec817b73d97ebc29cc14e6",
+              "textHistory": []
+            }
+          ],
+          "_id": "67ec817b73d97ebc29cc14e4"
+        },
+        {
+          "id": "195ce1f5-d1be-46f9-9bb2-de52a7d53795",
+          "estimatedTime": 4,
+          "recommendedEstimatedTime": 4,
+          "title": "💬 Do's and Don'ts",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "fe5df225-ceef-4c95-bac4-ac84e290d3b8",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p><strong class=\"ql-size-large\" style=\"color: rgb(0, 138, 0);\">Common Localization Error Categories</strong></p><p><span class=\"ql-size-large\">Localization is critical to train accurate model responses for your coding and math tasks! Even small localization issues — in grammar, formatting, or vocabulary — can make coding and math comments, examples, or explanations feel incorrect or confusing for the target audience in the assigned locale. Here are some </span><strong class=\"ql-size-large\">Do's and Don'ts</strong><span class=\"ql-size-large\"> when you are tasking. For more examples, please check out the </span><a href=\"https://docs.google.com/document/d/1dIkmf4PL9cU2l3Z12nAn3i8ZiwKfWhN9HnBXcVADRLw/edit?tab=t.0#heading=h.fch6ctvundnt\" rel=\"noopener noreferrer\" target=\"_blank\" class=\"ql-size-large\" style=\"color: rgb(0, 102, 204);\"><u>Instructions Document</u></a><u class=\"ql-size-large\">.</u></p><p><br></p><p><img src=\"https://static.remotasks.com/uploads//Screenshot%202025-04-01%20at%2012.34.16%E2%80%AFAM.png\"></p><h3><br></h3><h3>⚠️<strong> Function Names (e.g., main()) — </strong><strong style=\"color: rgb(230, 0, 0);\">Don’t Translate</strong></h3><ul><li><strong>Function names</strong>, code syntax, keywords (if, while, print, etc.) should<strong> remain in English</strong>, as they are part of the programming language itself.</li><li>Translating main() to, for example, principal() (Spanish) or haupt() (German) <strong>would break the code and confuse learners or developers.</strong></li></ul>"
+              },
+              "_id": "67ec817b73d97ebc29cc14e8",
+              "textHistory": []
+            },
+            {
+              "id": "0c94841e-e52e-485b-ac60-008fe12bd9b7",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p><strong class=\"ql-size-large\" style=\"color: rgb(0, 138, 0);\">🧭 Localization Checklist </strong></p><p><img src=\"https://static.remotasks.com/uploads/67e635997397b4aa841feda5/Screenshot%202025-03-27%20at%2022.50.28.png\" width=\"522\"></p>"
+              },
+              "_id": "67ec817b73d97ebc29cc14e9",
+              "textHistory": []
+            },
+            {
+              "id": "afd4d1f5-4a59-4845-8b1d-f4ea3af6b212",
+              "weight": 16.67,
+              "type": "multiple_choice",
+              "contents": {
+                "singleSelect": true,
+                "skipGrading": false,
+                "question": "<p><strong>Question: </strong>You are reviewing a localized math response for <strong>French (Canada)</strong>. The model writes:</p><blockquote>“La réponse finale est <strong>0.75</strong>.”</blockquote><p><br></p><p>What is the correct feedback?</p>",
+                "choices": [
+                  {
+                    "id": "69464d8d-bdcb-4aae-9e3a-4dd7a71344ec",
+                    "answer": "<p><strong>A.</strong> This is fine — decimals are universally understood.</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "8d81df74-12be-41a0-a177-387d28a1f20c",
+                    "answer": "<p><strong>B.</strong> Only the wording needs review — the number format is acceptable.</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "f0d52b4d-c36b-477c-a60a-a94b255982d4",
+                    "answer": "<p><strong>C.</strong> This only matters for currency, not math — no change needed.</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "869847e6-91d1-4454-9c01-3e326f525fcd",
+                    "answer": "<p><strong>D.</strong> This should be flagged — French Canadian uses commas for decimals, so it should be <strong>0,75</strong>.</p>",
+                    "isCorrect": true
+                  }
+                ],
+                "explanation": "Input your exIn French Canadian localization, the decimal separator is a comma, not a period. Writing “0.75” instead of “0,75” can lead to confusion or be seen as incorrect in math tasks.planation here"
+              },
+              "_id": "67ec817b73d97ebc29cc14ea",
+              "textHistory": []
+            }
+          ],
+          "_id": "67ec817b73d97ebc29cc14e7"
+        },
+        {
+          "id": "09bc789b-ee75-49cf-a042-a6a81bc2ca8a",
+          "estimatedTime": 0,
+          "recommendedEstimatedTime": 2,
+          "title": "✅ Tips for Localizing Prompts",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "bcf60ff7-d1a0-444d-80ee-9b3a6e97a344",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<h3><strong class=\"ql-size-large\" style=\"color: rgb(0, 138, 0);\">Localization Tips for Writing Prompts (Coding &amp; Math Tasks)</strong></h3><p>When writing prompts, always tailor the <strong>context, formatting, and terminology</strong> to match the <strong>target locale</strong>. Below are common areas where localization matters:</p><p><br></p><h4><span class=\"ql-size-large\">✍️ </span><strong class=\"ql-size-large\">Math Notation &amp; Language</strong></h4><ul><li>Use correct mathematical phrasing and notation for the locale.</li><li class=\"ql-indent-1\">✅ <strong>divisé par</strong> (fr-FR)</li><li class=\"ql-indent-1\">❌ <strong>divided by</strong> (en-US)</li><li class=\"ql-indent-1\">✅ Use a <strong>comma</strong> as the decimal separator where required</li><li class=\"ql-indent-1\">Ensure formulas are styled appropriately for local educational norms</li></ul><p><br></p><h4><span class=\"ql-size-large\">💱 </span><strong class=\"ql-size-large\">Currency and Units</strong></h4><ul><li>Use region-appropriate <strong>currencies</strong>, <strong>measurements</strong>, and <strong>time formats</strong>.</li><li class=\"ql-indent-1\">✅ <strong>€100</strong> (es-ES)</li><li class=\"ql-indent-1\">❌ <strong>$100</strong> (en-US)</li><li class=\"ql-indent-1\">✅ <strong>centimeters</strong> (fr-FR)</li><li class=\"ql-indent-1\">❌ <strong>inches</strong> (en-US)</li></ul><p><br></p><h4><span class=\"ql-size-large\">📅 </span><strong class=\"ql-size-large\">Date &amp; Number Formats</strong></h4><ul><li>Format dates and numbers to match regional conventions.</li><li class=\"ql-indent-1\">✅ <strong>15/03/2025</strong> (fr-FR, dd/mm/yyyy)</li><li class=\"ql-indent-1\">❌ <strong>03/15/2025</strong> (en-US, mm/dd/yyyy)</li><li class=\"ql-indent-1\">✅ <strong>3,14</strong> (de-DE uses comma for decimal)</li><li class=\"ql-indent-1\">❌ <strong>3.14 </strong><span style=\"background-color: rgb(255, 255, 255);\">(en-US uses period for decimal)</span></li></ul><p><br></p><h4><span class=\"ql-size-large\">💬 </span><strong class=\"ql-size-large\">Localized Technical Terms</strong></h4><ul><li>Translate or adapt common computer science terms when a standard localized version exists.</li><li class=\"ql-indent-1\">✅ <strong>cadena</strong> (es-ES for \"string\")</li><li class=\"ql-indent-1\">✅ <strong>matriz</strong> (es-ES for \"array\")</li><li class=\"ql-indent-1\">❌ Using untranslated <strong>\"string\"</strong> or <strong>\"array\"</strong> in instructions</li></ul><p><br></p><h3><span class=\"ql-size-large\">⚠️</span><strong class=\"ql-size-large\"> Function Names (e.g., main()) — </strong><strong class=\"ql-size-large\" style=\"color: rgb(230, 0, 0);\">Don’t Translate</strong></h3><ul><li><strong>Function names</strong>, code syntax, keywords (if, while, print, etc.) should<strong> remain in English</strong>, as they are part of the programming language itself.</li><li>Translating main() to, for example, principal() (Spanish) or haupt() (German) <strong>would break the code and confuse learners or developers.</strong></li></ul><p><br></p><p><br></p><p><strong class=\"ql-size-large\">Other elements of localization to consider:</strong></p><p><img src=\"https://static.remotasks.com/uploads/67e635997397b4aa841feda5/Screenshot%202025-03-27%20at%2022.43.01.png\" width=\"1129\"></p>"
+              },
+              "_id": "67ec817b73d97ebc29cc14ec",
+              "textHistory": []
+            }
+          ],
+          "_id": "67ec817b73d97ebc29cc14eb"
+        },
+        {
+          "id": "d963e01f-4849-4bcc-aa89-b1bc237e7516",
+          "estimatedTime": 2,
+          "recommendedEstimatedTime": 1,
+          "title": "📚 Good Localization Examples",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "5f090ef2-3d8d-4853-b750-08bbc4919c59",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<h4><span style=\"background-color: rgb(204, 224, 245);\">🇰🇷 </span><strong style=\"background-color: rgb(204, 224, 245);\">Korean (South Korea)</strong></h4><p><strong>Prompt:</strong></p><p> 코딩 수업에서 “문자열”이 무엇인지 설명해 줄 수 있나요?</p><p><strong>Why it’s good:</strong></p><h3> Uses Korean equivalent of \"string\" (<strong>문자열</strong>) and fits how coding concepts are taught in Korean schools.</h3><p><br></p><h4><span style=\"background-color: rgb(204, 224, 245);\">🇹🇭 </span><strong style=\"background-color: rgb(204, 224, 245);\">Thai (Thailand)</strong></h4><p><strong>Prompt:</strong></p><p> ฉันต้องการหาพื้นที่ของรูปสามเหลี่ยมที่ฐานยาว 10 เซนติเมตร และสูง 5 เซนติเมตร ต้องคำนวณอย่างไร?</p><p><strong>Why it’s good:</strong></p><p> Uses metric system (common in Thai schools), math vocabulary in natural Thai phrasing, and culturally appropriate context.</p><h3><br></h3><p><strong style=\"background-color: rgb(204, 224, 245);\">🇲🇽 Spanish (Mexico)</strong></p><p><strong>Prompt:</strong></p><blockquote>¿Qué cuentos mexicanos puedo leerle a mi hijo de 7 años para fomentar el amor por la lectura?</blockquote><p><strong>Why it's good:</strong></p><p> Uses local identity (“cuentos mexicanos”), appropriate tone, and family values.</p><p><br></p><h3><strong style=\"background-color: rgb(204, 224, 245);\">🇭🇰 Cantonese (Hong Kong)</strong></h3><p><strong>Prompt:</strong></p><blockquote>我的朋友工作很努力但沒有被升職。他很不開心。如果你是李白，你會怎樣安慰他？</blockquote><p><strong>Why it's good:</strong></p><p> Refers to a <strong>culturally relevant poet (Li Bai)</strong>, emotion-driven.</p><p><br></p><h3><strong style=\"background-color: rgb(204, 224, 245);\">🇫🇷 French (France)</strong></h3><p><strong>Prompt:</strong></p><blockquote>J’entends beaucoup parler de Carlos Alcaraz à Roland-Garros. Combien de fois a-t-il gagné, et contre qui ?</blockquote><p><strong>Why it's good:</strong></p><p> Locally famous event (French Open), culturally contextual.</p>"
+              },
+              "_id": "67ec817b73d97ebc29cc14ee",
+              "textHistory": []
+            }
+          ],
+          "_id": "67ec817b73d97ebc29cc14ed"
+        },
+        {
+          "id": "c0b2d890-0564-4139-8aae-5024f20d3d59",
+          "estimatedTime": 2,
+          "recommendedEstimatedTime": 1,
+          "title": "❌ Bad Localization Example: What to Avoid",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "b312b47c-8fe6-4ff6-97f8-8a7f989e93bd",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p><span class=\"ql-size-large\">In this case, the contributor's assigned locale was</span><strong class=\"ql-size-large\"> EN_GB (English spoken in Great Britain)</strong><span class=\"ql-size-large\">. </span></p><p><span class=\"ql-size-large\">Can you identify the issue in the marked comment? 👀</span></p><p><br></p><p><img src=\"https://static.remotasks.com/uploads/67e635997397b4aa841feda5/Screenshot%202025-03-27%20at%2023.13.17.png\"></p><p><br></p><p><br></p><p><span class=\"ql-size-large\">Exactly! In Great Britain, local people use \"</span><strong class=\"ql-size-large\">Initiali</strong><strong class=\"ql-size-large\" style=\"background-color: rgb(240, 102, 102);\">S</strong><strong class=\"ql-size-large\">e</strong><span class=\"ql-size-large\">\" not \"</span><strong class=\"ql-size-large\">Initiali</strong><strong class=\"ql-size-large\" style=\"background-color: rgb(240, 102, 102);\">Z</strong><strong class=\"ql-size-large\">e</strong><span class=\"ql-size-large\">\", in this case the task would have a localization issue because of this detail, so try to be as careful as possible!</span></p>"
+              },
+              "_id": "67ec817b73d97ebc29cc14f0",
+              "textHistory": []
+            }
+          ],
+          "_id": "67ec817b73d97ebc29cc14ef"
+        },
+        {
+          "id": "24993c9c-eef7-4a7e-9d41-56b1849e8d50",
+          "estimatedTime": 5,
+          "recommendedEstimatedTime": 3,
+          "title": "📖 Knowledge Check",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "60d978f7-136b-475f-894d-9029660abffd",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p>Now, let's run through an exercise to make sure we understand how to spot localization within a task. For each locale, make sure to <em>do your research</em> to ensure you have the accurate date/measurement/spelling convention.</p>"
+              },
+              "_id": "67ec817b73d97ebc29cc14f2",
+              "textHistory": []
+            },
+            {
+              "id": "acab3a9b-851a-4222-8ce8-377cfce5ad84",
+              "weight": 16.67,
+              "type": "multiple_choice",
+              "contents": {
+                "singleSelect": true,
+                "skipGrading": false,
+                "question": "<p>You’re reviewing a <strong>math prompt</strong> localized for <strong>French (France – fr-FR)</strong>. The model uses this line:</p><blockquote>\"Un produit coûte <strong>$100</strong> et mesure <strong>12 inches</strong> de long.\"</blockquote><p><br></p><p>What should you do?</p>",
+                "choices": [
+                  {
+                    "id": "d95642c7-d43c-4dd9-ab99-811cfdd609b1",
+                    "answer": "<p><strong>A.</strong> Approve it — dollars and inches are widely understood globally</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "cd229df1-0673-42b9-aecf-21c1919e6402",
+                    "answer": "<p><strong>B.</strong> Suggest changing dollars to euros, but leave inches</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "cb18c399-be8d-43a6-b676-2324cc27fb9c",
+                    "answer": "<p><strong>C.</strong> Suggest changing both <strong>$100</strong> to <strong>100 €</strong> and <strong>inches</strong> to <strong>centimètres</strong></p>",
+                    "isCorrect": true
+                  },
+                  {
+                    "id": "78cf8332-ab7b-422e-81ad-c408166699c4",
+                    "answer": "<p><strong>D.</strong> Leave it unless there is a calculation error</p>",
+                    "isCorrect": false
+                  }
+                ],
+                "explanation": "📝 Explanation: In fr-FR, currency should be in euros (€) and measurements should use the metric system (e.g., centimeters, not inches). Using U.S.-centric units breaks localization and may confuse users."
+              },
+              "_id": "67ec817b73d97ebc29cc14f3",
+              "textHistory": []
+            },
+            {
+              "id": "0ce91c87-7e6a-4ddd-93a6-c2e4e20ec9ac",
+              "weight": 16.67,
+              "type": "multiple_choice",
+              "contents": {
+                "singleSelect": true,
+                "skipGrading": false,
+                "question": "<p>Which of the following should be <strong>flagged as a localization issue</strong> in a prompt written for <strong>English (United Kingdom – en-GB)</strong>?</p>",
+                "choices": [
+                  {
+                    "id": "ce4500a5-21f3-4f89-a0c3-5128375186ff",
+                    "answer": "<p><strong>A.</strong> “What color is the output?”</p>",
+                    "isCorrect": true
+                  },
+                  {
+                    "id": "24a36854-0e02-412b-9914-318b0fbbaa24",
+                    "answer": "<p><strong>B.</strong> “What colour is the output?”</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "fea41627-2bf9-49a1-801b-21d969e94577",
+                    "answer": "<p><strong>C.</strong> “Analyse the function.”</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "bf895879-0aa7-4abd-bb6a-065cf5cd3a28",
+                    "answer": "<p><strong>D.</strong> “Initialise the value.”</p>",
+                    "isCorrect": false
+                  }
+                ],
+                "explanation": "📝 Explanation: “Color” is American English. In en-GB, the correct spelling is “colour”. Grammar and spelling must match the target locale — especially in technical writing."
+              },
+              "_id": "67ec817b73d97ebc29cc14f4",
+              "textHistory": []
+            },
+            {
+              "id": "a79bda53-08b0-439d-964a-abcafd6d1178",
+              "weight": 16.65,
+              "type": "multiple_choice",
+              "contents": {
+                "singleSelect": true,
+                "skipGrading": false,
+                "question": "<p>You are reviewing a math prompt localized for <strong>German (Germany – de-DE)</strong>. The prompt includes this sentence:</p><blockquote>\"Das Meeting ist für <strong>12/03/2025</strong> geplant.\"</blockquote><blockquote> <em>(The intended date is March 12, 2025.)</em></blockquote><p>What should you do?</p>",
+                "choices": [
+                  {
+                    "id": "3a6e66b5-e4e9-4cce-acaf-f86de7a3164b",
+                    "answer": "<p><strong>A.</strong> Approve it — this date format is commonly understood</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "b05f7031-2480-4b18-9ce1-312a6672eec2",
+                    "answer": "<p><strong>B.</strong> Suggest changing it to <strong>03.12.2025</strong> to align with German format</p>",
+                    "isCorrect": false
+                  },
+                  {
+                    "id": "36c811cc-d342-4136-a744-19062de6b854",
+                    "answer": "<p><strong>C.</strong> Suggest changing it to <strong>12.03.2025</strong> or <strong>12. März 2025</strong></p>",
+                    "isCorrect": true
+                  },
+                  {
+                    "id": "1e49052a-623b-45f7-b2cd-29104e622bcb",
+                    "answer": "<p><strong>D.</strong> Leave it unless the math is incorrect</p>",
+                    "isCorrect": false
+                  }
+                ],
+                "explanation": "📝 Explanation: In German, the standard date format is dd.mm.yyyy, so March 12, 2025 should be written as 12.03.2025 or spelled out as 12. März 2025. Using 12/03/2025 is unclear and mimics U.S./UK-style formatting, which may cause confusion."
+              },
+              "_id": "67ec817b73d97ebc29cc14f5",
+              "textHistory": []
+            }
+          ],
+          "_id": "67ec817b73d97ebc29cc14f1"
+        },
+        {
+          "id": "23c47507-20e5-4207-b1eb-101b2b09f5e4",
+          "estimatedTime": 0,
+          "recommendedEstimatedTime": 1,
+          "title": "💡 Final Thought",
+          "description": "",
+          "courseSectionItems": [
+            {
+              "id": "cc6a46b2-e811-4234-90db-eb3793038170",
+              "weight": 0,
+              "type": "rich_text",
+              "contents": {
+                "singleSelect": true,
+                "body": "<p class=\"ql-align-center\"><strong class=\"ql-size-large\" style=\"background-color: rgb(255, 235, 204);\">Localize like you're being audited by a family member or friend from your hometown🔎</strong></p><p class=\"ql-align-center\"><span class=\"ql-size-large\" style=\"background-color: rgb(255, 235, 204);\">🌟If it wouldn’t make sense to them, tweak it until it does! And don't forget, every detail matters!</span></p><p class=\"ql-align-center\"><br></p><p><strong style=\"background-color: rgb(255, 255, 204); color: rgb(230, 0, 0);\" class=\"ql-size-large\">Reminder: </strong><span class=\"ql-size-large\">You are encouraged to include localization where it f</span><strong class=\"ql-size-large\">eels natural and contextually appropriate</strong><span class=\"ql-size-large\">.</span><strong class=\"ql-size-large\"> </strong><span class=\"ql-size-large\">Do NOT try to force localization in prompts such that it sounds unnatural. However, if you DO include localized content, it MUST be accurate for the task's assigned locale. Otherwise, </span><strong class=\"ql-size-large\">we will fail tasks that have inaccurate localized information</strong><span class=\"ql-size-large\">. </span></p>"
+              },
+              "_id": "67ec817b73d97ebc29cc14f7",
+              "textHistory": []
+            }
+          ],
+          "_id": "67ec817b73d97ebc29cc14f6"
+        }
+      ],
+      "translatedSections": {},
+      "minReviewLevel": "-1",
+      "passingGradeThreshold": 0,
+      "isTemplate": false,
+      "showFinalGrade": false,
+      "grantedTagsUponCompletion": ["67ec6f1b935f9ded198317f3"],
+      "grantedTagsUponPass": [],
+      "grantedTagsUponFail": [],
+      "createdBy": "64e3ed3eb0925784ddb36b29",
+      "updatedBy": "67576a6c43eebf99b0d1b67e",
+      "allowFreeTextGrading": false,
+      "useCustomQuestionWeights": false,
+      "isTimed": false,
+      "createdAt": "2025-03-28T05:37:29.341Z",
+      "updatedAt": "2025-04-02T00:14:51.588Z",
+      "__v": 68
+    },
+    "currentSection": 1,
+    "status": "in_progress",
+    "attemptNumber": 1,
+    "completed": false,
+    "courseAnswer": {
+      "6c0ca625-e7ba-4f1e-96a8-59295fd7d1f4": {
+        "sectionType": "multiple_choice",
+        "contents": ["a127f0a3-a6a9-4fe5-8882-6839a5c057c2"],
+        "answeredAt": "2025-04-30T02:54:27.267Z",
+        "isCorrect": true,
+        "attemptNumber": 1,
+        "isComplete": true
+      }
+    },
+    "assigned": false,
+    "passingGrade": 0,
+    "fullstorySessions": [
+      "https://app.fullstory.com/ui/25WP4/client-session/e268fb31-9a0f-4481-91a7-66436a9e98fc%3A5f369621-bf2e-4070-ac0b-96084ca8397c%3A1745981599539"
+    ],
+    "remainingTime": 1260,
+    "projectId": "6765c31b02afade8f029bb60",
+    "createdAt": "2025-04-30T02:53:34.041Z",
+    "updatedAt": "2025-04-30T02:54:36.035Z",
+    "__v": 1
+  }
+}

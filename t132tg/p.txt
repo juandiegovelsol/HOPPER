@@ -1,0 +1,64 @@
+Desarrollé un programa en swift para mi restaurante que recibe una serie de órdenes, valida que todos los datos sean del tipo y valores esperados y calcula el total vendido en Euros. El programa retorna el total y mensajes de error en caso de encontrar datos inválidos. Quiero que generes pruebas usando solo assert para validar la salida de la función calcularTotalVendido conun caso en el que todas las órdenes contienen valores correctos, otro caso con algunos valores incorrectos, y el último con todos los valores incorrectos.
+
+```swift
+import Foundation
+
+// Define la estructura de una orden
+struct Orden {
+    let nombreCliente: String
+    let cantidadPlatos: Int
+    let subtotal: Double
+    let pagado: Bool
+}
+
+// Resultado con total y errores
+struct ResultadoVenta {
+    let total: Double
+    let errores: [String]
+}
+
+// Función para calcular el total vendido y recolectar errores
+func calcularTotalVendido(ordenes: [Orden]) -> ResultadoVenta {
+    var total: Double = 0.0
+    var errores: [String] = []
+
+    for (index, orden) in ordenes.enumerated() {
+        if validarOrden(orden) {
+            total += orden.subtotal
+        } else {
+            let errorDescripcion = descripcionError(orden)
+            errores.append("Orden \(index): \(errorDescripcion)")
+        }
+    }
+
+    return ResultadoVenta(total: total, errores: errores)
+}
+
+// Función de validación
+func validarOrden(_ orden: Orden) -> Bool {
+    return !orden.nombreCliente.isEmpty &&
+           orden.cantidadPlatos > 0 &&
+           orden.subtotal > 0 &&
+           orden.pagado
+}
+
+// Descripción de errores
+func descripcionError(_ orden: Orden) -> String {
+    var errores = [String]()
+
+    if orden.nombreCliente.isEmpty {
+        errores.append("nombre vacío")
+    }
+    if orden.cantidadPlatos <= 0 {
+        errores.append("cantidad de platos no válida")
+    }
+    if orden.subtotal <= 0 {
+        errores.append("subtotal no válido")
+    }
+    if !orden.pagado {
+        errores.append("orden no pagada")
+    }
+
+    return errores.joined(separator: ", ")
+}
+```

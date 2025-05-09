@@ -1,0 +1,52 @@
+67d3d0e5004e0562233da97c
+
+68197b20e0552024c8b565c0
+
+He desarrollado una aplicación para procesar los datos de reproducción de canciones por parte de los usuarios después de validar que los datos contienen valores correctos. No tengo un dispositivo en el cual correr xctest pero quiero desarrollar pruebas para el código que escribí, por lo que quiero que reflexiones acerca de qué herramientas tengo para desarrollar mis pruebas y que el código sea ejecutable en un entorno en línea de forma sencilla. Evalúa las dos alternativas sin código.
+
+```swift
+import Foundation
+
+struct Reproduccion {
+    let titulo: String
+    let duracionSegundos: Int
+    let usuario: String
+    let completado: Bool
+}
+
+struct ResultadoReproducciones {
+    let conteoPorCancion: [String: Int]
+    let errores: [String]
+}
+
+func procesarReproducciones(_ reproducciones: [Reproduccion]) -> ResultadoReproducciones {
+    var conteo: [String: Int] = [:]
+    var errores: [String] = []
+
+    for (index, rep) in reproducciones.enumerated() {
+        var mensajes = [String]()
+
+        if rep.titulo.isEmpty {
+            mensajes.append("título vacío")
+        }
+        if rep.duracionSegundos <= 30 {
+            mensajes.append("duración insuficiente")
+        }
+        if rep.usuario.isEmpty {
+            mensajes.append("usuario no especificado")
+        }
+        if !rep.completado {
+            mensajes.append("reproducción incompleta")
+        }
+
+        if mensajes.isEmpty {
+            conteo[rep.titulo, default: 0] += 1
+        } else {
+            let errorDescripcion = mensajes.joined(separator: ", ")
+            errores.append("Reproducción \(index): \(errorDescripcion)")
+        }
+    }
+
+    return ResultadoReproducciones(conteoPorCancion: conteo, errores: errores)
+}
+```

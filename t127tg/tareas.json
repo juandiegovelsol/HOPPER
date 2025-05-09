@@ -1,0 +1,17 @@
+[
+  {
+    "descripcion": "Tarea 1",
+    "persona": "Persona 1",
+    "entregada": false
+  },
+  {
+    "descripcion": "Tarea 2",
+    "persona": "Persona 2",
+    "entregada": true
+  },
+  {
+    "descripcion": "Tarea 3",
+    "persona": "Persona 1",
+    "entregada": false
+  }
+]

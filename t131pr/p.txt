@@ -1,0 +1,9 @@
+68164990d51891524c4c8e10
+
+Estoy desarrollando una aplicación por consola en Swift para gestionar mi tienda virtual
+que despacha productos en Chicago. Cada venta debe generar información que contenga datos
+para identificar el usuario como id, nombre, correo electrónico, datos relacionados con la
+compra como cantidad de artículos, precio total, método de pago, y datos relacionados con
+los artículos como nombre, precio unitario y cantidad. Quiero que reflecciones dos
+alternativas para estructurar los datos y asegurarme que la aplicación es fácilmente escalable.
+Dame un análisis breve de las ventajas y desventajas de cada opción.

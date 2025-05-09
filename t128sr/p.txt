@@ -1,0 +1,438 @@
+67d3d12f4f20813f96bc885b
+
+681232df063ce3c9bb7c0e0d
+
+
+Estoy trabajando en la implementación de un sistema de gestión hospitalaria en Nueva York a través de una aplicación de consola que permite agregar personas al sistema, asignar pacientes a enfermeros por parte de un médico, atender al paciente por parte de un enfermero y ver todos los datos del sistema. Quiero que analices el código para comprender como funciona cada una de las opciones mencionadas.
+
+```javascript
+const readline = require("readline");
+
+// Clase base para todas las personas
+class Persona {
+  constructor(id, nombre, apellido, identificacion, rol) {
+    this.id = id;
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.identificacion = identificacion;
+    this.rol = rol;
+  }
+}
+
+// Clase para Pacientes
+class Paciente extends Persona {
+  constructor(id, nombre, apellido, identificacion) {
+    super(id, nombre, apellido, identificacion, "paciente");
+    this.tratamientos = [];
+  }
+}
+
+// Clase para Médicos
+class Medico extends Persona {
+  constructor(id, nombre, apellido, identificacion) {
+    super(id, nombre, apellido, identificacion, "medico");
+  }
+
+  asignarPaciente(paciente, enfermero, descripcionTratamiento) {
+    const tratamiento = {
+      id: Date.now(),
+      pacienteId: paciente.id,
+      medicoId: this.id,
+      enfermeroId: enfermero.id,
+      descripcion: descripcionTratamiento,
+      fechaAsignacion: new Date().toLocaleDateString("en-US"),
+      estado: "pendiente",
+      fechaFinalizacion: null,
+    };
+
+    paciente.tratamientos.push(tratamiento);
+    return tratamiento;
+  }
+}
+
+// Clase para Enfermeros
+class Enfermero extends Persona {
+  constructor(id, nombre, apellido, identificacion) {
+    super(id, nombre, apellido, identificacion, "enfermero");
+    this.pacientesAsignados = [];
+  }
+
+  confirmarTratamiento(paciente, tratamientoId) {
+    const tratamiento = paciente.tratamientos.find(
+      (t) => t.id === tratamientoId && t.enfermeroId === this.id
+    );
+
+    if (tratamiento && tratamiento.estado === "pendiente") {
+      tratamiento.estado = "completado";
+      tratamiento.fechaFinalizacion = new Date().toLocaleDateString("en-US");
+      return true;
+    }
+    return false;
+  }
+}
+
+// Base de datos simple en memoria
+class Hospital {
+  constructor() {
+    this.personas = [];
+    this.ultimoId = 0;
+  }
+
+  crearPersona(nombre, apellido, identificacion, rol) {
+    this.ultimoId++;
+    let nuevaPersona;
+
+    switch (rol.toLowerCase()) {
+      case "medico":
+        nuevaPersona = new Medico(
+          this.ultimoId,
+          nombre,
+          apellido,
+          identificacion
+        );
+        break;
+      case "enfermero":
+        nuevaPersona = new Enfermero(
+          this.ultimoId,
+          nombre,
+          apellido,
+          identificacion
+        );
+        break;
+      case "paciente":
+        nuevaPersona = new Paciente(
+          this.ultimoId,
+          nombre,
+          apellido,
+          identificacion
+        );
+        break;
+      default:
+        throw new Error("Rol no válido");
+    }
+
+    this.personas.push(nuevaPersona);
+    return nuevaPersona;
+  }
+
+  buscarPersonaPorId(id) {
+    return this.personas.find((p) => p.id === id);
+  }
+
+  buscarPersonaPorRol(rol) {
+    return this.personas.filter((p) => p.rol === rol);
+  }
+
+  listarTratamientosPendientesPorEnfermero(enfermeroId) {
+    const tratamientosPendientes = [];
+
+    const pacientes = this.buscarPersonaPorRol("paciente");
+    pacientes.forEach((paciente) => {
+      const tratamientos = paciente.tratamientos.filter(
+        (t) => t.enfermeroId === enfermeroId && t.estado === "pendiente"
+      );
+
+      tratamientos.forEach((t) => {
+        tratamientosPendientes.push({
+          tratamiento: t,
+          paciente: paciente,
+        });
+      });
+    });
+
+    return tratamientosPendientes;
+  }
+
+  obtenerDatosCompletos() {
+    return {
+      medicos: this.buscarPersonaPorRol("medico"),
+      enfermeros: this.buscarPersonaPorRol("enfermero"),
+      pacientes: this.buscarPersonaPorRol("paciente"),
+    };
+  }
+}
+
+// Interfaz de usuario por consola
+class InterfazHospital {
+  constructor() {
+    this.hospital = new Hospital();
+    this.rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+
+    // Crear algunos datos de ejemplo
+    this.inicializarDatosEjemplo();
+  }
+
+  inicializarDatosEjemplo() {
+    this.hospital.crearPersona("Juan", "Pérez", "M12345", "medico");
+    this.hospital.crearPersona("María", "López", "E12345", "enfermero");
+    this.hospital.crearPersona("Carlos", "Gómez", "P12345", "paciente");
+  }
+
+  async iniciar() {
+    let continuar = true;
+
+    while (continuar) {
+      console.clear();
+      console.log("\n===== SISTEMA DE GESTIÓN HOSPITALARIA =====\n");
+      console.log("1. Crear nueva persona");
+      console.log("2. Asignar paciente a enfermero (solo médicos)");
+      console.log("3. Confirmar tratamiento (solo enfermeros)");
+      console.log("4. Ver datos almacenados");
+      console.log("5. Salir");
+
+      const opcion = await this.pregunta("\nSeleccione una opción: ");
+
+      switch (opcion) {
+        case "1":
+          await this.crearPersona();
+          break;
+        case "2":
+          await this.asignarPaciente();
+          break;
+        case "3":
+          await this.confirmarTratamiento();
+          break;
+        case "4":
+          await this.mostrarDatos();
+          break;
+        case "5":
+          continuar = false;
+          break;
+        default:
+          console.log("Opción no válida");
+      }
+
+      if (continuar) {
+        await this.pregunta("\nPresione Enter para continuar...");
+      }
+    }
+
+    this.rl.close();
+    console.log("\n¡Gracias por usar el Sistema de Gestión Hospitalaria!");
+  }
+
+  async crearPersona() {
+    console.log("\n--- CREAR NUEVA PERSONA ---\n");
+
+    const nombre = await this.pregunta("Nombre: ");
+    const apellido = await this.pregunta("Apellido: ");
+    const identificacion = await this.pregunta("Identificación: ");
+
+    let rolValido = false;
+    let rol;
+
+    while (!rolValido) {
+      rol = await this.pregunta("Rol (medico/enfermero/paciente): ");
+
+      if (["medico", "enfermero", "paciente"].includes(rol.toLowerCase())) {
+        rolValido = true;
+      } else {
+        console.log("Rol no válido. Debe ser: medico, enfermero o paciente");
+      }
+    }
+
+    try {
+      const persona = this.hospital.crearPersona(
+        nombre,
+        apellido,
+        identificacion,
+        rol
+      );
+      console.log(
+        `\n✅ ${
+          rol.charAt(0).toUpperCase() + rol.slice(1)
+        } creado con éxito. ID: ${persona.id}`
+      );
+    } catch (error) {
+      console.log(`\n❌ Error: ${error.message}`);
+    }
+  }
+
+  async asignarPaciente() {
+    console.log("\n--- ASIGNAR PACIENTE A ENFERMERO ---\n");
+
+    const medicoId = parseInt(await this.pregunta("ID del médico: "), 10);
+    const medico = this.hospital.buscarPersonaPorId(medicoId);
+
+    if (!medico || medico.rol !== "medico") {
+      console.log("\n❌ Error: ID de médico no válido");
+      return;
+    }
+
+    // Listar pacientes
+    const pacientes = this.hospital.buscarPersonaPorRol("paciente");
+    console.log("\nPacientes disponibles:");
+    pacientes.forEach((p) => {
+      console.log(
+        `ID: ${p.id} - ${p.nombre} ${p.apellido} (${p.identificacion})`
+      );
+    });
+
+    const pacienteId = parseInt(await this.pregunta("\nID del paciente: "), 10);
+    const paciente = this.hospital.buscarPersonaPorId(pacienteId);
+
+    if (!paciente || paciente.rol !== "paciente") {
+      console.log("\n❌ Error: ID de paciente no válido");
+      return;
+    }
+
+    // Listar enfermeros
+    const enfermeros = this.hospital.buscarPersonaPorRol("enfermero");
+    console.log("\nEnfermeros disponibles:");
+    enfermeros.forEach((e) => {
+      console.log(
+        `ID: ${e.id} - ${e.nombre} ${e.apellido} (${e.identificacion})`
+      );
+    });
+
+    const enfermeroId = parseInt(
+      await this.pregunta("\nID del enfermero: "),
+      10
+    );
+    const enfermero = this.hospital.buscarPersonaPorId(enfermeroId);
+
+    if (!enfermero || enfermero.rol !== "enfermero") {
+      console.log("\n❌ Error: ID de enfermero no válido");
+      return;
+    }
+
+    const descripcion = await this.pregunta("\nDescripción del tratamiento: ");
+
+    const tratamiento = medico.asignarPaciente(
+      paciente,
+      enfermero,
+      descripcion
+    );
+    enfermero.pacientesAsignados.push({
+      pacienteId: paciente.id,
+      tratamientoId: tratamiento.id,
+    });
+
+    console.log("\n✅ Tratamiento asignado correctamente");
+  }
+
+  async confirmarTratamiento() {
+    console.log("\n--- CONFIRMAR TRATAMIENTO ---\n");
+
+    const enfermeroId = parseInt(await this.pregunta("ID del enfermero: "), 10);
+    const enfermero = this.hospital.buscarPersonaPorId(enfermeroId);
+
+    if (!enfermero || enfermero.rol !== "enfermero") {
+      console.log("\n❌ Error: ID de enfermero no válido");
+      return;
+    }
+
+    const tratamientosPendientes =
+      this.hospital.listarTratamientosPendientesPorEnfermero(enfermero.id);
+
+    if (tratamientosPendientes.length === 0) {
+      console.log("\nNo hay tratamientos pendientes para este enfermero");
+      return;
+    }
+
+    console.log("\nTratamientos pendientes:");
+    tratamientosPendientes.forEach((item, index) => {
+      const paciente = item.paciente;
+      const tratamiento = item.tratamiento;
+      console.log(
+        `${index + 1}. Paciente: ${paciente.nombre} ${
+          paciente.apellido
+        } - Tratamiento: ${tratamiento.descripcion} (ID: ${tratamiento.id})`
+      );
+    });
+
+    const seleccion = parseInt(
+      await this.pregunta(
+        "\nSeleccione el número del tratamiento a confirmar: "
+      ),
+      10
+    );
+
+    if (
+      isNaN(seleccion) ||
+      seleccion < 1 ||
+      seleccion > tratamientosPendientes.length
+    ) {
+      console.log("\n❌ Selección no válida");
+      return;
+    }
+
+    const tratamientoSeleccionado = tratamientosPendientes[seleccion - 1];
+    const confirmado = enfermero.confirmarTratamiento(
+      tratamientoSeleccionado.paciente,
+      tratamientoSeleccionado.tratamiento.id
+    );
+
+    if (confirmado) {
+      console.log("\n✅ Tratamiento confirmado como completado");
+    } else {
+      console.log("\n❌ No se pudo confirmar el tratamiento");
+    }
+  }
+
+  async mostrarDatos() {
+    console.log("\n--- DATOS DEL SISTEMA ---\n");
+
+    const datos = this.hospital.obtenerDatosCompletos();
+
+    console.log("MÉDICOS:");
+    datos.medicos.forEach((m) => {
+      console.log(
+        `ID: ${m.id} - ${m.nombre} ${m.apellido} (${m.identificacion})`
+      );
+    });
+
+    console.log("\nENFERMEROS:");
+    datos.enfermeros.forEach((e) => {
+      console.log(
+        `ID: ${e.id} - ${e.nombre} ${e.apellido} (${e.identificacion})`
+      );
+    });
+
+    console.log("\nPACIENTES:");
+    datos.pacientes.forEach((p) => {
+      console.log(
+        `ID: ${p.id} - ${p.nombre} ${p.apellido} (${p.identificacion})`
+      );
+
+      if (p.tratamientos.length > 0) {
+        console.log("  Tratamientos:");
+        p.tratamientos.forEach((t) => {
+          const medico = this.hospital.buscarPersonaPorId(t.medicoId);
+          const enfermero = this.hospital.buscarPersonaPorId(t.enfermeroId);
+
+          console.log(`  - ID: ${t.id}`);
+          console.log(`    Descripción: ${t.descripcion}`);
+          console.log(`    Médico: ${medico.nombre} ${medico.apellido}`);
+          console.log(
+            `    Enfermero: ${enfermero.nombre} ${enfermero.apellido}`
+          );
+          console.log(`    Estado: ${t.estado}`);
+          console.log(`    Fecha asignación: ${t.fechaAsignacion}`);
+
+          if (t.fechaFinalizacion) {
+            console.log(`    Fecha finalización: ${t.fechaFinalizacion}`);
+          }
+          console.log();
+        });
+      }
+    });
+  }
+
+  pregunta(texto) {
+    return new Promise((resolve) => {
+      this.rl.question(texto, (respuesta) => {
+        resolve(respuesta);
+      });
+    });
+  }
+}
+
+// Iniciar la aplicación
+const interfaz = new InterfazHospital();
+interfaz.iniciar();
+
+```

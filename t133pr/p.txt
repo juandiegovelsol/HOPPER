@@ -1,0 +1,3 @@
+68197c19c9fdb51482645308
+
+Estoy pensando en desarrollar un programa en swift para automatizar el procesamiento de datos de reproducción de canciones para poder obtener métricas de los mismos. Quiero desarrollar el programa a través de consola, que los datos estén almacenados en un archivo externo, con valores como nombre de la canción, cantidad de reproducciones, duración, género y artista. Ayudame a reflexionar acerca de al menos dos formatos de archivo de entrada, analizando las ventajas y desventajas de cada alternativa.

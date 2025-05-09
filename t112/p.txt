@@ -1,0 +1,49 @@
+67d3d0e536d99bf7cd115490
+
+681232a4b0d986c90c4a762a
+
+Creé un programa para calcular el balance de mis operaciones en euros a partir de un archivo CSV donde se encuentran registrados los datos. El problema es que no funciona e imprime un mensaje en el que el total calculado es NaN, debería calcular el valor de ganancias o pérdidas según los precios de compra, venta y cantidades de cada activo. Corrige el código y devuélvelo completo sin comentarios.
+
+```javascript
+const fs = require("fs");
+const path = require("path");
+
+function readCSV(filePath) {
+  return fs.readFileSync(filePath, "utf8");
+}
+
+function parseCSV(data) {
+  const lines = data.trim().split("\n");
+  const headers = lines.shift().split(",");
+  return lines.map((line) => {
+    const values = line.split(",");
+    return headers.reduce((obj, header, index) => {
+      obj[header] = values[index];
+      return obj;
+    }, {});
+  });
+}
+
+function calculateProfitLoss(transactions) {
+  return transactions.reduce((total, transaction) => {
+    const buyPrice = parseFloat(transaction["precio_compra"]);
+    const sellPrice = parseFloat(transaction["precio_venta"]);
+    const quantity = parseFloat(transaction["cantidad"]);
+    const profitLoss = (sellPrice - buyPrice) * quantity;
+    return total + profitLoss;
+  }, 0);
+}
+
+const filePath = path.join(__dirname, "transacciones.csv");
+const csvData = readCSV(filePath);
+const transactions = parseCSV(csvData);
+const totalProfitLoss = calculateProfitLoss(transactions);
+console.log("Total de ganancias o pérdidas: €" + totalProfitLoss.toFixed(2));
+```
+
+```csv
+nombre_activo,precio_compra,precio_venta,cantidad
+AccionA,50,60,10
+AccionB,30,25,20
+AccionC,45,50,15
+```

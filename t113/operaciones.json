@@ -1,0 +1,23 @@
+[
+  {
+    "name": "A/EUR",
+    "entryPrice": 45000,
+    "exitPrice": 47000,
+    "quantity": 0.1,
+    "isLong": true
+  },
+  {
+    "name": "B/EUR",
+    "entryPrice": 3000,
+    "exitPrice": 2800,
+    "quantity": 1.5,
+    "isLong": true
+  },
+  {
+    "name": "C/EUR",
+    "entryPrice": 0.8,
+    "exitPrice": 0.6,
+    "quantity": 1000,
+    "isLong": false
+  }
+]

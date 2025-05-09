@@ -1,0 +1,5 @@
+681232b78d84a2341e581692
+
+67d3d12ffbc714b18e991893
+
+Quiero desarrollar un programa en JavaScript por consola que lea un archivo CSV con datos sobre transacciones de compra de activos y calcule el total de ganancias o pérdidas en dólares. El archivo CSV debe tener columnas para el nombre del activo, precio de compra, precio de venta, y cantidad en unidades. Quiero el código compelto sin comentarios y un ejemplo del CSV.

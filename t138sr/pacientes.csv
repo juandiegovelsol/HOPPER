@@ -1,0 +1,4 @@
+id,nombre,apellido,identificacion,medico,prioridad
+1,Juan,Pérez,P12345,,15
+2,María,abc,P23456,Dra. Rodríguez,155
+3,Carlos,Sánchez,P34567,Dr. Martínez,

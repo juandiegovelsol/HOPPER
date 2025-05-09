@@ -1,0 +1,3 @@
+6807b76c3f5dc293bc8bd668
+
+Necesito estandarizar datos de consumo de mis empresas para el desarrollo de un programa en Swift. Quiero almacenar datos de pedidos, donde cada pedido contiene precio en euros, articulos y cantidades, y también quiero almacenar datos de inventario con artículos y cantidades. Sugiereme al menos dos alternativas para la validación de los datos de entrada pero no quiero código.

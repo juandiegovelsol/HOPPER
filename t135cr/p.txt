@@ -1,0 +1,58 @@
+67d44a0743ba7042af199e11
+
+68197b894bde07afee08ff7d
+
+Estoy trabajando para una universidad en Barcelona y desarrollé un código para procesar las inscripciones y que valida los datos de entrada. El código imprime alertas para los datos incorrectos y encuentra la cantidad de inscripciones válidas en los datos de entrada. Quiero que refactorices el código manteniendo la funcionalidad original. El nuevo código debe tener la función actual, otra función que se encargue de la lógica de validación y otra que se encargue del conteo de inscripciones válidas o de agregar los errores.
+
+```swift
+import Foundation
+
+struct Inscripcion {
+    let nombre: String
+    let edad: Int
+    let correo: String
+}
+
+struct ResultadoInscripciones {
+    let totalValidas: Int
+    let errores: [String]
+}
+
+func procesarInscripciones(_ inscripciones: [Inscripcion]) -> ResultadoInscripciones {
+    var totalValidas = 0
+    var errores: [String] = []
+
+    for (index, inscripcion) in inscripciones.enumerated() {
+        var mensajes = [String]()
+
+        if inscripcion.nombre.isEmpty {
+            mensajes.append("nombre vacío")
+        }
+        if inscripcion.edad < 18 {
+            mensajes.append("edad menor de 18")
+        }
+        if !inscripcion.correo.contains("@") {
+            mensajes.append("correo inválido")
+        }
+
+        if mensajes.isEmpty {
+            totalValidas += 1
+        } else {
+            let errorDescripcion = mensajes.joined(separator: ", ")
+            errores.append("Inscripción \(index): \(errorDescripcion)")
+        }
+    }
+
+    return ResultadoInscripciones(totalValidas: totalValidas, errores: errores)
+}
+
+let inscripciones = [
+    Inscripcion(nombre: "María", edad: 22, correo: "maria@gmail.com"),
+    Inscripcion(nombre: "", edad: 25, correo: "usuario@correo.com"),
+    Inscripcion(nombre: "Pedro", edad: 16, correo: "pedro@gmail.com"),
+    Inscripcion(nombre: "Lucía", edad: 30, correo: "luciagmail.com")
+]
+
+let resultado = procesarInscripciones(inscripciones)
+print(resultado)
+```
