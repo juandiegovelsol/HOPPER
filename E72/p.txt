@@ -1,0 +1,53 @@
+681eb78d7ba37b29dfce6215
+
+Soy un entusiasta del fitness que realiza un seguimiento de sus entrenamientos y su progreso a lo largo del tiempo. Quiero crear una forma estructurada de registrar mis sesiones de ejercicio y controlar mi rendimiento. Escriba un script de Python que gestione los datos de mis entrenamientos utilizando una lista de diccionarios. El script debe cumplir con los siguientes requisitos:
+
+Permitirme ingresar sesiones de entrenamiento, incluyendo "fecha", "ejercicio", "duración" (en minutos), "calorías quemadas" y "notas".
+Almacenar estos datos en una lista llamada workoutLog.
+Proporcionar una función para calcular la duración total y las calorías totales quemadas para un rango de fechas específico.
+Generar los resultados en un formato JSON bien estructurado, incluyendo la duración total, las calorías totales quemadas y un resumen de los entrenamientos para ese rango de fechas.
+Asegurarse de que el script gestione los casos en los que no existan entrenamientos para el rango de fechas especificado devolviendo un mensaje que indique que no se encontraron entrenamientos.
+No incluir ningún comentario ni explicación en el código.
+Como entusiasta del fitness, necesito realizar un seguimiento de mis entrenamientos para controlar mi progreso y mantenerme motivado. Un enfoque estructurado me ayudará a analizar mi rendimiento y a realizar ajustes en mi rutina de entrenamiento.
+
+El objetivo es tener un script de Python que registre de manera eficiente mis sesiones de entrenamiento y me permita analizar mi rendimiento a lo largo del tiempo.
+
+La lista workoutLog podría comenzar de la siguiente manera:
+
+workoutLog = [
+{"date": "2024-01-10", "exercise": "Running", "duration": 30, "caloriesBurned": 300, "notes": "Felt great"},
+{"date": "2024-01-12", "exercise": "Cycling", "duration": 45, "caloriesBurned": 400, "notes": "Challenging ride"},
+{"date": "2024-01-15", "exercise": "Yoga", "duration": 60, "caloriesBurned": 200, "notes": "Relaxing session"}
+]
+
+
+Ejemplo de salida:
+
+Para un rango de fechas especificado desde "2024-01-10" a "2024-01-12", el JSON de salida podría verse así:
+
+{
+  "totalDuration": 75,
+  "totalCaloriesBurned": 700,
+  "summary": [
+    {
+      "date": "2024-01-10",
+      "exercise": "Running",
+      "duration": 30,
+      "caloriesBurned": 300
+    },
+    {
+      "date": "2024-01-12",
+      "exercise": "Cycling",
+      "duration": 45,
+      "caloriesBurned": 400
+    }
+  ]
+}
+
+Si no existen entrenamientos para el rango de fechas especificado, el resultado podría ser:
+
+{
+"message": "No se encontraron entrenamientos para este rango de fechas".
+}
+
+Esta solicitud proporciona instrucciones claras, contexto y resultados deseados, lo que la convierte en una solicitud eficaz para generar datos estructurados.

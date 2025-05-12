@@ -1,0 +1,22 @@
+[
+  {
+    "cliente1": "Juan Pérez",
+    "servicios_solicitados": ["Consulta de saldo", "Transferencia bancaria"],
+    "canal_de_atencion": "WhatsApp"
+  },
+  {
+    "cliente1": "María Gómez",
+    "servicios_solicitados": ["Pago de servicios"],
+    "canal_de_atencion": "Teléfono"
+  },
+  {
+    "cliente1": "Carlos Ruiz",
+    "servicios_solicitados": [
+      "Consulta de saldo",
+      "Pago de servicios",
+      "Recarga celular",
+      "Otros"
+    ],
+    "canal_de_atencion": "Correo electrónico"
+  }
+]

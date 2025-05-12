@@ -1,0 +1,17 @@
+681f7f4d1ce9fa5943950bf8
+
+total de datos por cliente por día.
+
+dias que superen el 20% del promedio
+
+Convertir fecha al estandar ISO YYYY-MM-DD
+
+eliminar filas con datos faltantes
+
+eliminar filas con datos erróneos
+
+Generar resumen con el formato
+
+Generar datos falsos en una funcion
+
+Generar grafico de líneas, cada linea es un cliente

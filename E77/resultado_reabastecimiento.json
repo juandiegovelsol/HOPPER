@@ -1,0 +1,6 @@
+[
+    {
+        "Producto": "Cemento",
+        "stock_sucursal_principal": 1000.0,
+        "stock_sucursal_secundaria": 200.0,
+        "fecha_ultimo_abastecimiento": 

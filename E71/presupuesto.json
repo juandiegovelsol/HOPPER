@@ -1,0 +1,12 @@
+{
+  "Ingresos": {
+    "Salario": 3000,
+    "Freelance": 500
+  },
+  "Gastos": {
+    "Alquiler": 1200,
+    "Comestibles": 300,
+    "Servicios": 200,
+    "Entretenimiento": 100
+  }
+}
